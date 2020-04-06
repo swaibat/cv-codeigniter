@@ -1,25 +1,25 @@
 <?php
-	$header_templete                  =   ovoo_config('header_templete');
+	$header_templete                  =   app_config('header_templete');
 	$theme_dir                        =   'theme/default/';
     $assets_dir                     =   'assets/theme/default/';
-  	$registration_enable            =   ovoo_config('registration_enable');    
-  	$frontend_login_enable          =   ovoo_config('frontend_login_enable');    
-  	$country_to_primary_menu        =   ovoo_config('country_to_primary_menu');    
-  	$genre_to_primary_menu          =   ovoo_config('genre_to_primary_menu');
-  	$release_to_primary_menu        =   ovoo_config('release_to_primary_menu');    
-  	$contact_to_primary_menu        =   ovoo_config('contact_to_primary_menu');
-  	$privacy_policy_to_primary_menu =   ovoo_config('privacy_policy_to_primary_menu');
-  	$dmca_to_primary_menu           =   ovoo_config('dmca_to_primary_menu');
-  	$az_to_primary_menu             =   ovoo_config('az_to_primary_menu');
-  	$az_to_footer_menu              =   ovoo_config('az_to_footer_menu');
-  	$product_request_enable           =   ovoo_config('product_request_enable');
-    $facebook_url                   =   ovoo_config('facebook_url');
-    $twitter_url                    =   ovoo_config('twitter_url');
-    $vimeo_url                      =   ovoo_config('vimeo_url');
-    $linkedin_url                   =   ovoo_config('linkedin_url');
-    $youtube_url                    =   ovoo_config('youtube_url');
-    $business_phone                 =   ovoo_config('business_phone');
-    $contact_email                  =   ovoo_config('contact_email');   
+  	$registration_enable            =   app_config('registration_enable');    
+  	$frontend_login_enable          =   app_config('frontend_login_enable');    
+  	$country_to_primary_menu        =   app_config('country_to_primary_menu');    
+  	$genre_to_primary_menu          =   app_config('genre_to_primary_menu');
+  	$release_to_primary_menu        =   app_config('release_to_primary_menu');    
+  	$contact_to_primary_menu        =   app_config('contact_to_primary_menu');
+  	$privacy_policy_to_primary_menu =   app_config('privacy_policy_to_primary_menu');
+  	$dmca_to_primary_menu           =   app_config('dmca_to_primary_menu');
+  	$az_to_primary_menu             =   app_config('az_to_primary_menu');
+  	$az_to_footer_menu              =   app_config('az_to_footer_menu');
+  	$product_request_enable           =   app_config('product_request_enable');
+    $facebook_url                   =   app_config('facebook_url');
+    $twitter_url                    =   app_config('twitter_url');
+    $vimeo_url                      =   app_config('vimeo_url');
+    $linkedin_url                   =   app_config('linkedin_url');
+    $youtube_url                    =   app_config('youtube_url');
+    $business_phone                 =   app_config('business_phone');
+    $contact_email                  =   app_config('contact_email');   
 ?>
 <style type="text/css">
     #myFooter {
@@ -39,7 +39,7 @@
 		          <span class="icon-bar"></span>
 		          <span class="icon-bar"></span>
 		        </button>
-		        <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>uploads/system_logo/<?php echo ovoo_config('logo'); ?>" alt="logo">
+		        <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>uploads/system_logo/<?php echo app_config('logo'); ?>" alt="logo">
 		        </a>
 		     </div>
 	      	<div class="collapse navbar-collapse" id="navbar1">
@@ -63,7 +63,7 @@
           <div class="row">
               <div class="col-md-4 col-sm-12 col-xs-12 border-right">
                   <div class="logo">
-                      <a href="<?php echo base_url(); ?>"> <img class="img-responsive" src="<?php echo base_url(); ?>uploads/system_logo/<?php echo ovoo_config('logo'); ?>?<?php  echo time();?>" alt="Logo" > </a>
+                      <a href="<?php echo base_url(); ?>"> <img class="img-responsive" src="<?php echo base_url(); ?>uploads/system_logo/<?php echo app_config('logo'); ?>?<?php  echo time();?>" alt="Logo" > </a>
                   </div>
               </div>
               <div class="col-md-4 m-t-10">
@@ -171,7 +171,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>uploads/system_logo/<?php echo ovoo_config('logo'); ?>" alt="logo">
+          <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>uploads/system_logo/<?php echo app_config('logo'); ?>" alt="logo">
           </a>
         </div>
         <div class="collapse navbar-collapse" id="navbar1">
@@ -241,7 +241,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>uploads/system_logo/<?php echo ovoo_config('logo'); ?>" alt="logo">
+        <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>uploads/system_logo/<?php echo app_config('logo'); ?>" alt="logo">
         </a>
      </div>
       <div class="collapse navbar-collapse" id="navbar1">
@@ -307,7 +307,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>uploads/system_logo/<?php echo ovoo_config('logo'); ?>" alt="logo">
+          <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>uploads/system_logo/<?php echo app_config('logo'); ?>" alt="logo">
           </a>
        </div>
         <div class="collapse navbar-collapse" id="navbar1">

@@ -1,8 +1,8 @@
 <?php 
     $site_name   =   $this->db->get_where('config' , array('title'=>'site_name'))->row()->value;
     $assets_dir  =   'assets/theme/default/';
-    $favicon     =   ovoo_config('favicon');
-    $front_end_theme =   ovoo_config('front_end_theme');
+    $favicon     =   app_config('favicon');
+    $front_end_theme =   app_config('front_end_theme');
 ?>   
 
 <!DOCTYPE html>

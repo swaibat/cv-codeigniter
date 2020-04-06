@@ -1493,13 +1493,6 @@ class Admin extends Admin_Core_Controller {
 
             if ($param1 == 'update') {
 
-             $purchase_code = $this->input->post('purchase_code');
-             if(strpos($purchase_code, '***********') === false):
-                $data['value'] = $purchase_code;
-                 $this->db->where('title' , 'purchase_code');
-                 $this->db->update('config' , $data);
-             endif;
-
              $data['value'] = $this->input->post('timezone');
              $this->db->where('title' , 'timezone');
              $this->db->update('config' , $data);

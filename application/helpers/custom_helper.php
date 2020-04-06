@@ -19,8 +19,8 @@ if ( ! function_exists('trans')):
 endif;
 
 // configuration helper
-if (! function_exists('ovoo_config')):
-	function ovoo_config($title)
+if (! function_exists('app_config')):
+	function app_config($title)
     {
     	$ci =& get_instance();
         return $ci->common_model->get_config($title);

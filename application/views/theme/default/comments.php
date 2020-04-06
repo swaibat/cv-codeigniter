@@ -1,8 +1,8 @@
 
 <?php   
-    $comments_method 			= ovoo_config('comments_method');
-    $facebook_comment_appid 	= ovoo_config('facebook_comment_appid');
-    $disqus_short_name 			= ovoo_config('disqus_short_name');
+    $comments_method 			= app_config('comments_method');
+    $facebook_comment_appid 	= app_config('facebook_comment_appid');
+    $disqus_short_name 			= app_config('disqus_short_name');
     if(($comments_method =='both' || $comments_method =='facebook') && $facebook_comment_appid !='') :
 ?>
 <!-- facebook comments -->
@@ -17,7 +17,7 @@
 	            if (d.getElementById(id)) return;
 	            js = d.createElement(s);
 	            js.id = id;
-	            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=<?php echo ovoo_config('facebook_comment_appid'); ?>";
+	            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=<?php echo app_config('facebook_comment_appid'); ?>";
 	            fjs.parentNode.insertBefore(js, fjs);
 	        }(document, 'script', 'facebook-jssdk'));
 	    </script>                        

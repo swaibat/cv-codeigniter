@@ -3,14 +3,14 @@
 <?php
   $theme_dir              =   'theme/default/';
   $assets_dir             =   'assets/theme/default/';
-  $header_templete        =   ovoo_config('header_templete');
-  $slider_type            =   ovoo_config('slider_type');
-  $slider_fullwide        =   ovoo_config('slider_fullwide');
-  $slider_height          =   ovoo_config('slider_height').'px';
-  $slider_border_radius   =   ovoo_config('slider_border_radius').'px';
-  $slider_arrow           =   ovoo_config('slider_arrow');
-  $slider_bullet          =   ovoo_config('slider_bullet');
-  $total_product_in_slider  =   ovoo_config('total_product_in_slider');
+  $header_templete        =   app_config('header_templete');
+  $slider_type            =   app_config('slider_type');
+  $slider_fullwide        =   app_config('slider_fullwide');
+  $slider_height          =   app_config('slider_height').'px';
+  $slider_border_radius   =   app_config('slider_border_radius').'px';
+  $slider_arrow           =   app_config('slider_arrow');
+  $slider_bullet          =   app_config('slider_bullet');
+  $total_product_in_slider  =   app_config('total_product_in_slider');
   ?>
 <?php if ($slider_type=="product" || $slider_type=="image"): ?>
 <style>

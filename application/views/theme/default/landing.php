@@ -13,7 +13,7 @@
     $site_name              		=   $this->db->get_where('config' , array('title' =>'site_name'))->row()->value;
     $registration_enable            =   $this->db->get_where('config' , array('title' =>'registration_enable'))->row()->value;    
 	$frontend_login_enable          =   $this->db->get_where('config' , array('title' =>'frontend_login_enable'))->row()->value;   
-	$landing_page_image_url         =   'uploads/'.ovoo_config('landing_bg');  
+	$landing_page_image_url         =   'uploads/'.app_config('landing_bg');  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -105,7 +105,7 @@
 				<div class="clo-md-12">
 					<div style="margin-bottom: 40px;">
 						<a href="<?php echo base_url(); ?>">
-							<img src="<?php echo base_url(); ?>uploads/system_logo/<?php echo ovoo_config('logo'); ?>" alt="logo">
+							<img src="<?php echo base_url(); ?>uploads/system_logo/<?php echo app_config('logo'); ?>" alt="logo">
 						</a>
 
 					</div>

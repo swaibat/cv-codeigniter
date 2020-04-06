@@ -35,7 +35,7 @@
   </div>
 </div>
 <div class="form-group row">
-  <label class="col-sm-12 control-label"><?php echo trans("amount").'('.ovoo_config('currency_symbol').')';?></label>
+  <label class="col-sm-12 control-label"><?php echo trans("amount").'('.app_config('currency_symbol').')';?></label>
   <div class="col-sm-12">
     <input type="text"  name="paid_amount" value="" class="form-control" placeholder="Enter amount" required />
   </div>

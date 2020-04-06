@@ -893,3 +893,5 @@ $lang["purchase_plan"] = "Purchase a plan";
 $lang["purchase_plan_text"] = "Select a plan to process payment.";
 $lang["tv"] = "Tv";
 $lang["subscribe_mail_list_text"] = "Subscribe mail list text";
+$lang["products_add"] = "Products add";
+$lang["products_manage"] = "Products manage";

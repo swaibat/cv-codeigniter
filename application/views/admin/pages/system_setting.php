@@ -1,25 +1,25 @@
 <?php
-    $registration_enable        = ovoo_config('purchase_code');
-    $frontend_login_enable      = ovoo_config('frontend_login_enable');
-    $blog_enable                = ovoo_config('blog_enable');
-    $country_to_primary_menu    = ovoo_config('country_to_primary_menu');
-    $genre_to_primary_menu      = ovoo_config('genre_to_primary_menu');
-    $release_to_primary_menu    = ovoo_config('release_to_primary_menu');
-    $contact_to_primary_menu    = ovoo_config('contact_to_primary_menu');
-    $contact_to_footer_menu     = ovoo_config('contact_to_footer_menu');
-    $show_star_image            = ovoo_config('show_star_image');
-    $product_report_enable        = ovoo_config('product_report_enable');
-    $product_report_email         = ovoo_config('product_report_email');
-    $product_request_enable       = ovoo_config('product_request_enable');
-    $product_request_email        = ovoo_config('product_request_email');
-    $product_report_note          = ovoo_config('product_report_note');
-    $recaptcha_enable           = ovoo_config('recaptcha_enable');
-    $recaptcha_site_key         = ovoo_config('recaptcha_site_key');
-    $recaptcha_secret_key       = ovoo_config('recaptcha_secret_key');
-    $az_to_primary_menu         = ovoo_config('az_to_primary_menu');
-    $az_to_footer_menu          = ovoo_config('az_to_footer_menu');
-    $current_timezone           = ovoo_config('timezone');
-    $purchase_code              = ovoo_config('purchase_code');
+    $registration_enable        = app_config('purchase_code');
+    $frontend_login_enable      = app_config('frontend_login_enable');
+    $blog_enable                = app_config('blog_enable');
+    $country_to_primary_menu    = app_config('country_to_primary_menu');
+    $genre_to_primary_menu      = app_config('genre_to_primary_menu');
+    $release_to_primary_menu    = app_config('release_to_primary_menu');
+    $contact_to_primary_menu    = app_config('contact_to_primary_menu');
+    $contact_to_footer_menu     = app_config('contact_to_footer_menu');
+    $show_star_image            = app_config('show_star_image');
+    $product_report_enable        = app_config('product_report_enable');
+    $product_report_email         = app_config('product_report_email');
+    $product_request_enable       = app_config('product_request_enable');
+    $product_request_email        = app_config('product_request_email');
+    $product_report_note          = app_config('product_report_note');
+    $recaptcha_enable           = app_config('recaptcha_enable');
+    $recaptcha_site_key         = app_config('recaptcha_site_key');
+    $recaptcha_secret_key       = app_config('recaptcha_secret_key');
+    $az_to_primary_menu         = app_config('az_to_primary_menu');
+    $az_to_footer_menu          = app_config('az_to_footer_menu');
+    $current_timezone           = app_config('timezone');
+    $purchase_code              = app_config('purchase_code');
     $purchase_code              = substr($purchase_code, 0,10).'***********'.substr($purchase_code, -8);
 ?>
 
@@ -58,38 +58,38 @@
           <div class="form-group row">
             <label class="col-sm-3 control-label"><?php echo trans('site_name'); ?></label>
             <div class="col-sm-9">
-              <input type="text" value="<?php echo ovoo_config('site_name'); ?>" name="site_name" class="form-control" required />
+              <input type="text" value="<?php echo app_config('site_name'); ?>" name="site_name" class="form-control" required />
             </div>
           </div>
 
           <div class="form-group row">
             <label class="col-sm-3 control-label"><?php echo trans('site_url'); ?></label>
             <div class="col-sm-9">
-              <input type="url" value="<?php echo ovoo_config('site_url'); ?>" name="site_url" class="form-control" required />
+              <input type="url" value="<?php echo app_config('site_url'); ?>" name="site_url" class="form-control" required />
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 control-label"><?php echo trans('system_email'); ?></label>
             <div class="col-sm-9">
-              <input type="email" value="<?php echo ovoo_config('system_email'); ?>" name="system_email" class="form-control" required />
+              <input type="email" value="<?php echo app_config('system_email'); ?>" name="system_email" class="form-control" required />
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 control-label"><?php echo trans('business_address'); ?></label>
             <div class="col-sm-9">
-              <input type="text" value="<?php echo ovoo_config('business_address'); ?>" name="business_address" class="form-control" />
+              <input type="text" value="<?php echo app_config('business_address'); ?>" name="business_address" class="form-control" />
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 control-label"><?php echo trans('business_phone'); ?></label>
             <div class="col-sm-9">
-              <input type="number" value="<?php echo ovoo_config('business_phone'); ?>" name="business_phone" class="form-control" data-parsley-length="[10, 14]" />
+              <input type="number" value="<?php echo app_config('business_phone'); ?>" name="business_phone" class="form-control" data-parsley-length="[10, 14]" />
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 control-label"><?php echo trans('contact_email'); ?></label>
             <div class="col-sm-9">
-              <input type="email" value="<?php echo ovoo_config('contact_email'); ?>" name="contact_email" class="form-control" />
+              <input type="email" value="<?php echo app_config('contact_email'); ?>" name="contact_email" class="form-control" />
             </div>
           </div>
 

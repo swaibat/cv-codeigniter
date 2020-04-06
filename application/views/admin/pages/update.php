@@ -14,7 +14,7 @@
           <div class="form-group row">
             <label class="control-label col-sm-3"><?php echo trans('current_version'); ?></label>
             <div class="col-sm-3">
-              <strong><?php echo ovoo_config('version'); ?></strong>
+              <strong><?php echo app_config('version'); ?></strong>
             </div>
           </div>
 

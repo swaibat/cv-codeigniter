@@ -1,19 +1,19 @@
 <?php
-$default_meta_description       =   ovoo_config('meta_description');
-$default_focus_keyword          =   ovoo_config('focus_keyword');
-$author                         =   ovoo_config('author');
-$front_end_theme                =   ovoo_config('front_end_theme');
+$default_meta_description       =   app_config('meta_description');
+$default_focus_keyword          =   app_config('focus_keyword');
+$author                         =   app_config('author');
+$front_end_theme                =   app_config('front_end_theme');
 $theme_dir                      =   'theme/default/';
 $assets_dir                     =   'assets/theme/default/';
-$dark_theme                     =   ovoo_config('dark_theme');
-$google_analytics_id            =   ovoo_config('google_analytics_id');
-$footer_templete                =   ovoo_config('footer_templete');
-$share_this_enable              =   ovoo_config('social_share_enable');
-$push_notification_enable       =   ovoo_config('push_notification_enable');
-$site_name                      =   ovoo_config('site_name');
-$recaptcha_enable               =   ovoo_config('recaptcha_enable');
-$favicon                        =   ovoo_config('favicon');
-$enable_ribbon                  =   ovoo_config('enable_ribbon');
+$dark_theme                     =   app_config('dark_theme');
+$google_analytics_id            =   app_config('google_analytics_id');
+$footer_templete                =   app_config('footer_templete');
+$share_this_enable              =   app_config('social_share_enable');
+$push_notification_enable       =   app_config('push_notification_enable');
+$site_name                      =   app_config('site_name');
+$recaptcha_enable               =   app_config('recaptcha_enable');
+$favicon                        =   app_config('favicon');
+$enable_ribbon                  =   app_config('enable_ribbon');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +36,7 @@ $enable_ribbon                  =   ovoo_config('enable_ribbon');
 		<link rel="canonical" href="<?php if (isset($canonical) && !empty($canonical)) : echo $canonical;
 									else : echo base_url();
 									endif; ?>">
-		<?php if ($page_name == 'watch' || $page_name == 'watch_tv' || $page_name == 'blog_details') : ?>
+		<?php if ($page_name == 'watch' || $page_name == 'blog_details') : ?>
 			<meta property="og:locale" content="en_US" />
 			<meta name="twitter:card" content="summary">
 			<meta name="twitter:description" content="<?php echo $meta_description; ?>" />
@@ -128,93 +128,7 @@ $enable_ribbon                  =   ovoo_config('enable_ribbon');
 		<?php if ($dark_theme == '1') : ?>
 			<link rel="stylesheet" type="text/css" href="<?php echo base_url($assets_dir); ?>css/dark.css">
 		<?php endif; ?>
-		<style type="text/css">
-			<?php if ($front_end_theme == 'blue') : ?> :root {
-				--swiper-theme-color: #0088cc;
-				--primary-color: #0088cc;
-				--secenday-color: #0088c0;
-			}
-
-			<?php elseif ($front_end_theme == 'green') : ?> :root {
-				--swiper-theme-color: #5DC560;
-				--primary-color: #5DC560;
-				--secenday-color: #5DC569;
-			}
-
-			<?php elseif ($front_end_theme == 'red') : ?> :root {
-				--swiper-theme-color: #ff0000;
-				--primary-color: #ff0000;
-				--secenday-color: #ff0009;
-			}
-
-			<?php elseif ($front_end_theme == 'yellow') : ?> :root {
-				--swiper-theme-color: #FDD922;
-				--primary-color: #FDD922;
-				--secenday-color: #FDD929;
-			}
-
-			<?php elseif ($front_end_theme == 'purple') : ?> :root {
-				--swiper-theme-color: #6d0eb1;
-				--primary-color: #6d0eb1;
-				--secenday-color: #6d0eb9;
-			}
-
-			<?php else : ?> :root {
-				--swiper-theme-color: #FDD922;
-				--primary-color: #FDD922;
-				--secenday-color: #0088c0;
-			}
-
-			<?php endif; ?>.owl-carousel .owl-next,
-			.owl-carousel .owl-prev {
-				background-color: var(--primary-color);
-			}
-
-			a {
-				color: var(--primary-color);
-			}
-
-			a:hover {
-				color: var(--secenday-color);
-			}
-
-			.vjs-chromecast-button .vjs-icon-placeholder {
-				width: 18px;
-				height: 18px;
-			}
-		</style>
-		<style type="text/css">
-			.ribbon {
-				<?php if ($enable_ribbon == '0') : ?>display: none;
-				<?php endif; ?>width: 110px;
-				height: 80px;
-				overflow: hidden;
-				position: absolute;
-				background: url(<?php echo base_url($assets_dir); ?>images/lock.png);
-				background-repeat: no-repeat;
-				overflow: hidden;
-			}
-
-			.ribbon-top-right {
-				bottom: 0px;
-				left: 0px;
-			}
-
-			.tv-ribbon {
-				<?php if ($enable_ribbon == '0') : ?>display: none;
-				<?php endif; ?>top: 10px;
-				left: 5px;
-				position: absolute;
-				z-index: 6;
-				padding: 2px 11px;
-				background-color: #ffe22e;
-				color: #383737;
-				border-top-right-radius: 5px;
-				border-bottom-right-radius: 5px;
-				font-size: 14px;
-				font-weight: bold;
-			}
-		</style>
+		<?php include 'inline_css.php'?>
 		<?php if ($page_name == 'price_plan') : ?>
 			<link rel="stylesheet" type="text/css" href="<?php echo base_url($assets_dir); ?>css/price_plan.css">
 		<?php endif; ?>
@@ -309,10 +223,10 @@ $enable_ribbon                  =   ovoo_config('enable_ribbon');
 	</script>
 	<?php
 	if ($push_notification_enable == '1') :
-		$onesignal_appid                    =   ovoo_config('onesignal_appid');
-		$onesignal_actionmessage            =   ovoo_config('onesignal_actionmessage');
-		$onesignal_acceptbuttontext         =   ovoo_config('onesignal_acceptbuttontext');
-		$onesignal_cancelbuttontext         =   ovoo_config('onesignal_cancelbuttontext');
+		$onesignal_appid                    =   app_config('onesignal_appid');
+		$onesignal_actionmessage            =   app_config('onesignal_actionmessage');
+		$onesignal_acceptbuttontext         =   app_config('onesignal_acceptbuttontext');
+		$onesignal_cancelbuttontext         =   app_config('onesignal_cancelbuttontext');
 	?>
 		<!-- oneSignal -->
 		<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
