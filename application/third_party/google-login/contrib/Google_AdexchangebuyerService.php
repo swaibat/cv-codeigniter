@@ -335,7 +335,7 @@ class Google_Creative extends Google_Model {
   public $productCategories;
   public $advertiserName;
   public $adgroupId;
-  public $videoURL;
+  public $ProductURL;
   public $width;
   public $attribute;
   public $kind;
@@ -367,11 +367,11 @@ class Google_Creative extends Google_Model {
   public function getAdgroupId() {
     return $this->adgroupId;
   }
-  public function setVideoURL($videoURL) {
-    $this->videoURL = $videoURL;
+  public function setVideoURL($ProductURL) {
+    $this->ProductURL = $ProductURL;
   }
   public function getVideoURL() {
-    return $this->videoURL;
+    return $this->ProductURL;
   }
   public function setWidth($width) {
     $this->width = $width;

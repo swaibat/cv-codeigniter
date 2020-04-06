@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="sidebar">
-        <div class="sidebar-movie most-liked">
+        <div class="sidebar-product most-liked">
             <h1 class="sidebar-title"><?php echo trans('category'); ?></h1>
             <ul class="post-category-list list-unstyled">
             <?php   
@@ -18,7 +18,7 @@
             <?php endforeach ?>
             </ul>
         </div>
-        <div class="sidebar-movie most-viewed">
+        <div class="sidebar-product most-viewed">
             <h1 class="sidebar-title"><?php echo trans('recent_post'); ?></h1>
             <?php
                     $most_rated_posts =   $this->db->get_where('posts', array('publication'=> '1'), 5)->result();         

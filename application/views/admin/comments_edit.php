@@ -1,7 +1,7 @@
 <?php
-if ($param3 == "movie") {
+if ($param3 == "product") {
     $comments    = $this->db->get_where('comments', array('comments_id' => $param2))->result_array();
-    echo form_open(base_url() . 'admin/comments/update_movie/' . $param2, array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data'));
+    echo form_open(base_url() . 'admin/comments/update_product/' . $param2, array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data'));
 } else if ($param3 == "post") {
     $comments    = $this->db->get_where('post_comments', array('post_comments_id' => $param2))->result_array();
     echo form_open(base_url() . 'admin/comments/update_post/' . $param2, array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data'));

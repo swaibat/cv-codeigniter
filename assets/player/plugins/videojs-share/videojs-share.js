@@ -1,5 +1,5 @@
 /**
- * videojs-share
+ * Productjs-share
  * @version 1.1.0
  * @copyright 2018 Mikhail Khazov <mkhazov.work@gmail.com>
  * @license MIT
@@ -7,7 +7,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global.videojsShare = factory());
+	(global.ProductjsShare = factory());
 }(this, (function () { 'use strict';
 
 var version = "1.1.0";
@@ -104,7 +104,7 @@ var possibleConstructorReturn = function (self, call) {
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
 
-var Button = videojs.getComponent('Button');
+var Button = Productjs.getComponent('Button');
 
 /**
  * Share button.
@@ -132,7 +132,7 @@ var ShareButton = function (_Button) {
   return ShareButton;
 }(Button);
 
-var ModalDialog = videojs.getComponent('ModalDialog');
+var ModalDialog = Productjs.getComponent('ModalDialog');
 
 /**
  * Share modal.
@@ -146,7 +146,7 @@ var ShareModal = function (_ModalDialog) {
 
     var _this = possibleConstructorReturn(this, _ModalDialog.call(this, player, options));
 
-    _this.playerClassName = 'vjs-videojs-share_open';
+    _this.playerClassName = 'vjs-Productjs-share_open';
     return _this;
   }
 
@@ -1448,7 +1448,7 @@ var ShareModalContent = function () {
   return ShareModalContent;
 }();
 
-var Component = videojs.getComponent('Component');
+var Component = Productjs.getComponent('Component');
 
 /**
  * Share overlay.
@@ -1490,8 +1490,8 @@ var ShareOverlay = function (_Component) {
 
 // Default options for the plugin.
 // Cross-compatibility for Video.js 5 and 6.
-var registerPlugin = videojs.registerPlugin || videojs.plugin;
-// const dom = videojs.dom || videojs;
+var registerPlugin = Productjs.registerPlugin || Productjs.plugin;
+// const dom = Productjs.dom || Productjs;
 
 /**
  * Function to invoke when the player is ready.
@@ -1508,16 +1508,16 @@ var registerPlugin = videojs.registerPlugin || videojs.plugin;
  *           A plain object containing options for the plugin.
  */
 var onPlayerReady = function onPlayerReady(player, options) {
-  player.addClass('vjs-videojs-share');
+  player.addClass('vjs-Productjs-share');
   //player.getChild('controlBar').addChild('ShareButton', options);
   player.controlBar.el().insertBefore(player.getChild('controlBar').addChild('ShareButton', options).el(), player.controlBar.customControlSpacer.el());
   player.addChild('ShareOverlay', options);
 };
 
 /**
- * A video.js plugin.
+ * A Product.js plugin.
  *
- * In the plugin function, the value of `this` is a video.js `Player`
+ * In the plugin function, the value of `this` is a Product.js `Player`
  * instance. You cannot rely on the player being in a "ready" state here,
  * depending on how the plugin is invoked. This may or may not be important
  * to you; if not, remove the wait for "ready"!
@@ -1527,13 +1527,13 @@ var onPlayerReady = function onPlayerReady(player, options) {
  *           An object of options left to the plugin author to define.
  */
 var share = function share(options) {
-  onPlayerReady(this, videojs.mergeOptions(defaults, options));
+  onPlayerReady(this, Productjs.mergeOptions(defaults, options));
 };
 
-videojs.registerComponent('ShareButton', ShareButton);
-videojs.registerComponent('ShareOverlay', ShareOverlay);
-var registerPlugin = videojs.registerPlugin;
-// Register the plugin with video.js.
+Productjs.registerComponent('ShareButton', ShareButton);
+Productjs.registerComponent('ShareOverlay', ShareOverlay);
+var registerPlugin = Productjs.registerPlugin;
+// Register the plugin with Product.js.
 registerPlugin('share', share);
 
 // Include the version number.

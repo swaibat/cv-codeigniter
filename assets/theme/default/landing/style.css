@@ -29,19 +29,19 @@ a:hover {
     border-radius: 5px;
     border-radius: 5px 0 0 5px;
 }
-.btn-all-movie {
+.btn-all-product {
     padding: 10px 30px;
     font-size: 16px;
     background: #0088CC;
     border-color: #077ab3;
     color: #fff;
 }
-.btn-all-movie:hover {
+.btn-all-product:hover {
     background: #0974a9;
     border-color: #077ab3;
 }
 
-.btn-all-movie:active {
+.btn-all-product:active {
     background-color: #000;
 }
 .search-text .btn-search {

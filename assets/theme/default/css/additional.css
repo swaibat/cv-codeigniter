@@ -1,5 +1,5 @@
 /*!
- * Ovoo-Movie & Video Steaming CMS
+ * Ovoo-Product & Video Steaming CMS
  * Author: Abdul Mannan/Spa Green Creative
  =============*/
 .btn-fb {
@@ -22,7 +22,7 @@
     color: #fff;
 }
 
-.video_quality, .total_episodes{
+.Product_quality, .total_episodes{
     position: absolute;
     top: 5px;
     left:5px;

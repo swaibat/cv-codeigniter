@@ -16,30 +16,30 @@
 <div id="section-opt">
     <div class="container">
         <div class="row">
-            <!-- All Movies -->
+            <!-- All Products -->
             <?php if($total_rows>0){
                 if($total_rows > 24){
                 echo $links;
             }
             ?>
             <div class="col-md-12 col-sm-12">
-                <div class="latest-movie movie-opt">
+                <div class="latest-product product-opt">
                     <div class="row clean-preset">
-                        <div class="movie-container">
-                            <?php foreach ($all_published_videos as $videos) :?>
+                        <div class="product-container">
+                            <?php foreach ($all_published_Products as $Products) :?>
                             <div class="col-md-2 col-sm-3 col-xs-4">
-                                <div class="latest-movie-img-container">
-                                    <div class="movie-img"> <img class="img-responsive lazy" src="<?php echo base_url('uploads/default_image/blank_thumbnail.jpg');?>" data-src="<?php echo $this->common_model->get_video_thumb_url($videos['videos_id']); ?>" alt="<?php echo $videos['title'];?>">
-                                        <a href="<?php echo base_url('watch/'.$videos['slug']).'.html';?>" class="ico-play ico-play-sm"> <img class="img-responsive play-svg svg" src="<?php echo base_url(); ?>assets/front_end/images/play-button.svg" alt="play" onerror="this.src='<?php echo base_url(); ?>assets/front_end/images/play-button.png'"> </a>
+                                <div class="latest-product-img-container">
+                                    <div class="product-img"> <img class="img-responsive lazy" src="<?php echo base_url('uploads/default_image/blank_thumbnail.jpg');?>" data-src="<?php echo $this->common_model->get_Product_thumb_url($Products['Products_id']); ?>" alt="<?php echo $Products['title'];?>">
+                                        <a href="<?php echo base_url('watch/'.$Products['slug']).'.html';?>" class="ico-play ico-play-sm"> <img class="img-responsive play-svg svg" src="<?php echo base_url(); ?>assets/front_end/images/play-button.svg" alt="play" onerror="this.src='<?php echo base_url(); ?>assets/front_end/images/play-button.png'"> </a>
                                         <div class="overlay-div"></div>
-                                        <div class="video_quality">
+                                        <div class="Product_quality">
                                             <span class="label label-primary">
-                                                <?php if($videos['is_tvseries']=='1'): echo $this->common_model->get_num_episodes_by_id($videos['videos_id']).' EPISODES'; else: echo $videos['video_quality']; endif; ?>
+                                                <?php if($Products['is_tvseries']=='1'): echo $this->common_model->get_num_episodes_by_id($Products['Products_id']).' EPISODES'; else: echo $Products['Product_quality']; endif; ?>
                                             </span>
                                         </div>
-                                        <div class="movie-title">
+                                        <div class="product-title">
                                             <h3>
-                                            <a href="<?php echo base_url('watch/'.$videos['slug']).'.html';?>"><?php echo $videos['title'];?></a>
+                                            <a href="<?php echo base_url('watch/'.$Products['slug']).'.html';?>"><?php echo $Products['title'];?></a>
                                             </h3>
                                         </div>
                                     </div>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <!-- End All Movies -->
+            <!-- End All Products -->
             <?php }else{
                 echo '<h4>Nothing found by "'.$search_keyword.'"</h4>';
             } ?>

@@ -82,7 +82,7 @@
                   <div class="btn-group">
                     <button type="button" class="btn btn-white btn-xs dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a data-toggle="modal" data-target="#mymodal" data-id="<?php echo base_url() . 'admin/view_modal/comments_edit/' . $comments['comments_id'] . '/movie'; ?>" id="menu" title="<?php echo trans('edit'); ?>"><?php echo trans('edit_comments'); ?></a>
+                      <li><a data-toggle="modal" data-target="#mymodal" data-id="<?php echo base_url() . 'admin/view_modal/comments_edit/' . $comments['comments_id'] . '/product'; ?>" id="menu" title="<?php echo trans('edit'); ?>"><?php echo trans('edit_comments'); ?></a>
                       <li><a title="<?php echo trans('delete'); ?>" href="#" onclick="delete_row(<?php echo " 'comments' " . ',' . $comments['comments_id']; ?>)" class="delete"><?php echo trans('delete'); ?></a> </li>
                     </ul>
                   </div>
@@ -93,7 +93,7 @@
                   <strong><?php echo $this->common_model->get_name_by_id($comments['user_id']); ?></strong><br>
                 </td>
                 <td> <?php echo $comments['comment']; ?></td>
-                <td><?php echo $this->common_model->get_title_by_videos_id($comments['video_id']); ?></td>
+                <td><?php echo $this->common_model->get_title_by_Products_id($comments['Product_id']); ?></td>
                 <td><?php echo $comments['comment_at']; ?></td>
                 <td>
                   <?php

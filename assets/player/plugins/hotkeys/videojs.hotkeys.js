@@ -1,6 +1,6 @@
 /*
  * Video.js Hotkeys
- * https://github.com/ctd1500/videojs-hotkeys
+ * https://github.com/ctd1500/Productjs-hotkeys
  *
  * Copyright (c) 2015 Chris Dougherty
  * Licensed under the Apache-2.0 license.
@@ -8,18 +8,18 @@
 
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) {
-    define('videojs-hotkeys', ['video.js'], function (module) {
+    define('Productjs-hotkeys', ['Product.js'], function (module) {
       return factory(module.default || module);
     });
   } else if (typeof module !== 'undefined' && module.exports) {
-    module.exports = factory(require('video.js'));
+    module.exports = factory(require('Product.js'));
   } else {
-    factory(videojs);
+    factory(Productjs);
   }
-}(this, function (videojs) {
+}(this, function (Productjs) {
   "use strict";
   if (typeof window !== 'undefined') {
-    window['videojs_hotkeys'] = { version: "0.2.21" };
+    window['Productjs_hotkeys'] = { version: "0.2.21" };
   }
 
   var hotkeys = function(options) {
@@ -57,7 +57,7 @@
       cFullscreen = 7;
 
     // Use built-in merge function from Video.js v5.0+ or v4.4.0+
-    var mergeOptions = videojs.mergeOptions || videojs.util.mergeOptions;
+    var mergeOptions = Productjs.mergeOptions || Productjs.util.mergeOptions;
     options = mergeOptions(def_options, options || {});
 
     var volumeStep = options.volumeStep,
@@ -77,7 +77,7 @@
       pEl.setAttribute('tabIndex', '-1');
     }
 
-    // Remove player outline to fix video performance issue
+    // Remove player outline to fix Product performance issue
     pEl.style.outline = "none";
 
     if (alwaysCaptureHotkeys || !player.autoplay()) {
@@ -226,7 +226,7 @@
               break;
 
             default:
-              // Number keys from 0-9 skip to a percentage of the video. 0 is 0% and 9 is 90%
+              // Number keys from 0-9 skip to a percentage of the Product. 0 is 0% and 9 is 90%
               if ((ewhich > 47 && ewhich < 59) || (ewhich > 95 && ewhich < 106)) {
                 // Do not handle if enableModifiersForNumbers set to false and keys are Ctrl, Cmd or Alt
                 if (enableModifiersForNumbers || !(event.metaKey || event.ctrlKey || event.altKey)) {
@@ -387,6 +387,6 @@
     return this;
   };
 
-  var registerPlugin = videojs.registerPlugin || videojs.plugin;
+  var registerPlugin = Productjs.registerPlugin || Productjs.plugin;
   registerPlugin('hotkeys', hotkeys);
 }));

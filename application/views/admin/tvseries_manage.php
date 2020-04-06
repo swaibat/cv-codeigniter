@@ -2,7 +2,7 @@
   <div class="col-sm-12">
     <div class="row">
       <div class="col-md-3">
-        <a href="<?php echo base_url() . 'admin/tvseries_add'; ?>" class="btn btn-sm btn-primary waves-effect waves-light"><span class="btn-label"><i class="fa fa-plus"></i></span><?php echo trans('add_video'); ?></a> <br>
+        <a href="<?php echo base_url() . 'admin/tvseries_add'; ?>" class="btn btn-sm btn-primary waves-effect waves-light"><span class="btn-label"><i class="fa fa-plus"></i></span><?php echo trans('add_Product'); ?></a> <br>
         <br>
       </div>
       <div class="col-md-9">
@@ -44,7 +44,7 @@
       </div>
     </div>
   </div>
-  <?php if (count($this->db->get('videos')->result_array()) > 0) : ?>
+  <?php if (count($this->db->get('Products')->result_array()) > 0) : ?>
     <table class="table table-striped" id="datatablessd">
       <thead>
         <tr>
@@ -61,34 +61,34 @@
         <?php $sl = 1;
           if ($last_row_num)
             $sl = $last_row_num + 1;
-          foreach ($videos as $videos) :
+          foreach ($Products as $Products) :
             ?>
-          <tr id='row_<?php echo $videos['videos_id']; ?>'>
+          <tr id='row_<?php echo $Products['Products_id']; ?>'>
             <td><?php echo $sl++; ?></td>
             <td>
               <div class="btn-group">
                 <button type="button" class="btn btn-white btn-sm dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></button>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a class="dropdown-item" target="_blank" href="<?php echo base_url() . 'watch/' . $videos['slug']; ?>"><?php echo trans('preview'); ?></a></li>
-                  <li><a class="dropdown-item" href="<?php echo base_url() . 'admin/seasons_manage/' . $videos['videos_id']; ?>"><?php echo trans('sessions_and_episodes'); ?></a></li>
-                  <li><a class="dropdown-item" href="<?php echo base_url() . 'admin/tvseries_edit/' . $videos['videos_id']; ?>"><?php echo trans('edit_tv_series'); ?></a></li>
-                  <li><a class="dropdown-item" title="<?php echo trans('delete'); ?>" href="#" onclick="delete_row(<?php echo " 'videos' " . ',' . $videos['videos_id']; ?>)" class="delete"><?php echo trans('delete'); ?></a> </li>
-                  <li><a class="dropdown-item" href="<?php echo base_url() . 'admin/send_movie_notification/push/' . $videos['videos_id'] . '/tv'; ?>"><?php echo trans('send_push_notification'); ?></a></li>
-                  <li><a class="dropdown-item" href="<?php echo base_url() . 'admin/send_movie_notification/email/' . $videos['videos_id'] . '/tv'; ?>"><?php echo trans('send_email_newslater'); ?></a></li>
+                  <li><a class="dropdown-item" target="_blank" href="<?php echo base_url() . 'watch/' . $Products['slug']; ?>"><?php echo trans('preview'); ?></a></li>
+                  <li><a class="dropdown-item" href="<?php echo base_url() . 'admin/seasons_manage/' . $Products['Products_id']; ?>"><?php echo trans('sessions_and_episodes'); ?></a></li>
+                  <li><a class="dropdown-item" href="<?php echo base_url() . 'admin/tvseries_edit/' . $Products['Products_id']; ?>"><?php echo trans('edit_tv_series'); ?></a></li>
+                  <li><a class="dropdown-item" title="<?php echo trans('delete'); ?>" href="#" onclick="delete_row(<?php echo " 'Products' " . ',' . $Products['Products_id']; ?>)" class="delete"><?php echo trans('delete'); ?></a> </li>
+                  <li><a class="dropdown-item" href="<?php echo base_url() . 'admin/send_product_notification/push/' . $Products['Products_id'] . '/tv'; ?>"><?php echo trans('send_push_notification'); ?></a></li>
+                  <li><a class="dropdown-item" href="<?php echo base_url() . 'admin/send_product_notification/email/' . $Products['Products_id'] . '/tv'; ?>"><?php echo trans('send_email_newslater'); ?></a></li>
                 </ul>
               </div>
             </td>
-            <td><img src="<?php echo $this->common_model->get_video_thumb_url($videos['videos_id']); ?>" class="img-fluid" style="max-width: 185"></td>
-            <td><a target="_blank" href="<?php echo base_url() . 'watch/' . $videos['slug']; ?>"><strong><?php echo $videos['title']; ?></strong></a></td>
-            <td><?php echo $videos['description']; ?></td>
+            <td><img src="<?php echo $this->common_model->get_Product_thumb_url($Products['Products_id']); ?>" class="img-fluid" style="max-width: 185"></td>
+            <td><a target="_blank" href="<?php echo base_url() . 'watch/' . $Products['slug']; ?>"><strong><?php echo $Products['title']; ?></strong></a></td>
+            <td><?php echo $Products['description']; ?></td>
             <td>
               <?php
-                  echo count($this->db->get_where('seasons', array('videos_id' => $videos['videos_id']))->result_array());
+                  echo count($this->db->get_where('seasons', array('Products_id' => $Products['Products_id']))->result_array());
                   ?> <?php echo trans('seasons'); ?>
             </td>
             <td>
               <?php
-                  if ($videos['publication'] == '1') {
+                  if ($Products['publication'] == '1') {
                     echo '<span class="label label-primary label-xs">Published</span>';
                   } else {
                     echo '<span class="label label-warning label-mini">Unublished</span>';
@@ -101,7 +101,7 @@
     </table>
   <?php else : ?>
     <div class="text-center">
-      <h2><?php echo trans('no_video_found'); ?></h2>
+      <h2><?php echo trans('no_Product_found'); ?></h2>
     </div>
   <?php endif; ?>
   <?php echo $links; ?>

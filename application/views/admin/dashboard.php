@@ -1,17 +1,17 @@
 <div class="row">
   <div class="col-md-3">
-    <div class="widget-small primary"><i class="icon fa fa-video-camera fa-3x"></i>
+    <div class="widget-small primary"><i class="icon fa fa-Product-camera fa-3x"></i>
       <div class="info">
-        <h4><?php echo trans('movies'); ?></h4>
-        <p><b class="counter"><?php echo $this->db->get_where('videos', array('publication' => '1', 'is_tvseries' => '0'))->num_rows(); ?></b></p>
+        <h4><?php echo trans('products'); ?></h4>
+        <p><b class="counter"><?php echo $this->db->get_where('Products', array('publication' => '1', 'is_tvseries' => '0'))->num_rows(); ?></b></p>
       </div>
     </div>
   </div>
   <div class="col-md-3">
-    <div class="widget-small info"><i class="icon fa fa-video-camera fa-3x"></i>
+    <div class="widget-small info"><i class="icon fa fa-Product-camera fa-3x"></i>
       <div class="info">
         <h4><?php echo trans('tv_series'); ?></h4>
-        <p><b class="counter"><?php echo $this->db->get_where('videos', array('publication' => '1', 'is_tvseries' => '1'))->num_rows(); ?></b></p>
+        <p><b class="counter"><?php echo $this->db->get_where('Products', array('publication' => '1', 'is_tvseries' => '1'))->num_rows(); ?></b></p>
       </div>
     </div>
   </div>
@@ -71,7 +71,7 @@
             <thead>
               <tr>
                 <th><?php echo trans('name'); ?></th>
-                <th><?php echo trans('video'); ?></th>
+                <th><?php echo trans('Product'); ?></th>
                 <th><?php echo trans('comments'); ?></th>
                 <th><?php echo trans('comments_at'); ?></th>
               </tr>
@@ -86,7 +86,7 @@
               foreach ($comments as $comment) : ?>
                 <tr>
                   <td><?php echo $this->common_model->get_name_by_id($comment['user_id']); ?></td>
-                  <td><?php echo $this->common_model->get_video_title_by_id($comment['video_id']); ?></td>
+                  <td><?php echo $this->common_model->get_Product_title_by_id($comment['Product_id']); ?></td>
                   <td><?php echo $comment['comment']; ?></td>
                   <td><?php echo $comment['comment_at']; ?></td>
                 </tr>
@@ -101,7 +101,7 @@
     <div class="col-sm-6">
       <div class="panel panel-border panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title"><?php echo trans('most_popular_videos'); ?></h3>
+          <h3 class="panel-title"><?php echo trans('most_popular_Products'); ?></h3>
         </div>
         <div class="panel-body">
           <table id="datatable-fixed-header" class="table table-striped table-bordered success">
@@ -116,12 +116,12 @@
               <?php
               $this->db->LIMIT('5');
               $this->db->order_by('total_view', 'desc');
-              $videos = $this->db->get('videos')->result_array();
-              foreach ($videos as $video) : ?>
+              $Products = $this->db->get('Products')->result_array();
+              foreach ($Products as $Product) : ?>
                 <tr>
-                  <td><a href="<?php echo base_url() . 'watch/' . $video['slug'] . '.html'; ?>" target="_blank"><?php echo $video['title']; ?></a></td>
-                  <td><a href="<?php echo base_url() . 'watch/' . $video['slug'] . '.html'; ?>" target="_blank"><?php echo $video['release']; ?></a></td>
-                  <td><a href="<?php echo base_url() . 'watch/' . $video['slug'] . '.html'; ?>" target="_blank"><?php echo $video['total_view']; ?></a></td>
+                  <td><a href="<?php echo base_url() . 'watch/' . $Product['slug'] . '.html'; ?>" target="_blank"><?php echo $Product['title']; ?></a></td>
+                  <td><a href="<?php echo base_url() . 'watch/' . $Product['slug'] . '.html'; ?>" target="_blank"><?php echo $Product['release']; ?></a></td>
+                  <td><a href="<?php echo base_url() . 'watch/' . $Product['slug'] . '.html'; ?>" target="_blank"><?php echo $Product['total_view']; ?></a></td>
                 </tr>
               <?php endforeach; ?>
             </tbody>
@@ -133,7 +133,7 @@
     <div class="col-sm-6">
       <div class="panel panel-border panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title"><?php echo trans('top_rated_videos'); ?></h3>
+          <h3 class="panel-title"><?php echo trans('top_rated_Products'); ?></h3>
         </div>
         <div class="panel-body">
           <table id="datatable-fixed-header" class="table table-striped table-bordered success">
@@ -148,12 +148,12 @@
               <?php
               $this->db->LIMIT('5');
               $this->db->order_by('total_rating', 'desc');
-              $videos = $this->db->get('videos')->result_array();
-              foreach ($videos as $video) : ?>
+              $Products = $this->db->get('Products')->result_array();
+              foreach ($Products as $Product) : ?>
                 <tr>
-                  <td><a href="<?php echo base_url() . 'watch/' . $video['slug'] . '.html'; ?>" target="_blank"><?php echo $video['title']; ?></a></td>
-                  <td><a href="<?php echo base_url() . 'watch/' . $video['slug'] . '.html'; ?>" target="_blank"><?php echo $video['release']; ?></a></td>
-                  <td><a href="<?php echo base_url() . 'watch/' . $video['slug'] . '.html'; ?>" target="_blank"><?php echo $video['total_rating']; ?></a></td>
+                  <td><a href="<?php echo base_url() . 'watch/' . $Product['slug'] . '.html'; ?>" target="_blank"><?php echo $Product['title']; ?></a></td>
+                  <td><a href="<?php echo base_url() . 'watch/' . $Product['slug'] . '.html'; ?>" target="_blank"><?php echo $Product['release']; ?></a></td>
+                  <td><a href="<?php echo base_url() . 'watch/' . $Product['slug'] . '.html'; ?>" target="_blank"><?php echo $Product['total_rating']; ?></a></td>
                 </tr>
               <?php endforeach; ?>
             </tbody>

@@ -42,16 +42,16 @@
             <div class="col-md-9 col-sm-12">
             <?php if($total_rows > 0){ ?>
                 <div class="row clean-preset">
-                    <div class="movie-container">
+                    <div class="product-container">
                         <!-- Single post -->
                         <?php foreach ($all_published_posts as $posts) :?>
                         <div class="col-md-6 col-sm-6">
                             <div class="post-list-container">
-                                <div class="movie-img">
-                                    <img class="img-responsive" src="<?php echo $posts->image_link; ?>" alt="video image">
+                                <div class="product-img">
+                                    <img class="img-responsive" src="<?php echo $posts->image_link; ?>" alt="Product image">
                                 </div>
-                                <div class="post-video-info">
-                                    <p class="post-video-aut-name">
+                                <div class="post-Product-info">
+                                    <p class="post-Product-aut-name">
                                         <span class="by-in"><?php echo trans('by'); ?></span>
                                         <a href="<?php echo base_url().'blog/author/'.$this->common_model->get_slug_by_user_id($posts->user_id).'.html';?>"><?php echo $this->common_model->get_name_by_id($posts->user_id);?></a>
                                         <span>&#47;</span>
@@ -64,7 +64,7 @@
                                         </a>
                                         <?php endforeach; ?>
                                         </p>
-                                        <p class="blog-movie-desc text-right">
+                                        <p class="blog-product-desc text-right">
                                             <span><?php echo $this->common_model->time_ago($posts->post_at);?></span>
                                             <span>&#47;</span>
                                             <span><?php echo $this->common_model->post_comments_record_count_by_id($posts->posts_id);?> <i class="fa fa-commenting-o"></i></span>

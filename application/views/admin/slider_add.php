@@ -46,7 +46,7 @@
     <label class="control-label col-md-12" >Action Type</label>
     <div class="col-sm-12">
         <select class="form-control m-bot15" name="action_type" id="action_type">
-          <option value="movie">Play Movie</option>
+          <option value="product">Play Product</option>
           <option value="tvseries">Play TVSeries</option>
           <option value="tv">Watch TV Channel</option>
           <option value="external_browser">Open URL by External Browser</option>
@@ -55,10 +55,10 @@
     </div>
 </div>
 
-<div class="form-group" id="movie" style="display: none;">
-  <label class="control-label col-md-12">Movie</label>
+<div class="form-group" id="product" style="display: none;">
+  <label class="control-label col-md-12">Product</label>
   <div class="col-sm-12">
-    <select class="form-control" name="movie_id" id="select_movie"></select>
+    <select class="form-control" name="product_id" id="select_product"></select>
   </div>
 </div>
 
@@ -112,23 +112,23 @@
 <script>
   jQuery(document).ready(function() {
     $('#action_type').on('change', function() {
-      if( this.value == 'movie'){
-        $("#movie").show();
+      if( this.value == 'product'){
+        $("#product").show();
         $("#tvseries").hide();
         $("#tv").hide();
         $("#url").hide();
       }else if(this.value == 'tvseries'){
-        $("#movie").hide();
+        $("#product").hide();
         $("#tvseries").show();
         $("#tv").hide();
         $("#url").hide();
       }else if(this.value == 'tv'){
-        $("#movie").hide();
+        $("#product").hide();
         $("#tvseries").hide();
         $("#tv").show();
         $("#url").hide();
       }else if(this.value == 'external_browser' || this.value == 'webview'){
-        $("#movie").hide();
+        $("#product").hide();
         $("#tvseries").hide();
         $("#tv").hide();
         $("#url").show();
@@ -140,11 +140,11 @@
 </script>
 <script src="<?php echo base_url() ?>assets/plugins/select2/select2.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-  $('#select_movie').select2({
-    placeholder: 'Select Movie',
+  $('#select_product').select2({
+    placeholder: 'Select Product',
     minimumInputLength: 2,
     ajax: {
-      url: '<?=base_url('admin/load_movie')?>',
+      url: '<?=base_url('admin/load_product')?>',
       dataType: 'json',
       delay: 250,
       processResults: function (data) {

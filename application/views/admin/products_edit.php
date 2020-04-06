@@ -15,33 +15,33 @@
 </style>
 
 <?php
-$videos   = $this->db->get_where('videos', array('videos_id' => $param1))->result_array();
-foreach ($videos as $video) :
-    $actors     = explode(",", $video['stars']);
-    $directors  = explode(",", $video['director']);
-    $writers    = explode(",", $video['writer']);
-    echo form_open(base_url() . 'admin/videos/update/' . $param1, array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data'));
+$Products   = $this->db->get_where('Products', array('Products_id' => $param1))->result_array();
+foreach ($Products as $Product) :
+    $actors     = explode(",", $Product['stars']);
+    $directors  = explode(",", $Product['director']);
+    $writers    = explode(",", $Product['writer']);
+    echo form_open(base_url() . 'admin/Products/update/' . $param1, array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data'));
     ?>
     <div class="row">
         <div class="col-md-6">
             <div class="card cta cta--featured p-a">
                 <div class="card-block">
-                    <h3 class="card-title no-margin-top"><?php echo trans('movie_info'); ?></h3>
+                    <h3 class="card-title no-margin-top"><?php echo trans('product_info'); ?></h3>
                 </div>
                 <span class="header-line"></span>
                 <div class="card-block">
                     <input type="hidden" name="imdbid" id="imdbid">
                     <div class="form-group">
                         <label class=" control-label"><?php echo trans('title'); ?></label>
-                        <input type="text" name="title" value="<?php echo $video['title'] ?>" id="title" class="form-control" required>
+                        <input type="text" name="title" value="<?php echo $Product['title'] ?>" id="title" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label class="control-label"><?php echo trans('slug'); ?> (<?php echo base_url(); ?>)</label>
-                        <input type="text" id="slug" name="slug" value="<?php echo $video['slug'] ?>" class="form-control input-sm" required>
+                        <input type="text" id="slug" name="slug" value="<?php echo $Product['slug'] ?>" class="form-control input-sm" required>
                     </div>
                     <div class="form-group">
                         <label class="control-label"><?php echo trans('description'); ?></label>
-                        <textarea class="wysihtml5 form-control" name="description" id="description" rows="10"><?php echo $video['description'] ?></textarea>
+                        <textarea class="wysihtml5 form-control" name="description" id="description" rows="10"><?php echo $Product['description'] ?></textarea>
                     </div>
                     <div class="form-group">
                         <label class="control-label"><?php echo trans('actor'); ?></label>
@@ -69,12 +69,12 @@ foreach ($videos as $video) :
                     </div>
                     <div class="form-group">
                         <label class="control-label"><?php echo trans('imdb_rating'); ?></label>
-                        <input type="text" name="rating" value='<?php echo $video['imdb_rating']; ?>' id="rating" class="form-control">
+                        <input type="text" name="rating" value='<?php echo $Product['imdb_rating']; ?>' id="rating" class="form-control">
                     </div>
                     <div class="form-group">
                         <label class="control-label"><?php echo trans('release_date'); ?></label>
                         <div class="input-group">
-                            <input type="text" name="release" id="release_date" class="form-control" value="<?php echo $video['release']; ?>">
+                            <input type="text" name="release" id="release_date" class="form-control" value="<?php echo $Product['release']; ?>">
                             <span class="input-group-addon bg-custom b-0 text-white"><i class="fa fa-calendar" aria-hidden="true"></i></span> </div>
                         <!-- input-group -->
                     </div>
@@ -84,7 +84,7 @@ foreach ($videos as $video) :
                             <optgroup label="Select Country">
                                 <?php $country = $this->db->get('country')->result_array();
                                     foreach ($country as $v_country) : ?>
-                                    <option value="<?php echo $v_country['country_id']; ?>" <?php if (preg_match('/\b' . $v_country['country_id'] . '\b/', $video['country'])) {
+                                    <option value="<?php echo $v_country['country_id']; ?>" <?php if (preg_match('/\b' . $v_country['country_id'] . '\b/', $Product['country'])) {
                                                                                                         echo "selected";
                                                                                                     } ?>><?php echo $v_country['name']; ?></option>
                                 <?php endforeach; ?>
@@ -95,7 +95,7 @@ foreach ($videos as $video) :
                         <select class="form-control select2" name="genre[]" multiple="multiple" id="genre">
                             <?php $genre = $this->db->get('genre')->result_array();
                                 foreach ($genre as $v_genre) : ?>
-                                <option value="<?php echo $v_genre['genre_id']; ?>" <?php if (preg_match('/\b' . $v_genre['genre_id'] . '\b/', $video['genre'])) {
+                                <option value="<?php echo $v_genre['genre_id']; ?>" <?php if (preg_match('/\b' . $v_genre['genre_id'] . '\b/', $Product['genre'])) {
                                                                                                 echo "selected";
                                                                                             } ?>><?php echo $v_genre['name']; ?></option>
                                 <option value="<?php echo $v_genre['genre_id']; ?>"><?php echo $v_genre['name']; ?></option>
@@ -103,26 +103,26 @@ foreach ($videos as $video) :
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="control-label"><?php echo trans('video_type'); ?></label>
-                        <select class="form-control select2" name="video_type[]" multiple="multiple" id="video_type">
-                            <?php $video_types = $this->db->get('video_type')->result_array();
-                                foreach ($video_types as $video_type) : ?>
-                                <option value="<?php echo $video_type['video_type_id']; ?>" <?php if (preg_match('/\b' . $video_type['video_type_id'] . '\b/', $video['video_type'])) {
+                        <label class="control-label"><?php echo trans('Product_type'); ?></label>
+                        <select class="form-control select2" name="Product_type[]" multiple="multiple" id="Product_type">
+                            <?php $Product_types = $this->db->get('Product_type')->result_array();
+                                foreach ($Product_types as $Product_type) : ?>
+                                <option value="<?php echo $Product_type['Product_type_id']; ?>" <?php if (preg_match('/\b' . $Product_type['Product_type_id'] . '\b/', $Product['Product_type'])) {
                                                                                                         echo "selected";
-                                                                                                    } ?>><?php echo $video_type['video_type']; ?></option>
+                                                                                                    } ?>><?php echo $Product_type['Product_type']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="control-label"><?php echo trans('runtime'); ?></label>
-                        <input type="text" name="runtime" value="<?php echo $video['runtime']; ?>" id="runtime" class="form-control">
+                        <input type="text" name="runtime" value="<?php echo $Product['runtime']; ?>" id="runtime" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label"><?php echo trans('video_quality'); ?></label>
-                        <select class="form-control m-bot15" name="video_quality">
+                        <label class="control-label"><?php echo trans('Product_quality'); ?></label>
+                        <select class="form-control m-bot15" name="Product_quality">
                             <?php $quality = $this->db->get_where('quality', array('status' => '1'))->result_array();
                                 foreach ($quality as $quality) : ?>
-                                <option value="<?php echo $quality['quality'] ?>" <?php if ($quality['quality'] == $video['video_quality']) {
+                                <option value="<?php echo $quality['quality'] ?>" <?php if ($quality['quality'] == $Product['Product_quality']) {
                                                                                                 echo 'selected';
                                                                                             } ?>><?php echo $quality['quality'] ?></option>
                             <?php endforeach; ?>
@@ -132,7 +132,7 @@ foreach ($videos as $video) :
                         <label class="control-label"><?php echo trans('publication'); ?></label>
                         <div class="toggle">
                             <label>
-                                <input type="checkbox" name="publication" <?php if ($video['publication'] == '1') {
+                                <input type="checkbox" name="publication" <?php if ($Product['publication'] == '1') {
                                                                                     echo 'checked';
                                                                                 } ?>><span class="button-indecator"></span>
                             </label>
@@ -143,7 +143,7 @@ foreach ($videos as $video) :
                         <label class="control-label"><?php echo trans('enable_download'); ?></label>
                         <div class="toggle">
                             <label>
-                                <input type="checkbox" name="enable_download" <?php if ($video['enable_download'] == '1') {
+                                <input type="checkbox" name="enable_download" <?php if ($Product['enable_download'] == '1') {
                                                                                         echo 'checked';
                                                                                     } ?>><span class="button-indecator"></span>
                             </label>
@@ -152,13 +152,13 @@ foreach ($videos as $video) :
                     <div class="form-group">
                       <label class="control-label">Free/Paid</label>
                         <select  class="form-control"  name="is_paid">
-                          <option value="0"  <?php if($video['is_paid'] =='0'){ echo "selected";} ?>>Free</option>
-                          <option value="1" <?php if($video['is_paid'] =='1'){ echo "selected";} ?>>Paid</option>
+                          <option value="0"  <?php if($Product['is_paid'] =='0'){ echo "selected";} ?>>Free</option>
+                          <option value="1" <?php if($Product['is_paid'] =='1'){ echo "selected";} ?>>Paid</option>
                         </select>
                     </div>
                     <div class="row">
                         <div class="col-sm-6 pull-left">
-                            <a href="<?php echo base_url() . 'admin/videos/#' . $param1 ?>" class="link m-l-15 text-left"> Back to list</a>
+                            <a href="<?php echo base_url() . 'admin/Products/#' . $param1 ?>" class="link m-l-15 text-left"> Back to list</a>
                         </div>
                     </div>
                 </div>
@@ -174,7 +174,7 @@ foreach ($videos as $video) :
                 <div class="card-block">
                     <div class="form-group">
                         <label class="control-label"><?php echo trans('thumbnail'); ?></label>
-                        <div class="profile-info-name text-center"> <img id="thumb_image" src="<?php echo $this->common_model->get_video_thumb_url($param1) . '?' . time(); ?>" width="150" class="img-thumbnail" alt=""> </div>
+                        <div class="profile-info-name text-center"> <img id="thumb_image" src="<?php echo $this->common_model->get_Product_thumb_url($param1) . '?' . time(); ?>" width="150" class="img-thumbnail" alt=""> </div>
                         <br>
                         <div id="thumbnail_content">
                             <input type="file" id="thumbnail_file" onchange="showImg(this);" name="thumbnail" class="filestyle" data-input="false" accept="image/*"></div><br>
@@ -189,7 +189,7 @@ foreach ($videos as $video) :
 
                     <div class="form-group">
                         <label class="control-label"><?php echo trans('poster'); ?></label>
-                        <div class="profile-info-name text-center"> <img id="poster_image" src="<?php echo $this->common_model->get_video_poster_admin_url($param1) . '?' . time(); ?>" width="350" class="img-thumbnail" alt=""> </div>
+                        <div class="profile-info-name text-center"> <img id="poster_image" src="<?php echo $this->common_model->get_Product_poster_admin_url($param1) . '?' . time(); ?>" width="350" class="img-thumbnail" alt=""> </div>
                         <br>
                         <div id="poster_content">
                             <input type="file" id="poster_file" onchange="showImg2(this);" name="poster_file" class="filestyle" data-input="false" accept="image/*"></div><br>
@@ -204,24 +204,24 @@ foreach ($videos as $video) :
                     <h3 class="card-title"><?php echo trans('seo_and_marketing'); ?></h3>
                     <div class="form-group">
                         <label class=" control-label"><?php echo trans('seo_title'); ?></label>
-                        <input type="text" name="seo_title" id="seo_title" value="<?php echo $video['seo_title']; ?>" class="form-control">
+                        <input type="text" name="seo_title" id="seo_title" value="<?php echo $Product['seo_title']; ?>" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label class="control-label"><?php echo trans('focus_keyword'); ?></label>
-                        <input type="text" name="focus_keyword" value="<?php echo $video['focus_keyword']; ?>" id="focus_keyword" class="form-control"><br>
+                        <input type="text" name="focus_keyword" value="<?php echo $Product['focus_keyword']; ?>" id="focus_keyword" class="form-control"><br>
                         <p><?php echo trans('use_comma_to_separate_keyword'); ?></p>
                     </div>
                     <div class="form-group">
                         <label class="control-label"><?php echo trans('meta_description'); ?></label>
                         <textarea class="wysihtml5 form-control" name="meta_description" id="meta_description" rows="5">
-                <?php echo $video['meta_description']; ?>
+                <?php echo $Product['meta_description']; ?>
             </textarea>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label"><?php echo trans('tags'); ?></label>
-                        <input type="text" name="tags" id="tags" value="<?php echo $video['tags']; ?>" class="form-control"><br>
+                        <input type="text" name="tags" id="tags" value="<?php echo $Product['tags']; ?>" class="form-control"><br>
                         <p><?php echo trans('use_comma_to_separate_tags'); ?></p>
                     </div>
 
@@ -322,7 +322,7 @@ foreach ($videos as $video) :
         $('#genre').select2({
             placeholder: 'Select Genre'
         });
-        $('#video_type').select2({
+        $('#Product_type').select2({
             placeholder: 'Select Video Type'
         });
         $('#focus_keyword').tagsinput();

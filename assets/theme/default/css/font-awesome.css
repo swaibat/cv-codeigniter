@@ -359,7 +359,7 @@
 .fa-indent:before {
   content: "\f03c";
 }
-.fa-video-camera:before {
+.fa-Product-camera:before {
   content: "\f03d";
 }
 .fa-photo:before,
@@ -1482,8 +1482,8 @@
 .fa-file-audio-o:before {
   content: "\f1c7";
 }
-.fa-file-movie-o:before,
-.fa-file-video-o:before {
+.fa-file-product-o:before,
+.fa-file-Product-o:before {
   content: "\f1c8";
 }
 .fa-file-code-o:before {

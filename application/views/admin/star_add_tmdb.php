@@ -5,13 +5,13 @@
 <div class="form-group">
   <label class="control-label"><?php echo trans('from'); ?></label>
   <select class="form-control" name="from" required>
-    <option value="movie"><?php echo trans('tmdb_movie'); ?></option>
+    <option value="product"><?php echo trans('tmdb_product'); ?></option>
     <option value="tv"><?php echo trans('tmdb_tv_series'); ?></option>
   </select>
 </div>
 <div class="form-group">
   <label class="control-label"><?php echo trans('tmdb_id'); ?></label>
-  <input type="text" name="id" class="form-control" placeholder="Enter TMDB Movie/Tv-Series ID" />
+  <input type="text" name="id" class="form-control" placeholder="Enter TMDB Product/Tv-Series ID" />
 </div>
 <div class="alert alert-info"><strong><?php echo trans('note'); ?>:</strong> <?php echo trans('actors_photo_will_import_by_cron.'); ?></div>
 

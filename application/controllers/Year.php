@@ -16,7 +16,7 @@ class Year extends Home_Core_Controller {
                         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
                         $config = array();
                         $config["base_url"] = base_url() . "year/".$year;
-                        $config["total_rows"] = $this->common_model->get_video_by_year_record_count($year);
+                        $config["total_rows"] = $this->common_model->get_Product_by_year_record_count($year);
                         $config["per_page"] = 24;
                         $config["uri_segment"] = 3;
                         $config['full_tag_open'] = '<div class="pagination-container text-center"><ul class ="pagination">';
@@ -48,16 +48,16 @@ class Year extends Home_Core_Controller {
                         $config['use_page_numbers'] = FALSE; 
 
                         $this->pagination->initialize($config);                      
-                        $data["all_published_videos"] = $this->common_model->get_video_by_year($config["per_page"], $page, $year);
+                        $data["all_published_Products"] = $this->common_model->get_Product_by_year($config["per_page"], $page, $year);
                         $data["links"] = $this->pagination->create_links();
                         $data['total_rows']=$config["total_rows"];
                         $data['year']=$year;
-                        $data['title'] = "Watch ".$year."'s". " movies & TV-Series online";
+                        $data['title'] = "Watch ".$year."'s". " products & TV-Series online";
                         $data['page_name']='year';
                         $this->load->view('theme/'.$this->active_theme.'/index',$data);
                 }
                 else{
-                        $data['title'] = "Search movie by year";
+                        $data['title'] = "Search product by year";
                         $data['page_name']='years';
                         $this->load->view('theme/'.$this->active_theme.'/index',$data);    
                 }

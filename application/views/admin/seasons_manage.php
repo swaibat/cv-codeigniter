@@ -21,9 +21,9 @@
                 </thead>
                 <tbody>
                 <?php echo form_open(base_url() . 'admin/seasons_manage/change_order/', array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data')); ?>
-                <input type="hidden" name="videos_id" value="<?php echo $param1; ?>">
+                <input type="hidden" name="Products_id" value="<?php echo $param1; ?>">
                     <?php $sl = 1;
-                        $seasons = $this->common_model->get_seasons_by_videos_id($param1);
+                        $seasons = $this->common_model->get_seasons_by_Products_id($param1);
                         foreach ($seasons as $seasons) :
                         ?>
                         <tr id='row_<?php echo $seasons['seasons_id']; ?>'>

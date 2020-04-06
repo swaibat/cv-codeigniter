@@ -1,4 +1,4 @@
-videojs.addLanguage("bg",{
+Productjs.addLanguage("bg",{
  "Play": "Възпроизвеждане",
  "Pause": "Пауза",
  "Current Time": "Текущо време",

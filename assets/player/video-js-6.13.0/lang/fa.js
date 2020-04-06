@@ -1,4 +1,4 @@
-videojs.addLanguage("fa",{
+Productjs.addLanguage("fa",{
  "Audio Player": "پخش کننده صوتی",
  "Video Player": "پخش کننده ویدیو",
  "Play": "پخش",

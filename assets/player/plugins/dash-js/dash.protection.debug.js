@@ -547,19 +547,19 @@ function Protection() {
         var log = config.log;
         var eventBus = config.eventBus;
         var errHandler = config.errHandler;
-        var videoElement = config.videoModel ? config.videoModel.getElement() : null;
+        var ProductElement = config.ProductModel ? config.ProductModel.getElement() : null;
 
-        if ((!videoElement || videoElement.onencrypted !== undefined) && (!videoElement || videoElement.mediaKeys !== undefined)) {
+        if ((!ProductElement || ProductElement.onencrypted !== undefined) && (!ProductElement || ProductElement.mediaKeys !== undefined)) {
             log('EME detected on this user agent! (ProtectionModel_21Jan2015)');
             return (0, _modelsProtectionModel_21Jan20152['default'])(context).create({ log: log, eventBus: eventBus, events: config.events });
-        } else if (getAPI(videoElement, APIS_ProtectionModel_3Feb2014)) {
+        } else if (getAPI(ProductElement, APIS_ProtectionModel_3Feb2014)) {
 
             log('EME detected on this user agent! (ProtectionModel_3Feb2014)');
-            return (0, _modelsProtectionModel_3Feb20142['default'])(context).create({ log: log, eventBus: eventBus, events: config.events, api: getAPI(videoElement, APIS_ProtectionModel_3Feb2014) });
-        } else if (getAPI(videoElement, APIS_ProtectionModel_01b)) {
+            return (0, _modelsProtectionModel_3Feb20142['default'])(context).create({ log: log, eventBus: eventBus, events: config.events, api: getAPI(ProductElement, APIS_ProtectionModel_3Feb2014) });
+        } else if (getAPI(ProductElement, APIS_ProtectionModel_01b)) {
 
             log('EME detected on this user agent! (ProtectionModel_01b)');
-            return (0, _modelsProtectionModel_01b2['default'])(context).create({ log: log, eventBus: eventBus, errHandler: errHandler, events: config.events, api: getAPI(videoElement, APIS_ProtectionModel_01b) });
+            return (0, _modelsProtectionModel_01b2['default'])(context).create({ log: log, eventBus: eventBus, errHandler: errHandler, events: config.events, api: getAPI(ProductElement, APIS_ProtectionModel_01b) });
         } else {
 
             log('No supported version of EME detected on this user agent! - Attempts to play encrypted content will fail!');
@@ -567,13 +567,13 @@ function Protection() {
         }
     }
 
-    function getAPI(videoElement, apis) {
+    function getAPI(ProductElement, apis) {
 
         for (var i = 0; i < apis.length; i++) {
             var api = apis[i];
             // detect if api is supported by browser
             // check only first function in api -> should be fine
-            if (typeof videoElement[api[Object.keys(api)[0]]] !== 'function') {
+            if (typeof ProductElement[api[Object.keys(api)[0]]] !== 'function') {
                 continue;
             }
 
@@ -790,7 +790,7 @@ var ProtectionEvents = (function (_EventsBase) {
      * associated with the protection set
      * @ignore
      */
-    this.VIDEO_ELEMENT_SELECTED = 'videoElementSelected';
+    this.VIDEO_ELEMENT_SELECTED = 'ProductElementSelected';
   }
 
   return ProtectionEvents;
@@ -894,7 +894,7 @@ function ProtectionController(config) {
 
     /**
      * Initialize this protection system with a given audio
-     * or video stream information.
+     * or Product stream information.
      *
      * @param {StreamInfo} [mediaInfo] Media information
      * @memberof module:ProtectionController
@@ -913,7 +913,7 @@ function ProtectionController(config) {
         mediaInfoArr.push(mediaInfo);
 
         // ContentProtection elements are specified at the AdaptationSet level, so the CP for audio
-        // and video will be the same.  Just use one valid MediaInfo object
+        // and Product will be the same.  Just use one valid MediaInfo object
         var supportedKS = protectionKeyController.getSupportedKeySystemsFromContentProtection(mediaInfo.contentProtection);
         if (supportedKS && supportedKS.length > 0) {
             selectKeySystem(supportedKS, true);
@@ -1068,7 +1068,7 @@ function ProtectionController(config) {
     }
 
     /**
-     * Sets the robustness level for video and audio capabilities. Optional to remove Chrome warnings.
+     * Sets the robustness level for Product and audio capabilities. Optional to remove Chrome warnings.
      * Possible values are SW_SECURE_CRYPTO, SW_SECURE_DECODE, HW_SECURE_CRYPTO, HW_SECURE_CRYPTO, HW_SECURE_DECODE, HW_SECURE_ALL.
      *
      * @param {string} level the robustness level
@@ -1135,19 +1135,19 @@ function ProtectionController(config) {
     function getKeySystemConfiguration(keySystem) {
         var protData = getProtData(keySystem);
         var audioCapabilities = [];
-        var videoCapabilities = [];
+        var ProductCapabilities = [];
         var audioRobustness = protData && protData.audioRobustness && protData.audioRobustness.length > 0 ? protData.audioRobustness : robustnessLevel;
-        var videoRobustness = protData && protData.videoRobustness && protData.videoRobustness.length > 0 ? protData.videoRobustness : robustnessLevel;
+        var ProductRobustness = protData && protData.ProductRobustness && protData.ProductRobustness.length > 0 ? protData.ProductRobustness : robustnessLevel;
 
         mediaInfoArr.forEach(function (media) {
             if (media.type === constants.AUDIO) {
                 audioCapabilities.push(new _voMediaCapability2['default'](media.codec, audioRobustness));
             } else if (media.type === constants.VIDEO) {
-                videoCapabilities.push(new _voMediaCapability2['default'](media.codec, videoRobustness));
+                ProductCapabilities.push(new _voMediaCapability2['default'](media.codec, ProductRobustness));
             }
         });
 
-        return new _voKeySystemConfiguration2['default'](audioCapabilities, videoCapabilities, 'optional', sessionType === 'temporary' ? 'optional' : 'required', [sessionType]);
+        return new _voKeySystemConfiguration2['default'](audioCapabilities, ProductCapabilities, 'optional', sessionType === 'temporary' ? 'optional' : 'required', [sessionType]);
     }
 
     function selectKeySystem(supportedKS, fromManifest) {
@@ -2613,7 +2613,7 @@ function ProtectionModel_01b(config) {
     var errHandler = config.errHandler;
 
     var instance = undefined,
-        videoElement = undefined,
+        ProductElement = undefined,
         keySystem = undefined,
         protectionKeyController = undefined,
 
@@ -2641,7 +2641,7 @@ function ProtectionModel_01b(config) {
     eventHandler = undefined;
 
     function setup() {
-        videoElement = null;
+        ProductElement = null;
         keySystem = null;
         pendingSessions = [];
         sessions = [];
@@ -2650,7 +2650,7 @@ function ProtectionModel_01b(config) {
     }
 
     function reset() {
-        if (videoElement) {
+        if (ProductElement) {
             removeEventListeners();
         }
         for (var i = 0; i < sessions.length; i++) {
@@ -2675,10 +2675,10 @@ function ProtectionModel_01b(config) {
     }
 
     function requestKeySystemAccess(ksConfigurations) {
-        var ve = videoElement;
+        var ve = ProductElement;
         if (!ve) {
-            // Must have a video element to do this capability tests
-            ve = document.createElement('video');
+            // Must have a Product element to do this capability tests
+            ve = document.createElement('Product');
         }
 
         // Try key systems in order, first one with supported key system configuration
@@ -2690,23 +2690,23 @@ function ProtectionModel_01b(config) {
             var supportedAudio = null;
             var supportedVideo = null;
 
-            // Try key system configs in order, first one with supported audio/video
+            // Try key system configs in order, first one with supported audio/Product
             // is used
             for (var configIdx = 0; configIdx < configs.length; configIdx++) {
                 //let audios = configs[configIdx].audioCapabilities;
-                var videos = configs[configIdx].videoCapabilities;
-                // Look for supported video container/codecs
-                if (videos && videos.length !== 0) {
-                    supportedVideo = []; // Indicates that we have a requested video config
-                    for (var videoIdx = 0; videoIdx < videos.length; videoIdx++) {
-                        if (ve.canPlayType(videos[videoIdx].contentType, systemString) !== '') {
-                            supportedVideo.push(videos[videoIdx]);
+                var Products = configs[configIdx].ProductCapabilities;
+                // Look for supported Product container/codecs
+                if (Products && Products.length !== 0) {
+                    supportedVideo = []; // Indicates that we have a requested Product config
+                    for (var ProductIdx = 0; ProductIdx < Products.length; ProductIdx++) {
+                        if (ve.canPlayType(Products[ProductIdx].contentType, systemString) !== '') {
+                            supportedVideo.push(Products[ProductIdx]);
                         }
                     }
                 }
 
-                // No supported audio or video in this configuration OR we have
-                // requested audio or video configuration that is not supported
+                // No supported audio or Product in this configuration OR we have
+                // requested audio or Product configuration that is not supported
                 if (!supportedAudio && !supportedVideo || supportedAudio && supportedAudio.length === 0 || supportedVideo && supportedVideo.length === 0) {
                     continue;
                 }
@@ -2720,7 +2720,7 @@ function ProtectionModel_01b(config) {
             }
         }
         if (!found) {
-            eventBus.trigger(events.KEY_SYSTEM_ACCESS_COMPLETE, { error: 'Key system access denied! -- No valid audio/video content configurations detected!' });
+            eventBus.trigger(events.KEY_SYSTEM_ACCESS_COMPLETE, { error: 'Key system access denied! -- No valid audio/Product content configurations detected!' });
         }
     }
 
@@ -2730,23 +2730,23 @@ function ProtectionModel_01b(config) {
     }
 
     function setMediaElement(mediaElement) {
-        if (videoElement === mediaElement) {
+        if (ProductElement === mediaElement) {
             return;
         }
 
         // Replacing the previous element
-        if (videoElement) {
+        if (ProductElement) {
             removeEventListeners();
         }
 
-        videoElement = mediaElement;
+        ProductElement = mediaElement;
 
         // Only if we are not detaching from the existing element
-        if (videoElement) {
-            videoElement.addEventListener(api.keyerror, eventHandler);
-            videoElement.addEventListener(api.needkey, eventHandler);
-            videoElement.addEventListener(api.keymessage, eventHandler);
-            videoElement.addEventListener(api.keyadded, eventHandler);
+        if (ProductElement) {
+            ProductElement.addEventListener(api.keyerror, eventHandler);
+            ProductElement.addEventListener(api.needkey, eventHandler);
+            ProductElement.addEventListener(api.keymessage, eventHandler);
+            ProductElement.addEventListener(api.keyadded, eventHandler);
             eventBus.trigger(events.VIDEO_ELEMENT_SELECTED);
         }
     }
@@ -2776,7 +2776,7 @@ function ProtectionModel_01b(config) {
             pendingSessions.push(newSession);
 
             // Send our request to the CDM
-            videoElement[api.generateKeyRequest](keySystem.systemString, new Uint8Array(initData));
+            ProductElement[api.generateKeyRequest](keySystem.systemString, new Uint8Array(initData));
 
             return newSession;
         } else {
@@ -2788,18 +2788,18 @@ function ProtectionModel_01b(config) {
         var sessionID = sessionToken.sessionID;
         if (!protectionKeyController.isClearKey(keySystem)) {
             // Send our request to the CDM
-            videoElement[api.addKey](keySystem.systemString, new Uint8Array(message), new Uint8Array(sessionToken.initData), sessionID);
+            ProductElement[api.addKey](keySystem.systemString, new Uint8Array(message), new Uint8Array(sessionToken.initData), sessionID);
         } else {
             // For clearkey, message is a ClearKeyKeySet
             for (var i = 0; i < message.keyPairs.length; i++) {
-                videoElement[api.addKey](keySystem.systemString, message.keyPairs[i].key, message.keyPairs[i].keyID, sessionID);
+                ProductElement[api.addKey](keySystem.systemString, message.keyPairs[i].key, message.keyPairs[i].keyID, sessionID);
             }
         }
     }
 
     function closeKeySession(sessionToken) {
         // Send our request to the CDM
-        videoElement[api.cancelKeyRequest](keySystem.systemString, sessionToken.sessionID);
+        ProductElement[api.cancelKeyRequest](keySystem.systemString, sessionToken.sessionID);
     }
 
     function setServerCertificate() /*serverCertificate*/{/* Not supported */}
@@ -2933,10 +2933,10 @@ function ProtectionModel_01b(config) {
     }
 
     function removeEventListeners() {
-        videoElement.removeEventListener(api.keyerror, eventHandler);
-        videoElement.removeEventListener(api.needkey, eventHandler);
-        videoElement.removeEventListener(api.keymessage, eventHandler);
-        videoElement.removeEventListener(api.keyadded, eventHandler);
+        ProductElement.removeEventListener(api.keyerror, eventHandler);
+        ProductElement.removeEventListener(api.needkey, eventHandler);
+        ProductElement.removeEventListener(api.keymessage, eventHandler);
+        ProductElement.removeEventListener(api.keyadded, eventHandler);
     }
 
     instance = {
@@ -3046,7 +3046,7 @@ function ProtectionModel_21Jan2015(config) {
 
     var instance = undefined,
         keySystem = undefined,
-        videoElement = undefined,
+        ProductElement = undefined,
         mediaKeys = undefined,
         sessions = undefined,
         eventHandler = undefined,
@@ -3054,7 +3054,7 @@ function ProtectionModel_21Jan2015(config) {
 
     function setup() {
         keySystem = null;
-        videoElement = null;
+        ProductElement = null;
         mediaKeys = null;
         sessions = [];
         protectionKeyController = (0, _controllersProtectionKeyController2['default'])(context).getInstance();
@@ -3071,9 +3071,9 @@ function ProtectionModel_21Jan2015(config) {
                 var done = function done(session) {
                     removeSession(session);
                     if (sessions.length === 0) {
-                        if (videoElement) {
-                            videoElement.removeEventListener('encrypted', eventHandler);
-                            videoElement.setMediaKeys(null).then(function () {
+                        if (ProductElement) {
+                            ProductElement.removeEventListener('encrypted', eventHandler);
+                            ProductElement.setMediaKeys(null).then(function () {
                                 eventBus.trigger(events.TEARDOWN_COMPLETE);
                             });
                         } else {
@@ -3121,8 +3121,8 @@ function ProtectionModel_21Jan2015(config) {
         keySystemAccess.mksa.createMediaKeys().then(function (mkeys) {
             keySystem = keySystemAccess.keySystem;
             mediaKeys = mkeys;
-            if (videoElement) {
-                videoElement.setMediaKeys(mediaKeys).then(function () {
+            if (ProductElement) {
+                ProductElement.setMediaKeys(mediaKeys).then(function () {
                     eventBus.trigger(events.INTERNAL_KEY_SYSTEM_SELECTED);
                 });
             } else {
@@ -3134,23 +3134,23 @@ function ProtectionModel_21Jan2015(config) {
     }
 
     function setMediaElement(mediaElement) {
-        if (videoElement === mediaElement) return;
+        if (ProductElement === mediaElement) return;
 
         // Replacing the previous element
-        if (videoElement) {
-            videoElement.removeEventListener('encrypted', eventHandler);
-            if (videoElement.setMediaKeys) {
-                videoElement.setMediaKeys(null);
+        if (ProductElement) {
+            ProductElement.removeEventListener('encrypted', eventHandler);
+            if (ProductElement.setMediaKeys) {
+                ProductElement.setMediaKeys(null);
             }
         }
 
-        videoElement = mediaElement;
+        ProductElement = mediaElement;
 
         // Only if we are not detaching from the existing element
-        if (videoElement) {
-            videoElement.addEventListener('encrypted', eventHandler);
-            if (videoElement.setMediaKeys && mediaKeys) {
-                videoElement.setMediaKeys(mediaKeys);
+        if (ProductElement) {
+            ProductElement.addEventListener('encrypted', eventHandler);
+            if (ProductElement.setMediaKeys && mediaKeys) {
+                ProductElement.setMediaKeys(mediaKeys);
             }
         }
     }
@@ -3471,7 +3471,7 @@ function ProtectionModel_3Feb2014(config) {
     var api = config.api;
 
     var instance = undefined,
-        videoElement = undefined,
+        ProductElement = undefined,
         keySystem = undefined,
         mediaKeys = undefined,
         keySystemAccess = undefined,
@@ -3480,7 +3480,7 @@ function ProtectionModel_3Feb2014(config) {
         protectionKeyController = undefined;
 
     function setup() {
-        videoElement = null;
+        ProductElement = null;
         keySystem = null;
         mediaKeys = null;
         keySystemAccess = null;
@@ -3494,8 +3494,8 @@ function ProtectionModel_3Feb2014(config) {
             for (var i = 0; i < sessions.length; i++) {
                 closeKeySession(sessions[i]);
             }
-            if (videoElement) {
-                videoElement.removeEventListener(api.needkey, eventHandler);
+            if (ProductElement) {
+                ProductElement.removeEventListener(api.needkey, eventHandler);
             }
             eventBus.trigger(events.TEARDOWN_COMPLETE);
         } catch (error) {
@@ -3526,11 +3526,11 @@ function ProtectionModel_3Feb2014(config) {
             var supportedAudio = null;
             var supportedVideo = null;
 
-            // Try key system configs in order, first one with supported audio/video
+            // Try key system configs in order, first one with supported audio/Product
             // is used
             for (var configIdx = 0; configIdx < configs.length; configIdx++) {
                 var audios = configs[configIdx].audioCapabilities;
-                var videos = configs[configIdx].videoCapabilities;
+                var Products = configs[configIdx].ProductCapabilities;
 
                 // Look for supported audio container/codecs
                 if (audios && audios.length !== 0) {
@@ -3542,18 +3542,18 @@ function ProtectionModel_3Feb2014(config) {
                     }
                 }
 
-                // Look for supported video container/codecs
-                if (videos && videos.length !== 0) {
-                    supportedVideo = []; // Indicates that we have a requested video config
-                    for (var videoIdx = 0; videoIdx < videos.length; videoIdx++) {
-                        if (window[api.MediaKeys].isTypeSupported(systemString, videos[videoIdx].contentType)) {
-                            supportedVideo.push(videos[videoIdx]);
+                // Look for supported Product container/codecs
+                if (Products && Products.length !== 0) {
+                    supportedVideo = []; // Indicates that we have a requested Product config
+                    for (var ProductIdx = 0; ProductIdx < Products.length; ProductIdx++) {
+                        if (window[api.MediaKeys].isTypeSupported(systemString, Products[ProductIdx].contentType)) {
+                            supportedVideo.push(Products[ProductIdx]);
                         }
                     }
                 }
 
-                // No supported audio or video in this configuration OR we have
-                // requested audio or video configuration that is not supported
+                // No supported audio or Product in this configuration OR we have
+                // requested audio or Product configuration that is not supported
                 if (!supportedAudio && !supportedVideo || supportedAudio && supportedAudio.length === 0 || supportedVideo && supportedVideo.length === 0) {
                     continue;
                 }
@@ -3567,7 +3567,7 @@ function ProtectionModel_3Feb2014(config) {
             }
         }
         if (!found) {
-            eventBus.trigger(events.KEY_SYSTEM_ACCESS_COMPLETE, { error: 'Key system access denied! -- No valid audio/video content configurations detected!' });
+            eventBus.trigger(events.KEY_SYSTEM_ACCESS_COMPLETE, { error: 'Key system access denied! -- No valid audio/Product content configurations detected!' });
         }
     }
 
@@ -3576,7 +3576,7 @@ function ProtectionModel_3Feb2014(config) {
             mediaKeys = ksAccess.mediaKeys = new window[api.MediaKeys](ksAccess.keySystem.systemString);
             keySystem = ksAccess.keySystem;
             keySystemAccess = ksAccess;
-            if (videoElement) {
+            if (ProductElement) {
                 setMediaKeys();
             }
             eventBus.trigger(events.INTERNAL_KEY_SYSTEM_SELECTED);
@@ -3586,18 +3586,18 @@ function ProtectionModel_3Feb2014(config) {
     }
 
     function setMediaElement(mediaElement) {
-        if (videoElement === mediaElement) return;
+        if (ProductElement === mediaElement) return;
 
         // Replacing the previous element
-        if (videoElement) {
-            videoElement.removeEventListener(api.needkey, eventHandler);
+        if (ProductElement) {
+            ProductElement.removeEventListener(api.needkey, eventHandler);
         }
 
-        videoElement = mediaElement;
+        ProductElement = mediaElement;
 
         // Only if we are not detaching from the existing element
-        if (videoElement) {
-            videoElement.addEventListener(api.needkey, eventHandler);
+        if (ProductElement) {
+            ProductElement.addEventListener(api.needkey, eventHandler);
             if (mediaKeys) {
                 setMediaKeys();
             }
@@ -3610,13 +3610,13 @@ function ProtectionModel_3Feb2014(config) {
             throw new Error('Can not create sessions until you have selected a key system');
         }
 
-        // Use the first video capability for the contentType.
+        // Use the first Product capability for the contentType.
         // TODO:  Not sure if there is a way to concatenate all capability data into a RFC6386-compatible format
 
         // If player is trying to playback Audio only stream - don't error out.
         var capabilities = null;
 
-        if (keySystemAccess.ksConfiguration.videoCapabilities !== null && keySystemAccess.ksConfiguration.videoCapabilities.length > 0) capabilities = keySystemAccess.ksConfiguration.videoCapabilities[0];
+        if (keySystemAccess.ksConfiguration.ProductCapabilities !== null && keySystemAccess.ksConfiguration.ProductCapabilities.length > 0) capabilities = keySystemAccess.ksConfiguration.ProductCapabilities[0];
 
         if (capabilities === null && keySystemAccess.ksConfiguration.audioCapabilities !== null && keySystemAccess.ksConfiguration.audioCapabilities.length > 0) capabilities = keySystemAccess.ksConfiguration.audioCapabilities[0];
 
@@ -3705,15 +3705,15 @@ function ProtectionModel_3Feb2014(config) {
     function setMediaKeys() {
         var boundDoSetKeys = null;
         var doSetKeys = function doSetKeys() {
-            videoElement.removeEventListener('loadedmetadata', boundDoSetKeys);
-            videoElement[api.setMediaKeys](mediaKeys);
+            ProductElement.removeEventListener('loadedmetadata', boundDoSetKeys);
+            ProductElement[api.setMediaKeys](mediaKeys);
             eventBus.trigger(events.VIDEO_ELEMENT_SELECTED);
         };
-        if (videoElement.readyState >= 1) {
+        if (ProductElement.readyState >= 1) {
             doSetKeys();
         } else {
             boundDoSetKeys = doSetKeys.bind(this);
-            videoElement.addEventListener('loadedmetadata', boundDoSetKeys);
+            ProductElement.addEventListener('loadedmetadata', boundDoSetKeys);
         }
     }
 
@@ -4664,8 +4664,8 @@ var KeySystemConfiguration =
  * @param {Array.<MediaCapability>} audioCapabilities array of
  * desired audio capabilities.  Higher preference capabilities should be placed earlier
  * in the array.
- * @param {Array.<MediaCapability>} videoCapabilities array of
- * desired video capabilities.  Higher preference capabilities should be placed earlier
+ * @param {Array.<MediaCapability>} ProductCapabilities array of
+ * desired Product capabilities.  Higher preference capabilities should be placed earlier
  * in the array.
  * @param {string} distinctiveIdentifier desired use of distinctive identifiers.
  * One of "required", "optional", or "not-allowed"
@@ -4675,15 +4675,15 @@ var KeySystemConfiguration =
  * be supported by the key system
  * @class
  */
-function KeySystemConfiguration(audioCapabilities, videoCapabilities, distinctiveIdentifier, persistentState, sessionTypes) {
+function KeySystemConfiguration(audioCapabilities, ProductCapabilities, distinctiveIdentifier, persistentState, sessionTypes) {
     _classCallCheck(this, KeySystemConfiguration);
 
     this.initDataTypes = ['cenc'];
     if (audioCapabilities && audioCapabilities.length) {
         this.audioCapabilities = audioCapabilities;
     }
-    if (videoCapabilities && videoCapabilities.length) {
-        this.videoCapabilities = videoCapabilities;
+    if (ProductCapabilities && ProductCapabilities.length) {
+        this.ProductCapabilities = ProductCapabilities;
     }
     this.distinctiveIdentifier = distinctiveIdentifier;
     this.persistentState = persistentState;

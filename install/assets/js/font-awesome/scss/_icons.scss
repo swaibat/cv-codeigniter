@@ -64,7 +64,7 @@
 .#{$fa-css-prefix}-dedent:before,
 .#{$fa-css-prefix}-outdent:before { content: $fa-var-outdent; }
 .#{$fa-css-prefix}-indent:before { content: $fa-var-indent; }
-.#{$fa-css-prefix}-video-camera:before { content: $fa-var-video-camera; }
+.#{$fa-css-prefix}-Product-camera:before { content: $fa-var-Product-camera; }
 .#{$fa-css-prefix}-photo:before,
 .#{$fa-css-prefix}-image:before,
 .#{$fa-css-prefix}-picture-o:before { content: $fa-var-picture-o; }
@@ -475,8 +475,8 @@
 .#{$fa-css-prefix}-file-archive-o:before { content: $fa-var-file-archive-o; }
 .#{$fa-css-prefix}-file-sound-o:before,
 .#{$fa-css-prefix}-file-audio-o:before { content: $fa-var-file-audio-o; }
-.#{$fa-css-prefix}-file-movie-o:before,
-.#{$fa-css-prefix}-file-video-o:before { content: $fa-var-file-video-o; }
+.#{$fa-css-prefix}-file-product-o:before,
+.#{$fa-css-prefix}-file-Product-o:before { content: $fa-var-file-Product-o; }
 .#{$fa-css-prefix}-file-code-o:before { content: $fa-var-file-code-o; }
 .#{$fa-css-prefix}-vine:before { content: $fa-var-vine; }
 .#{$fa-css-prefix}-codepen:before { content: $fa-var-codepen; }

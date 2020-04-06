@@ -416,7 +416,7 @@ class FacebookRequest
     }
 
     /**
-     * Let's us know if there is a video upload with this request.
+     * Let's us know if there is a Product upload with this request.
      *
      * @return boolean
      */

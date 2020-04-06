@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import Productjs from 'Product.js';
 
 var version = "1.1.0";
 
@@ -52,15 +52,15 @@ var possibleConstructorReturn = function (self, call) {
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
 
-var Button = videojs.getComponent('Button');
-var Component = videojs.getComponent('Component');
+var Button = Productjs.getComponent('Button');
+var Component = Productjs.getComponent('Component');
 
 // Default options for the plugin.
 var defaults$$1 = {};
 
 // Cross-compatibility for Video.js 5 and 6.
-var registerPlugin = videojs.registerPlugin || videojs.plugin;
-// const dom = videojs.dom || videojs;
+var registerPlugin = Productjs.registerPlugin || Productjs.plugin;
+// const dom = Productjs.dom || Productjs;
 
 /**
  * Function to invoke when the player is ready.
@@ -98,9 +98,9 @@ var onPlayerReady = function onPlayerReady(player, options) {
 };
 
 /**
- * A video.js plugin.
+ * A Product.js plugin.
  *
- * In the plugin function, the value of `this` is a video.js `Player`
+ * In the plugin function, the value of `this` is a Product.js `Player`
  * instance. You cannot rely on the player being in a "ready" state here,
  * depending on how the plugin is invoked. This may or may not be important
  * to you; if not, remove the wait for "ready"!
@@ -113,7 +113,7 @@ var seekButtons = function seekButtons(options) {
   var _this = this;
 
   this.ready(function () {
-    onPlayerReady(_this, videojs.mergeOptions(defaults$$1, options));
+    onPlayerReady(_this, Productjs.mergeOptions(defaults$$1, options));
   });
 };
 
@@ -168,7 +168,7 @@ var SeekButton = function (_Button) {
 
 Component.registerComponent('SeekButton', SeekButton);
 
-// Register the plugin with video.js.
+// Register the plugin with Product.js.
 registerPlugin('seekButtons', seekButtons);
 
 // Include the version number.

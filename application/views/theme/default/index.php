@@ -43,7 +43,7 @@ $enable_ribbon                  =   ovoo_config('enable_ribbon');
 			<meta name="twitter:title" content="<?php echo $og_title; ?>" />
 			<meta property="og:title" content="<?php echo $og_title; ?>" />
 			<meta property="og:url" content="<?php echo $og_url; ?>" />
-			<meta property="og:type" content="movie" />
+			<meta property="og:type" content="product" />
 			<meta property="og:description" content="<?php echo $meta_description; ?>" />
 			<meta property="og:image" content="<?php echo $og_image_url; ?>" />
 		<?php endif; ?>
@@ -80,23 +80,23 @@ $enable_ribbon                  =   ovoo_config('enable_ribbon');
 
 
 		<?php if ($page_name == 'watch' || $page_name == 'watch_tv') : ?>
-			<link href="<?php echo base_url(); ?>assets/player/video-js-6.13.0/video-js.css" rel="stylesheet" type="text/css">
-			<link href="<?php echo base_url(); ?>assets/player/plugins/videojs-mobile-ui/videojs-mobile-ui.css" rel="stylesheet" type="text/css">
+			<link href="<?php echo base_url(); ?>assets/player/Product-js-6.13.0/Product-js.css" rel="stylesheet" type="text/css">
+			<link href="<?php echo base_url(); ?>assets/player/plugins/Productjs-mobile-ui/Productjs-mobile-ui.css" rel="stylesheet" type="text/css">
 			<!-- tube skin CSS -->
-			<!-- <link href="<?php echo base_url(); ?>assets/player/plugins/tube-skin/videojs-tube.min.css" media="only screen and (min-width: 820px)" rel="stylesheet"/> -->
-			<script src="<?php echo base_url(); ?>assets/player/video-js-6.13.0/video.min.js" crossorigin="anonymous"></script>
-			<script src="<?php echo base_url(); ?>assets/player/plugins/videojs-mobile-ui/videojs-mobile-ui.min.js"></script>
+			<!-- <link href="<?php echo base_url(); ?>assets/player/plugins/tube-skin/Productjs-tube.min.css" media="only screen and (min-width: 820px)" rel="stylesheet"/> -->
+			<script src="<?php echo base_url(); ?>assets/player/Product-js-6.13.0/Product.min.js" crossorigin="anonymous"></script>
+			<script src="<?php echo base_url(); ?>assets/player/plugins/Productjs-mobile-ui/Productjs-mobile-ui.min.js"></script>
 			<!-- watermark CSS -->
-			<link href="<?php echo base_url(); ?>assets/player/plugins/watermark/videojs-logo.min.css" rel="stylesheet">
+			<link href="<?php echo base_url(); ?>assets/player/plugins/watermark/Productjs-logo.min.css" rel="stylesheet">
 			<!-- social share CSS -->
-			<link href="<?php echo base_url(); ?>assets/player/plugins/videojs-share/videojs-share.css" rel="stylesheet">
+			<link href="<?php echo base_url(); ?>assets/player/plugins/Productjs-share/Productjs-share.css" rel="stylesheet">
 			<!-- social share CSS -->
-			<link href="<?php echo base_url(); ?>assets/player/plugins/videojs-seek-buttons/videojs-seek-buttons.css" rel="stylesheet">
+			<link href="<?php echo base_url(); ?>assets/player/plugins/Productjs-seek-buttons/Productjs-seek-buttons.css" rel="stylesheet">
 
-			<!-- videojs-chromecast js -->
-			<script src="<?php echo base_url(); ?>assets/player/plugins/silvermine-videojs-chromecast/silvermine-videojs-chromecast.min.js"></script>
-			<!-- videojs-chromecast CSS -->
-			<link href="<?php echo base_url(); ?>assets/player/plugins/silvermine-videojs-chromecast/silvermine-videojs-chromecast.css" rel="stylesheet">
+			<!-- Productjs-chromecast js -->
+			<script src="<?php echo base_url(); ?>assets/player/plugins/silvermine-Productjs-chromecast/silvermine-Productjs-chromecast.min.js"></script>
+			<!-- Productjs-chromecast CSS -->
+			<link href="<?php echo base_url(); ?>assets/player/plugins/silvermine-Productjs-chromecast/silvermine-Productjs-chromecast.css" rel="stylesheet">
 			<!-- chromecast sdk -->
 			<script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
 
@@ -233,7 +233,7 @@ $enable_ribbon                  =   ovoo_config('enable_ribbon');
 					<?php if ($share_this_enable == '1') : ?>
 						<!-- Go to www.addthis.com/dashboard to customize your tools -->
 						<div class="addthis_inline_share_toolbox_yl99 m-t-30 m-b-10" data-url="<?php echo base_url(); ?>" data-title="<?php if ($page_name == 'watch') {
-																																			echo $watch_videos->title;
+																																			echo $watch_Products->title;
 																																		} else {
 																																			echo $title;
 																																		} ?>"></div>
@@ -245,7 +245,7 @@ $enable_ribbon                  =   ovoo_config('enable_ribbon');
 			<?php
 			$this->load->view($theme_dir . $page_name);
 			$this->load->view($theme_dir . 'footer/' . $footer_templete);
-			$this->load->view($theme_dir . 'movie_request');
+			$this->load->view($theme_dir . 'product_request');
 			?>
 		</div>
 	</div>

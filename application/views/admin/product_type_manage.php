@@ -1,20 +1,20 @@
 <div class="card">
   <div class="row">
     <div class="col-sm-6">
-      <?php echo form_open(base_url() . 'admin/video_type/add/' , array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data'));?>
-        <h4 class="text-center panel-title"><?php echo trans('add_new_video_type'); ?></h4>
+      <?php echo form_open(base_url() . 'admin/Product_type/add/' , array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data'));?>
+        <h4 class="text-center panel-title"><?php echo trans('add_new_Product_type'); ?></h4>
         <hr>
         <div class="form-group">
-          <label class="col-sm-3 control-label"><?php echo trans('video_type'); ?></label>
+          <label class="col-sm-3 control-label"><?php echo trans('Product_type'); ?></label>
           <div class="col-sm-6">
-            <input type="text"  name="video_type" class="form-control" required />
+            <input type="text"  name="Product_type" class="form-control" required />
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-sm-3 control-label"><?php echo trans('description'); ?></label>
           <div class="col-sm-6">
-            <input type="text"  name="video_type_desc"  class="form-control"  />
+            <input type="text"  name="Product_type_desc"  class="form-control"  />
           </div>
         </div>
 
@@ -54,7 +54,7 @@
           <thead>
             <tr>
               <th>#</th>
-              <th><?php echo trans('video_type'); ?></th>
+              <th><?php echo trans('Product_type'); ?></th>
               <th><?php echo trans('description'); ?></th>
               <th><?php echo trans('menu_bar'); ?></th>
               <th><?php echo trans('footer'); ?></th>
@@ -63,17 +63,17 @@
           </thead>
           <tbody>
             <?php $sl = 1;
-                  foreach ($video_types as $video_type):              
+                  foreach ($Product_types as $Product_type):              
 
             ?>
-            <tr id='row_<?php echo $video_type['video_type_id'];?>'>
+            <tr id='row_<?php echo $Product_type['Product_type_id'];?>'>
               <td><?php echo $sl++;?></td>
-              <td><strong><?php echo $video_type['video_type'];?></strong></td>
-              <td><?php echo $video_type['video_type_desc'];?></td>
-              <td><?php if($video_type['primary_menu']=='1'){ echo "Yes";}else{ echo "No";} ?></td>
-              <td><?php if($video_type['footer_menu']=='1'){ echo "Yes";}else{ echo "No";} ?></td>
+              <td><strong><?php echo $Product_type['Product_type'];?></strong></td>
+              <td><?php echo $Product_type['Product_type_desc'];?></td>
+              <td><?php if($Product_type['primary_menu']=='1'){ echo "Yes";}else{ echo "No";} ?></td>
+              <td><?php if($Product_type['footer_menu']=='1'){ echo "Yes";}else{ echo "No";} ?></td>
               <td>
-                <div class="btn-group m-b-20"> <a data-toggle="modal" data-target="#mymodal" data-id="<?php echo base_url() . 'admin/view_modal/video_type_edit/'. $video_type['video_type_id'];?>" id="menu" title="<?php echo trans('edit'); ?>" class="btn btn-sm btn-icon"><i class="fa fa-pencil"></i></a> <a title="<?php echo trans('delete'); ?>" class="btn btn-sm btn-icon" onclick="delete_row(<?php echo " 'video_type' ".','.$video_type['video_type_id'];?>)" class="delete"><i class="fa fa-remove"></i></a> </div>
+                <div class="btn-group m-b-20"> <a data-toggle="modal" data-target="#mymodal" data-id="<?php echo base_url() . 'admin/view_modal/Product_type_edit/'. $Product_type['Product_type_id'];?>" id="menu" title="<?php echo trans('edit'); ?>" class="btn btn-sm btn-icon"><i class="fa fa-pencil"></i></a> <a title="<?php echo trans('delete'); ?>" class="btn btn-sm btn-icon" onclick="delete_row(<?php echo " 'Product_type' ".','.$Product_type['Product_type_id'];?>)" class="delete"><i class="fa fa-remove"></i></a> </div>
               </td>
             </tr>
             <?php endforeach;?>

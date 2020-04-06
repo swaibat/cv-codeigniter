@@ -1,4 +1,4 @@
-videojs.addLanguage("es",{
+Productjs.addLanguage("es",{
  "Play": "Reproducción",
  "Play Video": "Reproducción Vídeo",
  "Pause": "Pausa",

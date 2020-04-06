@@ -568,17 +568,17 @@ class Facebook
      *
      * @throws FacebookSDKException
      */
-    public function videoToUpload($pathToFile)
+    public function ProductToUpload($pathToFile)
     {
         return new FacebookVideo($pathToFile);
     }
 
     /**
-     * Upload a video in chunks.
+     * Upload a Product in chunks.
      *
-     * @param int $target The id of the target node before the /videos edge.
+     * @param int $target The id of the target node before the /Products edge.
      * @param string $pathToFile The full path to the file.
-     * @param array $metadata The metadata associated with the video file.
+     * @param array $metadata The metadata associated with the Product file.
      * @param string|null $accessToken The access token.
      * @param int $maxTransferTries The max times to retry a failed upload chunk.
      * @param string|null $graphVersion The Graph API version to use.
@@ -593,8 +593,8 @@ class Facebook
         $graphVersion = $graphVersion ?: $this->defaultGraphVersion;
 
         $uploader = new FacebookResumableUploader($this->app, $this->client, $accessToken, $graphVersion);
-        $endpoint = '/'.$target.'/videos';
-        $file = $this->videoToUpload($pathToFile);
+        $endpoint = '/'.$target.'/Products';
+        $file = $this->ProductToUpload($pathToFile);
         $chunk = $uploader->start($endpoint, $file);
 
         do {
@@ -602,7 +602,7 @@ class Facebook
         } while (!$chunk->isLastChunk());
 
         return [
-          'video_id' => $chunk->getVideoId(),
+          'Product_id' => $chunk->getVideoId(),
           'success' => $uploader->finish($endpoint, $chunk->getUploadSessionId(), $metadata),
         ];
     }

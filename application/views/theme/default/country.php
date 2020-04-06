@@ -17,7 +17,7 @@
 		<div class="row">
 			<div class="col-md-6 col-sm-6 col-xs-12">
 				<div class="page-title">
-					<h1 class="text-uppercase"><?php echo $country_name; ?> <?php echo trans('movies'); ?></h1>
+					<h1 class="text-uppercase"><?php echo $country_name; ?> <?php echo trans('products'); ?></h1>
 				</div>
 			</div>
 			<div class="col-md-6 col-sm-6 col-xs-12 text-right">
@@ -39,12 +39,12 @@
     <div class="container">
         <div class="row">
         <?php if ($total_rows>0):?>
-            <!-- All Movies -->
+            <!-- All Products -->
             <div class="col-md-12 col-sm-12">
-                <div class="latest-movie movie-opt">
+                <div class="latest-product product-opt">
                     <div class="row clean-preset">
-                        <div class="movie-container">
-                            <?php foreach ($all_published_videos as $videos): ?>
+                        <div class="product-container">
+                            <?php foreach ($all_published_Products as $Products): ?>
                             <div class="col-md-2 col-sm-3 col-xs-6">
                                 <?php include('thumbnail.php'); ?>
                             </div>
@@ -53,8 +53,8 @@
                     </div>
                 </div>
             </div>
-            <!-- End All Movies -->
-			<?php else: echo "<h3 class='text-center text-uppercase'>No movie found by Country:  ".$country_name."</h3>"; endif; ?>
+            <!-- End All Products -->
+			<?php else: echo "<h3 class='text-center text-uppercase'>No product found by Country:  ".$country_name."</h3>"; endif; ?>
         </div>
 		<?php if($total_rows > 24): echo $links;endif;?>								
 	</div>

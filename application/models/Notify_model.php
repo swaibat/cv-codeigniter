@@ -2,12 +2,12 @@
 
 
 /**
- * OXOO - Android Live TV & Movie Portal App
+ * OXOO - Android Live TV & Product Portal App
  * ---------------------- OXOO --------------------
- * ------- Android Live TV & Movie Portal App --------
- * - Live tv channel & movie management system -
+ * ------- Android Live TV & Product Portal App --------
+ * - Live tv channel & product management system -
  *
- * @package     OXOO - Android Live TV & Movie Portal App
+ * @package     OXOO - Android Live TV & Product Portal App
  * @author      Abdul Mannan/Spa Green Creative
  * @copyright   Copyright (c) 2014 - 2019 SpaGreen,
  * @license     http://codecanyon.net/wiki/support/legal-terms/licensing-terms/ 
@@ -37,10 +37,10 @@ class Notify_model extends CI_Model {
         $this->notify_model->send_notification($data);
         return TRUE;
 	}
-    function send_movie_tvseries_notification($udata = array())
+    function send_product_tvseries_notification($udata = array())
     {   
-        $video              =   $this->db->get_where('videos', array('videos_id' => $udata['id']))->row();
-        $watch_url          =   base_url().'watch/'.$video->slug.'.html';
+        $Product              =   $this->db->get_where('Products', array('Products_id' => $udata['id']))->row();
+        $watch_url          =   base_url().'watch/'.$Product->slug.'.html';
 
         $data['message']    =   $udata['message'];
         $data['url']        =   $watch_url;
@@ -48,46 +48,46 @@ class Notify_model extends CI_Model {
         $data['icon']       =   $udata['icon'];        
         $data['img']        =   $udata['img'];
         $data['id']         =   $udata['id'];
-        $data['vtype']      =   'movie';
-        if($video->is_tvseries =='1')
+        $data['vtype']      =   'product';
+        if($Product->is_tvseries =='1')
             $data['vtype']  =   'tvseries';
         $data['open_with']  =   'app';
         $this->send_notification($data);        
         return TRUE;
     }
 
-    function send_movie_notification($video_id = NULL)
+    function send_product_notification($Product_id = NULL)
     {   
         $site_name          =   $this->db->get_where('config' , array('title' => 'site_name'))->row()->value;
-        $video              =   $this->db->get_where('videos', array('videos_id' => $video_id))->row();
+        $Product              =   $this->db->get_where('Products', array('Products_id' => $Product_id))->row();
         $logo               =   base_url('uploads/system_logo/logo.png');
-        $thumb_image        =   $this->common_model->get_video_thumb_url($video->videos_id);;
-        $watch_url          =   base_url().'watch/'.$video->slug.'.html';       
-        $headings           =   "New Movie Release-".$video->title;
-        $message            =   "Watch ".$video->title." on ".$site_name;
+        $thumb_image        =   $this->common_model->get_Product_thumb_url($Product->Products_id);;
+        $watch_url          =   base_url().'watch/'.$Product->slug.'.html';       
+        $headings           =   "New Product Release-".$Product->title;
+        $message            =   "Watch ".$Product->title." on ".$site_name;
         $data['message']    =   $message;
         $data['url']        =   $watch_url;
         $data['headings']   =   $headings;
         $data['icon']       =   $logo;        
         $data['img']        =   $thumb_image;
-        $data['id']         =   $video->videos_id;
-        $data['vtype']      =   'movie';
-        if($video->is_tvseries =='1')
+        $data['id']         =   $Product->Products_id;
+        $data['vtype']      =   'product';
+        if($Product->is_tvseries =='1')
             $data['vtype']  =   'tvseries';
         $data['open_with']  =   'app';
         $this->send_notification($data);        
         return TRUE;
     }
 
-    function send_custom_movie_notification($user_data = array())
+    function send_custom_product_notification($user_data = array())
     {
         $site_name          =   $this->db->get_where('config' , array('title' => 'site_name'))->row()->value;
-        $video              =   $this->db->get_where('videos', array('videos_id' => $user_data['videos_id']))->row();
+        $Product              =   $this->db->get_where('Products', array('Products_id' => $user_data['Products_id']))->row();
         $logo               =   base_url('uploads/system_logo/logo.png');
-        $thumb_image        =   $this->common_model->get_video_thumb_url($video->videos_id);;
-        $watch_url          =   base_url().'watch/'.$video->slug.'.html';       
-        $headings           =   "New Movie Release-".$video->title;
-        $message            =   "Watch ".$video->title." on ".$site_name;
+        $thumb_image        =   $this->common_model->get_Product_thumb_url($Product->Products_id);;
+        $watch_url          =   base_url().'watch/'.$Product->slug.'.html';       
+        $headings           =   "New Product Release-".$Product->title;
+        $message            =   "Watch ".$Product->title." on ".$site_name;
         $data['message']    =   $message;
         if($user_data['message'] !='' && $user_data['message'] !=null):
             $data['message']    =   $user_data['message'];
@@ -99,9 +99,9 @@ class Notify_model extends CI_Model {
         endif;
         $data['icon']       =   $logo;        
         $data['img']        =   $thumb_image;
-        $data['id']         =   $video->videos_id;
-        $data['vtype']      =   'movie';
-        if($video->is_tvseries =='1')
+        $data['id']         =   $Product->Products_id;
+        $data['vtype']      =   'product';
+        if($Product->is_tvseries =='1')
             $data['vtype']  =   'tvseries';
         $data['open_with']  =   'app';
         $this->send_notification($data);        
@@ -128,7 +128,7 @@ class Notify_model extends CI_Model {
             'small_icon'            => $data['icon'], // for android
             'large_icon'            => $data['icon'], // for android
             'headings'              => $headings,
-            // vtype: for movie=movie, for tvseries= tvseries, for live tv=tv
+            // vtype: for product=product, for tvseries= tvseries, for live tv=tv
             // open_with: for webview=web, for app=app
             'data'     => array('id'=>$data['id'],'vtype'=>$data['vtype'],'open'=>$data['open_with'],'url'=>$data['url'])
         );

@@ -15,8 +15,8 @@ class Home extends Home_Core_Controller {
   public function index() {
   	    $landing_page_enable        	=   $this->db->get_where('config' , array('title'=>'landing_page_enable'))->row()->value;
 		$data['all_published_slider']	= $this->common_model->all_published_slider();
-		$data['new_videos']				= $this->common_model->new_published_videos();
-		$data['latest_videos']			= $this->common_model->latest_published_videos();
+		$data['new_products']				= $this->common_model->new_published_products();
+		$data['latest_products']			= $this->common_model->latest_published_products();
 		$data['new_tv_series']			= $this->common_model->new_published_tv_series();
 		$data['latest_tv_series']		= $this->common_model->latest_published_tv_series();		
 		$data['title'] 					= $this->db->get_where('config' , array('title' =>'home_page_seo_title'))->row()->value;
@@ -36,15 +36,15 @@ class Home extends Home_Core_Controller {
 	public function home2() {
 
 		$data['all_published_slider']	= $this->common_model->all_published_slider();
-		$data['new_videos']				= $this->common_model->new_published_videos();
-		$data['latest_videos']			= $this->common_model->latest_published_videos();
+		$data['new_products']				= $this->common_model->new_published_products();
+		$data['latest_products']			= $this->common_model->latest_published_products();
 		$data['new_tv_series']			= $this->common_model->new_published_tv_series();
 		$data['latest_tv_series']		= $this->common_model->latest_published_tv_series();		
 		// seo
 		$data['title']					= $this->db->get_where('config' , array('title' =>'home_page_seo_title'))->row()->value;
 		$data['meta_description']		= $this->db->get_where('config' , array('title' =>'meta_description'))->row()->value;
 		$data['focus_keyword']			= $this->db->get_where('config' , array('title' =>'focus_keyword'))->row()->value;
-		$data['canonical']				= base_url('all-movies.html');
+		$data['canonical']				= base_url('all-products.html');
 		// end seo
 		$data['page_name']				= 'home';
 		$this->load->view('theme/'.$this->active_theme.'/index',$data);
@@ -59,7 +59,7 @@ class Home extends Home_Core_Controller {
 			$filter['title'] 	= $title;
 			$search_string	   .= 'q='.$title;
 		}
-		$total_rows = $this->common_model->get_videos_num_rows($filter);
+		$total_rows = $this->common_model->get_products_num_rows($filter);
 		$this->load->library("pagination");
 		$config 					= array();
 		$config["base_url"] 		= base_url() . "search?".$search_string;
@@ -93,7 +93,7 @@ class Home extends Home_Core_Controller {
 		$config['page_query_string'] = TRUE;
 		$this->pagination->initialize($config);
 		$page 						= $this->input->get('per_page');   
-        $data["all_published_videos"] = $this->common_model->get_videos($filter,$config["per_page"], $page);
+        $data["all_published_products"] = $this->common_model->get_products($filter,$config["per_page"], $page);
 		$data["links"] 				= $this->pagination->create_links();
 		$data['total_rows']			= $config["total_rows"];
 		$data['search_keyword']		= $filter['title'];
@@ -107,29 +107,29 @@ class Home extends Home_Core_Controller {
     	$this->db->order_by('title',"ASC");
         $this->db->limit(5);
         $this->db->like('title',$tearm);
-        $videos =  $this->db->get('videos')->result_array();
-            foreach($videos as $video)
+        $products =  $this->db->get('products')->result_array();
+            foreach($products as $product)
             {                
-                $new_row['title']= $video['title'];
-                $new_row['type']= "Movie";
-                if($video['is_tvseries']=="1"){
+                $new_row['title']= $product['title'];
+                $new_row['type']= "Product";
+                if($product['is_tvseries']=="1"){
                 	$new_row['type']= "TV-Series";
                 }
-	            $new_row['image'] 	= $this->common_model->get_video_thumb_url($video['videos_id']);
-                $new_row['url']		= base_url().'watch/'.$video['slug'].'.html';              
+	            $new_row['image'] 	= $this->common_model->get_product_thumb_url($product['products_id']);
+                $new_row['url']		= base_url().'watch/'.$product['slug'].'.html';              
              	$row_set[] 			= $new_row;
             }        
         echo json_encode($row_set); 
     }
   
-    public function movies(){
-    	$movie_per_page              =   $this->db->get_where('config' , array('title'=>'movie_per_page'))->row()->value;
+    public function products(){
+    	$product_per_page              =   $this->db->get_where('config' , array('title'=>'product_per_page'))->row()->value;
 		$this->load->library("pagination");
-		$total_movie 				= $this->common_model->movies_record_count();  
+		$total_product 				= $this->common_model->products_record_count();  
 		$config 					= array();
-		$config["base_url"] 		= base_url() . "home/movies";
-		$config["total_rows"] 		= $total_movie;
-		$config["per_page"] 		= $movie_per_page;
+		$config["base_url"] 		= base_url() . "home/products";
+		$config["total_rows"] 		= $total_product;
+		$config["per_page"] 		= $product_per_page;
 		$config["uri_segment"] 		= 3;
 	    $config['full_tag_open'] 	= '<div class="pagination-container text-center"><ul class ="pagination">';
 		$config['full_tag_close'] 	= '</ul></div><!--pagination-->';
@@ -154,17 +154,17 @@ class Home extends Home_Core_Controller {
 
 		$this->pagination->initialize($config);
 		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		$data["all_published_videos"] = $this->common_model->all_published_videos($movie_per_page, $page);
+		$data["all_published_products"] = $this->common_model->all_published_products($product_per_page, $page);
 		$data["links"] = $this->pagination->create_links();
-	    $data['total_rows']=$total_movie;
+	    $data['total_rows']=$total_product;
 		// seo
-		$data['title']				= $this->db->get_where('config' , array('title' =>'movie_page_seo_title'))->row()->value;
-		$data['meta_description']	= $this->db->get_where('config' , array('title' =>'movie_page_meta_description'))->row()->value;
-		$data['focus_keyword']		= $this->db->get_where('config' , array('title' =>'movie_page_focus_keyword'))->row()->value;
-		$data['canonical']			= base_url('movies.html');
+		$data['title']				= $this->db->get_where('config' , array('title' =>'product_page_seo_title'))->row()->value;
+		$data['meta_description']	= $this->db->get_where('config' , array('title' =>'product_page_meta_description'))->row()->value;
+		$data['focus_keyword']		= $this->db->get_where('config' , array('title' =>'product_page_focus_keyword'))->row()->value;
+		$data['canonical']			= base_url('products.html');
 		// end seo
 
-		$data['page_name']='movies';
+		$data['page_name']='products';
 		$this->load->view('theme/'.$this->active_theme.'/index',$data);
 	}
 
@@ -205,20 +205,20 @@ class Home extends Home_Core_Controller {
 
 		$this->pagination->initialize($config);
 		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		$data["all_published_videos"] = $this->common_model->fetch_trailers($config["per_page"], $page);
+		$data["all_published_products"] = $this->common_model->fetch_trailers($config["per_page"], $page);
 		$data["links"] = $this->pagination->create_links();
 		$data['total_rows']=$config["total_rows"];
-		$data['title'] = 'Free Movies Online';
-		$data['page_name']='movies';
+		$data['title'] = 'Free Products Online';
+		$data['page_name']='products';
 		$this->load->view('theme/'.$this->active_theme.'/index',$data);
 	}  
 
-	public function request_movies(){
+	public function request_products(){
 
 		$this->load->library("pagination");    
 		$config = array();
-		$config["base_url"] = base_url() . "home/request_movies";
-		$config["total_rows"] = $this->common_model->requested_movie_record_count();
+		$config["base_url"] = base_url() . "home/request_products";
+		$config["total_rows"] = $this->common_model->requested_product_record_count();
 		$config["per_page"] = 24;
 		$config["uri_segment"] = 3;
 		$config['full_tag_open'] = '<div class="pagination-container text-center"><ul class ="pagination">';
@@ -250,17 +250,17 @@ class Home extends Home_Core_Controller {
 
 		$this->pagination->initialize($config);
 		$page 							= ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		$data["all_published_videos"] 	= $this->common_model->fetch_request_movies($config["per_page"], $page);
+		$data["all_published_products"] 	= $this->common_model->fetch_request_products($config["per_page"], $page);
 		$data["links"] 					= $this->pagination->create_links();
 		$data['total_rows']				= $config["total_rows"];
-		$data['title'] 					= 'Free Movies  Request Online';
-		$data['page_name']				= 'request_movies';
+		$data['title'] 					= 'Free Products  Request Online';
+		$data['page_name']				= 'request_products';
 		$this->load->view('theme/'.$this->active_theme.'/index',$data);
     }
 
-    public function request_for_movies(){
-		$data['title'] = 'Send Us Movie Request';
-		$data['page_name']='requiest_for_movie';
+    public function request_for_products(){
+		$data['title'] = 'Send Us Product Request';
+		$data['page_name']='requiest_for_product';
 		$this->load->view('theme/'.$this->active_theme.'/index',$data);
 	}
 
@@ -328,7 +328,7 @@ class Home extends Home_Core_Controller {
         	$this->load->model('email_model');
         	if($this->email_model->contact_email($name , $email, $message)){
         		//$insert_id = '1043';
-        		//$this->email_model->new_movie_notification($insert_id);
+        		//$this->email_model->new_product_notification($insert_id);
         		$this->session->set_flashdata('success', 'Message send successfully.');
     		}else{
     			$this->session->set_flashdata('error', 'Oops! Something went wrong.');	
@@ -338,14 +338,14 @@ class Home extends Home_Core_Controller {
     	redirect(base_url() . 'contact-us.html', 'refresh');
     }
 
-    function send_movie_request(){
+    function send_product_request(){
         $name                   	= $this->input->post('name');
         $email                   	= $this->input->post('email');
-        $movie_name                 = $this->input->post('movie_name');  
+        $product_name                 = $this->input->post('product_name');  
         $message                   	= $this->input->post('message');
         $this->form_validation->set_rules('name', 'Name', 'required|min_length[3]');
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|min_length[6]');
-		$this->form_validation->set_rules('movie_name', 'Movie Name', 'required|min_length[3]');
+		$this->form_validation->set_rules('product_name', 'Product Name', 'required|min_length[3]');
 		$this->form_validation->set_rules('message', 'Message', 'required|min_length[5]');
 		// recaptcha check
         $recaptcha_enable          =   $this->db->get_where('config' , array('title' =>'recaptcha_enable'))->row()->value;
@@ -357,28 +357,28 @@ class Home extends Home_Core_Controller {
             redirect($this->agent->referrer(), 'refresh');
         else:
         	$this->load->model('email_model');
-        	$this->email_model->send_movie_request($name , $email, $message,$movie_name);
+        	$this->email_model->send_product_request($name , $email, $message,$product_name);
 
         	$this->session->set_flashdata('requiest_success', 'Request sent successfully.');
         	redirect($this->agent->referrer(), 'refresh');
         endif;
     }
 
-    function send_movie_requiest(){
+    function send_product_requiest(){
         $name                   	= $this->input->post('name');
         $email                   	= $this->input->post('email');
-        $movie_name                 = $this->input->post('movie_name');  
+        $product_name                 = $this->input->post('product_name');  
         $message                   	= $this->input->post('message');
         $this->form_validation->set_rules('name', 'Name', 'required|min_length[3]');
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|min_length[6]');
-		$this->form_validation->set_rules('movie_name', 'Movie Name', 'required|min_length[3]');
+		$this->form_validation->set_rules('product_name', 'Product Name', 'required|min_length[3]');
 		$this->form_validation->set_rules('message', 'Message', 'required|min_length[5]');
 		if ($this->form_validation->run() == FALSE):
         	$this->session->set_flashdata('error', json_encode(validation_errors()));
             redirect($this->input->post('url'), 'refresh');
         else:
         	$this->load->model('email_model');
-        	$this->email_model->send_movie_request($name , $email, $message,$movie_name);
+        	$this->email_model->send_product_request($name , $email, $message,$product_name);
 
         	$this->session->set_flashdata('success', 'Request sent successfully.');
         	redirect($this->input->post('url'), 'refresh');

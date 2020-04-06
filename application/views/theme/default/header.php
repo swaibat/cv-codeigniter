@@ -12,7 +12,7 @@
   	$dmca_to_primary_menu           =   ovoo_config('dmca_to_primary_menu');
   	$az_to_primary_menu             =   ovoo_config('az_to_primary_menu');
   	$az_to_footer_menu              =   ovoo_config('az_to_footer_menu');
-  	$movie_request_enable           =   ovoo_config('movie_request_enable');
+  	$product_request_enable           =   ovoo_config('product_request_enable');
     $facebook_url                   =   ovoo_config('facebook_url');
     $twitter_url                    =   ovoo_config('twitter_url');
     $vimeo_url                      =   ovoo_config('vimeo_url');

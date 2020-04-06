@@ -10,7 +10,7 @@ class Director extends Home_Core_Controller {
         $director=str_replace("%20"," ",$director);
         $config = array();
         $config["base_url"] = base_url() . "director/".$director;
-        $config["total_rows"] = $this->common_model->get_video_by_director_record_count($director);
+        $config["total_rows"] = $this->common_model->get_Product_by_director_record_count($director);
         $config["per_page"] = 24;
         $config["uri_segment"] = 3;
         $config['full_tag_open'] = '<div class="pagination-container text-center"><ul class ="pagination">';
@@ -42,13 +42,13 @@ class Director extends Home_Core_Controller {
 
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;      
-        $data["all_published_videos"] = $this->common_model->get_video_by_director($config["per_page"], $page, $director);
+        $data["all_published_Products"] = $this->common_model->get_Product_by_director($config["per_page"], $page, $director);
         $data["links"] = $this->pagination->create_links();
         $data['total_rows']=$config["total_rows"];
         $data['director_name']=$director;
         $data['all_published_genre']= $this->common_model->all_published_genre();
         $data['all_published_country']= $this->common_model->all_published_country();
-        $data['title'] = "Watch ".$director."'s". " movies & TV-Series online";
+        $data['title'] = "Watch ".$director."'s". " products & TV-Series online";
         $data['page_name']='director';
         $this->load->view('theme/'.$this->active_theme.'/index',$data);
 	}

@@ -27,7 +27,7 @@ class Country_model extends CI_Model {
     {
         $country_id = $this->db->get_where('country', array('slug' => $slug))->row()->country_id;
         $this->db->where("find_in_set(".$country_id.",country) >",0);
-        $query = $this->db->get('videos');
+        $query = $this->db->get('Products');
         return $query->num_rows();
     }
     public function country_exist($slug)
@@ -92,19 +92,19 @@ class Country_model extends CI_Model {
     }
     
 
-   public function fetch_country_video_by_slug($limit=16, $start=0, $slug) {
+   public function fetch_country_Product_by_slug($limit=16, $start=0, $slug) {
         $country_id   = $this->db->get_where('country', array('slug' => $slug))->row()->country_id;
         $this->db->where("find_in_set(".$country_id.",country) >",0);
         $this->db->limit($limit,$start);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
    }
 
    
-   public function fetch_country_video_by_slug_record_count($slug)
+   public function fetch_country_Product_by_slug_record_count($slug)
     {
         $country_id = $this->db->get_where('country', array('slug' => $slug))->row()->country_id;
         $this->db->where("find_in_set(".$country_id.",country) >",0);
-        $query = $this->db->get('videos');        
+        $query = $this->db->get('Products');        
         return $query->num_rows();
     }
 

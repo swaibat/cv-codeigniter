@@ -25,7 +25,7 @@
                         </div>
                     <?php endif; ?>
                     <?php if($g_login_enable == '1' || $f_login_enable == '1'): ?>
-                    <div class="movie-heading m-b-20"> <span><?php echo trans('connect_with_social_profile'); ?></span>
+                    <div class="product-heading m-b-20"> <span><?php echo trans('connect_with_social_profile'); ?></span>
                         <div class="disable-bottom-line"></div>
                     </div><br>                    
                     <?php if($this->db->get_where('config' , array('title' =>'google_login_enable'))->row()->value =='1'): ?>
@@ -36,7 +36,7 @@
                     <?php endif; ?>
                     <br><br><br>
                     <?php endif; ?>
-                    <div class="movie-heading m-b-20"> <span><?php echo trans('enter_credential'); ?></span>
+                    <div class="product-heading m-b-20"> <span><?php echo trans('enter_credential'); ?></span>
                         <div class="disable-bottom-line"></div>
                     </div>
                     <div id="contact-form">                        
@@ -63,7 +63,7 @@
                 </h2>
 
                 <div class="sendus">
-                    <div class="movie-heading m-b-20"> <span><?php echo trans('enter_your_details'); ?></span>
+                    <div class="product-heading m-b-20"> <span><?php echo trans('enter_your_details'); ?></span>
                         <div class="disable-bottom-line"></div>
                     </div>
                     <?php if($this->session->flashdata('success') !=''):?>

@@ -1,4 +1,4 @@
-videojs.addLanguage("nl",{
+Productjs.addLanguage("nl",{
  "Audio Player": "Audiospeler",
  "Video Player": "Videospeler",
  "Play": "Afspelen",

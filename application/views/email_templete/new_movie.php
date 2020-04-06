@@ -3,7 +3,7 @@
         <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <title>New Movie Published </title>    
+            <title>New Product Published </title>    
         </head>
 
         <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
@@ -49,20 +49,20 @@
                                                             <tr>
                                                        <td style="color:#666;padding:15px; padding-bottom:0;font-size:14px;line-height:20px;font-family:arial;text-align:center;">
                                             
-                                                            <h1  class=""><span style="color:#005f84;padding-bottom:30px;font-family: impact, sans-serif;" data-mce-style="font-family: impact, sans-serif;">'.$video->title.'</span></h1>
+                                                            <h1  class=""><span style="color:#005f84;padding-bottom:30px;font-family: impact, sans-serif;" data-mce-style="font-family: impact, sans-serif;">'.$Product->title.'</span></h1>
                                                             <h4  style="color:#005f84;padding-bottom:10px;" data-mce-style="font-family: impact, sans-serif;">by &nbsp;'.trans('site_title').'</h4>
 
                                                             <div style="font-style:normal;padding-bottom:15px;font-family:arial;line-height:20px;text-align:left">
                                                                 <img border="0" class="content-image  " align="left" src="'.$thumb_image.'" style="display: inline-block; margin: 0px; padding: 0px 20px 10px 0px; width: 250px;">
 
-                                                                <div style="margin: 0px 0px 10px 0px; line-height: 22px;text-align: left;"><span style="color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, sans-serif; font-size: 14px;">'.$video->description.'</span></div>
+                                                                <div style="margin: 0px 0px 10px 0px; line-height: 22px;text-align: left;"><span style="color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, sans-serif; font-size: 14px;">'.$Product->description.'</span></div>
                                                                                                                     
                                                                 
-                                                                <p><span style="font-weight:bold;font-size:16px">'.trans('release').':</span> '.$video->release.'</p>
+                                                                <p><span style="font-weight:bold;font-size:16px">'.trans('release').':</span> '.$Product->release.'</p>
                                                                 <p><span style="font-weight:bold;font-size:16px">'.trans('actor').': </span> '.$actor.'</p>
                                                                 <p><span style="font-weight:bold;font-size:16px">'.trans('director').': </span> '.$director.'</p>                                                                
-                                                                <p><span style="font-weight:bold;font-size:16px">'.trans('duration').':</span> '.$video->runtime.'</p>
-                                                                <p><span style="font-weight:bold;font-size:16px">'.trans('imdb_rating').': </span> '.$video->imdb_rating.'</p>
+                                                                <p><span style="font-weight:bold;font-size:16px">'.trans('duration').':</span> '.$Product->runtime.'</p>
+                                                                <p><span style="font-weight:bold;font-size:16px">'.trans('imdb_rating').': </span> '.$Product->imdb_rating.'</p>
                                                                 <p><span style="font-weight:bold;font-size:16px"><a style="margin-top: 10px; background-color: rgb(31, 148, 21); font-family: Arial; color: rgb(255, 255, 255); display: inline-block; border-radius: 6px; text-align: center; padding: 12px 20px; text-decoration: none;" class="button-1 hyperlink" href="'.$watch_url.'.html" data-default="1">WATCH ONLINE</a></p>
 
                                                             </div>

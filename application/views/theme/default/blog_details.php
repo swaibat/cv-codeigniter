@@ -35,7 +35,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9 col-sm-8">
-                <div class="movie-details-container">
+                <div class="product-details-container">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="blog-detail-img">
@@ -46,7 +46,7 @@
                                     <?php echo $post_details->post_title; ?>
                                 </h1>
                             </div>
-                            <div class="post-video-info">
+                            <div class="post-Product-info">
                                 <div class="row">
                                     <div class="col-md-6"><span class="by-in"><?php echo trans('by'); ?></span>
                                         <a href="#"><?php echo $this->common_model->get_name_by_id($post_details->user_id);?></a>
@@ -65,17 +65,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="movie-details-text">
+                            <div class="product-details-text">
                                 <?php echo $post_details->content; ?>
                                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
                                     <div class="addthis_inline_share_toolbox_yl99 m-t-30 m-b-10" data-url="<?php echo base_url().'blog/'.$post_details->slug.'.html';?>" data-title="Watch & Download <?php echo $post_details->post_title;?>"></div>
                                     <!-- Addthis Social tool -->
                             </div>
-                            <div class="similler-movie">
+                            <div class="similler-product">
                                 <?php $this->load->view($theme_dir.'comments',array('PAGE_URL' => base_url('blog/'.$post_details->slug.'.html'),'PAGE_IDENTIFIER'=>'post_'.$post_details->posts_id)); ?>
                             </div>
-                            <div class="similler-movie">
-                                <div class="movie-heading overflow-hidden">
+                            <div class="similler-product">
+                                <div class="product-heading overflow-hidden">
                                     <span><?php echo trans('related_blog'); ?></span>
                                     <div class="disable-bottom-line"></div>
                                 </div>
@@ -87,11 +87,11 @@
                                         foreach ($related_posts as $posts) :?>
                                         <div class="col-md-6 col-sm-6">
                                             <div class="post-list-container">
-                                                <div class="movie-img">
-                                                    <img class="img-responsive" src="<?php echo $posts->image_link; ?>" alt="video image">
+                                                <div class="product-img">
+                                                    <img class="img-responsive" src="<?php echo $posts->image_link; ?>" alt="Product image">
                                                 </div>
-                                                <div class="post-video-info">
-                                                    <p class="post-video-aut-name">
+                                                <div class="post-Product-info">
+                                                    <p class="post-Product-aut-name">
                                                         <span class="by-in">By</span>
                                                         <a href="#"><?php echo $this->common_model->get_name_by_id($posts->user_id);?></a>
                                                         <span>&#47;</span>
@@ -104,7 +104,7 @@
                                                         </a>
                                                         <?php endforeach; ?>
                                                     </p>
-                                                    <p class="blog-movie-desc text-right">
+                                                    <p class="blog-product-desc text-right">
                                                         <span><?php echo $this->common_model->time_ago($posts->post_at);?></span>
                                                         <span>&#47;</span>
                                                         <span><?php echo $this->common_model->post_comments_record_count_by_id($posts->posts_id);?> <i class="fa fa-commenting-o"></i></span>

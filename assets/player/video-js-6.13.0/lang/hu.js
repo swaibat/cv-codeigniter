@@ -1,4 +1,4 @@
-videojs.addLanguage("hu",{
+Productjs.addLanguage("hu",{
  "Play": "Lejátszás",
  "Pause": "Szünet",
  "Current Time": "Aktuális időpont",

@@ -1,4 +1,4 @@
-videojs.addLanguage("fr",{
+Productjs.addLanguage("fr",{
  "Audio Player": "Lecteur audio",
  "Video Player": "Lecteur vidéo",
  "Play": "Lecture",

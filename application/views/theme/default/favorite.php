@@ -5,7 +5,7 @@
             <div class="col-md-9 col-sm-8 col-xs-12">
                 <div class="page-title">
                     <h1 class="text-uppercase">
-                        <?php echo trans('my_favorite_movies_&amp;_videos'); ?>
+                        <?php echo trans('my_favorite_products_&amp;_Products'); ?>
                     </h1>
                 </div>
             </div>
@@ -64,41 +64,6 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>
-                    </div>
-                    <div class="pp-main col-md-9 col-sm-9">
-                        <div class="ppm-head">
-                            <div class="ppmh-title"><i class="fa fa-heart-o mr5"></i> <?php echo trans('favorite_movies_&amp;_tv-series'); ?></div>
-                        </div>
-                        <div class="ppm-content user-content">
-
-                            <div class="col-md-12 col-sm-12">
-                                <div class="latest-movie movie-opt">
-                                    <table class="table table-striped">
-                                        <?php 
-                                            foreach($fav_videos as $favorite_videos):
-                                            $all_fav_videos = $this->db->get_where('videos', array('videos_id'=>$favorite_videos['videos_id']))->result_array();
-                                            foreach ($all_fav_videos as $videos) :
-                                        ?>
-                                        <tr id="row_<?php echo $favorite_videos['wish_list_id'];?>">
-                                            <td width="180" valign="top"><a href="<?php if($videos['is_tvseries'] =='1'){ echo base_url('tv-series/watch/'.$videos['slug'].'.html');}else{  echo base_url('watch/'.$videos['slug'].'.html');}?>"><img class="img-responsive" src="<?php echo $this->common_model->get_video_thumb_url($videos['videos_id']); ?>" width="120" alt="Blade Runner 2049"></a></td>
-                                            <td valign="top">
-                                                <div>
-                                                    <a href="<?php echo base_url('watch/'.$videos['slug'].'.html');?>"><h3><?php echo $videos['title'];?></h3></a>
-                                                </div>
-                                                <?php echo $videos['description'];?>
-                                            </td>
-                                            <td width="70" valign="top">
-                                                <a class="btn btn-xs btn-success" href="<?php echo base_url('watch/'.$videos['slug'].'.html');?>"><i class="fa fa-eye"></i></a>
-                                                <button class="btn btn-xs btn-danger" onclick="wish_list_remove('<?php echo $favorite_videos['wish_list_id'];?>')"><i class="fa fa-close"></i></button>                                                
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; endforeach; ?>
-                                    </table>                                
-                                </div>
-                            </div>
-
-                            <div class="clearfix"></div>
                         </div>
                     </div>
                     <div class="clearfix"></div>

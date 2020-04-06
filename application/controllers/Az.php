@@ -15,13 +15,13 @@ class Az extends Home_Core_Controller {
         if($param1 !="" && $param1 !=NULL){          
             $title = $param1;
         }
-        $movie_per_page             =   $this->db->get_where('config' , array('title'=>'movie_per_page'))->row()->value;      
-        $total_rows                 =   $this->common_model->get_az_videos_num_rows($title);        
+        $product_per_page             =   $this->db->get_where('config' , array('title'=>'product_per_page'))->row()->value;      
+        $total_rows                 =   $this->common_model->get_az_Products_num_rows($title);        
         // page
         $config                     = array();
         $config["base_url"]         = base_url() . "az-list/".$title.'/page/';
         $config["total_rows"]       = $total_rows;
-        $config["per_page"]         = $movie_per_page;
+        $config["per_page"]         = $product_per_page;
         $config["uri_segment"]      = 4;
         $config['full_tag_open']    = '<!--pagination--><div class="paging"><div class="mt"><ul class="pagination">';
         $config['full_tag_close']   = '</ul></div></div><!--pagination-->';
@@ -49,17 +49,17 @@ class Az extends Home_Core_Controller {
         $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
         $page_offset                    = 0;
         if(is_numeric($page) && $page !="")
-            $page_offset                = ($page * $movie_per_page)-$movie_per_page;   
-        $data["all_videos"]             = $this->common_model->get_az_videos($title,$movie_per_page,$page_offset);
+            $page_offset                = ($page * $product_per_page)-$product_per_page;   
+        $data["all_Products"]             = $this->common_model->get_az_Products($title,$product_per_page,$page_offset);
         //var_dump($total_rows);
         //var_dump($this->db->last_query());
         $data["links"]                  = $this->pagination->create_links();
         $data['total_rows']             = $config["total_rows"];
-        $data['movie_per_page']         = $config["per_page"];
+        $data['product_per_page']         = $config["per_page"];
         $data['page_name']              = 'az';
         $data['param1']                 = $param1;
-        $data['title']                  = 'All A-Z Movies Directory';             
-        //$this->load->view('fmovies/index', $data);
+        $data['title']                  = 'All A-Z Products Directory';             
+        //$this->load->view('fproducts/index', $data);
         $this->load->view('theme/'.$this->active_theme.'/index',$data);
         //var_dump($this->db->last_query());
     }

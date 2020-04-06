@@ -9,7 +9,7 @@
   $dmca_to_primary_menu           =   ovoo_config('dmca_to_primary_menu');
   $az_to_primary_menu             =   ovoo_config('az_to_primary_menu');
   $az_to_footer_menu              =   ovoo_config('az_to_footer_menu');
-  $movie_request_enable           =   ovoo_config('movie_request_enable');    
+  $product_request_enable           =   ovoo_config('product_request_enable');    
 ?>
 
 <ul class="nav navbar-nav navbar-left">
@@ -67,21 +67,14 @@
     </div>
   </li>
 <?php endif; ?>
-<li><a href="<?php echo base_url('movies.html')?>"><?php echo trans('movies'); ?></a></li>
-  <?php 
-    $tv_series_publish          = ovoo_config('tv_series_publish');
-    $tv_series_pin_primary_menu = ovoo_config('tv_series_pin_primary_menu');
-    if($tv_series_publish =='1' && $tv_series_pin_primary_menu =='1'):
-  ?>
-    <li><a href="<?php echo base_url('tv-series.html')?>"><?php echo trans('tv_series'); ?></a></li>
-  <?php endif; ?>
+<li><a href="<?php echo base_url('products.html')?>"><?php echo trans('products'); ?></a></li>
   <?php if($az_to_primary_menu == '1'): ?>
     <li><a href="<?php echo base_url('az.html')?>"><?php echo trans('az'); ?></a></li>
   <?php endif; ?>
-  <?php $all_video_type_on_primary_menu= $this->common_model->all_video_type_on_primary_menu();
-    foreach ($all_video_type_on_primary_menu as $video_type):                                                
+  <?php $all_Product_type_on_primary_menu= $this->common_model->all_Product_type_on_primary_menu();
+    foreach ($all_Product_type_on_primary_menu as $Product_type):                                                
   ?>
-  <li><a href="<?php echo base_url().'type/'.$video_type->slug?>"><?php echo $video_type->video_type;?></a></li>
+  <li><a href="<?php echo base_url().'type/'.$Product_type->slug?>"><?php echo $Product_type->Product_type;?></a></li>
   <?php endforeach; ?>
   <?php 
     $blog_enable          = ovoo_config('blog_enable');
@@ -94,8 +87,8 @@
   ?>
   <li><a href="<?php echo base_url().'page/'.$pages->slug?>"><?php echo $pages->page_title?></a></li>
   <?php endforeach; ?>
-  <?php if($movie_request_enable == '1'): ?>
-    <li><a href="#" data-toggle="modal" data-target="#movieRequest"><?php echo trans('request'); ?></a></li>
+  <?php if($product_request_enable == '1'): ?>
+    <li><a href="#" data-toggle="modal" data-target="#productRequest"><?php echo trans('request'); ?></a></li>
   <?php endif; ?>
   <?php if($privacy_policy_to_primary_menu == '1'): ?>            
     <li><a href="<?php echo base_url('privacy-policy.html')?>"><?php echo trans('privacy_policy'); ?></a></li>

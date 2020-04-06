@@ -1351,7 +1351,7 @@ button.list-group-item{
     border-left: 0;
 }
 
-.embed-responsive .embed-responsive-item, .embed-responsive embed, .embed-responsive iframe, .embed-responsive object, .embed-responsive video{
+.embed-responsive .embed-responsive-item, .embed-responsive embed, .embed-responsive iframe, .embed-responsive object, .embed-responsive Product{
     right: 0;
 }
 
@@ -1733,7 +1733,7 @@ button.close{
     right: 0px;
 }
 
-.movie-heading span:before{
+.product-heading span:before{
     right: 0;
     left: auto;
 }
@@ -1742,24 +1742,24 @@ button.close{
     right: 0px;
 }
 
-.movie-title{
+.product-title{
     right: 0;
     border-radius: 0 0 5px 5px;
 }
 
-.bottom-movie-img-container .bottom-movie-img{
+.bottom-product-img-container .bottom-product-img{
     padding-left: 0px;
 }
 
-.bottom-movie-img-container .bottom-movie-title{
+.bottom-product-img-container .bottom-product-title{
     padding-right: 5px;
 }
 
-.hd-vid-auth-name, .post-video-aut-name{
+.hd-vid-auth-name, .post-Product-aut-name{
     float: right;
 }
 
-p.hd-movie-desc, p.blog-movie-desc{
+p.hd-product-desc, p.blog-product-desc{
     float: right;
 }
 
@@ -1866,20 +1866,20 @@ p.hd-movie-desc, p.blog-movie-desc{
     left: 0px;
 }
 
-.video-info-bar ul li{
+.Product-info-bar ul li{
     border-left: 1px solid #fff;
 }
 
-.video-info-bar ul li:last-child{
+.Product-info-bar ul li:last-child{
     border-left: none;
     border-right: 1px solid #fff;
 }
 
-.video-info-bar ul li i.fa{
+.Product-info-bar ul li i.fa{
     margin-left: 5px;
 }
 
-.video-info-bar ul li:last-child i.fa{
+.Product-info-bar ul li:last-child i.fa{
     margin-left: 0px;
 }
 
@@ -1895,25 +1895,25 @@ p.hd-movie-desc, p.blog-movie-desc{
     margin-left: 3px;
 }
 
-p.post-video-aut-name span{
+p.post-Product-aut-name span{
     float: right;
     margin-left: 6px;
 }
 
-p.post-video-aut-name span.by-in{
+p.post-Product-aut-name span.by-in{
     margin-left: 3px;
 }
 
-p.post-video-aut-name a{
+p.post-Product-aut-name a{
     float: right;
     margin-left: 4px;
 }
 
-p.post-video-aut-name a:last-child{
+p.post-Product-aut-name a:last-child{
     margin-left: 0px;
 }
 
-.post-video-aut-name span{
+.post-Product-aut-name span{
     margin-left: 2px;
 }
 
@@ -1922,15 +1922,15 @@ p.post-video-aut-name a:last-child{
     padding-left: 25px;
 }
 
-.video-info-bar .sharing-bar{
+.Product-info-bar .sharing-bar{
     left: 0;
 }
 
-.video-info-bar .sharing-bar li:last-child{
+.Product-info-bar .sharing-bar li:last-child{
     margin-left: 0px;
 }
 
-.video-info-bar .sharing-bar li a i.fa{
+.Product-info-bar .sharing-bar li a i.fa{
     margin-left: 0px;
     margin-right: 2px;
 }
@@ -2193,7 +2193,7 @@ p.post-video-aut-name a:last-child{
     left: 22px;
 }
 
-.responsive-embed .responsive-embed-item, .responsive-embed embed, .responsive-embed iframe, .responsive-embed object, .responsive-embed video{
+.responsive-embed .responsive-embed-item, .responsive-embed embed, .responsive-embed iframe, .responsive-embed object, .responsive-embed Product{
     right: 0;
 }
 
@@ -2238,30 +2238,30 @@ p.post-video-aut-name a:last-child{
     float: left;
 }
 
-.video-play-button{
+.Product-play-button{
     right: 50%;
     padding: 18px 28px 18px 20px ;
 }
 
-.video-play-button:before{
+.Product-play-button:before{
     right: 50%;
 }
 
-.video-play-button:after{
+.Product-play-button:after{
     right: 50%;
 }
 
-.video-play-button span{
+.Product-play-button span{
     border-right: 32px solid #fff;
 }
 
-.video-overlay{
+.Product-overlay{
     right: 0;
     left: 0;
 }
 
 @media screen and (max-width: 991px){
-    .video-play-button{
+    .Product-play-button{
         right: 50%;
         padding: 18px 28px 18px 20px ;
     }
@@ -2275,11 +2275,11 @@ input[type=checkbox], input[type=radio]{
 
 /*more rtl code*/
 
-.movie-heading {
+.product-heading {
     float: right;
 }
 
-.movie-heading span:before, .movies-list-wrap .ml-title span.title:before {
+.product-heading span:before, .products-list-wrap .ml-title span.title:before {
     right: 0;
     left: auto;
 }
@@ -2289,13 +2289,13 @@ input[type=checkbox], input[type=radio]{
 .owl-carousel .owl-prev {
     left: 5px;
 }
-.movies-list-wrap .ml-title .nav-tabs {
+.products-list-wrap .ml-title .nav-tabs {
     margin-right: 20px;
     float: right;
     display: flex;
     flex-direction: row-reverse;
 }
-.movie-heading{
+.product-heading{
     text-align: right;
 }
 .footer-about img {
@@ -2304,7 +2304,7 @@ input[type=checkbox], input[type=radio]{
 .navbar>.container .navbar-brand{
     margin-left: 15px;
 }
-.video_quality, .total_episodes{
+.Product_quality, .total_episodes{
     right: 0;
     left: auto;
 }
@@ -2321,7 +2321,7 @@ input[type=checkbox], input[type=radio]{
 .page-title {
     text-align: right;
 }
-.movie-payer{
+.product-payer{
     text-align: right;
 }
 div#contact-form {
@@ -2334,7 +2334,7 @@ div#contact-form {
 .profiles-wrap .pp-main .ppm-content{
     text-align: right;
 }
-.movie-heading{
+.product-heading{
     width: 100%;
 }
 @media only screen and (max-width: 768px){

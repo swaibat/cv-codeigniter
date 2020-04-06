@@ -1,4 +1,4 @@
-videojs.addLanguage("el",{
+Productjs.addLanguage("el",{
  "Play": "Aναπαραγωγή",
  "Pause": "Παύση",
  "Current Time": "Τρέχων χρόνος",

@@ -175,7 +175,7 @@ class Blog extends Home_Core_Controller {
 		$data["all_published_posts"] 	= $this->common_model->fetch_blog_post_by_author($config["per_page"], $page, $slug);
 		$data["links"] 					= $this->pagination->create_links();
 		$data['total_rows']				= $config["total_rows"];
-		$data['title'] 					= 'Watch movies & TV-Series online';
+		$data['title'] 					= 'Watch products & TV-Series online';
 		$data['page_name']				= 'blog';
 		$this->load->view('theme/'.$this->active_theme.'/index',$data);
     }

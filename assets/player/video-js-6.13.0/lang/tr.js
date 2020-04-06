@@ -1,4 +1,4 @@
-videojs.addLanguage("tr",{
+Productjs.addLanguage("tr",{
  "Play": "Oynat",
  "Pause": "Duraklat",
  "Replay": "Yeniden Oynat",
@@ -26,7 +26,7 @@ videojs.addLanguage("tr",{
  "You aborted the media playback": "Video oynatmayı iptal ettiniz",
  "A network error caused the media download to fail part-way.": "Video indirilirken bağlantı sorunu oluştu.",
  "The media could not be loaded, either because the server or network failed or because the format is not supported.": "Video oynatılamadı, ağ ya da sunucu hatası veya belirtilen format desteklenmiyor.",
- "The media playback was aborted due to a corruption problem or because the media used features your browser did not support.": "Tarayıcınız desteklemediği için videoda hata oluştu.",
+ "The media playback was aborted due to a corruption problem or because the media used features your browser did not support.": "Tarayıcınız desteklemediği için Productda hata oluştu.",
  "No compatible source was found for this media.": "Video için kaynak bulunamadı.",
  "The media is encrypted and we do not have the keys to decrypt it.": "Video, şifrelenmiş bir kaynaktan geliyor ve oynatmak için gerekli anahtar bulunamadı.",
  "Play Video": "Videoyu Oynat",

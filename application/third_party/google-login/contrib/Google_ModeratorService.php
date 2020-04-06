@@ -185,7 +185,7 @@
      * @opt_param string author Restricts the results to submissions by a specific author.
      * @opt_param string start-index Index of the first result to be retrieved.
      * @opt_param string q Search query.
-     * @opt_param bool hasAttachedVideo Specifies whether to restrict to submissions that have videos attached.
+     * @opt_param bool hasAttachedVideo Specifies whether to restrict to submissions that have Products attached.
      * @return Google_SubmissionList
      */
     public function listResponses($seriesId, $submissionId, $optParams = array()) {
@@ -393,7 +393,7 @@
      * @opt_param string author Restricts the results to submissions by a specific author.
      * @opt_param string sort Sort order.
      * @opt_param string q Search query.
-     * @opt_param bool hasAttachedVideo Specifies whether to restrict to submissions that have videos attached.
+     * @opt_param bool hasAttachedVideo Specifies whether to restrict to submissions that have Products attached.
      * @return Google_SubmissionList
      */
     public function listSeriesSubmissions($seriesId, $optParams = array()) {
@@ -429,7 +429,7 @@
      * @opt_param string author Restricts the results to submissions by a specific author.
      * @opt_param string start-index Index of the first result to be retrieved.
      * @opt_param string q Search query.
-     * @opt_param bool hasAttachedVideo Specifies whether to restrict to submissions that have videos attached.
+     * @opt_param bool hasAttachedVideo Specifies whether to restrict to submissions that have Products attached.
      * @return Google_SeriesList
      */
     public function listSeriesResponses($seriesId, $optParams = array()) {
@@ -559,7 +559,7 @@
      * @opt_param string author Restricts the results to submissions by a specific author.
      * @opt_param string sort Sort order.
      * @opt_param string q Search query.
-     * @opt_param bool hasAttachedVideo Specifies whether to restrict to submissions that have videos attached.
+     * @opt_param bool hasAttachedVideo Specifies whether to restrict to submissions that have Products attached.
      * @return Google_SubmissionList
      */
     public function listTopicsSubmissions($seriesId, $topicId, $optParams = array()) {
@@ -1072,7 +1072,7 @@ class Google_Series extends Google_Model {
   protected $__rulesDataType = '';
   public $rules;
   public $unauthVotingAllowed;
-  public $videoSubmissionAllowed;
+  public $ProductSubmissionAllowed;
   public $name;
   public $numTopics;
   public $anonymousSubmissionAllowed;
@@ -1107,11 +1107,11 @@ class Google_Series extends Google_Model {
   public function getUnauthVotingAllowed() {
     return $this->unauthVotingAllowed;
   }
-  public function setVideoSubmissionAllowed($videoSubmissionAllowed) {
-    $this->videoSubmissionAllowed = $videoSubmissionAllowed;
+  public function setVideoSubmissionAllowed($ProductSubmissionAllowed) {
+    $this->ProductSubmissionAllowed = $ProductSubmissionAllowed;
   }
   public function getVideoSubmissionAllowed() {
-    return $this->videoSubmissionAllowed;
+    return $this->ProductSubmissionAllowed;
   }
   public function setName($name) {
     $this->name = $name;
@@ -1154,7 +1154,7 @@ class Google_Series extends Google_Model {
 class Google_SeriesCounters extends Google_Model {
   public $users;
   public $noneVotes;
-  public $videoSubmissions;
+  public $ProductSubmissions;
   public $minusVotes;
   public $anonymousSubmissions;
   public $submissions;
@@ -1171,11 +1171,11 @@ class Google_SeriesCounters extends Google_Model {
   public function getNoneVotes() {
     return $this->noneVotes;
   }
-  public function setVideoSubmissions($videoSubmissions) {
-    $this->videoSubmissions = $videoSubmissions;
+  public function setVideoSubmissions($ProductSubmissions) {
+    $this->ProductSubmissions = $ProductSubmissions;
   }
   public function getVideoSubmissions() {
-    return $this->videoSubmissions;
+    return $this->ProductSubmissions;
   }
   public function setMinusVotes($minusVotes) {
     $this->minusVotes = $minusVotes;
@@ -1683,7 +1683,7 @@ class Google_Topic extends Google_Model {
 class Google_TopicCounters extends Google_Model {
   public $users;
   public $noneVotes;
-  public $videoSubmissions;
+  public $ProductSubmissions;
   public $minusVotes;
   public $submissions;
   public $plusVotes;
@@ -1699,11 +1699,11 @@ class Google_TopicCounters extends Google_Model {
   public function getNoneVotes() {
     return $this->noneVotes;
   }
-  public function setVideoSubmissions($videoSubmissions) {
-    $this->videoSubmissions = $videoSubmissions;
+  public function setVideoSubmissions($ProductSubmissions) {
+    $this->ProductSubmissions = $ProductSubmissions;
   }
   public function getVideoSubmissions() {
-    return $this->videoSubmissions;
+    return $this->ProductSubmissions;
   }
   public function setMinusVotes($minusVotes) {
     $this->minusVotes = $minusVotes;

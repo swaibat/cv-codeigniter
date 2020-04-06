@@ -150,21 +150,21 @@
   }
 
   /**
-   * The "videos" collection of methods.
+   * The "Products" collection of methods.
    * Typical usage is:
    *  <code>
    *   $youtubeService = new Google_YoutubeService(...);
-   *   $videos = $youtubeService->videos;
+   *   $Products = $youtubeService->Products;
    *  </code>
    */
   class Google_VideosServiceResource extends Google_ServiceResource {
 
 
     /**
-     * Browse the YouTube video collection. (videos.list)
+     * Browse the YouTube Product collection. (Products.list)
      *
-     * @param string $id YouTube IDs of the videos to be returned.
-     * @param string $part Parts of the video resource to be returned.
+     * @param string $id YouTube IDs of the Products to be returned.
+     * @param string $part Parts of the Product resource to be returned.
      * @param array $optParams Optional parameters.
      * @return Google_VideoListResponse
      */
@@ -199,7 +199,7 @@ class Google_YoutubeService extends Google_Service {
   public $search;
   public $playlistitems;
   public $playlists;
-  public $videos;
+  public $Products;
   /**
    * Constructs the internal representation of the Youtube service.
    *
@@ -212,10 +212,10 @@ class Google_YoutubeService extends Google_Service {
 
     $client->addService($this->serviceName, $this->version);
     $this->channels = new Google_ChannelsServiceResource($this, $this->serviceName, 'channels', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/youtube"], "parameters": {"part": {"required": true, "type": "string", "location": "query"}, "id": {"type": "string", "location": "query"}, "mine": {"type": "string", "location": "query"}}, "id": "youtube.channels.list", "httpMethod": "GET", "path": "channels", "response": {"$ref": "ChannelListResponse"}}}}', true));
-    $this->search = new Google_SearchServiceResource($this, $this->serviceName, 'search', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/youtube"], "parameters": {"q": {"type": "string", "location": "query"}, "startIndex": {"format": "uint32", "default": "0", "maximum": "1000", "minimum": "0", "location": "query", "type": "integer"}, "type": {"repeated": true, "enum": ["channel", "playlist", "video"], "type": "string", "location": "query"}, "order": {"default": "SEARCH_SORT_RELEVANCE", "enum": ["date", "rating", "relevance", "view_count"], "type": "string", "location": "query"}, "maxResults": {"format": "uint32", "default": "25", "maximum": "50", "minimum": "0", "location": "query", "type": "integer"}}, "response": {"$ref": "SearchListResponse"}, "httpMethod": "GET", "path": "search", "id": "youtube.search.list"}}}', true));
+    $this->search = new Google_SearchServiceResource($this, $this->serviceName, 'search', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/youtube"], "parameters": {"q": {"type": "string", "location": "query"}, "startIndex": {"format": "uint32", "default": "0", "maximum": "1000", "minimum": "0", "location": "query", "type": "integer"}, "type": {"repeated": true, "enum": ["channel", "playlist", "Product"], "type": "string", "location": "query"}, "order": {"default": "SEARCH_SORT_RELEVANCE", "enum": ["date", "rating", "relevance", "view_count"], "type": "string", "location": "query"}, "maxResults": {"format": "uint32", "default": "25", "maximum": "50", "minimum": "0", "location": "query", "type": "integer"}}, "response": {"$ref": "SearchListResponse"}, "httpMethod": "GET", "path": "search", "id": "youtube.search.list"}}}', true));
     $this->playlistitems = new Google_PlaylistitemsServiceResource($this, $this->serviceName, 'playlistitems', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/youtube"], "parameters": {"startIndex": {"minimum": "0", "type": "integer", "location": "query", "format": "uint32"}, "part": {"required": true, "type": "string", "location": "query"}, "playlistId": {"type": "string", "location": "query"}, "id": {"type": "string", "location": "query"}, "maxResults": {"default": "50", "minimum": "0", "type": "integer", "location": "query", "format": "uint32"}}, "id": "youtube.playlistitems.list", "httpMethod": "GET", "path": "playlistitems", "response": {"$ref": "PlaylistItemListResponse"}}}}', true));
     $this->playlists = new Google_PlaylistsServiceResource($this, $this->serviceName, 'playlists', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/youtube"], "parameters": {"part": {"required": true, "type": "string", "location": "query"}, "id": {"required": true, "type": "string", "location": "query"}}, "id": "youtube.playlists.list", "httpMethod": "GET", "path": "playlists", "response": {"$ref": "PlaylistListResponse"}}}}', true));
-    $this->videos = new Google_VideosServiceResource($this, $this->serviceName, 'videos', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/youtube"], "parameters": {"part": {"required": true, "type": "string", "location": "query"}, "id": {"required": true, "type": "string", "location": "query"}}, "id": "youtube.videos.list", "httpMethod": "GET", "path": "videos", "response": {"$ref": "VideoListResponse"}}}}', true));
+    $this->Products = new Google_VideosServiceResource($this, $this->serviceName, 'Products', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/youtube"], "parameters": {"part": {"required": true, "type": "string", "location": "query"}, "id": {"required": true, "type": "string", "location": "query"}}, "id": "youtube.Products.list", "httpMethod": "GET", "path": "Products", "response": {"$ref": "VideoListResponse"}}}}', true));
 
   }
 }
@@ -343,7 +343,7 @@ class Google_ChannelSnippet extends Google_Model {
 class Google_ChannelStatistics extends Google_Model {
   public $commentCount;
   public $subscriberCount;
-  public $videoCount;
+  public $ProductCount;
   public $viewCount;
   public function setCommentCount($commentCount) {
     $this->commentCount = $commentCount;
@@ -357,11 +357,11 @@ class Google_ChannelStatistics extends Google_Model {
   public function getSubscriberCount() {
     return $this->subscriberCount;
   }
-  public function setVideoCount($videoCount) {
-    $this->videoCount = $videoCount;
+  public function setVideoCount($ProductCount) {
+    $this->ProductCount = $ProductCount;
   }
   public function getVideoCount() {
-    return $this->videoCount;
+    return $this->ProductCount;
   }
   public function setViewCount($viewCount) {
     $this->viewCount = $viewCount;
@@ -610,7 +610,7 @@ class Google_ResourceId extends Google_Model {
   public $kind;
   public $channelId;
   public $playlistId;
-  public $videoId;
+  public $ProductId;
   public function setKind($kind) {
     $this->kind = $kind;
   }
@@ -629,11 +629,11 @@ class Google_ResourceId extends Google_Model {
   public function getPlaylistId() {
     return $this->playlistId;
   }
-  public function setVideoId($videoId) {
-    $this->videoId = $videoId;
+  public function setVideoId($ProductId) {
+    $this->ProductId = $ProductId;
   }
   public function getVideoId() {
-    return $this->videoId;
+    return $this->ProductId;
   }
 }
 
@@ -838,9 +838,9 @@ class Google_VideoContentDetails extends Google_Model {
 class Google_VideoListResponse extends Google_Model {
   public $kind;
   public $etag;
-  protected $__videosType = 'Google_Video';
-  protected $__videosDataType = 'map';
-  public $videos;
+  protected $__ProductsType = 'Google_Video';
+  protected $__ProductsDataType = 'map';
+  public $Products;
   public function setKind($kind) {
     $this->kind = $kind;
   }
@@ -853,11 +853,11 @@ class Google_VideoListResponse extends Google_Model {
   public function getEtag() {
     return $this->etag;
   }
-  public function setVideos(Google_Video $videos) {
-    $this->videos = $videos;
+  public function setVideos(Google_Video $Products) {
+    $this->Products = $Products;
   }
   public function getVideos() {
-    return $this->videos;
+    return $this->Products;
   }
 }
 

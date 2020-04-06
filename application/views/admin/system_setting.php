@@ -8,11 +8,11 @@
     $contact_to_primary_menu    = ovoo_config('contact_to_primary_menu');
     $contact_to_footer_menu     = ovoo_config('contact_to_footer_menu');
     $show_star_image            = ovoo_config('show_star_image');
-    $movie_report_enable        = ovoo_config('movie_report_enable');
-    $movie_report_email         = ovoo_config('movie_report_email');
-    $movie_request_enable       = ovoo_config('movie_request_enable');
-    $movie_request_email        = ovoo_config('movie_request_email');
-    $movie_report_note          = ovoo_config('movie_report_note');
+    $product_report_enable        = ovoo_config('product_report_enable');
+    $product_report_email         = ovoo_config('product_report_email');
+    $product_request_enable       = ovoo_config('product_request_enable');
+    $product_request_email        = ovoo_config('product_request_email');
+    $product_report_note          = ovoo_config('product_report_note');
     $recaptcha_enable           = ovoo_config('recaptcha_enable');
     $recaptcha_site_key         = ovoo_config('recaptcha_site_key');
     $recaptcha_secret_key       = ovoo_config('recaptcha_secret_key');
@@ -197,7 +197,7 @@
           </div>
 
           <div class="form-group row">
-            <label class="control-label col-sm-3 "><?php echo trans('show_actor_director_and_writer_image_to_movie_page'); ?></label>
+            <label class="control-label col-sm-3 "><?php echo trans('show_actor_director_and_writer_image_to_product_page'); ?></label>
             <div class="col-sm-6">
               <div class="toggle">
                 <label>
@@ -234,11 +234,11 @@
           </div>
 
           <div class="form-group row">
-            <label class="control-label col-sm-3 "><?php echo trans('enable_movie_report'); ?></label>
+            <label class="control-label col-sm-3 "><?php echo trans('enable_product_report'); ?></label>
             <div class="col-sm-9">
               <div class="toggle">
                 <label>
-                  <input type="checkbox" name="movie_report_enable" <?php if ($movie_report_enable == '1') {
+                  <input type="checkbox" name="product_report_enable" <?php if ($product_report_enable == '1') {
                                                                       echo 'checked';
                                                                     } ?>><span class="button-indecator"></span>
                 </label>
@@ -247,25 +247,25 @@
           </div>
 
           <div class="form-group row">
-            <label class="col-sm-3 control-label"><?php echo trans('movie_report_send_to_email'); ?></label>
+            <label class="col-sm-3 control-label"><?php echo trans('product_report_send_to_email'); ?></label>
             <div class="col-sm-6">
-              <input type="text" value="<?php echo $movie_report_email; ?>" name="movie_report_email" class="form-control" />
+              <input type="text" value="<?php echo $product_report_email; ?>" name="product_report_email" class="form-control" />
             </div>
           </div>
 
           <div class="form-group row">
-            <label class="col-sm-3 control-label"><?php echo trans('movie_report_attention_text'); ?></label>
+            <label class="col-sm-3 control-label"><?php echo trans('product_report_attention_text'); ?></label>
             <div class="col-sm-6">
-              <textarea type="text" rows="4" name="movie_report_note" class="form-control"><?php echo $movie_report_note; ?></textarea>
+              <textarea type="text" rows="4" name="product_report_note" class="form-control"><?php echo $product_report_note; ?></textarea>
             </div>
           </div>
 
           <div class="form-group row">
-            <label class="control-label col-sm-3 "><?php echo trans('enable_movie_request'); ?></label>
+            <label class="control-label col-sm-3 "><?php echo trans('enable_product_request'); ?></label>
             <div class="col-sm-9">
               <div class="toggle">
                 <label>
-                  <input type="checkbox" name="movie_request_enable" <?php if ($movie_request_enable == '1') {
+                  <input type="checkbox" name="product_request_enable" <?php if ($product_request_enable == '1') {
                                                                         echo 'checked';
                                                                       } ?>><span class="button-indecator"></span>
                 </label>
@@ -274,9 +274,9 @@
           </div>
 
           <div class="form-group row">
-            <label class="col-sm-3 control-label"><?php echo trans('movie_request_send_to_email'); ?></label>
+            <label class="col-sm-3 control-label"><?php echo trans('product_request_send_to_email'); ?></label>
             <div class="col-sm-6">
-              <input type="text" value="<?php echo $movie_request_email; ?>" name="movie_request_email" class="form-control" />
+              <input type="text" value="<?php echo $product_request_email; ?>" name="product_request_email" class="form-control" />
             </div>
           </div>
 

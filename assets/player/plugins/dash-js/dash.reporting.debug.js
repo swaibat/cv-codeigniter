@@ -58,7 +58,7 @@ var FactoryMaker = (function () {
     /**
      * Use this method from your extended object.  this.factory is injected into your object.
      * this.factory.getSingletonInstance(this.context, 'VideoModel')
-     * will return the video model for use in the extended object.
+     * will return the Product model for use in the extended object.
      *
      * @param {Object} context - injected into extended object as this.context
      * @param {string} className - string name found in all dash.js objects

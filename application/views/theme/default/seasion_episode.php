@@ -1,9 +1,9 @@
 <?php
     $s =0;
-    $seasons = $this->common_model->get_seasons_by_videos_id($watch_videos->videos_id);
+    $seasons = $this->common_model->get_seasons_by_Products_id($watch_Products->Products_id);
     foreach ($seasons as $season):
         if($this->common_model->get_num_episodes_by_seasons_id($season['seasons_id']) > 0):
-            $episodes = $this->common_model->get_episodes_by_videos_id_and_season_id($watch_videos->videos_id,$season['seasons_id']);
+            $episodes = $this->common_model->get_episodes_by_Products_id_and_season_id($watch_Products->Products_id,$season['seasons_id']);
             $s++;
             $i=0;
             $current_key = '000000';
@@ -15,10 +15,10 @@
 ?>
 
 <div class="row">
-    <!-- Upcomming Movies -->
+    <!-- Upcomming Products -->
     <div class="col-md-12 col-sm-12">
-        <div class="latest-movie movie-opt">
-            <div class="movie-heading overflow-hidden"> <span><?php echo $season['seasons_name']; ?></span>
+        <div class="latest-product product-opt">
+            <div class="product-heading overflow-hidden"> <span><?php echo $season['seasons_name']; ?></span>
                 <div class="disable-bottom-line"></div>
             </div>
         </div>
@@ -37,7 +37,7 @@
                     <?php if($current_key == $episode['stream_key']):?>
                         <span class="tv-ribbon">Playing..</span> 
                     <?php endif; ?>                                                  
-                    <a href="<?php echo base_url().'watch/'.$watch_videos->slug.'.html?key='.$episode['stream_key']; ?>">
+                    <a href="<?php echo base_url().'watch/'.$watch_Products->slug.'.html?key='.$episode['stream_key']; ?>">
                         <div>                                    
                             <img class="owl-lazy" src="<?php echo base_url('uploads/default_image/tv_poster.jpg'); ?>" data-src="<?php echo $this->common_model->get_episode_image_url($episode['episodes_id']); ?>" alt="<?php echo $episode['episodes_name']; ?>" />
                         </div>

@@ -32,22 +32,22 @@
 .svg:hover path {
     fill: #673ab7;
 }
-.movie-heading span {
+.product-heading span {
     color: #673ab7;
     border-bottom: 1px solid #673ab7;
 }
-.movie-title a:hover {
+.product-title a:hover {
     color: #673ab7;
 }
-.movie-title p i.fa:hover {
+.product-title p i.fa:hover {
     color: #673ab7;
 }
 .hd-vid-auth-name a:hover,
-.post-video-aut-name a:hover {
+.post-Product-aut-name a:hover {
     color: #673ab7;
 }
-p.hd-movie-desc a:hover,
-p.blog-movie-desc a:hover {
+p.hd-product-desc a:hover,
+p.blog-product-desc a:hover {
     color: #673ab7;
 }
 .sidebar h1 a:hover,
@@ -83,7 +83,7 @@ h1.sidebar-title {
     background: #673ab7;
 }
 */
-.video-info-bar ul li a:hover {
+.Product-info-bar ul li a:hover {
     color: #673ab7;
 }
 .input-top-line {
@@ -98,7 +98,7 @@ h1.sidebar-title {
 .breadcrumb li.active {
     color: #673ab7;
 }
-.video-info-bar .info-ul .sharing-drop:hover button:before {
+.Product-info-bar .info-ul .sharing-drop:hover button:before {
     color: #673ab7;
 }
 .btn-create-album:hover,
@@ -262,20 +262,20 @@ fieldset[disabled] .btn-success:hover {
     background-color: #673ab7;
     border-color: #337ab7;
 }
-.movies-list-wrap{ display: block; overflow:hidden; margin: 0 0 40px;}
-.movies-list-wrap .ml-title{ display: block; margin-bottom: 5px; overflow: hidden;}
-.movies-list-wrap .ml-title span.title{font-size: 18px; font-weight: 400; display: inline-block; height: 40px; line-height: 40px; color: #fff; margin-right: 20px; position: relative;}
-.movies-list-wrap .ml-title span.title:before{ content: ""; width: 50px; height: 2px; background: #673ab7; display: inline-block; position: absolute; bottom: 0; left: 0;}
-.movies-list-wrap .ml-title span.title-cate{ border: none; font-size: 22px; font-weight: 400;}
-.movies-list-wrap .ml-title span.title-cate:before{ display: none;}
-.movies-list-wrap .ml-title span i{ font-size: 14px;}
-.movies-list-wrap .ml-title .nav-tabs{ display: inline-block; margin-left: 0px; margin-top: 8px; border-bottom: none;}
-.movies-list-wrap .ml-title .nav-tabs li.active a{ border-radius: 2px; background: #673ab7 !important; color: #fff;}
-.movies-list-wrap .ml-title .nav-tabs li a{ color:#673ab7; border: none; height: 32px; line-height: 32px; background: none !important; padding: 0 15px; text-align: center; min-width: 60px;text-transform: capitalize;}
+.products-list-wrap{ display: block; overflow:hidden; margin: 0 0 40px;}
+.products-list-wrap .ml-title{ display: block; margin-bottom: 5px; overflow: hidden;}
+.products-list-wrap .ml-title span.title{font-size: 18px; font-weight: 400; display: inline-block; height: 40px; line-height: 40px; color: #fff; margin-right: 20px; position: relative;}
+.products-list-wrap .ml-title span.title:before{ content: ""; width: 50px; height: 2px; background: #673ab7; display: inline-block; position: absolute; bottom: 0; left: 0;}
+.products-list-wrap .ml-title span.title-cate{ border: none; font-size: 22px; font-weight: 400;}
+.products-list-wrap .ml-title span.title-cate:before{ display: none;}
+.products-list-wrap .ml-title span i{ font-size: 14px;}
+.products-list-wrap .ml-title .nav-tabs{ display: inline-block; margin-left: 0px; margin-top: 8px; border-bottom: none;}
+.products-list-wrap .ml-title .nav-tabs li.active a{ border-radius: 2px; background: #673ab7 !important; color: #fff;}
+.products-list-wrap .ml-title .nav-tabs li a{ color:#673ab7; border: none; height: 32px; line-height: 32px; background: none !important; padding: 0 15px; text-align: center; min-width: 60px;text-transform: capitalize;}
 .owl-carousel .owl-next,
 .owl-carousel .owl-prev {
     background-color: #673ab7; 
 }
-.movie-heading span:before {
+.product-heading span:before {
    background-color: #673ab7;  
 }

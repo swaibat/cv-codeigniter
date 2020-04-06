@@ -16,17 +16,17 @@
                         <div class="col-sm-6">
                             <select class="form-control m-bot15" id="slider_type" name="slider_type">
                                 <option value="image" <?php if(ovoo_config('slider_type')=='image'){echo 'selected';}?> id="ad1_image_selection"><?php echo trans('image_slider'); ?></option>
-                                <option value="movie" <?php if(ovoo_config('slider_type')=='movie'){echo 'selected';}?> id="ad1_code_selection"><?php echo trans('latest_movies'); ?></option>
+                                <option value="product" <?php if(ovoo_config('slider_type')=='product'){echo 'selected';}?> id="ad1_code_selection"><?php echo trans('latest_products'); ?></option>
                                 <option value="tv" <?php if(ovoo_config('slider_type')=='tv'){echo 'selected';}?> id="ad1_code_selection"><?php echo trans('latest_tv_channels'); ?></option>
                                 <option value="disable" <?php if(ovoo_config('slider_type')=='disable'){echo 'selected';}?> id="ad1_disable"><?php echo trans('disable'); ?></option>
                             </select>
                         </div>
                     </div>
-                    <div id="total_movie_in_slider">
+                    <div id="total_product_in_slider">
                         <div class="form-group">
-                            <label class=" col-sm-6 control-label"><?php echo trans('total_movie'); ?></label>
+                            <label class=" col-sm-6 control-label"><?php echo trans('total_product'); ?></label>
                             <div class="col-sm-6">
-                                <input type="text" name="total_movie_in_slider" value="<?php echo $this->db->get_where('config' , array('title' =>'total_movie_in_slider'))->row()->value; ?>" class="form-control" required>
+                                <input type="text" name="total_product_in_slider" value="<?php echo $this->db->get_where('config' , array('title' =>'total_product_in_slider'))->row()->value; ?>" class="form-control" required>
                             </div>
                         </div>
                     </div>
@@ -94,22 +94,22 @@
     $(document).ready(function() {
         <?php $slider_type=ovoo_config('slider_type');
         if ($slider_type=='image'):?>
-        $("#total_movie_in_slider").fadeOut();
-        <?php endif; if ($slider_type=='movie'):?>
-        $("#total_movie_in_slider").fadeIn();
+        $("#total_product_in_slider").fadeOut();
+        <?php endif; if ($slider_type=='product'):?>
+        $("#total_product_in_slider").fadeIn();
         <?php endif; if ($slider_type=='disable'):?>
-        $("#total_movie_in_slider").fadeOut();
+        $("#total_product_in_slider").fadeOut();
         <?php endif;?>
         
     });
     $("#slider_type").change(function() {
         var slider_type = $("#slider_type option:selected").val();
         if (slider_type == 'image') {    
-            $("#total_movie_in_slider").fadeOut();
-        } else if (slider_type == 'movie') {
-            $("#total_movie_in_slider").fadeIn();
+            $("#total_product_in_slider").fadeOut();
+        } else if (slider_type == 'product') {
+            $("#total_product_in_slider").fadeIn();
         } else if (slider_type == 'disable') {    
-            $("#total_movie_in_slider").fadeOut();
+            $("#total_product_in_slider").fadeOut();
         }
     });
 </script>
