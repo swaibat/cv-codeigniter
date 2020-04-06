@@ -35,62 +35,7 @@ class Admin extends Admin_Core_Controller {
         $data['page_title']            = trans('admin_dashboard');
         $this->load->view('admin/index', $data);		
 			
-    }
-
-
-    //  country
-    function country($param1 = '', $param2 = ''){
-        if ($this->session->userdata('admin_is_login') != 1)
-            redirect(base_url(), 'refresh');
-        // start menu active/inactive section
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '2');
-        // end menu active/inactive section
-        
-        if ($param1 == 'add') {
-            $data['name']           = $this->input->post('name');
-            $data['description']    = $this->input->post('description');
-            $data['slug']           = url_title($this->input->post('name'), 'dash', TRUE);
-            $data['publication']    = $this->input->post('publication');          
-            
-            $this->db->insert('country', $data);
-            if($this->input->post('image_link')!=''){ 
-                $image_source           =   $this->input->post('image_link');
-                $save_to                =   'uploads/country/'.$insert_id.'.png';           
-                $this->common_model->grab_image($image_source,$save_to);
-            }
-            if(isset($_FILES['image']) && $_FILES['image']['name']!=''){
-                move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/country/'.$insert_id.'.png');
-            }
-            $this->session->set_flashdata('success', trans('add_success'));
-            redirect($this->agent->referrer());
-        }
-            
-        if ($param1 == 'update') {
-            $data['name']           = $this->input->post('name');
-            $data['description']    = $this->input->post('description');
-            $data['slug']           = url_title($this->input->post('name'), 'dash', TRUE);
-            $data['publication']    = $this->input->post('publication');
-
-            $this->db->where('country_id', $param2);
-            $this->db->update('country', $data);
-            if($this->input->post('image_link')!=''){
-                $image_source           =   $this->input->post('image_link');
-                $save_to                =   'uploads/country/'.$param2.'.png';           
-                $this->common_model->grab_image($image_source,$save_to);
-            }
-            if(isset($_FILES['image']) && $_FILES['image']['name']!=''){
-                move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/country/'.$param2.'.png');
-            }
-
-            $this->session->set_flashdata('success', trans('update_success'));
-            redirect($this->agent->referrer());
-        }        
-        $data['page_name']          = 'country_manage';
-        $data['page_title']         = trans('country_management');
-        $data['countries']          = $this->db->get('country')->result_array(); 
-        $this->load->view('admin/index', $data);
-    }
+	}
 
     // genre
     function genre($param1 = '', $param2 = ''){
@@ -2919,7 +2864,6 @@ class Admin extends Admin_Core_Controller {
             $response['actor']          = $this->common_model->get_star_ids_for_product_import('actor',$data['actor']);
             $response['director']       = $this->common_model->get_star_ids_for_product_import('director',$data['director']);
             $response['writer']         = $this->common_model->get_star_ids_for_product_import('writer',$data['writer']);
-            $response['country']        = $this->country_model->get_country_ids($data['country']);
             $response['genre']          = $this->genre_model->get_genre_ids($data['genre']);
             $response['rating']         = $data['rating'];
             $response['release']        = $data['release'];

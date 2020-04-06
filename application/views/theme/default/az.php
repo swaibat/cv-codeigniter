@@ -104,7 +104,6 @@
                             <td> <img class="thumb" src="<?php echo $this->common_model->get_Product_thumb_url($Products['Products_id']); ?>" alt="<?php echo $Products['title'];?>"> <a class="name" href="<?php echo base_url('watch/'.$Products['slug']).'.html';?>" title="<?php echo $Products['title'];?>"><?php echo $Products['title'];?></a> </td>
                             <td><?php echo date("Y",strtotime($Products['release']));?></td>
                             <td><?php echo ($Products['Product_quality'] =='' || $Products['Product_quality'] == NULL) ? $Products['Product_quality'] : 'HD';?></td>
-                            <td> <?php echo $this->country_model->generate_countries_anchor($Products['country']); ?></td>
                             <td> <?php echo $this->genre_model->generate_genres_anchor($Products['genre']); ?> </td>
                             <td><span class="imdb"><?php echo $Products['imdb_rating'];?></span></td>
                         </tr>

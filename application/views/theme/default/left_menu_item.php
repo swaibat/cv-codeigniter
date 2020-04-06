@@ -30,22 +30,6 @@
     </div>
   </li>
 <?php endif; ?>
-<?php if($country_to_primary_menu =='1'): ?>
-  <li class="dropdown"> 
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo trans('country'); ?> <span class="caret"></span></a>
-    <div class="dropdown-menu row col-lg-12 three-column-navbar" role="menu">
-      <?php $all_published_country= $this->country_model->all_published_country();
-        foreach ($all_published_country as $country):                                                
-      ?>
-      <div class="col-md-3">
-        <ul class="menu-item list-unstyled">
-          <li><a href="<?php echo base_url('country/'.$country->slug.'.html'); ?>"><?php echo $country->name; ?></a></li>
-        </ul>
-      </div>
-      <?php endforeach; ?>
-    </div>
-  </li>
-<?php endif; ?>
 <?php if($release_to_primary_menu =='1'): ?>
   <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo trans('release'); ?> <span class="caret"></span></a>
     <div class="dropdown-menu row col-lg-12 three-column-navbar" role="menu">

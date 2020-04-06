@@ -36,32 +36,6 @@
                 </li>
             </ul>
         </li>
-        <li class="treeview <?php if ($active_menu == 28 || $active_menu == 29 || $active_menu == 30) { echo " is-expanded "; } ?>">
-            <a href="#" class="app-menu__item" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-film" aria-hidden="true"></i>
-                <span class="app-menu__label"><?php echo trans('tv_series') ?></span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item <?php if ($active_menu == 29) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/tvseries_add/' ?>">
-                        <i class="app-menu__icon fa fa-plus" aria-hidden="true"></i>
-                        <?php echo trans('new_tv_series') ?></span>
-                    </a>
-                </li>
-                <li><a class="treeview-item <?php if ($active_menu == 30) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/tvseries/' ?>">
-                        <i class="app-menu__icon fa fa-list" aria-hidden="true"></i>
-                        <?php echo trans('all_tv_series') ?> </span>
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item <?php if ($active_menu == 28) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/tv_series_setting/' ?>">
-                        <i class="app-menu__icon fa fa-gear" aria-hidden="true"></i>
-                        <?php echo trans('setting') ?></span>
-                    </a>
-                </li>
-            </ul>
-        </li>
         <li>
             <a class="app-menu__item <?php if ($active_menu == 7) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/product_importer/' ?>">
                 <i class="app-menu__icon fa fa-search" aria-hidden="true"></i>
@@ -175,12 +149,6 @@
                     </a>
                 </li>
             </ul>
-        </li>
-        <li>
-            <a class="app-menu__item <?php if ($active_menu == 25) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/manage_star' ?>">
-                <i class="app-menu__icon fa fa-users"></i>
-                <span class="app-menu__label"><?php echo trans('actor_or_director') ?></span>
-            </a>
         </li>
         <li>
             <a class="app-menu__item <?php if ($active_menu == 15) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/manage_user' ?>">

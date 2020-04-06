@@ -139,16 +139,6 @@
                                                 <a href="<?php echo base_url().'star/'.$this->common_model->get_star_slug_by_id($star_id);?>"><?php echo $this->common_model->get_star_name_by_id($star_id);?></a>
                                             <?php endforeach; endif;?>
                                             </p>
-                                            <p> <strong><?php echo trans('country'); ?>: </strong>
-                                                <?php if($watch_Products->country !='' && $watch_Products->country !=NULL):
-                                                    $i = 0;
-                                                    $countries =explode(',', $watch_Products->country);                                                
-                                                    foreach ($countries as $country_id):
-                                                    if($i>0){ echo ',';} $i++;
-                                                    ?>
-                                                <a href="<?php echo $this->country_model->get_country_url_by_id($country_id);?>"><?php echo $this->country_model->get_country_name_by_id($country_id);?></a>
-                                            <?php endforeach; endif;?>
-                                            </p>
                                             <p><strong><?php echo trans('release'); ?>: </strong>
                                                 <?php echo $watch_Products->release;?>
                                             </p>
