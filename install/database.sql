@@ -1177,28 +1177,6 @@ CREATE TABLE IF NOT EXISTS `download_link` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `episodes`
---
-
-DROP TABLE IF EXISTS `episodes`;
-CREATE TABLE IF NOT EXISTS `episodes` (
-  `episodes_id` int(11) NOT NULL AUTO_INCREMENT,
-  `stream_key` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `products_id` int(11) DEFAULT NULL,
-  `seasons_id` int(11) DEFAULT NULL,
-  `episodes_name` varchar(250) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `file_source` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `source_type` varchar(250) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `file_url` varchar(500) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `order` int(50) NOT NULL DEFAULT 0,
-  `date_added` datetime NOT NULL DEFAULT '2019-01-01 00:00:00',
-  `last_ep_added` datetime NOT NULL DEFAULT '2019-01-01 00:00:00',
-  PRIMARY KEY (`episodes_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `genre`
 --
 

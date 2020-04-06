@@ -10,7 +10,7 @@
         <div class="overlay-div"></div>
         <div class="Product_quality">
             <span class="label label-primary">
-                <?php if($Products['is_tvseries']=='1'): echo $this->common_model->get_num_episodes_by_id($Products['Products_id']).' EPISODES'; else: echo $Products['Product_quality']; endif; ?>
+                <?php echo $Products['Product_quality'] ?>
             </span>
         </div>
         <div class="product-title">
