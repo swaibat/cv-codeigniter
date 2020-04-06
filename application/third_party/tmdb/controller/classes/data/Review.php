@@ -83,7 +83,7 @@ class Review {
     //------------------------------------------------------------------------------
 
     /** 
-     *  Get the JSON representation of the Movie
+     *  Get the JSON representation of the Product
      *
      *  @return string
      */

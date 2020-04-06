@@ -38,7 +38,7 @@ class Genre_model extends CI_Model {
     {
         $genre_id = $this->db->get_where('genre', array('slug' => $slug))->row()->genre_id;
         $this->db->where("find_in_set(".$genre_id.",genre) >",0);
-        $query = $this->db->get('videos');
+        $query = $this->db->get('Products');
         return $query->num_rows();
     }    
 
@@ -93,31 +93,31 @@ class Genre_model extends CI_Model {
     }
     
 
-   public function fetch_genre_video_by_slug($limit=16, $start=0, $slug) {
+   public function fetch_genre_Product_by_slug($limit=16, $start=0, $slug) {
         $genre_id   = $this->db->get_where('genre', array('slug' => $slug))->row()->genre_id;
-        $this->db->order_by('videos_id','DESC');
+        $this->db->order_by('Products_id','DESC');
         $this->db->where("find_in_set(".$genre_id.",genre) >",0);
         $this->db->limit($limit,$start);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
    }
 
    
-   public function fetch_genre_video_by_slug_record_count($slug)
+   public function fetch_genre_Product_by_slug_record_count($slug)
     {
         $genre_id = $this->db->get_where('genre', array('slug' => $slug))->row()->genre_id;
         $this->db->where("find_in_set(".$genre_id.",genre) >",0);
-        $query = $this->db->get('videos');        
+        $query = $this->db->get('Products');        
         return $query->num_rows();
     }
 
-    public function get_video_by_genre_id($genre_id='',$limit=12)
+    public function get_Product_by_genre_id($genre_id='',$limit=12)
     {
         //$genre_id = $this->db->get_where('genre', array('slug' => $slug))->row()->genre_id;
         $this->db->where("is_tvseries !=",'1');
         $this->db->where("find_in_set(".$genre_id.",genre) >",0);
         $this->db->limit($limit);
-        $this->db->order_by('videos_id',"desc");
-        $query = $this->db->get('videos');        
+        $this->db->order_by('Products_id',"desc");
+        $query = $this->db->get('Products');        
         return $query->result_array();
     }
 
@@ -127,8 +127,8 @@ class Genre_model extends CI_Model {
         $this->db->where("is_tvseries",'1');
         $this->db->where("find_in_set(".$genre_id.",genre) >",0);
         $this->db->limit($limit);
-        $this->db->order_by('videos_id',"desc");
-        $query = $this->db->get('videos');        
+        $this->db->order_by('Products_id',"desc");
+        $query = $this->db->get('Products');        
         return $query->result_array();
     }
 

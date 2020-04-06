@@ -1,4 +1,4 @@
-videojs.addLanguage("sk",{
+Productjs.addLanguage("sk",{
  "Audio Player": "Zvukový prehrávač",
  "Video Player": "Video prehrávač",
  "Play": "Prehrať",
@@ -33,7 +33,7 @@ videojs.addLanguage("sk",{
  "The media playback was aborted due to a corruption problem or because the media used features your browser did not support.": "Prehrávanie súboru bolo prerušené pre poškodené dáta, alebo súbor používa vlastnosti, ktoré váš prehliadač nepodporuje.",
  "No compatible source was found for this media.": "Nebol nájdený žiaden kompatibilný zdroj pre tento súbor.",
  "The media is encrypted and we do not have the keys to decrypt it.": "Súbor je zašifrovaný a nie je k dispozícii kľúč na rozšifrovanie.",
- "Play Video": "Prehrať video",
+ "Play Video": "Prehrať Product",
  "Close": "Zatvoriť",
  "Close Modal Dialog": "Zatvoriť modálne okno",
  "Modal Window": "Modálne okno",

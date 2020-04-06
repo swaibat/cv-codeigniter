@@ -1,4 +1,4 @@
-videojs.addLanguage("pl",{
+Productjs.addLanguage("pl",{
  "Play": "Odtwarzaj",
  "Pause": "Pauza",
  "Current Time": "Aktualny czas",

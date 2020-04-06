@@ -1,26 +1,26 @@
 <?php 
-  $movie_request_enable                  =   $this->db->get_where('config' , array('title' =>'movie_request_enable'))->row()->value;
-  if($movie_request_enable == '1'):
+  $product_request_enable                  =   $this->db->get_where('config' , array('title' =>'product_request_enable'))->row()->value;
+  if($product_request_enable == '1'):
     $recaptcha_enable                   =   $this->db->get_where('config' , array('title' =>'recaptcha_enable'))->row()->value;
     $requiest_success_message             = $this->session->flashdata('requiest_success');
     $requiest_error_message               = $this->session->flashdata('requiest_error');
 
  ?>
-<!-- movie requiest modal  -->
-  <div id="movieRequest" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<!-- product requiest modal  -->
+  <div id="productRequest" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
       <div class="modal-content p-0 b-0">
         <div class="panel report-panel panel-color panel-primary">
           <div class="panel-heading">
             <button type="button" class="close m-t-5" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 class="panel-title text-light"><?php echo trans('movie_request'); ?></h3>
+            <h3 class="panel-title text-light"><?php echo trans('product_request'); ?></h3>
           </div>
           <div class="modal-body">
             <?php if($requiest_success_message !=''): ?>
               <div class="alert alert-dsuccess"><?php echo $requiest_success_message; ?></div>
               <script>
                 $(document).ready(function() {
-                  $('#movieRequest').modal('show');
+                  $('#productRequest').modal('show');
                 });
               </script>
             <?php endif; ?>
@@ -29,11 +29,11 @@
               <div class="alert alert-danger"><?php echo $requiest_error_message; ?></div>
               <script>
                 $(document).ready(function() {
-                  $('#movieRequest').modal('show');
+                  $('#productRequest').modal('show');
                 });
               </script>
             <?php endif; ?>
-            <?php echo form_open(base_url('send_movie_request') , array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data', 'id' =>'report_form'));?>
+            <?php echo form_open(base_url('send_product_request') , array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data', 'id' =>'report_form'));?>
               
               <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo trans('name'); ?></label>
@@ -50,9 +50,9 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label"><?php echo trans('movie_name'); ?></label>
+                <label class="col-sm-3 control-label"><?php echo trans('product_name'); ?></label>
                 <div class="col-sm-9">
-                  <input name="movie_name" type="text" class="form-control" rows="4" placeholder="Movie Name"  required>
+                  <input name="product_name" type="text" class="form-control" rows="4" placeholder="Product Name"  required>
                 </div>
               </div>
 
@@ -82,7 +82,7 @@
       </div>
     </div>
   </div>
-  <!-- END movie requiest modal -->
+  <!-- END product requiest modal -->
 </form>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/parsleyjs/dist/parsley.min.js"></script>
 <script>

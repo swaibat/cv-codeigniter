@@ -75,19 +75,19 @@ class Subscription_model extends CI_Model {
       return $validity;
     }
 
-    function check_video_availability($slug=''){
+    function check_Product_availability($slug=''){
         $error = FALSE;
         if ($slug == '' || $slug==NULL)
             $error = TRUE;
 
-        $videos_exist = $this->common_model->videos_exist_by_slug($slug);
-        if (!$videos_exist )
+        $Products_exist = $this->common_model->Products_exist_by_slug($slug);
+        if (!$Products_exist )
             $error = TRUE;
         return $error;
     }
 
-    function videos_exist_by_slug($slug='') {
-        $rows = $this->db->get_where('videos', array('slug' => $slug,'publication'=>'1'))->num_rows();
+    function Products_exist_by_slug($slug='') {
+        $rows = $this->db->get_where('Products', array('slug' => $slug,'publication'=>'1'))->num_rows();
         if($rows >0){
           return TRUE;
         }
@@ -97,10 +97,10 @@ class Subscription_model extends CI_Model {
     }
 
 
-    function check_video_accessibility($videos_id=''){
+    function check_Product_accessibility($Products_id=''){
         $accessibility = "denied";        
         // free content can access by all
-        $is_paid = $this->db->get_where('videos',array('videos_id'=>$videos_id))->row()->is_paid;
+        $is_paid = $this->db->get_where('Products',array('Products_id'=>$Products_id))->row()->is_paid;
         if($is_paid =='0')
             $accessibility = "allowed";        
         if($is_paid =='1'):
@@ -112,7 +112,7 @@ class Subscription_model extends CI_Model {
                 $accessibility = "allowed";
             endif;
         endif;
-        // admin can access all movie
+        // admin can access all product
         if ($this->session->userdata('admin_is_login') == 1)
             $accessibility = "allowed";
         return $accessibility;

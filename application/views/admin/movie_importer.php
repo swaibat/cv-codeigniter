@@ -3,20 +3,20 @@
         <div class="col-sm-12">
             <div class="panel panel-border panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?php echo trans('movie_importer') ?></h3>
+                    <h3 class="panel-title"><?php echo trans('product_importer') ?></h3>
                 </div>
-                <?php echo form_open(base_url() . 'admin/movie_importer/', array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data')); ?>
+                <?php echo form_open(base_url() . 'admin/product_importer/', array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data')); ?>
                 <div class="panel-body">
                     <div class="col-lg-6 offset-lg-3">
                         <div class="input-group" style="margin-top: 50px;margin-bottom: 10px;">
                             <select name="to" class="form-control" style="max-width: 120px;">
-                                <option value="movie" <?php if (isset($to) && $to == 'movie') : echo "selected";
-                                                        endif; ?>><?php echo trans('movie') ?></option>
+                                <option value="product" <?php if (isset($to) && $to == 'product') : echo "selected";
+                                                        endif; ?>><?php echo trans('product') ?></option>
                                 <option value="tv" <?php if (isset($to) && $to == 'tv') : echo "selected";
                                                     endif; ?>><?php echo trans('tv_series') ?></option>
                             </select>
                             <input type="text" class="form-control" id="" name="title" value="<?php if (isset($title) && $title != '') : echo $title;
-                                                                                                endif; ?>" placeholder="<?php echo trans('enter_movie_tvshow_title_here') ?>" required="">
+                                                                                                endif; ?>" placeholder="<?php echo trans('enter_product_tvshow_title_here') ?>" required="">
                             <div class="input-group-append" id="button-area">
                                 <button type="submit" class="btn btn-outline-primary" id="import_btn" type="button" id="button-addon2"><?php echo trans('search') ?></button>
                             </div>
@@ -35,7 +35,7 @@
     </div>
 </div>
 <br>
-<?php if (isset($movies)) : ?>
+<?php if (isset($products)) : ?>
     <!-- search result section -->
     <div class="card">
         <div class="row">
@@ -57,11 +57,11 @@
                             </thead>
                             <tbody>
                                 <?php
-                                    if (count($movies) > 0) :
+                                    if (count($products) > 0) :
                                         $sl = 1;
                                         $i = 0;
-                                        foreach ($movies as $videos) :
-                                            $data = json_decode($movies[$i], true);
+                                        foreach ($products as $Products) :
+                                            $data = json_decode($products[$i], true);
                                             $i++;
                                             ?>
                                         <tr id='row_2'>
@@ -78,7 +78,7 @@
                                                                     endif; ?></strong></td>
                                             <td><?php echo $data['overview']; ?></td>
                                             <td>
-                                                <div id="<?php echo 'div_' . $data['id']; ?>"><a class="btn btn btn-outline-primary" href="javascript:void(0);" id="<?php echo 'btn_' . $data['id']; ?>" onclick="import_movie(<?php echo $data['id']; ?>)"><?php echo trans('import') ?></a>
+                                                <div id="<?php echo 'div_' . $data['id']; ?>"><a class="btn btn btn-outline-primary" href="javascript:void(0);" id="<?php echo 'btn_' . $data['id']; ?>" onclick="import_product(<?php echo $data['id']; ?>)"><?php echo trans('import') ?></a>
                                             </td>
                                         </tr>
                                     <?php
@@ -98,11 +98,11 @@
     </div>
     <!-- Ajax import -->
     <script type="text/javascript">
-        function import_movie(tmdb_id) {
+        function import_product(tmdb_id) {
             var base_url = '<?php echo base_url(); ?>'
             url = base_url + 'admin/complete_import/'
             var to = '<?php if ($to == 'tv') : echo "tv";
-                            else : echo 'movie';
+                            else : echo 'product';
                             endif; ?>'
             //$("#btn_"+tmdb_id).text('Importing..');       
             swal({
@@ -144,10 +144,10 @@
                             })
                             .fail(function(response) {
                                 swal('Oops...', 'Something went wrong with ajax !', 'error');
-                                $("#div_" + tmdb_id).html('<a class="btn btn btn-outline-primary" href="javascript:void(0);" id="btn_' + tmdb_id + '" onclick="import_movie(' + tmdb_id + ')">Try Again</a>');
+                                $("#div_" + tmdb_id).html('<a class="btn btn btn-outline-primary" href="javascript:void(0);" id="btn_' + tmdb_id + '" onclick="import_product(' + tmdb_id + ')">Try Again</a>');
                             })
                     } else {
-                        $("#div_" + tmdb_id).html('<a class="btn btn btn-outline-primary" href="javascript:void(0);" id="btn_' + tmdb_id + '" onclick="import_movie(' + tmdb_id + ')">Import</a>');
+                        $("#div_" + tmdb_id).html('<a class="btn btn btn-outline-primary" href="javascript:void(0);" id="btn_' + tmdb_id + '" onclick="import_product(' + tmdb_id + ')">Import</a>');
                     }
                 })
         }

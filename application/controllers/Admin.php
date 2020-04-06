@@ -188,9 +188,9 @@ class Admin extends Admin_Core_Controller {
             $this->db->where('title' , 'slider_bullet');
             $this->db->update('config' , $data);
 
-            if($slider_type=='movie'){                
-                $data['value'] =   $this->input->post('total_movie_in_slider');
-                $this->db->where('title' , 'total_movie_in_slider');
+            if($slider_type=='product'){                
+                $data['value'] =   $this->input->post('total_product_in_slider');
+                $this->db->where('title' , 'total_product_in_slider');
                 $this->db->update('config' , $data);
             }
             $this->session->set_flashdata('success', trans('update_success'));
@@ -215,8 +215,8 @@ class Admin extends Admin_Core_Controller {
             $data['action_btn_text']    =   $this->input->post('action_btn_text');
             $data['image_link']         =   base_url().'uploads/no_image.jpg';
 
-            if($data['action_type'] == 'movie'):
-                $data['action_id']        =   $this->input->post('movie_id');
+            if($data['action_type'] == 'product'):
+                $data['action_id']        =   $this->input->post('product_id');
             elseif($data['action_type'] == 'tvseries'):
                 $data['action_id']        =   $this->input->post('tvseries_id');
             elseif($data['action_type'] == 'external_browser' || $data['action_type'] == 'webview'):
@@ -251,8 +251,8 @@ class Admin extends Admin_Core_Controller {
             $data['action_type']        =   $this->input->post('action_type');
             $data['action_btn_text']    =   $this->input->post('action_btn_text');
 
-            if($data['action_type'] == 'movie'):
-                $data['action_id']        =   $this->input->post('movie_id');
+            if($data['action_type'] == 'product'):
+                $data['action_id']        =   $this->input->post('product_id');
             elseif($data['action_type'] == 'tvseries'):
                 $data['action_id']        =   $this->input->post('tvseries_id');
             elseif($data['action_type'] == 'external_browser' || $data['action_type'] == 'webview'):
@@ -282,21 +282,21 @@ class Admin extends Admin_Core_Controller {
         $data['sliders']        = $this->db->get('slider')->result_array(); 
         $this->load->view('admin/index', $data);
     }
-    // add videos or movies 
-    function videos_add(){
+    // add products or products 
+    function products_add(){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
         // start menu active/inactive section
         $this->session->unset_userdata('active_menu');
         $this->session->set_userdata('active_menu', '6');
         // end menu active/inactive section
-        $data['page_name']      = 'videos_add';
-        $data['page_title']     = trans('videos_add'); 
+        $data['page_name']      = 'products_add';
+        $data['page_title']     = trans('products_add'); 
         $this->load->view('admin/index', $data);
     }
 
-    // edit videos or movies 
-    function videos_edit($param1='',$param2=''){
+    // edit products or products 
+    function products_edit($param1='',$param2=''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
             /* start menu active/inactive section*/
@@ -305,13 +305,13 @@ class Admin extends Admin_Core_Controller {
             /* end menu active/inactive section*/
             $data['param1']         = $param1;
             $data['param2']         = $param2;
-            $data['page_name']      = 'videos_edit';
-            $data['page_title']     = trans('video_edit').' | '.$this->common_model->get_title_by_videos_id($param1);
+            $data['page_name']      = 'products_edit';
+            $data['page_title']     = trans('product_edit').' | '.$this->common_model->get_title_by_products_id($param1);
             $this->load->view('admin/index', $data);
     }
 
-    // add,edit videos or movies 
-    function videos($param1 = '', $param2 = ''){
+    // add,edit products or products 
+    function products($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
         // active menu session
@@ -328,7 +328,7 @@ class Admin extends Admin_Core_Controller {
             $writers                        = $this->input->post('writer');            
             $countries                      = $this->input->post('country');            
             $genres                         = $this->input->post('genre');
-            $video_types                    = $this->input->post('video_type');
+            $product_types                    = $this->input->post('product_type');
             if($actors !='' && $actors !=NULL){
                 $data['stars']              = implode(',',$actors);
             }
@@ -350,7 +350,6 @@ class Admin extends Admin_Core_Controller {
             
             
             $data['runtime']            = $this->input->post('runtime');
-            $data['video_quality']      = $this->input->post('video_quality');
             $data['publication']        = '0';
             if(isset($_POST['publication'])) {
                 $data['publication']    = '1';
@@ -365,16 +364,16 @@ class Admin extends Admin_Core_Controller {
             $data['meta_description']   = $this->input->post('meta_description');
             $data['tags']               = $this->input->post('tags');       
                         
-            $this->db->insert('videos', $data);
+            $this->db->insert('products', $data);
             $insert_id = $this->db->insert_id();
             $slug                       = url_title($this->input->post('slug'), 'dash', TRUE);
-            $slug_num                   = $this->common_model->slug_num('videos',$slug);
+            $slug_num                   = $this->common_model->slug_num('products',$slug);
             if($slug_num > 0){
                 $slug= $slug.'-'.$insert_id;
             }
             $data_update['slug']        = $slug;            
             if(isset($_FILES['thumbnail']) && $_FILES['thumbnail']['name']!=''){
-                move_uploaded_file($_FILES['thumbnail']['tmp_name'], 'uploads/video_thumb/'.$insert_id.'.jpg');                
+                move_uploaded_file($_FILES['thumbnail']['tmp_name'], 'uploads/product_thumb/'.$insert_id.'.jpg');                
             }
 
             if(isset($_FILES['poster_file']) && $_FILES['poster_file']['name']!=''){
@@ -383,7 +382,7 @@ class Admin extends Admin_Core_Controller {
 
             if($this->input->post('thumb_link')!=''){ 
                 $image_source           =   $this->input->post('thumb_link');
-                $save_to                =   'uploads/video_thumb/'.$insert_id.'.jpg';           
+                $save_to                =   'uploads/product_thumb/'.$insert_id.'.jpg';           
                 $this->common_model->grab_image($image_source,$save_to);
             }
 
@@ -393,8 +392,8 @@ class Admin extends Admin_Core_Controller {
                 $this->common_model->grab_image($image_source,$save_to);
             }
 
-            $this->db->where('videos_id', $insert_id);
-            $this->db->update('videos', $data_update);
+            $this->db->where('products_id', $insert_id);
+            $this->db->update('products', $data_update);
             
             // email newslater
             if(isset($_POST['email_notify'])) {
@@ -420,7 +419,7 @@ class Admin extends Admin_Core_Controller {
             $writers                        = $this->input->post('writer');            
             $countries                      = $this->input->post('country');            
             $genres                         = $this->input->post('genre');
-            $video_types                    = $this->input->post('video_type');
+            $product_types                    = $this->input->post('product_type');
             if($actors !='' && $actors !=NULL){
                 $data['stars']              = implode(',',$actors);
             }
@@ -440,7 +439,7 @@ class Admin extends Admin_Core_Controller {
             $data['imdb_rating']        = $this->input->post('rating');
             $data['release']            = $this->input->post('release');            
             $data['runtime']            = $this->input->post('runtime');
-            $data['video_quality']      = $this->input->post('video_quality');
+            $data['product_quality']      = $this->input->post('product_quality');
             $publication                = $this->input->post('publication');
             if($publication =='on'){
                 $data['publication'] = '1';
@@ -458,18 +457,18 @@ class Admin extends Admin_Core_Controller {
             $data['focus_keyword']      = $this->input->post('focus_keyword');
             $data['meta_description']   = $this->input->post('meta_description');
             $data['tags']               = $this->input->post('tags');
-            $this->db->where('videos_id', $param2);
-            $this->db->update('videos', $data);
-            $this->db->where('videos_id', $param2);
+            $this->db->where('products_id', $param2);
+            $this->db->update('products', $data);
+            $this->db->where('products_id', $param2);
 
             $slug                       = url_title($this->input->post('slug'), 'dash', TRUE);
-            $slug_num                   = $this->common_model->slug_num('videos',$slug);
+            $slug_num                   = $this->common_model->slug_num('products',$slug);
             if($slug_num > 1){
                 $slug= $slug.'-'.$param2;
             }
             $data_update['slug']               = $slug;            
             if(isset($_FILES['thumbnail']) && $_FILES['thumbnail']['name']!=''){
-                move_uploaded_file($_FILES['thumbnail']['tmp_name'], 'uploads/video_thumb/'.$param2.'.jpg');                
+                move_uploaded_file($_FILES['thumbnail']['tmp_name'], 'uploads/product_thumb/'.$param2.'.jpg');                
             }
 
             if(isset($_FILES['poster_file']) && $_FILES['poster_file']['name']!=''){
@@ -478,7 +477,7 @@ class Admin extends Admin_Core_Controller {
 
             if($this->input->post('thumb_link')!=''){ 
                 $image_source =$this->input->post('thumb_link');
-                $save_to = 'uploads/video_thumb/'.$param2.'.jpg';           
+                $save_to = 'uploads/product_thumb/'.$param2.'.jpg';           
                 $this->common_model->grab_image($image_source,$save_to);
             }
 
@@ -488,8 +487,8 @@ class Admin extends Admin_Core_Controller {
                 $this->common_model->grab_image($image_source,$save_to);
             }
 
-            $this->db->where('videos_id', $param2);
-            $this->db->update('videos', $data_update);
+            $this->db->where('products_id', $param2);
+            $this->db->update('products', $data_update);
             // email newslater
             if(isset($_POST['email_notify'])) {
                 $this->load->model('email_model');
@@ -501,7 +500,7 @@ class Admin extends Admin_Core_Controller {
                 $this->notify_model->send_push_notification($param2);
             }
             $this->session->set_flashdata('success', trans('update_success'));
-            redirect(base_url() . 'admin/videos_edit/'.$param2, 'refresh');
+            redirect(base_url() . 'admin/products_edit/'.$param2, 'refresh');
             //redirect($this->agent->referrer());
         }
         // filter
@@ -527,10 +526,10 @@ class Admin extends Admin_Core_Controller {
             $data['publication'] = $publication;            
 
         }
-        $total_rows = $this->common_model->get_videos_num_rows($filter);
+        $total_rows = $this->common_model->get_products_num_rows($filter);
         // page
         $config                     = $this->common_model->pagination();
-        $config["base_url"]         = base_url() . "admin/videos?".$search_string;
+        $config["base_url"]         = base_url() . "admin/products?".$search_string;
         $config["total_rows"]       = $total_rows;
         $config["per_page"]         = 10;
         $config["uri_segment"]      = 3;          
@@ -539,17 +538,17 @@ class Admin extends Admin_Core_Controller {
         $this->pagination->initialize($config);
         $data['last_row_num']       = $this->uri->segment(3);
         $page                       = $this->input->get('per_page');//($this->uri->segment(3)) ? $this->uri->segment(3) : 0;   
-        $data["videos"]             = $this->common_model->get_videos($filter,$config["per_page"], $page);
+        $data["products"]             = $this->common_model->get_products($filter,$config["per_page"], $page);
         $data["links"]              = $this->pagination->create_links();
         $data['total_rows']         = $config["total_rows"];
-        $data['page_name']          = 'videos_manage';
-        $data['page_title']         = trans('videos_manage');             
+        $data['page_name']          = 'products_manage';
+        $data['page_title']         = trans('products_manage');             
         $this->load->view('admin/index', $data);
     }
 
 
 
-    // add videos or movies 
+    // add products or products 
     function tvseries_add(){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
@@ -562,7 +561,7 @@ class Admin extends Admin_Core_Controller {
         $this->load->view('admin/index', $data);
     }
 
-    // edit videos or movies 
+    // edit products or products 
     function tvseries_edit($param1='',$param2=''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
@@ -579,7 +578,7 @@ class Admin extends Admin_Core_Controller {
             $this->load->view('admin/index', $data);
     }
 
-     // add,edit videos or movies 
+     // add,edit products or products 
     function tvseries($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
@@ -598,7 +597,7 @@ class Admin extends Admin_Core_Controller {
             $writers                    = $this->input->post('writer');            
             $countries                  = $this->input->post('country');            
             $genres                     = $this->input->post('genre');
-            $video_types                = $this->input->post('video_type');
+            $product_types                = $this->input->post('product_type');
             if($actors !='' && $actors !=NULL){
                 $data['stars']              = implode(',',$actors);
             }
@@ -618,7 +617,7 @@ class Admin extends Admin_Core_Controller {
             $data['release']            = $this->input->post('release');
             $data['is_tvseries']        = '1';
             $data['runtime']            = $this->input->post('runtime');
-            $data['video_quality']      = $this->input->post('video_quality');
+            $data['product_quality']      = $this->input->post('product_quality');
             $data['publication']        = '0';
             if(isset($_POST['publication'])) {
                 $data['publication']    = '1';
@@ -632,16 +631,16 @@ class Admin extends Admin_Core_Controller {
             $data['meta_description']   = $this->input->post('meta_description');
             $data['tags']               = $this->input->post('tags');       
                         
-            $this->db->insert('videos', $data);
+            $this->db->insert('products', $data);
             $insert_id = $this->db->insert_id();
             $slug                       = url_title($this->input->post('slug'), 'dash', TRUE);
-            $slug_num                   = $this->common_model->slug_num('videos',$slug);
+            $slug_num                   = $this->common_model->slug_num('products',$slug);
             if($slug_num > 0){
                 $slug= $slug.'-'.$insert_id;
             }
             $data_update['slug']               = $slug;            
             if(isset($_FILES['thumbnail']) && $_FILES['thumbnail']['name']!=''){
-                move_uploaded_file($_FILES['thumbnail']['tmp_name'], 'uploads/video_thumb/'.$insert_id.'.jpg');                
+                move_uploaded_file($_FILES['thumbnail']['tmp_name'], 'uploads/product_thumb/'.$insert_id.'.jpg');                
             }
 
             if(isset($_FILES['poster_file']) && $_FILES['poster_file']['name']!=''){
@@ -650,7 +649,7 @@ class Admin extends Admin_Core_Controller {
 
             if($this->input->post('thumb_link')!=''){ 
                 $image_source =$this->input->post('thumb_link');
-                $save_to = 'uploads/video_thumb/'.$insert_id.'.jpg';           
+                $save_to = 'uploads/product_thumb/'.$insert_id.'.jpg';           
                 $this->common_model->grab_image($image_source,$save_to);
             }
 
@@ -660,8 +659,8 @@ class Admin extends Admin_Core_Controller {
                 $this->common_model->grab_image($image_source,$save_to);
             }
 
-            $this->db->where('videos_id', $insert_id);
-            $this->db->update('videos', $data_update);
+            $this->db->where('products_id', $insert_id);
+            $this->db->update('products', $data_update);
             // email newslater
             if(isset($_POST['email_notify'])) {
                 $this->load->model('email_model');
@@ -686,7 +685,7 @@ class Admin extends Admin_Core_Controller {
             $writers                    = $this->input->post('writer');            
             $countries                  = $this->input->post('country');            
             $genres                     = $this->input->post('genre');
-            $video_types                = $this->input->post('video_type');
+            $product_types                = $this->input->post('product_type');
             if($actors !='' && $actors !=NULL){
                 $data['stars']              = implode(',',$actors);
             }
@@ -706,7 +705,7 @@ class Admin extends Admin_Core_Controller {
             $data['release']            = $this->input->post('release');
             $data['is_tvseries']        = '1';
             $data['runtime']            = $this->input->post('runtime');
-            $data['video_quality']      = $this->input->post('video_quality');
+            $data['product_quality']      = $this->input->post('product_quality');
             $publication = $this->input->post('publication');
             if($publication =='on'){
                 $data['publication'] = '1';
@@ -723,18 +722,18 @@ class Admin extends Admin_Core_Controller {
             $data['meta_description']   = $this->input->post('meta_description');
             $data['tags']               = $this->input->post('tags');
             //var_dump($data);
-            $this->db->where('videos_id', $param2);
-            $this->db->update('videos', $data);
-            $this->db->where('videos_id', $param2);
+            $this->db->where('products_id', $param2);
+            $this->db->update('products', $data);
+            $this->db->where('products_id', $param2);
 
             $slug                       = url_title($this->input->post('slug'), 'dash', TRUE);
-            $slug_num                   = $this->common_model->slug_num('videos',$slug);
+            $slug_num                   = $this->common_model->slug_num('products',$slug);
             if($slug_num > 1){
                 $slug= $slug.'-'.$param2;
             }
             $data_update['slug']               = $slug;            
             if(isset($_FILES['thumbnail']) && $_FILES['thumbnail']['name']!=''){
-                move_uploaded_file($_FILES['thumbnail']['tmp_name'], 'uploads/video_thumb/'.$param2.'.jpg');                
+                move_uploaded_file($_FILES['thumbnail']['tmp_name'], 'uploads/product_thumb/'.$param2.'.jpg');                
             }
 
             if(isset($_FILES['poster_file']) && $_FILES['poster_file']['name']!=''){
@@ -743,7 +742,7 @@ class Admin extends Admin_Core_Controller {
 
             if($this->input->post('thumb_link')!=''){ 
                 $image_source =$this->input->post('thumb_link');
-                $save_to = 'uploads/video_thumb/'.$param2.'.jpg';           
+                $save_to = 'uploads/product_thumb/'.$param2.'.jpg';           
                 //$this->common_model->grab_image($image_source,$save_to);
                 $cron_data['type']       = "image";       
                 $cron_data['action']     = "download";       
@@ -763,8 +762,8 @@ class Admin extends Admin_Core_Controller {
                 // $this->db->insert('cron',$cron_data);
             }
 
-            $this->db->where('videos_id', $param2);
-            $this->db->update('videos', $data_update);
+            $this->db->where('products_id', $param2);
+            $this->db->update('products', $data_update);
             // email newslater
             if(isset($_POST['email_notify'])) {
                 $this->load->model('email_model');
@@ -803,7 +802,7 @@ class Admin extends Admin_Core_Controller {
             $data['publication'] = $publication;            
 
         }
-        $total_rows = $this->common_model->get_videos_num_rows($filter);
+        $total_rows = $this->common_model->get_products_num_rows($filter);
         //var_dump($total_rows,$filter);
         // page
         //$config                         =   array();
@@ -819,7 +818,7 @@ class Admin extends Admin_Core_Controller {
         $this->pagination->initialize($config);
         $data['last_row_num']           =   $this->uri->segment(3);
         $page                           =   $this->input->get('per_page');//($this->uri->segment(3)) ? $this->uri->segment(3) : 0;   
-        $data["videos"]                 =   $this->common_model->get_videos($filter,10, $page);
+        $data["products"]                 =   $this->common_model->get_products($filter,10, $page);
         $data["links"]                  =   $this->pagination->create_links();
         //var_dump($data["links"]);
         $data['total_rows']             =   $total_rows;
@@ -837,26 +836,26 @@ class Admin extends Admin_Core_Controller {
             $this->session->set_userdata('active_menu', '30');
             /* end menu active/inactive section*/
         if ($param1 == 'add') {            
-            $data['videos_id']         = $this->input->post('videos_id');
+            $data['products_id']         = $this->input->post('products_id');
             $data['seasons_name']      = $this->input->post('seasons_name');            
             $data['order']             = $this->input->post('order');            
             
             $this->db->insert('seasons', $data);
             $this->session->set_flashdata('success', trans('add_success'));
-            redirect(base_url() . 'admin/seasons_manage/'.$data['videos_id'], 'refresh');
+            redirect(base_url() . 'admin/seasons_manage/'.$data['products_id'], 'refresh');
         }
         if ($param1 == 'update') {
-            $data['videos_id']         = $this->input->post('videos_id');
+            $data['products_id']         = $this->input->post('products_id');
             $data['seasons_name']      = $this->input->post('seasons_name');
             $data['order']             = $this->input->post('order'); 
             
             $this->db->where('seasons_id', $param2);
             $this->db->update('seasons', $data);
             $this->session->set_flashdata('success', trans('update_success'));
-            redirect(base_url() . 'admin/seasons_manage/'.$data['videos_id'], 'refresh');
+            redirect(base_url() . 'admin/seasons_manage/'.$data['products_id'], 'refresh');
         }
         if ($param1 == 'change_order') {
-            $videos_id           = $this->input->post('videos_id');
+            $products_id           = $this->input->post('products_id');
             $seasons_ids         = $this->input->post('seasons_id');
             $orders              = $this->input->post('order');
             $i=0;
@@ -866,13 +865,13 @@ class Admin extends Admin_Core_Controller {
                 $this->db->update('seasons', $data);
             endfor;
             $this->session->set_flashdata('success', trans('update_success'));
-            redirect(base_url() . 'admin/seasons_manage/'.$videos_id, 'refresh');
+            redirect(base_url() . 'admin/seasons_manage/'.$products_id, 'refresh');
         }
         $data['param1']         = $param1;
         $data['param2']         = $param2;
-        $data['slug']           = $this->common_model->get_slug_by_videos_id($param1);
+        $data['slug']           = $this->common_model->get_slug_by_products_id($param1);
         $data['page_name']      = 'seasons_manage';
-        $data['page_title']     = $this->common_model->get_title_by_videos_id($param1);
+        $data['page_title']     = $this->common_model->get_title_by_products_id($param1);
         $this->load->view('admin/index', $data);
     }
 
@@ -885,7 +884,7 @@ class Admin extends Admin_Core_Controller {
         $this->session->set_userdata('active_menu', '30');
         /* end menu active/inactive section*/
         if ($param1 == 'change_order'):
-            $videos_id           = $this->input->post('videos_id');
+            $products_id           = $this->input->post('products_id');
             $episodes_ids        = $this->input->post('episodes_id');
             $orders              = $this->input->post('order');
             $i=0;
@@ -900,15 +899,15 @@ class Admin extends Admin_Core_Controller {
             $data['param1']         = $param1;
             $data['param2']         = $param2;
             $data['page_name']      = 'episode_edit';
-            $data['page_title']     = trans('edit_episode').' for '.$this->common_model->get_title_by_videos_id($param1);
+            $data['page_title']     = trans('edit_episode').' for '.$this->common_model->get_title_by_products_id($param1);
             $data['episode_info']   = $this->common_model->get_single_episode_details_by_id($param2);
             $this->load->view('admin/index', $data);
         else:
             $data['param1']         = $param1;
             $data['param2']         = $param2;
-            $data['slug']           = $this->common_model->get_slug_by_videos_id($param1);
+            $data['slug']           = $this->common_model->get_slug_by_products_id($param1);
             $data['page_name']      = 'episodes_manage';
-            $data['page_title']     = trans('episodes_for').' '.$this->common_model->get_title_by_videos_id($param1).' '.$this->common_model->get__seasons_name_by_id($param2);
+            $data['page_title']     = trans('episodes_for').' '.$this->common_model->get_title_by_products_id($param1).' '.$this->common_model->get__seasons_name_by_id($param2);
             $this->load->view('admin/index', $data);
         endif;
     }
@@ -924,43 +923,43 @@ class Admin extends Admin_Core_Controller {
         $this->session->set_userdata('active_menu', '8');
         /* end menu active/inactive section*/
         if ($param1 == 'update') {
-            $video_id = $param2;
+            $product_id = $param2;
             $file_type= 'upload';
-            $video_file_type    = $this->input->post('video_file_type');
-            $video_file         = $this->input->post('video_file');
+            $product_file_type    = $this->input->post('product_file_type');
+            $product_file         = $this->input->post('product_file');
             $link_name          = $this->input->post('link_name');
             $link               = $this->input->post('link');            
-            $this->db->where('videos_id', $video_id);
-            $this->db->delete('video_file');
-            for($i=0;$i<sizeof($video_file_type);$i++){                
-                $file_data['videos_id']     = $video_id;
-                $file_data['file_source']   = $video_file_type[$i];
+            $this->db->where('products_id', $product_id);
+            $this->db->delete('product_file');
+            for($i=0;$i<sizeof($product_file_type);$i++){                
+                $file_data['products_id']     = $product_id;
+                $file_data['file_source']   = $product_file_type[$i];
                 $file_data['source_type']   = 'link';
-                if($video_file_type[$i]     == 'upload'){
-                   $file_data['source_type'] = $this->common_model->get_extension($video_file[$i]);
-                   copy('uploads/temp/'.$video_file[$i], 'uploads/videos/'.$video_file[$i]);
+                if($product_file_type[$i]     == 'upload'){
+                   $file_data['source_type'] = $this->common_model->get_extension($product_file[$i]);
+                   copy('uploads/temp/'.$product_file[$i], 'uploads/products/'.$product_file[$i]);
                 }
-                $file_data['file_url'] = $video_file[$i];
-                $this->db->insert('video_file', $file_data);
+                $file_data['file_url'] = $product_file[$i];
+                $this->db->insert('product_file', $file_data);
                 //var_dump($file_data);
             }
-            $this->db->where('videos_id', $video_id);
+            $this->db->where('products_id', $product_id);
             $this->db->delete('download_link');
             for($i=0;$i<sizeof($link);$i++){
-                $download_data['videos_id'] = $video_id;
+                $download_data['products_id'] = $product_id;
                 $download_data['link_name'] = $link_name[$i];
                 $download_data['link']      = $link[$i];
             }
         }
         if ($param1 == 'change_order'):
-            $videos_id           = $this->input->post('videos_id');
-            $video_file_ids      = $this->input->post('video_file_id');
+            $products_id           = $this->input->post('products_id');
+            $product_file_ids      = $this->input->post('product_file_id');
             $orders              = $this->input->post('order');
             $i=0;
             for($i=0; $i<sizeof($orders); $i++):
                 $data['order'] = $orders[$i];
-                $this->db->where('video_file_id', $video_file_ids[$i]);
-                $this->db->update('video_file', $data);
+                $this->db->where('product_file_id', $product_file_ids[$i]);
+                $this->db->update('product_file', $data);
             endfor;
             $this->session->set_flashdata('success', trans('update_success'));
             redirect($this->agent->referrer());
@@ -968,16 +967,16 @@ class Admin extends Admin_Core_Controller {
         if ($param1 == 'edit'):
             $data['param1']         = $param1;
             $data['param2']         = $param2;
-            $data['page_name']      = 'video_file_edit';
-            $data['page_title']     = trans('edit_video_file');
-            $data['video_file_info']= $this->common_model->get_single_video_file_details_by_id($param2);
+            $data['page_name']      = 'product_file_edit';
+            $data['page_title']     = trans('edit_product_file');
+            $data['product_file_info']= $this->common_model->get_single_product_file_details_by_id($param2);
             $this->load->view('admin/index', $data);
         else:
             $data['param1']         = $param1;
             $data['param2']         = $param2;
-            $data['slug']           = $this->common_model->get_slug_by_videos_id($param1);
+            $data['slug']           = $this->common_model->get_slug_by_products_id($param1);
             $data['page_name']      = 'file_and_download';
-            $data['page_title']     = trans('file_and_download').' | '.$this->common_model->get_title_by_videos_id($param1);
+            $data['page_title']     = trans('file_and_download').' | '.$this->common_model->get_title_by_products_id($param1);
             $this->load->view('admin/index', $data);
         endif;
     }
@@ -986,8 +985,8 @@ class Admin extends Admin_Core_Controller {
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
 
-        $video_file_id              = $this->input->post('video_file_id');
-        $videos_id                  = $this->input->post('videos_id');
+        $product_file_id              = $this->input->post('product_file_id');
+        $products_id                  = $this->input->post('products_id');
         $language                   = $this->input->post('language');
         $srclang                    = $this->common_model->get_srclang($language);
         $kind                       = $this->input->post('kind');
@@ -999,7 +998,7 @@ class Admin extends Admin_Core_Controller {
             $ext = $this->common_model->get_extension($_FILES['vtt_file']['name']);
             if($ext =='vtt')
                 $is_subtitle        = TRUE;
-            $subtitle_path          = 'uploads/subtitles/'.$videos_id.'_'.$video_file_id.'_'.$this->generate_random_string().'.vtt';
+            $subtitle_path          = 'uploads/subtitles/'.$products_id.'_'.$product_file_id.'_'.$this->generate_random_string().'.vtt';
             move_uploaded_file($_FILES['vtt_file']['tmp_name'], $subtitle_path);
             $data['src']            = base_url().$subtitle_path;                               
         }else if(isset($vtt_url) && $vtt_url !=''){
@@ -1007,17 +1006,17 @@ class Admin extends Admin_Core_Controller {
             $is_subtitle            = TRUE;
         }
         if($is_subtitle){          
-            $data['video_file_id']  = $video_file_id;
-            $data['videos_id']      = $videos_id;
+            $data['product_file_id']  = $product_file_id;
+            $data['products_id']      = $products_id;
             $data['language']       = $language;
             $data['kind']           = $kind;
             $data['srclang']        = $srclang;
             $this->db->insert('subtitle', $data);
             $this->session->set_flashdata('success', trans('add_success'));
-            redirect(base_url() . 'admin/file_and_download/'.$videos_id, 'refresh'); 
+            redirect(base_url() . 'admin/file_and_download/'.$products_id, 'refresh'); 
         }else{
             $this->session->set_flashdata('error', trans('vtt_support_only'));
-            redirect(base_url() . 'admin/file_and_download/'.$videos_id, 'refresh'); 
+            redirect(base_url() . 'admin/file_and_download/'.$products_id, 'refresh'); 
         }
     }
 
@@ -1027,7 +1026,7 @@ class Admin extends Admin_Core_Controller {
             redirect(base_url(), 'refresh');
 
         $episodes_id                = $this->input->post('episodes_id');
-        $videos_id                  = $this->input->post('videos_id');
+        $products_id                  = $this->input->post('products_id');
         $seasons_id                 = $this->input->post('seasons_id');
         $language                   = $this->input->post('language');
         $srclang                    = $this->common_model->get_srclang($language);
@@ -1040,7 +1039,7 @@ class Admin extends Admin_Core_Controller {
             $ext = $this->common_model->get_extension($_FILES['vtt_file']['name']);
             if($ext =='vtt')
                 $is_subtitle        = TRUE;
-            $subtitle_path          = 'uploads/subtitles/'.$videos_id.'_'.$episodes_id.'_'.$this->generate_random_string().'.vtt';
+            $subtitle_path          = 'uploads/subtitles/'.$products_id.'_'.$episodes_id.'_'.$this->generate_random_string().'.vtt';
             move_uploaded_file($_FILES['vtt_file']['tmp_name'], $subtitle_path);
             $data['src']            = base_url().$subtitle_path;                               
         }else if(isset($vtt_url) && $vtt_url !=''){
@@ -1049,21 +1048,21 @@ class Admin extends Admin_Core_Controller {
         }
         if($is_subtitle){          
             $data['episodes_id']    = $episodes_id;
-            $data['videos_id']      = $videos_id;
+            $data['products_id']      = $products_id;
             $data['language']       = $language;
             $data['kind']           = $kind;
             $data['srclang']        = $srclang;
             $this->db->insert('tvseries_subtitle', $data);
             $this->session->set_flashdata('success', trans('add_success'));
-            redirect(base_url() . 'admin/episodes_manage/'.$videos_id.'/'.$seasons_id, 'refresh'); 
+            redirect(base_url() . 'admin/episodes_manage/'.$products_id.'/'.$seasons_id, 'refresh'); 
         }else{
             $this->session->set_flashdata('error', trans('vtt_support_only'));      
-            redirect(base_url() . 'admin/episodes_manage/'.$videos_id.'/'.$seasons_id, 'refresh'); 
+            redirect(base_url() . 'admin/episodes_manage/'.$products_id.'/'.$seasons_id, 'refresh'); 
         }
     }
 
-    // videos or movies types
-    function video_type($param1 = '', $param2 = ''){
+    // products or products types
+    function product_type($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
             /* start menu active/inactive section*/
@@ -1073,47 +1072,47 @@ class Admin extends Admin_Core_Controller {
         
         if ($param1 == 'add') {
             
-            $data['video_type']             = $this->input->post('video_type');
-            $data['video_type_desc']        = $this->input->post('video_type_desc');
+            $data['product_type']             = $this->input->post('product_type');
+            $data['product_type_desc']        = $this->input->post('product_type_desc');
             $data['primary_menu']           = $this->input->post('primary_menu');
             $data['footer_menu']            = $this->input->post('footer_menu');           
             
-            $this->db->insert('video_type', $data);
+            $this->db->insert('product_type', $data);
 
             $insert_id                      = $this->db->insert_id();
-            $slug                           = url_title($this->input->post('video_type'), 'dash', TRUE);
-            $slug_num                       = $this->common_model->slug_num('video_type',$slug);
+            $slug                           = url_title($this->input->post('product_type'), 'dash', TRUE);
+            $slug_num                       = $this->common_model->slug_num('product_type',$slug);
             if($slug_num > 0){
                 $slug= $slug.'-'.$insert_id;
             }
             $data_update['slug']               = $slug;
-            $this->db->where('video_type_id', $insert_id);
-            $this->db->update('video_type', $data_update);
+            $this->db->where('product_type_id', $insert_id);
+            $this->db->update('product_type', $data_update);
 
             $this->session->set_flashdata('success', trans('add_success'));
             redirect($this->agent->referrer());
         }
         if ($param1 == 'update') {         
             
-            $data['video_type']             = $this->input->post('video_type');
-            $data['video_type_desc']        = $this->input->post('video_type_desc');
+            $data['product_type']             = $this->input->post('product_type');
+            $data['product_type_desc']        = $this->input->post('product_type_desc');
             $data['primary_menu']           = $this->input->post('primary_menu');
             $data['footer_menu']            = $this->input->post('footer_menu');            
-            $this->db->where('video_type_id', $param2);
-            $this->db->update('video_type', $data);
+            $this->db->where('product_type_id', $param2);
+            $this->db->update('product_type', $data);
             $this->session->set_flashdata('success', trans('update_success'));
             redirect($this->agent->referrer());
         }      
         
-            $data['page_name']              = 'video_type_manage';
+            $data['page_name']              = 'product_type_manage';
             $data['page_title']             = 'Videos Type Management';
-            $data['video_types']            = $this->db->get('video_type')->result_array();             
+            $data['product_types']            = $this->db->get('product_type')->result_array();             
             $this->load->view('admin/index', $data);
 
 
     }
-    // videos or movies types
-    function video_quality($param1 = '', $param2 = ''){
+    // products or products types
+    function product_quality($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
             /* start menu active/inactive section*/
@@ -1138,13 +1137,13 @@ class Admin extends Admin_Core_Controller {
             $this->session->set_flashdata('success', trans('update_success'));
             redirect($this->agent->referrer());
         }
-        $data['page_name']                  = 'video_quality_manage';
-        $data['page_title']                 = trans('video_quality_manage');
+        $data['page_name']                  = 'product_quality_manage';
+        $data['page_title']                 = trans('product_quality_manage');
         $data['quality']                    = $this->db->get('quality')->result_array();             
         $this->load->view('admin/index', $data);
     } 
 
-    // videos or movies types
+    // products or products types
     function comments($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
@@ -1152,7 +1151,7 @@ class Admin extends Admin_Core_Controller {
             $this->session->unset_userdata('active_menu');
             $this->session->set_userdata('active_menu', '31');
             /* end menu active/inactive section*/ 
-        if ($param1 == 'update_movie') {
+        if ($param1 == 'update_product') {
             $data['comment']             = $this->input->post('comment');
             $data['publication']        = $this->input->post('publication');                        
             $this->db->where('comments_id', $param2);
@@ -1389,7 +1388,7 @@ class Admin extends Admin_Core_Controller {
             $insert_id = $this->db->insert_id();          
 
             $slug                       = url_title($this->input->post('slug'), 'dash', TRUE);
-            $slug_num                   = $this->common_model->slug_num('videos',$slug);
+            $slug_num                   = $this->common_model->slug_num('products',$slug);
             if($slug_num > 0){
                 $slug= $slug.'-'.$insert_id;
             }
@@ -1421,7 +1420,7 @@ class Admin extends Admin_Core_Controller {
             $this->db->where('posts_id', $param2);
             $this->db->update('posts', $data);
             $slug                       = url_title($this->input->post('slug'), 'dash', TRUE);
-            $slug_num                   = $this->common_model->slug_num('videos',$slug);
+            $slug_num                   = $this->common_model->slug_num('products',$slug);
             if($slug_num > 1){
                 $slug= $slug.'-'.$param2;
             }
@@ -1903,40 +1902,40 @@ class Admin extends Admin_Core_Controller {
                  $this->db->where('title' , 'show_star_image');
                  $this->db->update('config' , $data);
             endif;
-             // movie report
-            $movie_report_enable = $this->input->post('movie_report_enable');
-            if($movie_report_enable =='on'):
+             // product report
+            $product_report_enable = $this->input->post('product_report_enable');
+            if($product_report_enable =='on'):
                 $data['value'] = '1';
-                $this->db->where('title' , 'movie_report_enable');
+                $this->db->where('title' , 'product_report_enable');
                  $this->db->update('config' , $data);
             else:
                 $data['value'] = '0';
-                 $this->db->where('title' , 'movie_report_enable');
+                 $this->db->where('title' , 'product_report_enable');
                  $this->db->update('config' , $data);
             endif;
 
-            $data['value'] = $this->input->post('movie_report_email');
-             $this->db->where('title' , 'movie_report_email');
+            $data['value'] = $this->input->post('product_report_email');
+             $this->db->where('title' , 'product_report_email');
              $this->db->update('config' , $data);
 
-             $data['value'] = $this->input->post('movie_report_note');
-             $this->db->where('title' , 'movie_report_note');
+             $data['value'] = $this->input->post('product_report_note');
+             $this->db->where('title' , 'product_report_note');
              $this->db->update('config' , $data);
 
-            //movie request
-            $movie_request_enable = $this->input->post('movie_request_enable');
-            if($movie_request_enable =='on'):
+            //product request
+            $product_request_enable = $this->input->post('product_request_enable');
+            if($product_request_enable =='on'):
                 $data['value'] = '1';
-                $this->db->where('title' , 'movie_request_enable');
+                $this->db->where('title' , 'product_request_enable');
                  $this->db->update('config' , $data);
             else:
                 $data['value'] = '0';
-                 $this->db->where('title' , 'movie_request_enable');
+                 $this->db->where('title' , 'product_request_enable');
                  $this->db->update('config' , $data);
             endif;
 
-            $data['value'] = $this->input->post('movie_request_email');
-             $this->db->where('title' , 'movie_request_email');
+            $data['value'] = $this->input->post('product_request_email');
+             $this->db->where('title' , 'product_request_email');
              $this->db->update('config' , $data);
 
 
@@ -2481,18 +2480,18 @@ class Admin extends Admin_Core_Controller {
             $this->db->update('config' , $data);
 
 
-            // movie page
-            $data['value'] = $this->input->post('movie_page_seo_title');
-            $this->db->where('title' , 'movie_page_seo_title');
+            // product page
+            $data['value'] = $this->input->post('product_page_seo_title');
+            $this->db->where('title' , 'product_page_seo_title');
             $this->db->update('config' , $data);
 
-            $data['value'] = $this->input->post('movie_page_focus_keyword');
-            $this->db->where('title' , 'movie_page_focus_keyword');
+            $data['value'] = $this->input->post('product_page_focus_keyword');
+            $this->db->where('title' , 'product_page_focus_keyword');
             $this->db->update('config' , $data);
 
 
-            $data['value'] = $this->input->post('movie_page_meta_description');
-            $this->db->where('title' , 'movie_page_meta_description');
+            $data['value'] = $this->input->post('product_page_meta_description');
+            $this->db->where('title' , 'product_page_meta_description');
             $this->db->update('config' , $data);
 
 
@@ -2714,7 +2713,7 @@ class Admin extends Admin_Core_Controller {
         $this->load->view('admin/index', $data);
     }
 
-    function send_movie_tvseries_notification($param1 = '', $param2 = ''){
+    function send_product_tvseries_notification($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
             // active menu session
@@ -2723,56 +2722,56 @@ class Admin extends Admin_Core_Controller {
             /* end menu active/inactive section*/
 
         if ($param1 == 'send'):
-            $videos_id                  = $this->input->post("videos_id");
-            if(!empty($videos_id) && $videos_id !='' && $videos_id !=NULL && is_numeric($videos_id)):
-                $verify                 = $this->common_model->verify_movie_tvseries_id($videos_id);
+            $products_id                  = $this->input->post("products_id");
+            if(!empty($products_id) && $products_id !='' && $products_id !=NULL && is_numeric($products_id)):
+                $verify                 = $this->common_model->verify_product_tvseries_id($products_id);
                 if($verify):
                     $data['message']    = $this->input->post("message");
                     $data['headings']   = $this->input->post("headings");
                     $data['icon']       = $this->input->post("icon");         
                     $data['img']        = $this->input->post("img");
-                    $data['id']         = $videos_id;
+                    $data['id']         = $products_id;
                     $this->load->model('notify_model');
-                    $this->notify_model->send_movie_tvseries_notification($data);
+                    $this->notify_model->send_product_tvseries_notification($data);
                     $this->session->set_flashdata('success', trans('notification_send_success'));                    
                 else:
-                $this->session->set_flashdata('error', 'Movie ID not found.');
+                $this->session->set_flashdata('error', 'Product ID not found.');
                 endif;
             else:
-                $this->session->set_flashdata('error', 'Invalid movie ID');
+                $this->session->set_flashdata('error', 'Invalid product ID');
             endif;
             redirect($this->agent->referrer());
         endif;
-        $data['page_name']      = 'send_movie_tvseries_notification';
-        $data['page_title']     = trans('send_movie_tvseries_notification');
+        $data['page_name']      = 'send_product_tvseries_notification';
+        $data['page_title']     = trans('send_product_tvseries_notification');
         $this->load->view('admin/index', $data);
     }
 
 
-    function send_movie_notification($type='',$videos_id = '',$param2=''){
+    function send_product_notification($type='',$products_id = '',$param2=''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
             /* start menu active/inactive section*/
             $this->session->unset_userdata('active_menu');
             $this->session->set_userdata('active_menu', '37');
             /* end menu active/inactive section*/
-        if(!empty($videos_id) && $videos_id !='' && $videos_id !=NULL && is_numeric($videos_id)):
-            $verify                 = $this->common_model->verify_movie_tvseries_id($videos_id);
+        if(!empty($products_id) && $products_id !='' && $products_id !=NULL && is_numeric($products_id)):
+            $verify                 = $this->common_model->verify_product_tvseries_id($products_id);
             if($verify):
                 if($type == 'email'):
                     $this->load->model('email_model');
-                    $this->email_model->create_newslater_cron($videos_id);
+                    $this->email_model->create_newslater_cron($products_id);
                     $this->session->set_flashdata('success', trans('newsletter_send_success')); 
                 else:
                     $this->load->model('notify_model');
-                    $this->notify_model->send_push_notification($videos_id);
+                    $this->notify_model->send_push_notification($products_id);
                     $this->session->set_flashdata('success', trans('notification_send_success')); 
                 endif;
             else:
-                $this->session->set_flashdata('error', trans('movie_id_not_found'));
+                $this->session->set_flashdata('error', trans('product_id_not_found'));
             endif;
         else:
-            $this->session->set_flashdata('error', trans('invalid_movie_id'));
+            $this->session->set_flashdata('error', trans('invalid_product_id'));
         endif;
         if($param2 == 'tv'):
             redirect($this->agent->referrer());
@@ -3096,7 +3095,7 @@ class Admin extends Admin_Core_Controller {
         if($from=='tv'){
             $result = $this->tmdb_model->import_tvseries_info($id);
         }else{
-            $result = $this->tmdb_model->import_movie_info($id);
+            $result = $this->tmdb_model->import_product_info($id);
         }
         if($result):
             $response['status']         = 'success';
@@ -3109,21 +3108,21 @@ class Admin extends Admin_Core_Controller {
     }  
 
     //imdb import
-    function import_movie(){
+    function import_product(){
         $response                   = array();        
         $id                         = trim($this->input->post("id"));
         $from                       = $this->input->post("from");
         $lang                       = $this->input->post("lang");
         
         // $id = 550;
-        // $from ='movie';
+        // $from ='product';
         // $lang = 'de';
         $response['submitted_data'] = $_POST;
         $this->load->model('tmdb_model');
         if($from=='tv'){
             $data = $this->tmdb_model->get_tvseries_info($id,$lang);            
         }else{
-            $data = $this->tmdb_model->get_movie_info($id,$lang);            
+            $data = $this->tmdb_model->get_product_info($id,$lang);            
         }
         //var_dump($data);      
         if(isset($data['status']) && $data['status']=='success'){
@@ -3132,9 +3131,9 @@ class Admin extends Admin_Core_Controller {
             $response['title']          = $data['title'];
             $response['plot']           = $data['plot'];
             $response['runtime']        = $data['runtime'];
-            $response['actor']          = $this->common_model->get_star_ids_for_movie_import('actor',$data['actor']);
-            $response['director']       = $this->common_model->get_star_ids_for_movie_import('director',$data['director']);
-            $response['writer']         = $this->common_model->get_star_ids_for_movie_import('writer',$data['writer']);
+            $response['actor']          = $this->common_model->get_star_ids_for_product_import('actor',$data['actor']);
+            $response['director']       = $this->common_model->get_star_ids_for_product_import('director',$data['director']);
+            $response['writer']         = $this->common_model->get_star_ids_for_product_import('writer',$data['writer']);
             $response['country']        = $this->country_model->get_country_ids($data['country']);
             $response['genre']          = $this->genre_model->get_genre_ids($data['genre']);
             $response['rating']         = $data['rating'];
@@ -3171,7 +3170,7 @@ class Admin extends Admin_Core_Controller {
         if($from=='tv'){
             $data = $this->tmdb_model->get_tvshow_actor_info($id);
         }else{
-            $data = $this->tmdb_model->get_movie_actor_info($id);
+            $data = $this->tmdb_model->get_product_actor_info($id);
         }
         $this->session->set_flashdata('success', $data.' '.trans('start_imported'));
         redirect($this->agent->referrer());
@@ -3179,7 +3178,7 @@ class Admin extends Admin_Core_Controller {
 
     function download_link(){
 
-        $this->form_validation->set_rules('videos_id', 'videos_id', 'required');
+        $this->form_validation->set_rules('products_id', 'products_id', 'required');
         $this->form_validation->set_rules('link_title', 'Link Title', 'required|min_length[2]');
         $this->form_validation->set_rules('file_size', 'File Size', 'required|min_length[2]');
         $this->form_validation->set_rules('resolution', 'Resolution', 'required|min_length[2]');
@@ -3188,7 +3187,7 @@ class Admin extends Admin_Core_Controller {
         if ($this->form_validation->run() == FALSE):
             $this->session->set_flashdata('error',strip_tags(json_encode(validation_errors())));
         else:
-            $data['videos_id']          = $this->input->post("videos_id");            
+            $data['products_id']          = $this->input->post("products_id");            
             $data['link_title']         = $this->input->post("link_title");
             $data['file_size']          = $this->input->post("file_size");
             $data['resolution']         = $this->input->post("resolution");
@@ -3199,26 +3198,26 @@ class Admin extends Admin_Core_Controller {
         endif;
         redirect($this->agent->referrer());
     }
-    function video_file(){
+    function product_file(){
         $response = array();
-        $file_data['videos_id']         = $_POST["videos_id"];            
+        $file_data['products_id']         = $_POST["products_id"];            
         $file_data['file_source']       = $_POST["type"];
         $file_data['file_url']          = $_POST["url"];
         $file_data['source_type']       = 'link';
         $file_data['stream_key']        = $this->generate_random_string();
-        $this->db->insert('video_file', $file_data);
+        $this->db->insert('product_file', $file_data);
         $response['row_id']             = $this->db->insert_id();
         $response['post_status']        = "success";
         $response['type']               = $_POST["type"];
         $response['url']                = $_POST["url"];         
-        $response['watch_url']          = base_url('watch/').$this->common_model->get_slug_by_videos_id($_POST["videos_id"]).'.html?key='.$file_data['stream_key'];         
+        $response['watch_url']          = base_url('watch/').$this->common_model->get_slug_by_products_id($_POST["products_id"]).'.html?key='.$file_data['stream_key'];         
         echo json_encode($response);    
     }
 
     function episodes_url(){
         $response                       = array();
         $datetime                       = date("Y-m-d H:i:s");
-        $file_data['videos_id']         = $_POST["videos_id"];
+        $file_data['products_id']         = $_POST["products_id"];
         $file_data['seasons_id']        = $_POST["seasons_id"];
         $file_data['episodes_name']     = $_POST["episodes_name"];            
         $file_data['file_source']       = $_POST["type"];
@@ -3233,10 +3232,10 @@ class Admin extends Admin_Core_Controller {
         $response['url']                = $_POST["url"];         
         $response['episodes_name']      = $_POST["episodes_name"];
 
-        // update videos
-        $videos_data['last_ep_added']   = $datetime;
-        $this->db->where('videos_id',$_POST["videos_id"]);
-        $this->db->update('videos',$videos_data);
+        // update products
+        $products_data['last_ep_added']   = $datetime;
+        $this->db->where('products_id',$_POST["products_id"]);
+        $this->db->update('products',$products_data);
 
         echo json_encode($response);    
     }
@@ -3244,25 +3243,25 @@ class Admin extends Admin_Core_Controller {
     function rating(){
         $response                   = array();            
         $rate                       = $_POST["rate"];
-        $video_id                   = $_POST["video_id"];
-        $post_status                = $this->post_rating( $rate , $video_id);
+        $product_id                   = $_POST["product_id"];
+        $post_status                = $this->post_rating( $rate , $product_id);
         $response['post_status']    = $post_status; 
         $response['rate']           = $rate; 
-        $response['video_id']       = $video_id; 
+        $response['product_id']       = $product_id; 
         echo json_encode($response);    
     }
     // post rating
-    function post_rating( $rate , $video_id){
+    function post_rating( $rate , $product_id){
 
         $ip=$_SERVER['REMOTE_ADDR'];
 
         $verify_data = array(
-                            'video_id'      => $video_id,                             
+                            'product_id'      => $product_id,                             
                             'ip'            => $ip                                                    
                             );
 
         $data = array(
-                      'video_id'            => $video_id,
+                      'product_id'            => $product_id,
                       'rating'              => $rate,                             
                        'ip'                 => $ip                                                   
                     );
@@ -3276,32 +3275,32 @@ class Admin extends Admin_Core_Controller {
 			}
             else{                
                 $this->db->insert('rating', $data);
-                $current_rating =$this->db->get_where('videos' , array('videos_id'=>$video_id))->row()->total_rating;
+                $current_rating =$this->db->get_where('products' , array('products_id'=>$product_id))->row()->total_rating;
 				$rating=$current_rating+1;
-				$this->db->where('videos_id', $video_id);
-				$this->db->update('videos', array('total_rating' => $rating));                
+				$this->db->where('products_id', $product_id);
+				$this->db->update('products', array('total_rating' => $rating));                
             }
            return "success"; 
         }
 
-        //movie importer
+        //product importer
 
-        function movie_importer(){
+        function product_importer(){
 		if ($this->session->userdata('admin_is_login') != 1)
 			redirect(base_url(), 'refresh');
 			/* start menu active/inactive section*/
 		$this->session->unset_userdata('active_menu');
 		$this->session->set_userdata('active_menu', '7');
 		/* end menu active/inactive section*/
-		$data['page_name']  = 'movie_importer';
-		$data['page_title'] = 'Movie Search & Import';
+		$data['page_name']  = 'product_importer';
+		$data['page_title'] = 'Product Search & Import';
         if(!empty($this->input->post('title')) && $this->input->post('title') !=NULL):
             $this->load->model('tmdb_model');
             $search_data    = $this->tmdb_model->search($this->input->post('title'),$this->input->post('to'));
             if(isset($search_data['error_message'])):
                 $data['error_message'] = $search_data['error_message'];
             else:
-                $data['movies'] = $search_data;
+                $data['products'] = $search_data;
             endif;
             $data['title']  = $this->input->post('title');
             $data['to']     = $this->input->post('to');
@@ -3357,21 +3356,21 @@ class Admin extends Admin_Core_Controller {
         $this->load->view('admin/index', $data);
     }
 
-    public function movie_upload(){
+    public function product_upload(){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
 
-        $videos_id                  = $this->input->post('videos_id');
+        $products_id                  = $this->input->post('products_id');
         $label                      = $this->input->post('label');
         $order                      = $this->input->post('order');
         $source                     = $this->input->post('source');
         // validation rule
-        $this->form_validation->set_rules('videos_id', trans('video_id'), 'trim|required');
+        $this->form_validation->set_rules('products_id', trans('product_id'), 'trim|required');
         $this->form_validation->set_rules('label', trans('episode_name'), 'trim|required');
         $this->form_validation->set_rules('source', trans('source'), 'trim|required');
 
         //  data
-        $data['videos_id']      = $videos_id;
+        $data['products_id']      = $products_id;
         $data['label']          = $label;
         $data['order']          = $order;
         $data['stream_key']     = $this->generate_random_string();
@@ -3382,15 +3381,15 @@ class Admin extends Admin_Core_Controller {
                 $this->session->set_flashdata('error', validation_errors());
             else:
                 //upload configuration
-                $NewFileName                = $videos_id.'-'.uniqid(); //new file name
-                $config['upload_path']      = 'uploads/videos/';
+                $NewFileName                = $products_id.'-'.uniqid(); //new file name
+                $config['upload_path']      = 'uploads/products/';
                 $config['allowed_types']    = 'mp4|webm|mkv|m3u8';
                 $config['file_name']        = $NewFileName;
                 $config['max_size']         = 0;
                 //$this->load->library('upload', $config);
                 $this->upload->initialize($config);
                 //upload file to directory
-                if($this->upload->do_upload('videofile')):
+                if($this->upload->do_upload('productfile')):
                     $uploadData             = $this->upload->data();                    
                     $file_name              = $uploadData['file_name'];
                     $file_ext               = $uploadData['file_ext'];
@@ -3398,12 +3397,12 @@ class Admin extends Admin_Core_Controller {
 
                     $data['file_source']    = $file_ext;
                     $data['source_type']    = 'upload';                    
-                    $data['file_url']       = base_url().'uploads/videos/'.$file_name;
+                    $data['file_url']       = base_url().'uploads/products/'.$file_name;
                     
-                    $this->db->insert('video_file', $data);
+                    $this->db->insert('product_file', $data);
                     $insert_id              = $this->db->insert_id();
                     $insert_status          = TRUE;
-                    $this->session->set_flashdata('success', trans('video_add_success'));
+                    $this->session->set_flashdata('success', trans('product_add_success'));
                 else:
                     $this->session->set_flashdata('error', $this->upload->display_errors());
                     
@@ -3417,29 +3416,29 @@ class Admin extends Admin_Core_Controller {
             if($this->form_validation->run() == FALSE):
                 $this->session->set_flashdata('error', validation_errors());
             else:
-                $this->db->insert('video_file', $data);
+                $this->db->insert('product_file', $data);
                 $insert_id              = $this->db->insert_id();
                 $insert_status          = TRUE;
-                $this->session->set_flashdata('success', trans('video_add_success'));
+                $this->session->set_flashdata('success', trans('product_add_success'));
             endif;
         endif;
         redirect($this->agent->referrer());
     }
-    public function movie_file_update($video_file_id=""){
+    public function product_file_update($product_file_id=""){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
 
-        $videos_id                  = $this->input->post('videos_id');
+        $products_id                  = $this->input->post('products_id');
         $label                      = $this->input->post('label');
         $order                      = $this->input->post('order');
         $source                     = $this->input->post('source');
         // validation rule
-        $this->form_validation->set_rules('videos_id', trans('video_id'), 'trim|required');
+        $this->form_validation->set_rules('products_id', trans('product_id'), 'trim|required');
         $this->form_validation->set_rules('label', trans('episode_name'), 'trim|required');
         $this->form_validation->set_rules('source', trans('source'), 'trim|required');
 
         //  data
-        $data['videos_id']      = $videos_id;
+        $data['products_id']      = $products_id;
         $data['label']          = $label;
         $data['order']          = $order;
 
@@ -3448,15 +3447,15 @@ class Admin extends Admin_Core_Controller {
                 $this->session->set_flashdata('error', validation_errors());
             else:
                 //upload configuration
-                $NewFileName                = $videos_id.'-'.uniqid(); //new file name
-                $config['upload_path']      = 'uploads/videos/';
+                $NewFileName                = $products_id.'-'.uniqid(); //new file name
+                $config['upload_path']      = 'uploads/products/';
                 $config['allowed_types']    = 'mp4|webm|mkv|m3u8';
                 $config['file_name']        = $NewFileName;
                 $config['max_size']         = 0;
                 //$this->load->library('upload', $config);
                 $this->upload->initialize($config);
                 //upload file to directory
-                if($this->upload->do_upload('videofile')):
+                if($this->upload->do_upload('productfile')):
                     $uploadData             = $this->upload->data();                    
                     $file_name              = $uploadData['file_name'];
                     $file_ext               = $uploadData['file_ext'];
@@ -3464,12 +3463,12 @@ class Admin extends Admin_Core_Controller {
 
                     $data['file_source']    = $file_ext;
                     $data['source_type']    = 'upload';                    
-                    $data['file_url']       = base_url().'uploads/videos/'.$file_name;
+                    $data['file_url']       = base_url().'uploads/products/'.$file_name;
                     
                     
-                    $this->db->where('video_file_id',$video_file_id);
-                    $this->db->update('video_file', $data);
-                    $this->session->set_flashdata('success', trans('video_update_success'));
+                    $this->db->where('product_file_id',$product_file_id);
+                    $this->db->update('product_file', $data);
+                    $this->session->set_flashdata('success', trans('product_update_success'));
                 else:
                     $this->session->set_flashdata('error', $this->upload->display_errors());
                     
@@ -3483,9 +3482,9 @@ class Admin extends Admin_Core_Controller {
             if($this->form_validation->run() == FALSE):
                 $this->session->set_flashdata('error', validation_errors());
             else:
-                $this->db->where('video_file_id',$video_file_id);
-                $this->db->update('video_file', $data);
-                $this->session->set_flashdata('success', trans('video_update_success'));
+                $this->db->where('product_file_id',$product_file_id);
+                $this->db->update('product_file', $data);
+                $this->session->set_flashdata('success', trans('product_update_success'));
             endif;
         endif;
         redirect($this->agent->referrer());
@@ -3493,19 +3492,19 @@ class Admin extends Admin_Core_Controller {
     public function episodes_upload(){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-        $videos_id                  = $this->input->post('videos_id');
+        $products_id                  = $this->input->post('products_id');
         $seasons_id                 = $this->input->post('seasons_id');
         $episodes_name              = $this->input->post('episodes_name');
         $order                      = $this->input->post('order');
         $source                     = $this->input->post('source');
         // validation rule
-        $this->form_validation->set_rules('videos_id', trans('video_id'), 'trim|required');
+        $this->form_validation->set_rules('products_id', trans('product_id'), 'trim|required');
         $this->form_validation->set_rules('seasons_id', trans('seasons_id'), 'trim|required');
         $this->form_validation->set_rules('episodes_name', trans('episode_name'), 'trim|required');
         $this->form_validation->set_rules('source', trans('source'), 'trim|required');
 
         //  data
-        $data['videos_id']      = $videos_id;
+        $data['products_id']      = $products_id;
         $data['seasons_id']     = $seasons_id;
         $data['episodes_name']  = $episodes_name;
         $data['order']          = $order;
@@ -3520,15 +3519,15 @@ class Admin extends Admin_Core_Controller {
                 $this->session->set_flashdata('error', validation_errors());
             else:
                 //upload configuration
-                $NewFileName                = $videos_id.'-'.$seasons_id.'-'.uniqid(); //new file name
-                $config['upload_path']      = 'uploads/videos/';
+                $NewFileName                = $products_id.'-'.$seasons_id.'-'.uniqid(); //new file name
+                $config['upload_path']      = 'uploads/products/';
                 $config['allowed_types']    = 'mp4|webm|mkv|m3u8';
                 $config['file_name']        = $NewFileName;
                 $config['max_size']         = 0;
                 //$this->load->library('upload', $config);
                 $this->upload->initialize($config);
                 //upload file to directory
-                if($this->upload->do_upload('videofile')):
+                if($this->upload->do_upload('productfile')):
                     $uploadData             = $this->upload->data();                    
                     $file_name              = $uploadData['file_name'];
                     $file_ext               = $uploadData['file_ext'];
@@ -3536,14 +3535,14 @@ class Admin extends Admin_Core_Controller {
 
                     $data['file_source']    = $file_ext;
                     $data['source_type']    = 'upload';                    
-                    $data['file_url']       = base_url().'uploads/videos/'.$file_name;
+                    $data['file_url']       = base_url().'uploads/products/'.$file_name;
                     
                     $this->db->insert('episodes', $data);
                     $insert_id              = $this->db->insert_id();
                     $insert_status          = TRUE;
                     // update episode update time
-                    $this->db->where('videos_id',$videos_id);
-                    $this->db->update('videos',$data2);
+                    $this->db->where('products_id',$products_id);
+                    $this->db->update('products',$data2);
                     $this->session->set_flashdata('success', trans('episode_add_success'));
                 else:
                     $this->session->set_flashdata('error', $this->upload->display_errors());
@@ -3562,8 +3561,8 @@ class Admin extends Admin_Core_Controller {
                 $insert_id              = $this->db->insert_id();
                 $insert_status          = TRUE;
                 // update episode update time
-                $this->db->where('videos_id',$videos_id);
-                $this->db->update('videos',$data2);
+                $this->db->where('products_id',$products_id);
+                $this->db->update('products',$data2);
                 $this->session->set_flashdata('success', trans('episode_add_success'));
             endif;
         endif;
@@ -3588,19 +3587,19 @@ class Admin extends Admin_Core_Controller {
     public function episodes_update($episodes_id=""){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-        $videos_id                  = $this->input->post('videos_id');
+        $products_id                  = $this->input->post('products_id');
         $seasons_id                 = $this->input->post('seasons_id');
         $episodes_name              = $this->input->post('episodes_name');
         $order                      = $this->input->post('order');
         $source                     = $this->input->post('source');
         // validation rule
-        $this->form_validation->set_rules('videos_id', trans('video_id'), 'trim|required');
+        $this->form_validation->set_rules('products_id', trans('product_id'), 'trim|required');
         $this->form_validation->set_rules('seasons_id', trans('seasons_id'), 'trim|required');
         $this->form_validation->set_rules('episodes_name', trans('episode_name'), 'trim|required');
         $this->form_validation->set_rules('source', trans('source'), 'trim|required');
 
         //  data
-        $data['videos_id']      = $videos_id;
+        $data['products_id']      = $products_id;
         $data['seasons_id']     = $seasons_id;
         $data['episodes_name']  = $episodes_name;
         $data['order']          = $order;
@@ -3610,15 +3609,15 @@ class Admin extends Admin_Core_Controller {
                 $this->session->set_flashdata('error', validation_errors());
             else:
                 //upload configuration
-                $NewFileName                = $videos_id.'-'.$seasons_id.'-'.uniqid(); //new file name
-                $config['upload_path']      = 'uploads/videos/';
+                $NewFileName                = $products_id.'-'.$seasons_id.'-'.uniqid(); //new file name
+                $config['upload_path']      = 'uploads/products/';
                 $config['allowed_types']    = 'mp4|webm|mkv|m3u8';
                 $config['file_name']        = $NewFileName;
                 $config['max_size']         = 0;
                 //$this->load->library('upload', $config);
                 $this->upload->initialize($config);
                 //upload file to directory
-                if($this->upload->do_upload('videofile')):
+                if($this->upload->do_upload('productfile')):
                     $uploadData             = $this->upload->data();                    
                     $file_name              = $uploadData['file_name'];
                     $file_ext               = $uploadData['file_ext'];
@@ -3626,7 +3625,7 @@ class Admin extends Admin_Core_Controller {
 
                     $data['file_source']    = $file_ext;
                     $data['source_type']    = 'upload';                    
-                    $data['file_url']       = base_url().'uploads/videos/'.$file_name;
+                    $data['file_url']       = base_url().'uploads/products/'.$file_name;
 
                     $this->db->where('episodes_id',$episodes_id);                    
                     $this->db->update('episodes', $data);
@@ -3680,17 +3679,17 @@ class Admin extends Admin_Core_Controller {
         echo json_encode($users_arr);
     }
 
-    public function load_movie(){
+    public function load_product(){
         $q                          = $this->input->get('q');
         $users_arr                  = [];
         $this->db->limit(50);
         $this->db->where('is_tvseries !=','1');
         $this->db->like('title',$q,'both');
-        $stars                      = $this->db->get('videos')->result_array();
+        $stars                      = $this->db->get('products')->result_array();
         foreach( $stars as $star){
-            $videos_id         = $star['videos_id'];
+            $products_id         = $star['products_id'];
             $title           = $star['title'];
-            $users_arr[]    = ["id" => $videos_id, "text" => $title];
+            $users_arr[]    = ["id" => $products_id, "text" => $title];
         }
         echo json_encode($users_arr);
     }
@@ -3701,11 +3700,11 @@ class Admin extends Admin_Core_Controller {
         $this->db->limit(50);
         $this->db->where('is_tvseries','1');
         $this->db->like('title',$q,'both');
-        $stars                      = $this->db->get('videos')->result_array();
+        $stars                      = $this->db->get('products')->result_array();
         foreach( $stars as $star){
-            $videos_id         = $star['videos_id'];
+            $products_id         = $star['products_id'];
             $title           = $star['title'];
-            $users_arr[]    = ["id" => $videos_id, "text" => $title];
+            $users_arr[]    = ["id" => $products_id, "text" => $title];
         }
         echo json_encode($users_arr);
     }
@@ -3716,11 +3715,11 @@ class Admin extends Admin_Core_Controller {
         $this->db->limit(50);
         $this->db->where('is_tvseries','1');
         $this->db->like('title',$q,'both');
-        $stars                      = $this->db->get('videos')->result_array();
+        $stars                      = $this->db->get('products')->result_array();
         foreach( $stars as $star){
-            $videos_id         = $star['videos_id'];
+            $products_id         = $star['products_id'];
             $title           = $star['title'];
-            $users_arr[]    = ["id" => $videos_id, "text" => $title];
+            $users_arr[]    = ["id" => $products_id, "text" => $title];
         }
         echo json_encode($users_arr);
     }
@@ -3751,11 +3750,11 @@ class Admin extends Admin_Core_Controller {
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
 
-        $video_files = $this->db->get('video_file')->result_array();
-        foreach ($video_files as $video_file):
+        $product_files = $this->db->get('product_file')->result_array();
+        foreach ($product_files as $product_file):
             $data['stream_key'] = $this->generate_random_string();
-            $this->db->where('video_file_id',$video_file['video_file_id']);
-            $this->db->update('video_file', $data);
+            $this->db->where('product_file_id',$product_file['product_file_id']);
+            $this->db->update('product_file', $data);
         endforeach;
         $episodes = $this->db->get('episodes')->result_array();
         foreach ($episodes as $episode):
@@ -3898,8 +3897,8 @@ class Admin extends Admin_Core_Controller {
                  $this->db->update('config' , $data);
             endif;
 
-            $data['value'] = $this->input->post('preroll_ads_video');
-            $this->db->where('title' , 'preroll_ads_video');
+            $data['value'] = $this->input->post('preroll_ads_product');
+            $this->db->where('title' , 'preroll_ads_product');
             $this->db->update('config' , $data);
 
             $this->session->set_flashdata('success', trans('ima_ads_setting_changed'));
@@ -4058,30 +4057,30 @@ class Admin extends Admin_Core_Controller {
         endif;
         redirect($this->agent->referrer());
     }
-    public function get_single_movie_details_by_id(){
+    public function get_single_product_details_by_id(){
         $response                       = array();
-        $id                             = $this->input->post('videos_id');
-        $this->db->where('videos_id', $id);
-        $movie                          =   $this->db->get('videos')->row();        
-        $response['videos_id']          = $movie->videos_id;
-        $response['title']              = $movie->title;
-        $response['description']        = strip_tags($movie->description);
-        $response['thumbnail_url']      = $this->common_model->get_video_thumb_url($movie->videos_id);
-        $response['poster_url']         = $this->common_model->get_video_poster_url($movie->videos_id);
+        $id                             = $this->input->post('products_id');
+        $this->db->where('products_id', $id);
+        $product                          =   $this->db->get('products')->row();        
+        $response['products_id']          = $product->products_id;
+        $response['title']              = $product->title;
+        $response['description']        = strip_tags($product->description);
+        $response['thumbnail_url']      = $this->common_model->get_product_thumb_url($product->products_id);
+        $response['poster_url']         = $this->common_model->get_product_poster_url($product->products_id);
         echo json_encode($response);
     }
-    public function get_movie_by_search_title(){
+    public function get_product_by_search_title(){
         $q                          = $this->input->get('q');
-        $movies                     = [];
+        $products                     = [];
         $this->db->limit(50);
         $this->db->like('title',$q,'both');
-        $videos                      = $this->db->get('videos')->result_array();
-        foreach( $videos as $video){
-            $videos_id          = $video['videos_id'];
-            $title              = $video['title'];
-            $movies[]           = ["id" => $videos_id, "text" => $title];
+        $products                      = $this->db->get('products')->result_array();
+        foreach( $products as $product){
+            $products_id          = $product['products_id'];
+            $title              = $product['title'];
+            $products[]           = ["id" => $products_id, "text" => $title];
         }
-        echo json_encode($movies);
+        echo json_encode($products);
     }
 
 

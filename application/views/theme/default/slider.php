@@ -10,9 +10,9 @@
   $slider_border_radius   =   ovoo_config('slider_border_radius').'px';
   $slider_arrow           =   ovoo_config('slider_arrow');
   $slider_bullet          =   ovoo_config('slider_bullet');
-  $total_movie_in_slider  =   ovoo_config('total_movie_in_slider');
+  $total_product_in_slider  =   ovoo_config('total_product_in_slider');
   ?>
-<?php if ($slider_type=="movie" || $slider_type=="image"): ?>
+<?php if ($slider_type=="product" || $slider_type=="image"): ?>
 <style>
   .slider-content{
     height: <?php echo $slider_height; ?>;
@@ -29,32 +29,32 @@
   <div id="slider" class="swiper-container-horizontal">
       <div class="swiper-wrapper">
         <?php
-          if ($slider_type=="movie"):
-            $this->db->limit($total_movie_in_slider);
-            $this->db->order_by("videos_id","desc");
-            $slider_videos = $this->db->get_where('videos', array('publication'=>'1'))->result();
-            foreach ($slider_videos as $videos):
+          if ($slider_type=="product"):
+            $this->db->limit($total_product_in_slider);
+            $this->db->order_by("Products_id","desc");
+            $slider_Products = $this->db->get_where('Products', array('publication'=>'1'))->result();
+            foreach ($slider_Products as $Products):
         ?>
-          <div class="swiper-slide" style="background-image: url('<?php echo $this->common_model->get_video_poster_url($videos->videos_id); ?>');">
-              <a href="<?php echo base_url('watch/'.$videos->slug).'.html';?>" class="slide-link" title="<?php echo $videos->title;?>"> </a>
+          <div class="swiper-slide" style="background-image: url('<?php echo $this->common_model->get_Product_poster_url($Products->Products_id); ?>');">
+              <a href="<?php echo base_url('watch/'.$Products->slug).'.html';?>" class="slide-link" title="<?php echo $Products->title;?>"> </a>
               <span class="slide-caption">
-                <h2><?php echo $videos->title;?></h2>
-                <p class="sc-desc"><?php echo substr(strip_tags($videos->description),0,220);?></p>
+                <h2><?php echo $Products->title;?></h2>
+                <p class="sc-desc"><?php echo substr(strip_tags($Products->description),0,220);?></p>
                 <div class="slide-caption-info">
                   <div class="block">
                     <strong><?php echo trans('genre'); ?>: </strong>
-                    <?php if($videos->genre !='' && $videos->genre !=NULL):
+                    <?php if($Products->genre !='' && $Products->genre !=NULL):
                             $i = 0;
-                            $genres =explode(',', $videos->genre);                                                
+                            $genres =explode(',', $Products->genre);                                                
                             foreach ($genres as $genre_id):
                             if($i>0){ echo ',';} $i++;?><?php echo $this->genre_model->get_genre_name_by_id($genre_id);?>
                     <?php endforeach; endif;?>
                   </div>
-                  <div class="block"><strong><?php echo trans('duration'); ?>:</strong> <?php echo $videos->runtime; ?></div>
+                  <div class="block"><strong><?php echo trans('duration'); ?>:</strong> <?php echo $Products->runtime; ?></div>
                   <div class="block"><strong><?php echo trans('release'); ?>:</strong> 2019</div>
-                  <div class="block"><strong>IMDb:</strong> <?php echo $videos->imdb_rating;?></div>
+                  <div class="block"><strong>IMDb:</strong> <?php echo $Products->imdb_rating;?></div>
                 </div>
-                <a href="<?php echo base_url('watch/'.$videos->slug).'.html';?>" >
+                <a href="<?php echo base_url('watch/'.$Products->slug).'.html';?>" >
                   <div class="btn btn-sm btn-success mt20" style="margin-top: 10px;"><?php echo trans('watch_now') ?></div>
                 </a>
               </span>
@@ -65,9 +65,9 @@
           $all_published_slider= $this->common_model->all_published_slider();
           foreach ($all_published_slider as $slider):
             $action_url = $slider->action_url;
-            if($slider->action_type == 'movie' || $slider->action_type == 'tvseries' || $slider->action_type == 'tv'):
-              if($slider->action_type == 'movie' || $slider->action_type == 'tvseries'):
-                $action_url = base_url("watch/".$this->common_model->get_slug_by_videos_id($slider->action_id).'.html');
+            if($slider->action_type == 'product' || $slider->action_type == 'tvseries' || $slider->action_type == 'tv'):
+              if($slider->action_type == 'product' || $slider->action_type == 'tvseries'):
+                $action_url = base_url("watch/".$this->common_model->get_slug_by_Products_id($slider->action_id).'.html');
               endif;
             endif;
       ?>

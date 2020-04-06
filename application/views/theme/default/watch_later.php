@@ -74,24 +74,24 @@
                         <div class="ppm-content user-content">
 
                             <div class="col-md-12 col-sm-12">
-                                <div class="latest-movie movie-opt">
+                                <div class="latest-product product-opt">
                                     <table class="table table-striped">
                                         <?php 
-                                            foreach($wl_videos as $favorite_videos):
-                                            $all_fav_videos = $this->db->get_where('videos', array('videos_id'=>$favorite_videos['videos_id']))->result_array();
-                                            foreach ($all_fav_videos as $videos) :
+                                            foreach($wl_Products as $favorite_Products):
+                                            $all_fav_Products = $this->db->get_where('Products', array('Products_id'=>$favorite_Products['Products_id']))->result_array();
+                                            foreach ($all_fav_Products as $Products) :
                                         ?>
-                                        <tr id="row_<?php echo $favorite_videos['wish_list_id'];?>">
-                                            <td width="180" valign="top"><a href="<?php echo base_url('watch/'.$videos['slug'].'.html');?>"><img class="img-responsive" src="<?php echo $this->common_model->get_video_thumb_url($videos['videos_id']); ?>" width="120" alt="Blade Runner 2049"></a></td>
+                                        <tr id="row_<?php echo $favorite_Products['wish_list_id'];?>">
+                                            <td width="180" valign="top"><a href="<?php echo base_url('watch/'.$Products['slug'].'.html');?>"><img class="img-responsive" src="<?php echo $this->common_model->get_Product_thumb_url($Products['Products_id']); ?>" width="120" alt="Blade Runner 2049"></a></td>
                                             <td valign="top">
                                                 <div>
-                                                    <a href="<?php if($videos['is_tvseries'] =='1'){ echo base_url('tv-series/watch/'.$videos['slug'].'.html');}else{  echo base_url('watch/'.$videos['slug'].'.html');}?>"><h3><?php echo $videos['title'];?></h3></a>
+                                                    <a href="<?php if($Products['is_tvseries'] =='1'){ echo base_url('tv-series/watch/'.$Products['slug'].'.html');}else{  echo base_url('watch/'.$Products['slug'].'.html');}?>"><h3><?php echo $Products['title'];?></h3></a>
                                                 </div>
-                                                <?php echo $videos['description'];?>
+                                                <?php echo $Products['description'];?>
                                             </td>
                                             <td width="70" valign="top">
-                                                <a class="btn btn-xs btn-success" href="<?php echo base_url('watch/'.$videos['slug'].'.html');?>"><i class="fa fa-eye"></i></a>
-                                                <button class="btn btn-xs btn-danger" onclick="wish_list_remove('<?php echo $favorite_videos['wish_list_id'];?>')"><i class="fa fa-close"></i></button>                                                
+                                                <a class="btn btn-xs btn-success" href="<?php echo base_url('watch/'.$Products['slug'].'.html');?>"><i class="fa fa-eye"></i></a>
+                                                <button class="btn btn-xs btn-danger" onclick="wish_list_remove('<?php echo $favorite_Products['wish_list_id'];?>')"><i class="fa fa-close"></i></button>                                                
                                             </td>
                                         </tr>
                                     <?php endforeach; endforeach; ?>

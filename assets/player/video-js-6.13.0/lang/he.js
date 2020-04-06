@@ -1,4 +1,4 @@
-videojs.addLanguage("he",{
+Productjs.addLanguage("he",{
  "Audio Player": "נַגָּן שמע",
  "Video Player": "נַגָּן וידאו",
  "Play": "נַגֵּן",

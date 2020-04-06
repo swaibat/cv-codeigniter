@@ -3,9 +3,9 @@
   foreach ( $qualitys as $row):
 ?>
 
-<?php echo form_open(base_url() . 'admin/video_quality/update/'.$param2 , array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data'));?>
+<?php echo form_open(base_url() . 'admin/Product_quality/update/'.$param2 , array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data'));?>
 
-<h4 class="text-center"><?php echo trans('edit_video_type'); ?></h4>
+<h4 class="text-center"><?php echo trans('edit_Product_type'); ?></h4>
 <hr>
 <div class="form-group">
   <label class="col-sm-3 control-label"><?php echo trans('quality'); ?></label>

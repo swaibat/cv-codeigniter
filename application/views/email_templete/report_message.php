@@ -44,8 +44,8 @@ $message = '
                                     
                                                     <div style="font-style:normal;padding-bottom:15px;font-family:arial;line-height:20px;text-align:left">
                                                         
-                                                        <p><span style="font-weight:bold;font-size:16px">'.trans('movie_name').':</span> '.$video->title.'</p>
-                                                        <p><span style="font-weight:bold;font-size:16px">'.trans('video_issue').':</span> '.$video_msg.'</p>
+                                                        <p><span style="font-weight:bold;font-size:16px">'.trans('product_name').':</span> '.$Product->title.'</p>
+                                                        <p><span style="font-weight:bold;font-size:16px">'.trans('Product_issue').':</span> '.$Product_msg.'</p>
                                                         <p><span style="font-weight:bold;font-size:16px">'.trans('audio_issue').':</span> '.$audio_msg.'</p>
                                                         <p><span style="font-weight:bold;font-size:16px">'.trans('subtitle_issue').':</span> '.$subtitle_msg.'</p>                                                    
                                                         <p><span style="font-weight:bold;font-size:16px;">'.trans('message').':</span> </p>

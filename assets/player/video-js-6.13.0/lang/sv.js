@@ -1,4 +1,4 @@
-videojs.addLanguage("sv",{
+Productjs.addLanguage("sv",{
  "Play": "Spela",
  "Pause": "Pausa",
  "Current Time": "Aktuell tid",
@@ -18,9 +18,9 @@ videojs.addLanguage("sv",{
  "Captions": "Text på",
  "captions off": "Text av",
  "Chapters": "Kapitel",
- "You aborted the media playback": "Du har avbrutit videouppspelningen.",
- "A network error caused the media download to fail part-way.": "Ett nätverksfel gjorde att nedladdningen av videon avbröts.",
- "The media could not be loaded, either because the server or network failed or because the format is not supported.": "Det gick inte att ladda videon, antingen på grund av ett server- eller nätverksfel, eller för att formatet inte stöds.",
- "The media playback was aborted due to a corruption problem or because the media used features your browser did not support.": "Uppspelningen avbröts på grund av att videon är skadad, eller också för att videon använder funktioner som din webbläsare inte stöder.",
- "No compatible source was found for this media.": "Det gick inte att hitta någon kompatibel källa för den här videon."
+ "You aborted the media playback": "Du har avbrutit Productuppspelningen.",
+ "A network error caused the media download to fail part-way.": "Ett nätverksfel gjorde att nedladdningen av Productn avbröts.",
+ "The media could not be loaded, either because the server or network failed or because the format is not supported.": "Det gick inte att ladda Productn, antingen på grund av ett server- eller nätverksfel, eller för att formatet inte stöds.",
+ "The media playback was aborted due to a corruption problem or because the media used features your browser did not support.": "Uppspelningen avbröts på grund av att Productn är skadad, eller också för att Productn använder funktioner som din webbläsare inte stöder.",
+ "No compatible source was found for this media.": "Det gick inte att hitta någon kompatibel källa för den här Productn."
 });

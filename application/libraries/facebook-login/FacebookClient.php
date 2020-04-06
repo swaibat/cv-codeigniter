@@ -41,9 +41,9 @@ class FacebookClient
     const BASE_GRAPH_URL = 'https://graph.facebook.com';
 
     /**
-     * @const string Graph API URL for video uploads.
+     * @const string Graph API URL for Product uploads.
      */
-    const BASE_GRAPH_VIDEO_URL = 'https://graph-video.facebook.com';
+    const BASE_GRAPH_VIDEO_URL = 'https://graph-Product.facebook.com';
 
     /**
      * @const string Beta Graph API URL.
@@ -51,9 +51,9 @@ class FacebookClient
     const BASE_GRAPH_URL_BETA = 'https://graph.beta.facebook.com';
 
     /**
-     * @const string Beta Graph API URL for video uploads.
+     * @const string Beta Graph API URL for Product uploads.
      */
-    const BASE_GRAPH_VIDEO_URL_BETA = 'https://graph-video.beta.facebook.com';
+    const BASE_GRAPH_VIDEO_URL_BETA = 'https://graph-Product.beta.facebook.com';
 
     /**
      * @const int The timeout in seconds for a normal request.
@@ -66,7 +66,7 @@ class FacebookClient
     const DEFAULT_FILE_UPLOAD_REQUEST_TIMEOUT = 3600;
 
     /**
-     * @const int The timeout in seconds for a request that contains video uploads.
+     * @const int The timeout in seconds for a request that contains Product uploads.
      */
     const DEFAULT_VIDEO_UPLOAD_REQUEST_TIMEOUT = 7200;
 
@@ -140,7 +140,7 @@ class FacebookClient
     /**
      * Returns the base Graph URL.
      *
-     * @param boolean $postToVideoUrl Post to the video API if videos are being uploaded.
+     * @param boolean $postToVideoUrl Post to the Product API if Products are being uploaded.
      *
      * @return string
      */

@@ -1,4 +1,4 @@
-videojs.addLanguage("vi",{
+Productjs.addLanguage("vi",{
  "Audio Player": "Trình phát Audio",
  "Video Player": "Trình phát Video",
  "Play": "Phát",

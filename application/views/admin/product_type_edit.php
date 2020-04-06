@@ -1,20 +1,20 @@
 <?php
-  $video_types    = $this->db->get_where('video_type' , array('video_type_id' => $param2) )->result_array();
-  foreach ( $video_types as $row):
+  $Product_types    = $this->db->get_where('Product_type' , array('Product_type_id' => $param2) )->result_array();
+  foreach ( $Product_types as $row):
 ?>
 
-<?php echo form_open(base_url() . 'admin/video_type/update/'.$param2 , array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data'));?>
+<?php echo form_open(base_url() . 'admin/Product_type/update/'.$param2 , array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data'));?>
 
-<h4 class="text-center"><?php echo trans('edit_video_type'); ?></h4>
+<h4 class="text-center"><?php echo trans('edit_Product_type'); ?></h4>
 <hr>
 <div class="form-group">
-  <label class="control-label"><?php echo trans('video_type'); ?></label>
-    <input type="text"  name="video_type" value="<?php echo $row['video_type']; ?>" class="form-control" required />
+  <label class="control-label"><?php echo trans('Product_type'); ?></label>
+    <input type="text"  name="Product_type" value="<?php echo $row['Product_type']; ?>" class="form-control" required />
 </div>
 
 <div class="form-group">
   <label class="control-label"><?php echo trans('description'); ?></label>
-    <input type="text"  name="video_type_desc"  value="<?php echo $row['video_type_desc']; ?>" class="form-control"  />
+    <input type="text"  name="Product_type_desc"  value="<?php echo $row['Product_type_desc']; ?>" class="form-control"  />
 </div>
 
 <div class="form-group">

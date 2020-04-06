@@ -1,4 +1,4 @@
-videojs.addLanguage("nb",{
+Productjs.addLanguage("nb",{
  "Play": "Spill",
  "Pause": "Pause",
  "Current Time": "Aktuell tid",
@@ -19,8 +19,8 @@ videojs.addLanguage("nb",{
  "captions off": "Undertekst for hørselshemmede av",
  "Chapters": "Kapitler",
  "You aborted the media playback": "Du avbrøt avspillingen.",
- "A network error caused the media download to fail part-way.": "En nettverksfeil avbrøt nedlasting av videoen.",
+ "A network error caused the media download to fail part-way.": "En nettverksfeil avbrøt nedlasting av Producten.",
  "The media could not be loaded, either because the server or network failed or because the format is not supported.": "Videoen kunne ikke lastes ned, på grunn av nettverksfeil eller serverfeil, eller fordi formatet ikke er støttet.",
- "The media playback was aborted due to a corruption problem or because the media used features your browser did not support.": "Videoavspillingen ble avbrudt på grunn av ødelagte data eller fordi videoen ville gjøre noe som nettleseren din ikke har støtte for.",
+ "The media playback was aborted due to a corruption problem or because the media used features your browser did not support.": "Videoavspillingen ble avbrudt på grunn av ødelagte data eller fordi Producten ville gjøre noe som nettleseren din ikke har støtte for.",
  "No compatible source was found for this media.": "Fant ikke en kompatibel kilde for dette mediainnholdet."
 });

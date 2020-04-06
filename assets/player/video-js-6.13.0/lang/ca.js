@@ -1,4 +1,4 @@
-videojs.addLanguage("ca",{
+Productjs.addLanguage("ca",{
  "Play": "Reproducció",
  "Pause": "Pausa",
  "Current Time": "Temps reproduït",

@@ -1,4 +1,4 @@
-videojs.addLanguage("ar",{
+Productjs.addLanguage("ar",{
  "Play": "تشغيل",
  "Pause": "إيقاف",
  "Current Time": "الوقت الحالي",

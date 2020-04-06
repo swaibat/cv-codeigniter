@@ -1,4 +1,4 @@
-videojs.addLanguage("ba",{
+Productjs.addLanguage("ba",{
  "Play": "Pusti",
  "Pause": "Pauza",
  "Current Time": "Trenutno vrijeme",

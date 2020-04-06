@@ -46,7 +46,7 @@ $admin_message = '
                                                         
                                                         <p><span style="font-weight:bold;font-size:16px">'.trans('received_from').':</span> '.$name.'</p>
                                                         <p><span style="font-weight:bold;font-size:16px">'.trans('email').':</span> '.$email.'</p>
-                                                        <p><span style="font-weight:bold;font-size:16px">'.trans('request_for').':</span> '.$movie_name.'</p>                                                   
+                                                        <p><span style="font-weight:bold;font-size:16px">'.trans('request_for').':</span> '.$product_name.'</p>                                                   
                                                         <p><span style="font-weight:bold;font-size:16px;">'.trans('message_bellow').':</span> </p>
                                                         <p style="margin-bottom:0;"> '.nl2br($message).' </p>
                                                         
@@ -117,7 +117,7 @@ $client_message = '
                                                                     <tr>
                                                                         <td style="color:#005f84;font-size:22px;font-weight:bold;text-align:center;font-family:arial">
                                                                 
-                                                                           '.trans('movie_request').'
+                                                                           '.trans('product_request').'
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
@@ -132,7 +132,7 @@ $client_message = '
                                                         
                                                         <p><span style="font-weight:bold;font-size:16px">'.trans('your_name').':</span> '.$name.'</p>
                                                         <p><span style="font-weight:bold;font-size:16px">'.trans('your_email').':</span> '.$email.'</p>
-                                                        <p><span style="font-weight:bold;font-size:16px">'.trans('request_for').' :</span> '.$movie_name.'</p>                                                   
+                                                        <p><span style="font-weight:bold;font-size:16px">'.trans('request_for').' :</span> '.$product_name.'</p>                                                   
                                                         <p><span style="font-weight:bold;font-size:16px;">'.trans('message').':</span> </p>
                                                         <p style="margin-bottom:0;"> '.nl2br($message).' </p>
                                                         

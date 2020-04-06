@@ -1,4 +1,4 @@
-videojs.addLanguage("pt-PT",{
+Productjs.addLanguage("pt-PT",{
  "Play": "Reproduzir",
  "Pause": "Parar",
  "Replay": "Reiniciar",

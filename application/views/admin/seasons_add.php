@@ -10,7 +10,7 @@
   <label class="control-label"><?php echo trans('order'); ?></label>
   <input type="number" name="order" class="form-control" value="0" required />
 </div>
-<input type="hidden" name="videos_id" value="<?php echo $param2; ?>">
+<input type="hidden" name="Products_id" value="<?php echo $param2; ?>">
 
 
 <div class="form-group row">

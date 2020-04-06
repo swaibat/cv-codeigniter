@@ -1,7 +1,7 @@
 <?php
 /**
- * TMDB API v3 PHP class - wrapper to API version 3 of 'themoviedb.org
- * API Documentation: http://help.themoviedb.org/kb/api/about-3
+ * TMDB API v3 PHP class - wrapper to API version 3 of 'theproductdb.org
+ * API Documentation: http://help.theproductdb.org/kb/api/about-3
  * Documentation and usage in README file
  *
  * @package TMDB-V3-PHP-API
@@ -12,7 +12,7 @@
  * @version 0.0.2
  * @license BSD http://www.opensource.org/licenses/bsd-license.php
  *
- * Portions of this file are based on pieces of TMDb PHP API class - API 'themoviedb.org'
+ * Portions of this file are based on pieces of TMDb PHP API class - API 'theproductdb.org'
  * @Copyright Jonas De Smet - Glamorous | https://github.com/glamorous/TMDb-PHP-API
  * Licensed under BSD (http://www.opensource.org/licenses/bsd-license.php)
  * @date 10.12.2010
@@ -41,14 +41,14 @@
  *   	public function getDebug()
  *   	public function getAPIConfig()
  *   	public function getImageURL($size = "original")
- *   	public function getDiscoverMovies($page = 1)
+ *   	public function getDiscoverProducts($page = 1)
  *   	public function getDiscoverTVShows($page = 1)
- *   	public function getDiscoverMovie($page = 1)
- *   	public function getLatestMovie()
- *   	public function getNowPlayingMovies($page = 1)
- *   	public function getPopularMovies($page = 1)
- *   	public function getTopRatedMovies($page = 1)
- *   	public function getUpcomingMovies($page = 1)
+ *   	public function getDiscoverProduct($page = 1)
+ *   	public function getLatestProduct()
+ *   	public function getNowPlayingProducts($page = 1)
+ *   	public function getPopularProducts($page = 1)
+ *   	public function getTopRatedProducts($page = 1)
+ *   	public function getUpcomingProducts($page = 1)
  *   	public function getLatestTVShow()
  *   	public function getOnTheAirTVShows($page = 1)
  *   	public function getAiringTodayTVShows($page = 1, $timeZone = null)
@@ -56,14 +56,14 @@
  *   	public function getPopularTVShows($page = 1)
  *   	public function getLatestPerson()
  *		public function getPopularPersons($page = 1)
- *		public function getMovie($idMovie, $appendToResponse = null)
+ *		public function getProduct($idProduct, $appendToResponse = null)
  *		public function getTVShow($idTVShow, $appendToResponse = null)
  *		public function getSeason($idTVShow, $numSeason, $appendToResponse = null)
  *		public function getEpisode($idTVShow, $numSeason, $numEpisode, $appendToResponse = null)
  *		public function getPerson($idPerson, $appendToResponse = null)
  *		public function getCollection($idCollection, $appendToResponse = null)
  *		public function getCompany($idCompany, $appendToResponse = null)
- *		public function searchMovie($movieTitle)
+ *		public function searchProduct($productTitle)
  *		public function searchTVShow($tvShowTitle)
  *		public function searchPerson($personName)
  *		public function searchCollection($collectionName)
@@ -71,9 +71,9 @@
  *		public function find($id, $external_source = 'imdb_id')
  *		public function getTimezones()
  *		public function getJobs()
- *		public function getMovieGenres()
+ *		public function getProductGenres()
  *		public function getTVGenres()
- *		public function getMoviesByGenre($idGenre, $page = 1)
+ *		public function getProductsByGenre($idGenre, $page = 1)
  *		public function multiSearch($searchQuery)
  *
  *		private function _loadConfig()
@@ -83,19 +83,19 @@
  *
  *
  * 	URL LIST:
- *   	configuration		http://api.themoviedb.org/3/configuration
+ *   	configuration		http://api.theproductdb.org/3/configuration
  * 		Image				http://cf2.imgobject.com/t/p/original/IMAGEN.jpg #### echar un ojo ####
- * 		Search Movie		http://api.themoviedb.org/3/search/movie
- * 		Search Person		http://api.themoviedb.org/3/search/person
- * 		Movie Info			http://api.themoviedb.org/3/movie/11
- * 		Casts				http://api.themoviedb.org/3/movie/11/casts
- * 		Posters				http://api.themoviedb.org/3/movie/11/images
- * 		Trailers			http://api.themoviedb.org/3/movie/11/trailers
- * 		translations		http://api.themoviedb.org/3/movie/11/translations
- * 		Alternative titles 	http://api.themoviedb.org/3/movie/11/alternative_titles
+ * 		Search Product		http://api.theproductdb.org/3/search/product
+ * 		Search Person		http://api.theproductdb.org/3/search/person
+ * 		Product Info			http://api.theproductdb.org/3/product/11
+ * 		Casts				http://api.theproductdb.org/3/product/11/casts
+ * 		Posters				http://api.theproductdb.org/3/product/11/images
+ * 		Trailers			http://api.theproductdb.org/3/product/11/trailers
+ * 		translations		http://api.theproductdb.org/3/product/11/translations
+ * 		Alternative titles 	http://api.theproductdb.org/3/product/11/alternative_titles
  *
- * 		Collection Info 	http://api.themoviedb.org/3/collection/11
- * 		Person images		http://api.themoviedb.org/3/person/287/images
+ * 		Collection Info 	http://api.theproductdb.org/3/collection/11
+ * 		Person images		http://api.theproductdb.org/3/person/287/images
  */
 
 include(APPPATH ."third_party/tmdb/controller/classes/data/ApiBaseObject.php");
@@ -103,12 +103,12 @@ include(APPPATH ."third_party/tmdb/controller/classes/data/Collection.php");
 include(APPPATH ."third_party/tmdb/controller/classes/data/Company.php");
 include(APPPATH ."third_party/tmdb/controller/classes/data/Episode.php");
 include(APPPATH ."third_party/tmdb/controller/classes/data/Genre.php");
-include(APPPATH ."third_party/tmdb/controller/classes/data/Movie.php");
+include(APPPATH ."third_party/tmdb/controller/classes/data/Product.php");
 include(APPPATH ."third_party/tmdb/controller/classes/data/Person.php");
 include(APPPATH ."third_party/tmdb/controller/classes/data/Role.php");
 include(APPPATH ."third_party/tmdb/controller/classes/data/Season.php");
 include(APPPATH ."third_party/tmdb/controller/classes/data/TVShow.php");
-include(APPPATH ."third_party/tmdb/controller/classes/roles/MovieRole.php");
+include(APPPATH ."third_party/tmdb/controller/classes/roles/ProductRole.php");
 include(APPPATH ."third_party/tmdb/controller/classes/roles/TVShowRole.php");
 include(APPPATH ."third_party/tmdb/controller/classes/config/APIConfiguration.php");
 include(APPPATH ."third_party/tmdb/controller/classes/config/Configuration.php");
@@ -116,7 +116,7 @@ include(APPPATH ."third_party/tmdb/controller/classes/config/Configuration.php")
 class Tmdb_lib {
 
 	#@var string url of API TMDB
-	const _API_URL_ = "http://api.themoviedb.org/3/";
+	const _API_URL_ = "http://api.theproductdb.org/3/";
 
 	#@var string Version of this class
 	const VERSION = '0.5';
@@ -143,9 +143,9 @@ class Tmdb_lib {
 			exit;
 		}
 	}
-	public function get_movie($tmdb_id=''){
-      $movie = getMovie($tmdb_id);
-      return json_decode($movie ->getJSON());
+	public function get_product($tmdb_id=''){
+      $product = getProduct($tmdb_id);
+      return json_decode($product ->getJSON());
     }
 
 	//------------------------------------------------------------------------------
@@ -319,22 +319,22 @@ class Tmdb_lib {
 	//------------------------------------------------------------------------------
 
 	/**
-	 * 	Discover Movies
+	 * 	Discover Products
 	 *	@add by tnsws
 	 *
-	 * 	@return Movie[]
+	 * 	@return Product[]
 	 */
-	public function getDiscoverMovies($page = 1) {
+	public function getDiscoverProducts($page = 1) {
 
-		$movies = array();
+		$products = array();
 
-		$result = $this->_call('discover/movie', '&page='. $page);
+		$result = $this->_call('discover/product', '&page='. $page);
 
 		foreach($result['results'] as $data){
-			$movies[] = new Movie($data);
+			$products[] = new Product($data);
 		}
 
-		return $movies;
+		return $products;
 	}
 
 	/**
@@ -361,113 +361,113 @@ class Tmdb_lib {
 	//------------------------------------------------------------------------------
 
 	/**
-	 * 	Get latest Movie
+	 * 	Get latest Product
 	 *	@add by tnsws
 	 *
-	 * 	@return Movie
+	 * 	@return Product
 	 */
-	public function getDiscoverMovie($page = 1) {
+	public function getDiscoverProduct($page = 1) {
 
-		$movies = array();
+		$products = array();
 
-		$result = $this->_call('discover/movie', 'page='. $page);
+		$result = $this->_call('discover/product', 'page='. $page);
 
 		foreach($result['results'] as $data){
-			$movies[] = new Movie($data);
+			$products[] = new Product($data);
 		}
 
-		return $movies;
+		return $products;
 	}
 
 	//------------------------------------------------------------------------------
-	// Get Featured Movies
+	// Get Featured Products
 	//------------------------------------------------------------------------------
 
 	/**
-	 * 	Get latest Movie
+	 * 	Get latest Product
 	 *
-	 * 	@return Movie
+	 * 	@return Product
 	 */
-	public function getLatestMovie() {
-		return new Movie($this->_call('movie/latest'));
+	public function getLatestProduct() {
+		return new Product($this->_call('product/latest'));
 	}
 
 	/**
-	 *  Get Now Playing Movies
-	 *
-	 * 	@param integer $page
-	 * 	@return Movie[]
-	 */
-	public function getNowPlayingMovies($page = 1) {
-
-		$movies = array();
-
-		$result = $this->_call('movie/now_playing', '&page='. $page);
-
-		foreach($result['results'] as $data){
-			$movies[] = new Movie($data);
-		}
-
-		return $movies;
-	}
-
-	/**
-	 *  Get Popular Movies
+	 *  Get Now Playing Products
 	 *
 	 * 	@param integer $page
-	 * 	@return Movie[]
+	 * 	@return Product[]
 	 */
-	public function getPopularMovies($page = 1) {
+	public function getNowPlayingProducts($page = 1) {
 
-		$movies = array();
+		$products = array();
 
-		$result = $this->_call('movie/popular', '&page='. $page);
+		$result = $this->_call('product/now_playing', '&page='. $page);
 
 		foreach($result['results'] as $data){
-			$movies[] = new Movie($data);
+			$products[] = new Product($data);
 		}
 
-		return $movies;
+		return $products;
 	}
 
 	/**
-	 *  Get Top Rated Movies
+	 *  Get Popular Products
+	 *
+	 * 	@param integer $page
+	 * 	@return Product[]
+	 */
+	public function getPopularProducts($page = 1) {
+
+		$products = array();
+
+		$result = $this->_call('product/popular', '&page='. $page);
+
+		foreach($result['results'] as $data){
+			$products[] = new Product($data);
+		}
+
+		return $products;
+	}
+
+	/**
+	 *  Get Top Rated Products
 	 *	@add by tnsws
 	 *
 	 * 	@param integer $page
-	 * 	@return Movie[]
+	 * 	@return Product[]
 	 */
-	public function getTopRatedMovies($page = 1) {
+	public function getTopRatedProducts($page = 1) {
 
-		$movies = array();
+		$products = array();
 
-		$result = $this->_call('movie/top_rated', '&page='. $page);
+		$result = $this->_call('product/top_rated', '&page='. $page);
 
 		foreach($result['results'] as $data){
-			$movies[] = new Movie($data);
+			$products[] = new Product($data);
 		}
 
-		return $movies;
+		return $products;
 	}
 
 	/**
-	 *  Get Upcoming Movies
+	 *  Get Upcoming Products
 	 *	@add by tnsws
 	 *
 	 * 	@param integer $page
-	 * 	@return Movie[]
+	 * 	@return Product[]
 	 */
-	public function getUpcomingMovies($page = 1) {
+	public function getUpcomingProducts($page = 1) {
 
-		$movies = array();
+		$products = array();
 
-		$result = $this->_call('movie/upcoming', '&page='. $page);
+		$result = $this->_call('product/upcoming', '&page='. $page);
 
 		foreach($result['results'] as $data){
-			$movies[] = new Movie($data);
+			$products[] = new Product($data);
 		}
 
-		return $movies;
+		return $products;
 	}
 
 	//------------------------------------------------------------------------------
@@ -627,16 +627,16 @@ class Tmdb_lib {
 	//------------------------------------------------------------------------------
 
 	/**
-	 * 	Get a Movie
+	 * 	Get a Product
 	 *
-	 * 	@param int $idMovie The Movie id
+	 * 	@param int $idProduct The Product id
 	 * 	@param array $appendToResponse The extra append of the request
-	 * 	@return Movie
+	 * 	@return Product
 	 */
-	public function getMovie($idMovie, $appendToResponse = null) {
-		$appendToResponse = (isset($appendToResponse)) ? $appendToResponse : $this->getConfig()->getAppender('movie');
+	public function getProduct($idProduct, $appendToResponse = null) {
+		$appendToResponse = (isset($appendToResponse)) ? $appendToResponse : $this->getConfig()->getAppender('product');
 
-		return new Movie($this->_call('movie/' . $idMovie, $appendToResponse));
+		return new Product($this->_call('product/' . $idProduct, $appendToResponse));
 	}
 
 	/**
@@ -733,7 +733,7 @@ class Tmdb_lib {
     public function multiSearch($searchQuery)
     {
         $searchResults = array(
-            Movie::MEDIA_TYPE_MOVIE => array(),
+            Product::MEDIA_TYPE_MOVIE => array(),
             TVShow::MEDIA_TYPE_TV => array(),
             Person::MEDIA_TYPE_PERSON => array(),
         );
@@ -745,8 +745,8 @@ class Tmdb_lib {
         }
 
         foreach ($result['results'] as $data) {
-            if ($data['media_type'] === Movie::MEDIA_TYPE_MOVIE) {
-                $searchResults[Movie::MEDIA_TYPE_MOVIE][] = new Movie($data);
+            if ($data['media_type'] === Product::MEDIA_TYPE_MOVIE) {
+                $searchResults[Product::MEDIA_TYPE_MOVIE][] = new Product($data);
             } elseif ($data['media_type']  === TVShow::MEDIA_TYPE_TV) {
                 $searchResults[TVShow::MEDIA_TYPE_TV][] = new TvShow($data);
             } elseif ($data['media_type']  === Person::MEDIA_TYPE_PERSON) {
@@ -758,22 +758,22 @@ class Tmdb_lib {
     }
 
 	/**
-	 *  Search Movie
+	 *  Search Product
 	 *
-	 * 	@param string $movieTitle The title of a Movie
-	 * 	@return Movie[]
+	 * 	@param string $productTitle The title of a Product
+	 * 	@return Product[]
 	 */
-	public function searchMovie($movieTitle){
+	public function searchProduct($productTitle){
 
-		$movies = array();
+		$products = array();
 
-		$result = $this->_call('search/movie', '&query='. urlencode($movieTitle));
+		$result = $this->_call('search/product', '&query='. urlencode($productTitle));
 
 		foreach($result['results'] as $data){
-			$movies[] = new Movie($data);
+			$products[] = new Product($data);
 		}
 
-		return $movies;
+		return $products;
 	}
 
 	/**
@@ -868,8 +868,8 @@ class Tmdb_lib {
 
 		$result = $this->_call('find/'.$id, '&external_source='. urlencode($external_source));
 
-		foreach($result['movie_results'] as $data){
-			$found['movies'][] = new Movie($data);
+		foreach($result['product_results'] as $data){
+			$found['products'][] = new Product($data);
 		}
 		foreach($result['person_results'] as $data){
 			$found['persons'][] = new Person($data);
@@ -910,15 +910,15 @@ class Tmdb_lib {
 	}
 
 	/**
-	 * 	Get Movie Genres
+	 * 	Get Product Genres
 	 *
 	 * 	@return Genre[]
 	 */
-	public function getMovieGenres() {
+	public function getProductGenres() {
 
 		$genres = array();
 
-		$result = $this->_call('genre/movie/list');
+		$result = $this->_call('genre/product/list');
 
 		foreach($result['genres'] as $data){
 			$genres[] = new Genre($data);
@@ -950,23 +950,23 @@ class Tmdb_lib {
 	//------------------------------------------------------------------------------
 
 	/**
-	 *  Get Movies by Genre
+	 *  Get Products by Genre
 	 *
 	 *  @param integer $idGenre
 	 * 	@param integer $page
-	 * 	@return Movie[]
+	 * 	@return Product[]
 	 */
-	public function getMoviesByGenre($idGenre, $page = 1) {
+	public function getProductsByGenre($idGenre, $page = 1) {
 
-		$movies = array();
+		$products = array();
 
-		$result = $this->_call('genre/'.$idGenre.'/movies', '&page='. $page);
+		$result = $this->_call('genre/'.$idGenre.'/products', '&page='. $page);
 
 		foreach($result['results'] as $data){
-			$movies[] = new Movie($data);
+			$products[] = new Product($data);
 		}
 
-		return $movies;
+		return $products;
 	}
 }
 ?>

@@ -65,11 +65,11 @@ class Common_model extends CI_Model {
         return count($this->db->get_where($table, array('slug' => $slug))->result_array());
     }
 
-    function get_video_type($video_type_id=''){
-        $query = $this->db->get_where('video_type', array('video_type_id' => $video_type_id));
+    function get_Product_type($Product_type_id=''){
+        $query = $this->db->get_where('Product_type', array('Product_type_id' => $Product_type_id));
         $res = $query->result_array();
         foreach ($res as $row)
-            return $row['video_type'];
+            return $row['Product_type'];
     }
 
     function get_category_name($category_id=''){
@@ -89,12 +89,12 @@ class Common_model extends CI_Model {
         return $image_url;
     }
 
-    function get_episode_image_url($episode_id = "",$videos_id="")
+    function get_episode_image_url($episode_id = "",$Products_id="")
     {
         if(file_exists('uploads/episodes/'.$episode_id.'.jpg'))
             return base_url().'uploads/episodes/'.$episode_id.'.jpg';
-        // else if(file_exists('uploads/video_thumb/'.$videos_id.'.jpg'))
-        //     return base_url().'uploads/video_thumb/'.$videos_id.'.jpg';
+        // else if(file_exists('uploads/Product_thumb/'.$Products_id.'.jpg'))
+        //     return base_url().'uploads/Product_thumb/'.$Products_id.'.jpg';
         else
             return base_url().'uploads/default_image/episode.jpg';
     }
@@ -225,7 +225,7 @@ class Common_model extends CI_Model {
         return $this->db->get_where('slider', array('publication'=> '1'), 8)->result();
     }
 
-    public function all_published_videos($limit='',$page='')
+    public function all_published_Products($limit='',$page='')
     {        
         $offset = ($page*$limit)-$limit;
         if($offset<0){
@@ -233,12 +233,12 @@ class Common_model extends CI_Model {
         }
         $this->db->where('is_tvseries','0');
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit($limit,$offset);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
     }
 
-    public function most_watched_videos($limit='',$page='')
+    public function most_watched_Products($limit='',$page='')
     {        
         $offset = ($page*$limit)-$limit;
         if($offset<0){
@@ -247,55 +247,55 @@ class Common_model extends CI_Model {
         $this->db->where('publication', '1');
         $this->db->order_by("total_view","DESC");
         $this->db->limit($limit,$offset);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
     }
 
 
-    public function get_hot_videos($limit=12)
+    public function get_hot_Products($limit=12)
     {        
         $this->db->where('is_tvseries','0');
         $this->db->where('publication', '1');
         $this->db->order_by("total_view","desc");
         $this->db->limit($limit);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
     }
 
-    public function get_today_hot_videos($limit=12)
+    public function get_today_hot_Products($limit=12)
     {        
         $this->db->where('is_tvseries','0');
         $this->db->where('publication', '1');
         $this->db->order_by("today_view","desc");
         $this->db->limit($limit);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
     }
 
 
-    public function get_weekly_hot_videos($limit=12)
+    public function get_weekly_hot_Products($limit=12)
     {        
         $this->db->where('is_tvseries','0');
         $this->db->where('publication', '1');
         $this->db->order_by("weekly_view","desc");
         $this->db->limit($limit);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
     }
 
-    public function get_monthly_hot_videos($limit=12)
+    public function get_monthly_hot_Products($limit=12)
     {        
         $this->db->where('is_tvseries','0');
         $this->db->where('publication', '1');
         $this->db->order_by("monthly_view","desc");
         $this->db->limit($limit);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
     }
 
 
-    public function get_top_rated_videos($limit=12)
+    public function get_top_rated_Products($limit=12)
     {        
         $this->db->where('is_tvseries','0');
         $this->db->where('publication', '1');
         $this->db->order_by("total_rating","desc");
         $this->db->limit($limit);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
     }
 
     public function get_hot_tvseries($limit=12)
@@ -304,7 +304,7 @@ class Common_model extends CI_Model {
         $this->db->where('publication', '1');
         $this->db->order_by("total_view","desc");
         $this->db->limit($limit);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
     }
 
     public function get_today_hot_tvseries($limit=12)
@@ -313,7 +313,7 @@ class Common_model extends CI_Model {
         $this->db->where('publication', '1');
         $this->db->order_by("today_view","desc");
         $this->db->limit($limit);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
     }
 
 
@@ -323,7 +323,7 @@ class Common_model extends CI_Model {
         $this->db->where('publication', '1');
         $this->db->order_by("weekly_view","desc");
         $this->db->limit($limit);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
     }
 
 
@@ -333,7 +333,7 @@ class Common_model extends CI_Model {
         $this->db->where('publication', '1');
         $this->db->order_by("total_rating","desc");
         $this->db->limit($limit);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
     }
 
 
@@ -347,31 +347,31 @@ class Common_model extends CI_Model {
     }
 
 
-    public function new_published_videos($limit='',$page='')
+    public function new_published_Products($limit='',$page='')
     {
         $this->db->where('publication', '1');
         $this->db->where('is_tvseries', '0');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit(12);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
     }
 
-    public function latest_published_videos($limit=12,$page='')
+    public function latest_published_Products($limit=12,$page='')
     {
         $this->db->where('publication', '1');
         $this->db->where('is_tvseries', '0');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit($limit);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
     }
 
     public function new_published_tv_series($limit='',$page='')
     {
         $this->db->where('publication', '1');
         $this->db->where('is_tvseries', '1');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit(12);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
     }
 
     public function latest_published_tv_series($limit=16,$page='')
@@ -380,12 +380,12 @@ class Common_model extends CI_Model {
         $this->db->where('is_tvseries', '1');
         $this->db->order_by("last_ep_added","DESC");
         $this->db->limit($limit);
-        return $this->db->get('videos')->result_array();
+        return $this->db->get('Products')->result_array();
     }
 
-    public function get_num_episodes_by_id($videos_id='')
+    public function get_num_episodes_by_id($Products_id='')
     {
-        return $this->db->get_where('episodes', array('videos_id'=>$videos_id))->num_rows();
+        return $this->db->get_where('episodes', array('Products_id'=>$Products_id))->num_rows();
     }
 
     public function get_num_episodes_by_seasons_id($seasons_id='')
@@ -399,18 +399,18 @@ class Common_model extends CI_Model {
         $this->db->where('publication', '1');
         $this->db->order_by("last_ep_added","DESC");
         $this->db->limit(12);
-        $query_result = $this->db->get('videos');
+        $query_result = $this->db->get('Products');
         $result = $query_result->result();
         return $result;
     }
 
-    public function all_published_request_movies()
+    public function all_published_request_products()
     {
-        $this->db->where("FIND_IN_SET(left(3,10),video_type)>0");
+        $this->db->where("FIND_IN_SET(left(3,10),Product_type)>0");
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit(12);
-        $query_result = $this->db->get('videos');
+        $query_result = $this->db->get('Products');
         $result = $query_result->result();
         return $result;
     }
@@ -424,19 +424,19 @@ class Common_model extends CI_Model {
         return $result;
     }
 
-    public function all_video_type_on_primary_menu()
+    public function all_Product_type_on_primary_menu()
     {
         $this->db->where('primary_menu', '1');
-        $this->db->order_by("video_type_id","ASC");
-        $query_result = $this->db->get('video_type');
+        $this->db->order_by("Product_type_id","ASC");
+        $query_result = $this->db->get('Product_type');
         $result = $query_result->result();
         return $result;
     }
-    public function all_video_type_on_footer_menu()
+    public function all_Product_type_on_footer_menu()
     {
         $this->db->where('footer_menu', '1');
-        $this->db->order_by("video_type_id","ASC");
-        $query_result = $this->db->get('video_type');
+        $this->db->order_by("Product_type_id","ASC");
+        $query_result = $this->db->get('Product_type');
         $result = $query_result->result();
         return $result;
     }
@@ -455,10 +455,10 @@ class Common_model extends CI_Model {
     public function all_published_trailers()
     {
         $this->db->select('*');
-        $this->db->from('videos');
+        $this->db->from('Products');
         $this->db->where('is_tvseries', '0');
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit(6);
         $query_result = $this->db->get();
         $result = $query_result->result();
@@ -466,44 +466,44 @@ class Common_model extends CI_Model {
     }
    
 
-    public function get_videos_by_slug($slug)
+    public function get_Products_by_slug($slug)
     {
-        return $this->db->get_where('videos', array('slug' => $slug))->row();
+        return $this->db->get_where('Products', array('slug' => $slug))->row();
     }
-    public function get_videos_id_by_slug($slug)
+    public function get_Products_id_by_slug($slug)
     {
-        return $this->db->get_where('videos', array('slug' => $slug))->row()->videos_id;
+        return $this->db->get_where('Products', array('slug' => $slug))->row()->Products_id;
     }
-    public function watch_count_by_slug($videos_id='')
+    public function watch_count_by_slug($Products_id='')
     {
-        //$videos_id          =   $this->db->get_where('videos', array('videos_id' => $videos_id))->row()->videos_id;
-        $today_view         =   $this->db->get_where('videos', array('videos_id' => $videos_id))->row()->today_view;
-        $weekly_view        =   $this->db->get_where('videos', array('videos_id' => $videos_id))->row()->weekly_view;
-        $monthly_view       =   $this->db->get_where('videos', array('videos_id' => $videos_id))->row()->monthly_view;
-        $total_view         =   $this->db->get_where('videos', array('videos_id' => $videos_id))->row()->total_view;
+        //$Products_id          =   $this->db->get_where('Products', array('Products_id' => $Products_id))->row()->Products_id;
+        $today_view         =   $this->db->get_where('Products', array('Products_id' => $Products_id))->row()->today_view;
+        $weekly_view        =   $this->db->get_where('Products', array('Products_id' => $Products_id))->row()->weekly_view;
+        $monthly_view       =   $this->db->get_where('Products', array('Products_id' => $Products_id))->row()->monthly_view;
+        $total_view         =   $this->db->get_where('Products', array('Products_id' => $Products_id))->row()->total_view;
         
         $data['today_view'] =    $today_view +   1;
-        $this->db->where('videos_id', $videos_id);
-        $this->db->update('videos', $data);
+        $this->db->where('Products_id', $Products_id);
+        $this->db->update('Products', $data);
 
 
         $data['weekly_view'] =    $weekly_view +   1;
-        $this->db->where('videos_id', $videos_id);
-        $this->db->update('videos', $data);
+        $this->db->where('Products_id', $Products_id);
+        $this->db->update('Products', $data);
 
         $data['monthly_view']=    $monthly_view +   1;
-        $this->db->where('videos_id', $videos_id);
-        $this->db->update('videos', $data);
+        $this->db->where('Products_id', $Products_id);
+        $this->db->update('Products', $data);
 
 
         $data['total_view'] =    $total_view +   1;
-        $this->db->where('videos_id', $videos_id);
-        $this->db->update('videos', $data);
+        $this->db->where('Products_id', $Products_id);
+        $this->db->update('Products', $data);
     }    
 
     public function type_is_exist($slug)
     {
-        $num_rows = $this->db->get_where('video_type', array('slug' => $slug))->num_rows();
+        $num_rows = $this->db->get_where('Product_type', array('slug' => $slug))->num_rows();
         if($num_rows > 0):
             return true;
         else:
@@ -521,7 +521,7 @@ class Common_model extends CI_Model {
         return $star_id;
     }
 
-    public function get_video_by_star($limit, $start,$star_id)
+    public function get_Product_by_star($limit, $start,$star_id)
     {
         $data =array();
         $this->db->group_start();
@@ -530,9 +530,9 @@ class Common_model extends CI_Model {
         $this->db->or_where("FIND_IN_SET($star_id,writer)>0");
         $this->db->group_end();
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit($limit,$start);
-        $query = $this->db->get('videos');
+        $query = $this->db->get('Products');
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }
@@ -553,29 +553,29 @@ class Common_model extends CI_Model {
         return $names;
     }
 
-    public function get_video_by_star_record_count($star_id)
+    public function get_Product_by_star_record_count($star_id)
     {
         $this->db->select('*');
-        $this->db->from('videos');
+        $this->db->from('Products');
         $this->db->group_start();
         $this->db->where("FIND_IN_SET($star_id,stars)>0");
         $this->db->or_where("FIND_IN_SET($star_id,director)>0");
         $this->db->or_where("FIND_IN_SET($star_id,writer)>0");
         $this->db->group_end();
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $query = $this->db->get();        
         return $query->num_rows();
     }
 
-    public function get_video_by_director($limit, $start,$director)
+    public function get_Product_by_director($limit, $start,$director)
     {
         
         $this->db->select('*');
-        $this->db->from('videos');
+        $this->db->from('Products');
         $this->db->like('director', $director);
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit(24);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -587,21 +587,21 @@ class Common_model extends CI_Model {
         return '';
     }
 
-    public function get_videos_num_rows($array=array())
+    public function get_Products_num_rows($array=array())
     {
         if($array !='' && $array !=NULL && !empty($array))
             $this->db->like($array);
-        $query = $this->db->get('videos');
+        $query = $this->db->get('Products');
         return $query->num_rows();
     }
 
-     public function get_videos($array=array(),$limit=NULL, $start=NULL)
+     public function get_Products($array=array(),$limit=NULL, $start=NULL)
     {
         if($array !='' && $array !=NULL && !empty($array))
             $this->db->like($array);
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit($limit,$start);
-        $query = $this->db->get('videos');
+        $query = $this->db->get('Products');
         if ($query->num_rows() > 0){
             return $query->result_array();        
         }else{
@@ -625,7 +625,7 @@ class Common_model extends CI_Model {
     public function get_tvseries($limit=NULL, $start=NULL)
     {        
         $this->db->select('*');
-        $this->db->from('videos');
+        $this->db->from('Products');
         $this->db->where('is_tvseries', '1');
         $this->db->order_by("last_ep_added","DESC");
         $this->db->limit($limit,$start);
@@ -635,62 +635,62 @@ class Common_model extends CI_Model {
         }
     }
 
-    public function get_video_by_director_record_count($director)
+    public function get_Product_by_director_record_count($director)
     {
         $this->db->select('*');
-        $this->db->from('videos');
+        $this->db->from('Products');
         $this->db->like('director', $director);
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit(24);
         $query = $this->db->get();        
         return $query->num_rows();
     }
 
-    public function get_video_by_tags($limit, $start,$tags)
+    public function get_Product_by_tags($limit, $start,$tags)
     {
         $this->db->like('tags', $tags);
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit($limit,$start);
-        $query = $this->db->get("videos");        
+        $query = $this->db->get("Products");        
         return $query->result_array();
 
     }
 
-    public function get_video_by_year($limit, $start,$year)
+    public function get_Product_by_year($limit, $start,$year)
     {
         //$start = ($limit * $start) - $limit;
         $this->db->like('release', $year);
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit($limit,$start);
-        $query = $this->db->get("videos");
+        $query = $this->db->get("Products");
         return $query->result_array();
     }
-    public function get_video_by_year_record_count($year)
+    public function get_Product_by_year_record_count($year)
     {
         $this->db->like('release', $year);
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");
-        $query = $this->db->get("videos");    
+        $this->db->order_by("Products_id","desc");
+        $query = $this->db->get("Products");    
         return $query->num_rows();
     }
 
-    public function get_video_by_tags_record_count($tag)
+    public function get_Product_by_tags_record_count($tag)
     {
         $this->db->select('*');
-        $this->db->from('videos');
+        $this->db->from('Products');
         $this->db->like('tags', $tag);
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit(24);
         $query = $this->db->get();        
         return $query->num_rows();
     }    
     
-    // star movie import
-    public function get_star_ids_for_movie_import($type='',$stars='')
+    // star product import
+    public function get_star_ids_for_product_import($type='',$stars='')
     {
         $stars          = explode(',', $stars);
         $data           = array();
@@ -758,28 +758,28 @@ class Common_model extends CI_Model {
     }
 
     
-    public function movies_record_count()
+    public function products_record_count()
     {
         $this->db->where("is_tvseries !=","1");
         $this->db->where("publication","1");
-        $query = $this->db->get('videos');
+        $query = $this->db->get('Products');
         return $query->num_rows();
     }
-    public function search_movies_record_count($search='')
+    public function search_products_record_count($search='')
     {
-        $query = $this->db->like('title', $search)->get('videos');
+        $query = $this->db->like('title', $search)->get('Products');
         
         return $query->num_rows();
     }
     
     public function tv_series_record_count()
     {
-        return $this->db->get_where('videos', array('is_tvseries'=>'1'))->num_rows();
+        return $this->db->get_where('Products', array('is_tvseries'=>'1'))->num_rows();
     }
 
-    public function is_video_published($videos_id)
+    public function is_Product_published($Products_id)
     {
-        $publication                    =   $this->db->get_where('videos' , array('videos_id'=>$videos_id))->row()->publication;
+        $publication                    =   $this->db->get_where('Products' , array('Products_id'=>$Products_id))->row()->publication;
         
         if($publication =='1')
             return true;
@@ -787,31 +787,31 @@ class Common_model extends CI_Model {
             return false;        
     }
     
-    public function requested_movie_record_count()
+    public function requested_product_record_count()
     {
-        $query = $this->db->where("FIND_IN_SET(left(3,10),video_type)>0")->get('videos');
-        //$query = $this->db->where('video_type', '3')->get('videos');
+        $query = $this->db->where("FIND_IN_SET(left(3,10),Product_type)>0")->get('Products');
+        //$query = $this->db->where('Product_type', '3')->get('Products');
         
         return $query->num_rows();
     }
     
     public function trailers_record_count()
     {
-        $query = $this->db->where("FIND_IN_SET(left(4,10),video_type)>0")->get('videos');
-        //$query = $this->db->where('video_type', '4')->get('videos');
+        $query = $this->db->where("FIND_IN_SET(left(4,10),Product_type)>0")->get('Products');
+        //$query = $this->db->where('Product_type', '4')->get('Products');
         
         return $query->num_rows();
     }
     
-   public function fetch_videos($limit, $start) {
+   public function fetch_Products($limit, $start) {
         $this->db->limit($limit, $start);
         
         $this->db->select('*');
-        $this->db->from('videos');
-        //$this->db->where('video_type', '1');
-        $this->db->where("FIND_IN_SET(left(1,10),video_type)>0");
+        $this->db->from('Products');
+        //$this->db->where('Product_type', '1');
+        $this->db->where("FIND_IN_SET(left(1,10),Product_type)>0");
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit(24);
         $query = $this->db->get();
         
@@ -825,12 +825,12 @@ class Common_model extends CI_Model {
         return false;
    }
 
-   public function fetch_search_videos($limit, $start,$search) {
+   public function fetch_search_Products($limit, $start,$search) {
         $this->db->limit($limit, $start);
         $this->db->like('title',$search);
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");
-        return $this->db->get('videos')->result_array();        
+        $this->db->order_by("Products_id","desc");
+        return $this->db->get('Products')->result_array();        
    }
 
    
@@ -839,19 +839,19 @@ class Common_model extends CI_Model {
         $this->db->where('publication', '1');
         $this->db->order_by("last_ep_added","DESC");
         $this->db->limit($limit,$start);
-        $query = $this->db->get("videos");
+        $query = $this->db->get("Products");
         return $query->result_array();
    }
    
-   public function fetch_request_movies($limit, $start) {
+   public function fetch_request_products($limit, $start) {
         $this->db->limit($limit, $start);
         
         $this->db->select('*');
-        $this->db->from('videos');
-        $this->db->where("FIND_IN_SET(left(3,10),video_type)>0");
-        //$this->db->where('video_type', '3');
+        $this->db->from('Products');
+        $this->db->where("FIND_IN_SET(left(3,10),Product_type)>0");
+        //$this->db->where('Product_type', '3');
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit(32);
         $query = $this->db->get();
         
@@ -867,11 +867,11 @@ class Common_model extends CI_Model {
    
    public function fetch_trailers($limit, $start) {
         $this->db->limit($limit, $start);
-        $this->db->where("FIND_IN_SET(left(4,10),video_type)>0");
+        $this->db->where("FIND_IN_SET(left(4,10),Product_type)>0");
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit(32);
-        $query = $this->db->get('videos');
+        $query = $this->db->get('Products');
         
 
         if ($query->num_rows() > 0) {
@@ -883,34 +883,34 @@ class Common_model extends CI_Model {
         return false;
    }   
 
-   public function fetch_video_type_video_by_slug($limit, $start, $slug)
+   public function fetch_Product_type_Product_by_slug($limit, $start, $slug)
    {
-        $video_type = $this->db->get_where('video_type', array('slug' => $slug))->row()->video_type_id;
+        $Product_type = $this->db->get_where('Product_type', array('slug' => $slug))->row()->Product_type_id;
         $this->db->limit($limit, $start);
-        $this->db->where("find_in_set(".$video_type.",video_type) >",0);
+        $this->db->where("find_in_set(".$Product_type.",Product_type) >",0);
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");;
-        $query = $this->db->get("videos");
+        $this->db->order_by("Products_id","desc");;
+        $query = $this->db->get("Products");
         return $query->result_array();
     }
 
-  public function fetch_video_type_video_by_slug_record_count($slug)
+  public function fetch_Product_type_Product_by_slug_record_count($slug)
     {
-        $video_type = $this->db->get_where('video_type', array('slug' => $slug))->row();
-        $query = $this->db->where(array('video_type'=>$video_type->video_type_id))->get('videos');        
+        $Product_type = $this->db->get_where('Product_type', array('slug' => $slug))->row();
+        $query = $this->db->where(array('Product_type'=>$Product_type->Product_type_id))->get('Products');        
         return $query->num_rows();
     }
 
-    public function fetch_country_video_by_slug($limit, $start, $slug) {
+    public function fetch_country_Product_by_slug($limit, $start, $slug) {
         $country_id = $this->db->get_where('country', array('slug' => $slug))->row();
         $this->db->limit($limit, $start);        
         $this->db->select('*');
-        $this->db->from('videos');
+        $this->db->from('Products');
         $this->db->where("FIND_IN_SET(left($country_id->country_id,10),country)>0");
         //$this->db->where('country', $country_id->country_id);
-        //$this->db->where('video_type', '3');
+        //$this->db->where('Product_type', '3');
         $this->db->where('publication', '1');
-        $this->db->order_by("videos_id","desc");
+        $this->db->order_by("Products_id","desc");
         $this->db->limit(24);
         $query = $this->db->get();
         
@@ -924,10 +924,10 @@ class Common_model extends CI_Model {
         return '';
    }
 
-   public function fetch_country_video_by_slug_record_count($slug)
+   public function fetch_country_Product_by_slug_record_count($slug)
     {
         $country_id = $this->db->get_where('country', array('slug' => $slug))->row();
-        $query = $this->db->where(array('country'=>$country_id->country_id))->get('videos');
+        $query = $this->db->where(array('country'=>$country_id->country_id))->get('Products');
         
         return $query->num_rows();
     }
@@ -1037,7 +1037,7 @@ class Common_model extends CI_Model {
    public function search_result($search)
    {
      $this->db->like('title',$search);
-     $query  =   $this->db->get('videos');
+     $query  =   $this->db->get('Products');
          return $query->result();
    }
 
@@ -1052,41 +1052,41 @@ class Common_model extends CI_Model {
         return $image_url;
     }
 
-    function get_video_thumb_url($videos_id = '')
+    function get_Product_thumb_url($Products_id = '')
     {
-        if(file_exists('uploads/video_thumb/'.$videos_id.'.jpg'))
-            $image_url  =   base_url().'uploads/video_thumb/'.$videos_id.'.jpg';
+        if(file_exists('uploads/Product_thumb/'.$Products_id.'.jpg'))
+            $image_url  =   base_url().'uploads/Product_thumb/'.$Products_id.'.jpg';
         else
             $image_url  =   base_url().'uploads/default_image/thumbnail.jpg';
             
         return $image_url;
     }
 
-    function get_video_poster_url($videos_id = '')
+    function get_Product_poster_url($Products_id = '')
     {
-        if(file_exists('uploads/poster_image/'.$videos_id.'.jpg'))
-            $image_url  =   base_url().'uploads/poster_image/'.$videos_id.'.jpg';
-        else if(file_exists('uploads/video_thumb/'.$videos_id.'.jpg'))
-            $image_url  =   base_url().'uploads/video_thumb/'.$videos_id.'.jpg';
+        if(file_exists('uploads/poster_image/'.$Products_id.'.jpg'))
+            $image_url  =   base_url().'uploads/poster_image/'.$Products_id.'.jpg';
+        else if(file_exists('uploads/Product_thumb/'.$Products_id.'.jpg'))
+            $image_url  =   base_url().'uploads/Product_thumb/'.$Products_id.'.jpg';
         else
             $image_url  =   base_url().'uploads/default_image/poster.jpg';            
         return $image_url;
     }
 
-    function get_video_original_poster_url($videos_id = '')
+    function get_Product_original_poster_url($Products_id = '')
     {
-        if(file_exists('uploads/poster_image/'.$videos_id.'.jpg'))
-            $image_url  =   base_url().'uploads/poster_image/'.$videos_id.'.jpg';
+        if(file_exists('uploads/poster_image/'.$Products_id.'.jpg'))
+            $image_url  =   base_url().'uploads/poster_image/'.$Products_id.'.jpg';
         else
             $image_url  =   base_url().'uploads/default_image/poster.jpg';            
         return $image_url;
     }
 
 
-    function get_video_poster_admin_url($videos_id = '')
+    function get_Product_poster_admin_url($Products_id = '')
     {
-        if(file_exists('uploads/poster_image/'.$videos_id.'.jpg'))
-            $image_url  =   base_url().'uploads/poster_image/'.$videos_id.'.jpg';
+        if(file_exists('uploads/poster_image/'.$Products_id.'.jpg'))
+            $image_url  =   base_url().'uploads/poster_image/'.$Products_id.'.jpg';
         
         else
             $image_url  =   base_url().'uploads/default_image/poster.jpg';
@@ -1209,9 +1209,9 @@ class Common_model extends CI_Model {
 
     }
 
-    function get_video_title_by_id($videos_id)
+    function get_Product_title_by_id($Products_id)
     {
-        $query  =   $this->db->get_where('videos' , array('videos_id' => $videos_id));
+        $query  =   $this->db->get_where('Products' , array('Products_id' => $Products_id));
         $res    =   $query->result_array();
         foreach($res as $row)           
             return $row['title'];
@@ -1304,10 +1304,10 @@ class Common_model extends CI_Model {
         }
     }
 
-    function get_title_by_videos_id($videos_id=''){
-        $video =$this->db->get_where('videos' , array('videos_id'=>$videos_id));
-        if($video->num_rows() >0){
-            return $video->row()->title;
+    function get_title_by_Products_id($Products_id=''){
+        $Product =$this->db->get_where('Products' , array('Products_id'=>$Products_id));
+        if($Product->num_rows() >0){
+            return $Product->row()->title;
         }else{
             return 'Title Not Found';
         }
@@ -1322,10 +1322,10 @@ class Common_model extends CI_Model {
         }
     }
 
-    function get_slug_by_videos_id($videos_id=''){
-        $video =$this->db->get_where('videos' , array('videos_id'=>$videos_id));
-        if($video->num_rows() >0){
-            return $video->row()->slug;
+    function get_slug_by_Products_id($Products_id=''){
+        $Product =$this->db->get_where('Products' , array('Products_id'=>$Products_id));
+        if($Product->num_rows() >0){
+            return $Product->row()->slug;
         }else{
             return '';
         }
@@ -1421,12 +1421,12 @@ class Common_model extends CI_Model {
         return $config;
     }
 
-    function check_movie_accessability($slug=''){
+    function check_product_accessability($slug=''){
         $error = FALSE;
         if ($slug != '' && $slug != NULL):
-            if($this->movie_exist($slug)):
-                $videos_id          = $this->get_videos_id_by_slug($slug);
-                if($this->check_movie_visiability($videos_id) == FALSE):
+            if($this->product_exist($slug)):
+                $Products_id          = $this->get_Products_id_by_slug($slug);
+                if($this->check_product_visiability($Products_id) == FALSE):
                     $error = TRUE;
                 endif;
             else:
@@ -1440,18 +1440,18 @@ class Common_model extends CI_Model {
     }
 
 
-    function movie_exist($slug='') {
+    function product_exist($slug='') {
         $result = FALSE;
-        $rows = $this->db->get_where('videos', array('slug' => $slug))->num_rows();
+        $rows = $this->db->get_where('Products', array('slug' => $slug))->num_rows();
         if($rows >0):
           $result = TRUE;
         endif;
         return $result;     
     }
 
-    function check_movie_visiability($videos_id) {
+    function check_product_visiability($Products_id) {
         $result = TRUE;
-        $publication = $this->db->get_where('videos', array('videos_id' => $videos_id))->row()->publication;
+        $publication = $this->db->get_where('Products', array('Products_id' => $Products_id))->row()->publication;
         if($publication =='0'):
             if ($this->session->userdata('admin_is_login') != '1')
                 $result = FALSE;
@@ -1489,20 +1489,20 @@ class Common_model extends CI_Model {
         return $bytes;
     }
 
-    public function verify_movie_tvseries_id($id='')
+    public function verify_product_tvseries_id($id='')
     {
         //var_dump($id);
         $result =   FALSE;
-        $rows   =   $this->db->get_where('videos', array('videos_id' => $id))->num_rows();
+        $rows   =   $this->db->get_where('Products', array('Products_id' => $id))->num_rows();
         if($rows >    0):
             $result =   TRUE;
         endif;
         return $result;
     }
-    function get_related_movie($videos_id='',$genre_ids=''){
+    function get_related_product($Products_id='',$genre_ids=''){
         //var_dump($genre_ids);
         $response   =   array();
-        $this->db->where('videos_id !=',$videos_id);
+        $this->db->where('Products_id !=',$Products_id);
         $this->db->where('is_tvseries !=','1');
         $this->db->where('publication','1');
         $this->db->limit(12);
@@ -1520,15 +1520,15 @@ class Common_model extends CI_Model {
             endforeach;
             $this->db->group_end();
         endif;
-        $response     = $this->db->get('videos')->result_array();
+        $response     = $this->db->get('Products')->result_array();
         //var_dump($this->db->last_query());
         return $response;
 
     }
 
-    function get_related_tvseries($videos_id='',$genre_ids=''){
+    function get_related_tvseries($Products_id='',$genre_ids=''){
         $response   =   array();
-        $this->db->where('videos_id !=',$videos_id);
+        $this->db->where('Products_id !=',$Products_id);
         $this->db->where('is_tvseries','1');
         $this->db->where('publication','1');
         $this->db->order_by("last_ep_added","DESC");
@@ -1548,7 +1548,7 @@ class Common_model extends CI_Model {
             endforeach;
             $this->db->group_end();
         endif;
-        $response     = $this->db->get('videos')->result_array();
+        $response     = $this->db->get('Products')->result_array();
         return $response;
     }
 
@@ -1583,7 +1583,7 @@ class Common_model extends CI_Model {
         return $result;
     }
 
-    public function get_az_videos_num_rows($title='')
+    public function get_az_Products_num_rows($title='')
     {
         $result = array();
        if($title =='09'):
@@ -1597,11 +1597,11 @@ class Common_model extends CI_Model {
         else:
             $this->db->like('title',$title,'after');
         endif;        
-        $query = $this->db->get('videos');
+        $query = $this->db->get('Products');
         return $query->num_rows();
     }
 
-    public function get_az_videos($title='',$limit=16, $start=0)
+    public function get_az_Products($title='',$limit=16, $start=0)
     {
 
         $result = array();
@@ -1617,7 +1617,7 @@ class Common_model extends CI_Model {
             $this->db->like('title',$title,'after');
         endif;
         $this->db->limit($limit,$start);
-        $query = $this->db->get('videos');
+        $query = $this->db->get('Products');
         
         if ($query->num_rows() > 0){
             $result = $query->result_array();       
@@ -1650,8 +1650,8 @@ class Common_model extends CI_Model {
     }
 
     public function generator_sitemap(){
-        $movies 			= $this->db->get_where('videos', array('publication'=>'1'))->result_array();
-        $movie_types 		= $this->db->get('video_type')->result_array();
+        $products 			= $this->db->get_where('Products', array('publication'=>'1'))->result_array();
+        $product_types 		= $this->db->get('Product_type')->result_array();
         $pages 				= $this->db->get_where('page', array('publication'=>'1'))->result_array();
         $posts 				= $this->db->get_where('posts', array('publication'=>'1'))->result_array();
         $countries 			= $this->db->get_where('country', array('publication'=>'1'))->result_array();
@@ -1667,13 +1667,13 @@ class Common_model extends CI_Model {
 		// landing page page
 		if($landing_page_enable == '1'):
 			$url = $xml->addChild('url');
-			$url->addChild('loc',base_url('all-movies.html'));
+			$url->addChild('loc',base_url('all-products.html'));
 			$url->addChild('priority','1.0');
 		endif;
 		
-		// movie page
+		// product page
 		$url = $xml->addChild('url');
-		$url->addChild('loc',base_url('movies.html'));
+		$url->addChild('loc',base_url('products.html'));
 		$url->addChild('priority','0.9'); 
 
 		// privacy page
@@ -1714,17 +1714,17 @@ class Common_model extends CI_Model {
 			$url->addChild('priority','0.5');
 		endfor;
 
-		// movie page
-		foreach($movies as $movie):
+		// product page
+		foreach($products as $product):
 			$url = $xml->addChild('url');
-			$url->addChild('loc',base_url("watch/".$movie['slug'].".html"));
+			$url->addChild('loc',base_url("watch/".$product['slug'].".html"));
 			$url->addChild('priority','0.9');
 		endforeach;
 
 
-		foreach($movie_types as $movie_type):
+		foreach($product_types as $product_type):
 			$url = $xml->addChild('url');
-			$url->addChild('loc',base_url("type/".$movie_type['slug'].".html"));
+			$url->addChild('loc',base_url("type/".$product_type['slug'].".html"));
 			$url->addChild('priority','0.9');
 		endforeach;
 
@@ -1758,10 +1758,10 @@ class Common_model extends CI_Model {
 		endif;
     }
 
-    // movie file
-    public function video_file_order(){
+    // product file
+    public function Product_file_order(){
         // season order
-        $season_order   =   ovoo_config('video_file_order');
+        $season_order   =   ovoo_config('Product_file_order');
         if($season_order == 'DESC'):
             $season_order = 'DESC';
         else:
@@ -1769,30 +1769,30 @@ class Common_model extends CI_Model {
         endif;
         return $season_order;
     }
-    public function get_video_file_by_videos_id($videos_id=''){
-        $this->db->order_by('order', $this->video_file_order());
-        return $this->db->get_where('video_file',array('videos_id'=>$videos_id))->result_array();
+    public function get_Product_file_by_Products_id($Products_id=''){
+        $this->db->order_by('order', $this->Product_file_order());
+        return $this->db->get_where('Product_file',array('Products_id'=>$Products_id))->result_array();
     }
-    public function get_first_video_details_videos_id($videos_id=''){
-        $this->db->order_by('order', $this->video_file_order());
+    public function get_first_Product_details_Products_id($Products_id=''){
+        $this->db->order_by('order', $this->Product_file_order());
         $this->db->limit(1);
-        return $this->db->get_where('video_file', array('videos_id'=>$videos_id))->row();
+        return $this->db->get_where('Product_file', array('Products_id'=>$Products_id))->row();
     }
-    public function get_single_video_file_details_by_id($id=''){
-        $this->db->order_by('order', $this->video_file_order());
+    public function get_single_Product_file_details_by_id($id=''){
+        $this->db->order_by('order', $this->Product_file_order());
         $this->db->limit(1);
-        $query = $this->db->get_where('video_file', array('video_file_id'=>$id));
+        $query = $this->db->get_where('Product_file', array('Product_file_id'=>$id));
         if($query->num_rows() > 0):
-            return $this->db->get_where('video_file', array('video_file_id'=>$id))->row();
+            return $this->db->get_where('Product_file', array('Product_file_id'=>$id))->row();
         endif;
     }
 
-    public function get_single_video_file_details_by_key($key=''){
-        $this->db->order_by('order', $this->video_file_order());
+    public function get_single_Product_file_details_by_key($key=''){
+        $this->db->order_by('order', $this->Product_file_order());
         $this->db->limit(1);
-        $query = $this->db->get_where('video_file', array('stream_key'=>$key));
+        $query = $this->db->get_where('Product_file', array('stream_key'=>$key));
         if($query->num_rows() > 0):
-            return $this->db->get_where('video_file', array('stream_key'=>$key))->row();
+            return $this->db->get_where('Product_file', array('stream_key'=>$key))->row();
         endif;
     }
 
@@ -1823,20 +1823,20 @@ class Common_model extends CI_Model {
 
     
 
-    public function get_seasons_by_videos_id($videos_id=''){
+    public function get_seasons_by_Products_id($Products_id=''){
         $this->db->order_by('order', $this->season_order());
-        return $this->db->get_where('seasons',array('videos_id'=>$videos_id))->result_array();
+        return $this->db->get_where('seasons',array('Products_id'=>$Products_id))->result_array();
     }
 
-    public function get_episodes_by_videos_id_and_season_id($videos_id='',$seasons_id=''){
+    public function get_episodes_by_Products_id_and_season_id($Products_id='',$seasons_id=''){
         $this->db->order_by('order', $this->episode_order());
-        return $this->db->get_where('episodes',array('videos_id'=>$videos_id,'seasons_id'=> $seasons_id))->result_array();
+        return $this->db->get_where('episodes',array('Products_id'=>$Products_id,'seasons_id'=> $seasons_id))->result_array();
     }
 
-    public function get_first_episode_details_videos_id($videos_id=''){
+    public function get_first_episode_details_Products_id($Products_id=''){
         $this->db->order_by('order', $this->episode_order());
         $this->db->limit(1);
-        return $this->db->get_where('episodes', array('videos_id'=>$videos_id))->row();
+        return $this->db->get_where('episodes', array('Products_id'=>$Products_id))->row();
     }
 
     public function validate_stream_key($key=''){

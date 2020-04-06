@@ -1,11 +1,11 @@
-.video-js .vjs-big-play-button .vjs-icon-placeholder:before, .vjs-button > .vjs-icon-placeholder:before, .video-js .vjs-modal-dialog, .vjs-modal-dialog .vjs-modal-dialog-content {
+.Product-js .vjs-big-play-button .vjs-icon-placeholder:before, .vjs-button > .vjs-icon-placeholder:before, .Product-js .vjs-modal-dialog, .vjs-modal-dialog .vjs-modal-dialog-content {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%; }
 
-.video-js .vjs-big-play-button .vjs-icon-placeholder:before, .vjs-button > .vjs-icon-placeholder:before {
+.Product-js .vjs-big-play-button .vjs-icon-placeholder:before, .vjs-button > .vjs-icon-placeholder:before {
   text-align: center; }
 
 @font-face {
@@ -18,11 +18,11 @@
   font-weight: normal;
   font-style: normal; }
 
-.vjs-icon-play, .video-js .vjs-big-play-button .vjs-icon-placeholder:before, .video-js .vjs-play-control .vjs-icon-placeholder {
+.vjs-icon-play, .Product-js .vjs-big-play-button .vjs-icon-placeholder:before, .Product-js .vjs-play-control .vjs-icon-placeholder {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
-  .vjs-icon-play:before, .video-js .vjs-big-play-button .vjs-icon-placeholder:before, .video-js .vjs-play-control .vjs-icon-placeholder:before {
+  .vjs-icon-play:before, .Product-js .vjs-big-play-button .vjs-icon-placeholder:before, .Product-js .vjs-play-control .vjs-icon-placeholder:before {
     content: "\f101"; }
 
 .vjs-icon-play-circle {
@@ -32,53 +32,53 @@
   .vjs-icon-play-circle:before {
     content: "\f102"; }
 
-.vjs-icon-pause, .video-js .vjs-play-control.vjs-playing .vjs-icon-placeholder {
+.vjs-icon-pause, .Product-js .vjs-play-control.vjs-playing .vjs-icon-placeholder {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
-  .vjs-icon-pause:before, .video-js .vjs-play-control.vjs-playing .vjs-icon-placeholder:before {
+  .vjs-icon-pause:before, .Product-js .vjs-play-control.vjs-playing .vjs-icon-placeholder:before {
     content: "\f103"; }
 
-.vjs-icon-volume-mute, .video-js .vjs-mute-control.vjs-vol-0 .vjs-icon-placeholder {
+.vjs-icon-volume-mute, .Product-js .vjs-mute-control.vjs-vol-0 .vjs-icon-placeholder {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
-  .vjs-icon-volume-mute:before, .video-js .vjs-mute-control.vjs-vol-0 .vjs-icon-placeholder:before {
+  .vjs-icon-volume-mute:before, .Product-js .vjs-mute-control.vjs-vol-0 .vjs-icon-placeholder:before {
     content: "\f104"; }
 
-.vjs-icon-volume-low, .video-js .vjs-mute-control.vjs-vol-1 .vjs-icon-placeholder {
+.vjs-icon-volume-low, .Product-js .vjs-mute-control.vjs-vol-1 .vjs-icon-placeholder {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
-  .vjs-icon-volume-low:before, .video-js .vjs-mute-control.vjs-vol-1 .vjs-icon-placeholder:before {
+  .vjs-icon-volume-low:before, .Product-js .vjs-mute-control.vjs-vol-1 .vjs-icon-placeholder:before {
     content: "\f105"; }
 
-.vjs-icon-volume-mid, .video-js .vjs-mute-control.vjs-vol-2 .vjs-icon-placeholder {
+.vjs-icon-volume-mid, .Product-js .vjs-mute-control.vjs-vol-2 .vjs-icon-placeholder {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
-  .vjs-icon-volume-mid:before, .video-js .vjs-mute-control.vjs-vol-2 .vjs-icon-placeholder:before {
+  .vjs-icon-volume-mid:before, .Product-js .vjs-mute-control.vjs-vol-2 .vjs-icon-placeholder:before {
     content: "\f106"; }
 
-.vjs-icon-volume-high, .video-js .vjs-mute-control .vjs-icon-placeholder {
+.vjs-icon-volume-high, .Product-js .vjs-mute-control .vjs-icon-placeholder {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
-  .vjs-icon-volume-high:before, .video-js .vjs-mute-control .vjs-icon-placeholder:before {
+  .vjs-icon-volume-high:before, .Product-js .vjs-mute-control .vjs-icon-placeholder:before {
     content: "\f107"; }
 
-.vjs-icon-fullscreen-enter, .video-js .vjs-fullscreen-control .vjs-icon-placeholder {
+.vjs-icon-fullscreen-enter, .Product-js .vjs-fullscreen-control .vjs-icon-placeholder {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
-  .vjs-icon-fullscreen-enter:before, .video-js .vjs-fullscreen-control .vjs-icon-placeholder:before {
+  .vjs-icon-fullscreen-enter:before, .Product-js .vjs-fullscreen-control .vjs-icon-placeholder:before {
     content: "\f108"; }
 
-.vjs-icon-fullscreen-exit, .video-js.vjs-fullscreen .vjs-fullscreen-control .vjs-icon-placeholder {
+.vjs-icon-fullscreen-exit, .Product-js.vjs-fullscreen .vjs-fullscreen-control .vjs-icon-placeholder {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
-  .vjs-icon-fullscreen-exit:before, .video-js.vjs-fullscreen .vjs-fullscreen-control .vjs-icon-placeholder:before {
+  .vjs-icon-fullscreen-exit:before, .Product-js.vjs-fullscreen .vjs-fullscreen-control .vjs-icon-placeholder:before {
     content: "\f109"; }
 
 .vjs-icon-square {
@@ -95,35 +95,35 @@
   .vjs-icon-spinner:before {
     content: "\f10b"; }
 
-.vjs-icon-subtitles, .video-js .vjs-subtitles-button .vjs-icon-placeholder, .video-js .vjs-subs-caps-button .vjs-icon-placeholder,
-.video-js.video-js:lang(en-GB) .vjs-subs-caps-button .vjs-icon-placeholder,
-.video-js.video-js:lang(en-IE) .vjs-subs-caps-button .vjs-icon-placeholder,
-.video-js.video-js:lang(en-AU) .vjs-subs-caps-button .vjs-icon-placeholder,
-.video-js.video-js:lang(en-NZ) .vjs-subs-caps-button .vjs-icon-placeholder {
+.vjs-icon-subtitles, .Product-js .vjs-subtitles-button .vjs-icon-placeholder, .Product-js .vjs-subs-caps-button .vjs-icon-placeholder,
+.Product-js.Product-js:lang(en-GB) .vjs-subs-caps-button .vjs-icon-placeholder,
+.Product-js.Product-js:lang(en-IE) .vjs-subs-caps-button .vjs-icon-placeholder,
+.Product-js.Product-js:lang(en-AU) .vjs-subs-caps-button .vjs-icon-placeholder,
+.Product-js.Product-js:lang(en-NZ) .vjs-subs-caps-button .vjs-icon-placeholder {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
-  .vjs-icon-subtitles:before, .video-js .vjs-subtitles-button .vjs-icon-placeholder:before, .video-js .vjs-subs-caps-button .vjs-icon-placeholder:before,
-  .video-js.video-js:lang(en-GB) .vjs-subs-caps-button .vjs-icon-placeholder:before,
-  .video-js.video-js:lang(en-IE) .vjs-subs-caps-button .vjs-icon-placeholder:before,
-  .video-js.video-js:lang(en-AU) .vjs-subs-caps-button .vjs-icon-placeholder:before,
-  .video-js.video-js:lang(en-NZ) .vjs-subs-caps-button .vjs-icon-placeholder:before {
+  .vjs-icon-subtitles:before, .Product-js .vjs-subtitles-button .vjs-icon-placeholder:before, .Product-js .vjs-subs-caps-button .vjs-icon-placeholder:before,
+  .Product-js.Product-js:lang(en-GB) .vjs-subs-caps-button .vjs-icon-placeholder:before,
+  .Product-js.Product-js:lang(en-IE) .vjs-subs-caps-button .vjs-icon-placeholder:before,
+  .Product-js.Product-js:lang(en-AU) .vjs-subs-caps-button .vjs-icon-placeholder:before,
+  .Product-js.Product-js:lang(en-NZ) .vjs-subs-caps-button .vjs-icon-placeholder:before {
     content: "\f10c"; }
 
-.vjs-icon-captions, .video-js .vjs-captions-button .vjs-icon-placeholder, .video-js:lang(en) .vjs-subs-caps-button .vjs-icon-placeholder,
-.video-js:lang(fr-CA) .vjs-subs-caps-button .vjs-icon-placeholder {
+.vjs-icon-captions, .Product-js .vjs-captions-button .vjs-icon-placeholder, .Product-js:lang(en) .vjs-subs-caps-button .vjs-icon-placeholder,
+.Product-js:lang(fr-CA) .vjs-subs-caps-button .vjs-icon-placeholder {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
-  .vjs-icon-captions:before, .video-js .vjs-captions-button .vjs-icon-placeholder:before, .video-js:lang(en) .vjs-subs-caps-button .vjs-icon-placeholder:before,
-  .video-js:lang(fr-CA) .vjs-subs-caps-button .vjs-icon-placeholder:before {
+  .vjs-icon-captions:before, .Product-js .vjs-captions-button .vjs-icon-placeholder:before, .Product-js:lang(en) .vjs-subs-caps-button .vjs-icon-placeholder:before,
+  .Product-js:lang(fr-CA) .vjs-subs-caps-button .vjs-icon-placeholder:before {
     content: "\f10d"; }
 
-.vjs-icon-chapters, .video-js .vjs-chapters-button .vjs-icon-placeholder {
+.vjs-icon-chapters, .Product-js .vjs-chapters-button .vjs-icon-placeholder {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
-  .vjs-icon-chapters:before, .video-js .vjs-chapters-button .vjs-icon-placeholder:before {
+  .vjs-icon-chapters:before, .Product-js .vjs-chapters-button .vjs-icon-placeholder:before {
     content: "\f10e"; }
 
 .vjs-icon-share {
@@ -140,11 +140,11 @@
   .vjs-icon-cog:before {
     content: "\f110"; }
 
-.vjs-icon-circle, .video-js .vjs-play-progress, .video-js .vjs-volume-level {
+.vjs-icon-circle, .Product-js .vjs-play-progress, .Product-js .vjs-volume-level {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
-  .vjs-icon-circle:before, .video-js .vjs-play-progress:before, .video-js .vjs-volume-level:before {
+  .vjs-icon-circle:before, .Product-js .vjs-play-progress:before, .Product-js .vjs-volume-level:before {
     content: "\f111"; }
 
 .vjs-icon-circle-outline {
@@ -168,18 +168,18 @@
   .vjs-icon-hd:before {
     content: "\f114"; }
 
-.vjs-icon-cancel, .video-js .vjs-control.vjs-close-button .vjs-icon-placeholder {
+.vjs-icon-cancel, .Product-js .vjs-control.vjs-close-button .vjs-icon-placeholder {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
-  .vjs-icon-cancel:before, .video-js .vjs-control.vjs-close-button .vjs-icon-placeholder:before {
+  .vjs-icon-cancel:before, .Product-js .vjs-control.vjs-close-button .vjs-icon-placeholder:before {
     content: "\f115"; }
 
-.vjs-icon-replay, .video-js .vjs-play-control.vjs-ended .vjs-icon-placeholder {
+.vjs-icon-replay, .Product-js .vjs-play-control.vjs-ended .vjs-icon-placeholder {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
-  .vjs-icon-replay:before, .video-js .vjs-play-control.vjs-ended .vjs-icon-placeholder:before {
+  .vjs-icon-replay:before, .Product-js .vjs-play-control.vjs-ended .vjs-icon-placeholder:before {
     content: "\f116"; }
 
 .vjs-icon-facebook {
@@ -224,18 +224,18 @@
   .vjs-icon-pinterest:before {
     content: "\f11c"; }
 
-.vjs-icon-audio-description, .video-js .vjs-descriptions-button .vjs-icon-placeholder {
+.vjs-icon-audio-description, .Product-js .vjs-descriptions-button .vjs-icon-placeholder {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
-  .vjs-icon-audio-description:before, .video-js .vjs-descriptions-button .vjs-icon-placeholder:before {
+  .vjs-icon-audio-description:before, .Product-js .vjs-descriptions-button .vjs-icon-placeholder:before {
     content: "\f11d"; }
 
-.vjs-icon-audio, .video-js .vjs-audio-button .vjs-icon-placeholder {
+.vjs-icon-audio, .Product-js .vjs-audio-button .vjs-icon-placeholder {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
-  .vjs-icon-audio:before, .video-js .vjs-audio-button .vjs-icon-placeholder:before {
+  .vjs-icon-audio:before, .Product-js .vjs-audio-button .vjs-icon-placeholder:before {
     content: "\f11e"; }
 
 .vjs-icon-next-item {
@@ -252,7 +252,7 @@
   .vjs-icon-previous-item:before {
     content: "\f120"; }
 
-.video-js {
+.Product-js {
   display: block;
   vertical-align: top;
   box-sizing: border-box;
@@ -266,21 +266,21 @@
   font-style: normal;
   font-family: Arial, Helvetica, sans-serif;
   word-break: initial; }
-  .video-js:-moz-full-screen {
+  .Product-js:-moz-full-screen {
     position: absolute; }
-  .video-js:-webkit-full-screen {
+  .Product-js:-webkit-full-screen {
     width: 100% !important;
     height: 100% !important; }
 
-.video-js[tabindex="-1"] {
+.Product-js[tabindex="-1"] {
   outline: none; }
 
-.video-js *,
-.video-js *:before,
-.video-js *:after {
+.Product-js *,
+.Product-js *:before,
+.Product-js *:after {
   box-sizing: inherit; }
 
-.video-js ul {
+.Product-js ul {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
@@ -290,24 +290,24 @@
   margin-top: 0;
   margin-bottom: 0; }
 
-.video-js.vjs-fluid,
-.video-js.vjs-16-9,
-.video-js.vjs-4-3 {
+.Product-js.vjs-fluid,
+.Product-js.vjs-16-9,
+.Product-js.vjs-4-3 {
   width: 100%;
   max-width: 100%;
   height: 0; }
 
-.video-js.vjs-16-9 {
+.Product-js.vjs-16-9 {
   padding-top: 56.25%; }
 
-.video-js.vjs-4-3 {
+.Product-js.vjs-4-3 {
   padding-top: 75%; }
 
-.video-js.vjs-fill {
+.Product-js.vjs-fill {
   width: 100%;
   height: 100%; }
 
-.video-js .vjs-tech {
+.Product-js .vjs-tech {
   position: absolute;
   top: 0;
   left: 0;
@@ -320,7 +320,7 @@ body.vjs-full-window {
   height: 100%;
   overflow-y: auto; }
 
-.vjs-full-window .video-js.vjs-fullscreen {
+.vjs-full-window .Product-js.vjs-fullscreen {
   position: fixed;
   overflow: hidden;
   z-index: 1000;
@@ -329,12 +329,12 @@ body.vjs-full-window {
   bottom: 0;
   right: 0; }
 
-.video-js.vjs-fullscreen {
+.Product-js.vjs-fullscreen {
   width: 100% !important;
   height: 100% !important;
   padding-top: 0 !important; }
 
-.video-js.vjs-fullscreen.vjs-user-inactive {
+.Product-js.vjs-fullscreen.vjs-user-inactive {
   cursor: none; }
 
 .vjs-hidden {
@@ -344,7 +344,7 @@ body.vjs-full-window {
   opacity: 0.5;
   cursor: default; }
 
-.video-js .vjs-offscreen {
+.Product-js .vjs-offscreen {
   height: 1px;
   left: -9999px;
   position: absolute;
@@ -371,7 +371,7 @@ body.vjs-full-window {
 .vjs-no-js a:visited {
   color: #66A8CC; }
 
-.video-js .vjs-big-play-button {
+.Product-js .vjs-big-play-button {
   font-size: 3em;
   line-height: 1.5em;
   height: 1.5em;
@@ -401,8 +401,8 @@ body.vjs-full-window {
   margin-top: -0.75em;
   margin-left: -1.5em; }
 
-.video-js:hover .vjs-big-play-button,
-.video-js .vjs-big-play-button:focus {
+.Product-js:hover .vjs-big-play-button,
+.Product-js .vjs-big-play-button:focus {
   border-color: #fff;
   background-color: #73859f;
   background-color: rgba(115, 133, 159, 0.5);
@@ -421,7 +421,7 @@ body.vjs-full-window {
 .vjs-has-started.vjs-paused.vjs-show-big-play-button-on-pause .vjs-big-play-button {
   display: block; }
 
-.video-js button {
+.Product-js button {
   background: none;
   border: none;
   color: inherit;
@@ -440,7 +440,7 @@ body.vjs-full-window {
   width: 100%;
   height: 100%; }
 
-.video-js .vjs-control.vjs-close-button {
+.Product-js .vjs-control.vjs-close-button {
   cursor: pointer;
   height: 3em;
   position: absolute;
@@ -448,14 +448,14 @@ body.vjs-full-window {
   top: 0.5em;
   z-index: 2; }
 
-.video-js .vjs-modal-dialog {
+.Product-js .vjs-modal-dialog {
   background: rgba(0, 0, 0, 0.8);
   background: -webkit-linear-gradient(-90deg, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0));
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0));
   overflow: auto;
   box-sizing: content-box; }
 
-.video-js .vjs-modal-dialog > * {
+.Product-js .vjs-modal-dialog > * {
   box-sizing: border-box; }
 
 .vjs-modal-dialog .vjs-modal-dialog-content {
@@ -539,7 +539,7 @@ body.vjs-full-window {
 .vjs-menu-button-popup .vjs-menu.vjs-lock-showing {
   display: block; }
 
-.video-js .vjs-menu-button-inline {
+.Product-js .vjs-menu-button-inline {
   -webkit-transition: all 0.4s;
   -moz-transition: all 0.4s;
   -ms-transition: all 0.4s;
@@ -547,13 +547,13 @@ body.vjs-full-window {
   transition: all 0.4s;
   overflow: hidden; }
 
-.video-js .vjs-menu-button-inline:before {
+.Product-js .vjs-menu-button-inline:before {
   width: 2.222222222em; }
 
-.video-js .vjs-menu-button-inline:hover,
-.video-js .vjs-menu-button-inline:focus,
-.video-js .vjs-menu-button-inline.vjs-slider-active,
-.video-js.vjs-no-flex .vjs-menu-button-inline {
+.Product-js .vjs-menu-button-inline:hover,
+.Product-js .vjs-menu-button-inline:focus,
+.Product-js .vjs-menu-button-inline.vjs-slider-active,
+.Product-js.vjs-no-flex .vjs-menu-button-inline {
   width: 12em; }
 
 .vjs-menu-button-inline .vjs-menu {
@@ -594,7 +594,7 @@ body.vjs-full-window {
   margin: 0;
   overflow: hidden; }
 
-.video-js .vjs-control-bar {
+.Product-js .vjs-control-bar {
   display: none;
   width: 100%;
   position: absolute;
@@ -639,7 +639,7 @@ body.vjs-full-window {
 .vjs-has-started.vjs-no-flex .vjs-control-bar {
   display: table; }
 
-.video-js .vjs-control {
+.Product-js .vjs-control {
   position: relative;
   text-align: center;
   margin: 0;
@@ -656,12 +656,12 @@ body.vjs-full-window {
   font-size: 1.8em;
   line-height: 1.67; }
 
-.video-js .vjs-control:focus:before,
-.video-js .vjs-control:hover:before,
-.video-js .vjs-control:focus {
+.Product-js .vjs-control:focus:before,
+.Product-js .vjs-control:hover:before,
+.Product-js .vjs-control:focus {
   text-shadow: 0em 0em 1em white; }
 
-.video-js .vjs-control-text {
+.Product-js .vjs-control-text {
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -674,10 +674,10 @@ body.vjs-full-window {
   display: table-cell;
   vertical-align: middle; }
 
-.video-js .vjs-custom-control-spacer {
+.Product-js .vjs-custom-control-spacer {
   display: none; }
 
-.video-js .vjs-progress-control {
+.Product-js .vjs-progress-control {
   cursor: pointer;
   -webkit-box-flex: auto;
   -moz-box-flex: auto;
@@ -695,7 +695,7 @@ body.vjs-full-window {
   min-width: 4em;
   touch-action: none; }
 
-.video-js .vjs-progress-control.disabled {
+.Product-js .vjs-progress-control.disabled {
   cursor: default; }
 
 .vjs-live .vjs-progress-control {
@@ -704,7 +704,7 @@ body.vjs-full-window {
 .vjs-no-flex .vjs-progress-control {
   width: auto; }
 
-.video-js .vjs-progress-holder {
+.Product-js .vjs-progress-holder {
   -webkit-box-flex: auto;
   -moz-box-flex: auto;
   -webkit-flex: auto;
@@ -717,18 +717,18 @@ body.vjs-full-window {
   transition: all 0.2s;
   height: 0.3em; }
 
-.video-js .vjs-progress-control .vjs-progress-holder {
+.Product-js .vjs-progress-control .vjs-progress-holder {
   margin: 0 10px; }
 
-.video-js .vjs-progress-control:hover .vjs-progress-holder {
+.Product-js .vjs-progress-control:hover .vjs-progress-holder {
   font-size: 1.666666666666666666em; }
 
-.video-js .vjs-progress-control:hover .vjs-progress-holder.disabled {
+.Product-js .vjs-progress-control:hover .vjs-progress-holder.disabled {
   font-size: 1em; }
 
-.video-js .vjs-progress-holder .vjs-play-progress,
-.video-js .vjs-progress-holder .vjs-load-progress,
-.video-js .vjs-progress-holder .vjs-load-progress div {
+.Product-js .vjs-progress-holder .vjs-play-progress,
+.Product-js .vjs-progress-holder .vjs-load-progress,
+.Product-js .vjs-progress-holder .vjs-load-progress div {
   position: absolute;
   display: block;
   height: 100%;
@@ -738,24 +738,24 @@ body.vjs-full-window {
   left: 0;
   top: 0; }
 
-.video-js .vjs-play-progress {
+.Product-js .vjs-play-progress {
   background-color: #fff; }
-  .video-js .vjs-play-progress:before {
+  .Product-js .vjs-play-progress:before {
     font-size: 0.9em;
     position: absolute;
     right: -0.5em;
     top: -0.333333333333333em;
     z-index: 1; }
 
-.video-js .vjs-load-progress {
+.Product-js .vjs-load-progress {
   background: #bfc7d3;
   background: rgba(115, 133, 159, 0.5); }
 
-.video-js .vjs-load-progress div {
+.Product-js .vjs-load-progress div {
   background: white;
   background: rgba(115, 133, 159, 0.75); }
 
-.video-js .vjs-time-tooltip {
+.Product-js .vjs-time-tooltip {
   background-color: #fff;
   background-color: rgba(255, 255, 255, 0.8);
   -webkit-border-radius: 0.3em;
@@ -772,19 +772,19 @@ body.vjs-full-window {
   visibility: hidden;
   z-index: 1; }
 
-.video-js .vjs-progress-holder:focus .vjs-time-tooltip {
+.Product-js .vjs-progress-holder:focus .vjs-time-tooltip {
   display: none; }
 
-.video-js .vjs-progress-control:hover .vjs-time-tooltip,
-.video-js .vjs-progress-control:hover .vjs-progress-holder:focus .vjs-time-tooltip {
+.Product-js .vjs-progress-control:hover .vjs-time-tooltip,
+.Product-js .vjs-progress-control:hover .vjs-progress-holder:focus .vjs-time-tooltip {
   display: block;
   font-size: 0.6em;
   visibility: visible; }
 
-.video-js .vjs-progress-control.disabled:hover .vjs-time-tooltip {
+.Product-js .vjs-progress-control.disabled:hover .vjs-time-tooltip {
   font-size: 1em; }
 
-.video-js .vjs-progress-control .vjs-mouse-display {
+.Product-js .vjs-progress-control .vjs-mouse-display {
   display: none;
   position: absolute;
   width: 1px;
@@ -795,10 +795,10 @@ body.vjs-full-window {
 .vjs-no-flex .vjs-progress-control .vjs-mouse-display {
   z-index: 0; }
 
-.video-js .vjs-progress-control:hover .vjs-mouse-display {
+.Product-js .vjs-progress-control:hover .vjs-mouse-display {
   display: block; }
 
-.video-js.vjs-user-inactive .vjs-progress-control .vjs-mouse-display {
+.Product-js.vjs-user-inactive .vjs-progress-control .vjs-mouse-display {
   visibility: hidden;
   opacity: 0;
   -webkit-transition: visibility 1s, opacity 1s;
@@ -807,7 +807,7 @@ body.vjs-full-window {
   -o-transition: visibility 1s, opacity 1s;
   transition: visibility 1s, opacity 1s; }
 
-.video-js.vjs-user-inactive.vjs-no-flex .vjs-progress-control .vjs-mouse-display {
+.Product-js.vjs-user-inactive.vjs-no-flex .vjs-progress-control .vjs-mouse-display {
   display: none; }
 
 .vjs-mouse-display .vjs-time-tooltip {
@@ -815,7 +815,7 @@ body.vjs-full-window {
   background-color: #000;
   background-color: rgba(0, 0, 0, 0.8); }
 
-.video-js .vjs-slider {
+.Product-js .vjs-slider {
   position: relative;
   cursor: pointer;
   padding: 0;
@@ -835,16 +835,16 @@ body.vjs-full-window {
   background-color: #73859f;
   background-color: rgba(115, 133, 159, 0.5); }
 
-.video-js .vjs-slider.disabled {
+.Product-js .vjs-slider.disabled {
   cursor: default; }
 
-.video-js .vjs-slider:focus {
+.Product-js .vjs-slider:focus {
   text-shadow: 0em 0em 1em white;
   -webkit-box-shadow: 0 0 1em #fff;
   -moz-box-shadow: 0 0 1em #fff;
   box-shadow: 0 0 1em #fff; }
 
-.video-js .vjs-mute-control {
+.Product-js .vjs-mute-control {
   cursor: pointer;
   -webkit-box-flex: none;
   -moz-box-flex: none;
@@ -855,7 +855,7 @@ body.vjs-full-window {
   padding-right: 2em;
   padding-bottom: 3em; }
 
-.video-js .vjs-volume-control {
+.Product-js .vjs-volume-control {
   cursor: pointer;
   margin-right: 1em;
   display: -webkit-box;
@@ -863,10 +863,10 @@ body.vjs-full-window {
   display: -ms-flexbox;
   display: flex; }
 
-.video-js .vjs-volume-control.vjs-volume-horizontal {
+.Product-js .vjs-volume-control.vjs-volume-horizontal {
   width: 5em; }
 
-.video-js .vjs-volume-panel .vjs-volume-control {
+.Product-js .vjs-volume-panel .vjs-volume-control {
   visibility: visible;
   opacity: 0;
   width: 1px;
@@ -879,19 +879,19 @@ body.vjs-full-window {
   .vjs-no-flex .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical .vjs-volume-level {
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; }
 
-.video-js .vjs-volume-panel {
+.Product-js .vjs-volume-panel {
   -webkit-transition: width 1s;
   -moz-transition: width 1s;
   -ms-transition: width 1s;
   -o-transition: width 1s;
   transition: width 1s; }
-  .video-js .vjs-volume-panel:hover .vjs-volume-control,
-  .video-js .vjs-volume-panel:active .vjs-volume-control,
-  .video-js .vjs-volume-panel:focus .vjs-volume-control,
-  .video-js .vjs-volume-panel .vjs-volume-control:hover,
-  .video-js .vjs-volume-panel .vjs-volume-control:active,
-  .video-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control,
-  .video-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active {
+  .Product-js .vjs-volume-panel:hover .vjs-volume-control,
+  .Product-js .vjs-volume-panel:active .vjs-volume-control,
+  .Product-js .vjs-volume-panel:focus .vjs-volume-control,
+  .Product-js .vjs-volume-panel .vjs-volume-control:hover,
+  .Product-js .vjs-volume-panel .vjs-volume-control:active,
+  .Product-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control,
+  .Product-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active {
     visibility: visible;
     opacity: 1;
     position: relative;
@@ -900,49 +900,49 @@ body.vjs-full-window {
     -ms-transition: visibility 0.1s, opacity 0.1s, height 0.1s, width 0.1s, left 0s, top 0s;
     -o-transition: visibility 0.1s, opacity 0.1s, height 0.1s, width 0.1s, left 0s, top 0s;
     transition: visibility 0.1s, opacity 0.1s, height 0.1s, width 0.1s, left 0s, top 0s; }
-    .video-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-horizontal,
-    .video-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-horizontal,
-    .video-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-horizontal,
-    .video-js .vjs-volume-panel .vjs-volume-control:hover.vjs-volume-horizontal,
-    .video-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-horizontal,
-    .video-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control.vjs-volume-horizontal,
-    .video-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-horizontal {
+    .Product-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-horizontal,
+    .Product-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-horizontal,
+    .Product-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-horizontal,
+    .Product-js .vjs-volume-panel .vjs-volume-control:hover.vjs-volume-horizontal,
+    .Product-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-horizontal,
+    .Product-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control.vjs-volume-horizontal,
+    .Product-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-horizontal {
       width: 5em;
       height: 3em; }
-    .video-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-vertical,
-    .video-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-vertical,
-    .video-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-vertical,
-    .video-js .vjs-volume-panel .vjs-volume-control:hover.vjs-volume-vertical,
-    .video-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-vertical,
-    .video-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control.vjs-volume-vertical,
-    .video-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-vertical {
+    .Product-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-vertical,
+    .Product-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-vertical,
+    .Product-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-vertical,
+    .Product-js .vjs-volume-panel .vjs-volume-control:hover.vjs-volume-vertical,
+    .Product-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-vertical,
+    .Product-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control.vjs-volume-vertical,
+    .Product-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-vertical {
       -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; }
-      .video-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,
-      .video-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-vertical .vjs-volume-level,
-      .video-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,
-      .video-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-vertical .vjs-volume-level,
-      .video-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,
-      .video-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-vertical .vjs-volume-level,
-      .video-js .vjs-volume-panel .vjs-volume-control:hover.vjs-volume-vertical .vjs-volume-bar,
-      .video-js .vjs-volume-panel .vjs-volume-control:hover.vjs-volume-vertical .vjs-volume-level,
-      .video-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-vertical .vjs-volume-bar,
-      .video-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-vertical .vjs-volume-level,
-      .video-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,
-      .video-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control.vjs-volume-vertical .vjs-volume-level,
-      .video-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-vertical .vjs-volume-bar,
-      .video-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-vertical .vjs-volume-level {
+      .Product-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,
+      .Product-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-vertical .vjs-volume-level,
+      .Product-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,
+      .Product-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-vertical .vjs-volume-level,
+      .Product-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,
+      .Product-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-vertical .vjs-volume-level,
+      .Product-js .vjs-volume-panel .vjs-volume-control:hover.vjs-volume-vertical .vjs-volume-bar,
+      .Product-js .vjs-volume-panel .vjs-volume-control:hover.vjs-volume-vertical .vjs-volume-level,
+      .Product-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-vertical .vjs-volume-bar,
+      .Product-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-vertical .vjs-volume-level,
+      .Product-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,
+      .Product-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control.vjs-volume-vertical .vjs-volume-level,
+      .Product-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-vertical .vjs-volume-bar,
+      .Product-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-vertical .vjs-volume-level {
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; }
-  .video-js .vjs-volume-panel.vjs-volume-panel-horizontal:hover, .video-js .vjs-volume-panel.vjs-volume-panel-horizontal:active, .video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-slider-active {
+  .Product-js .vjs-volume-panel.vjs-volume-panel-horizontal:hover, .Product-js .vjs-volume-panel.vjs-volume-panel-horizontal:active, .Product-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-slider-active {
     width: 9em;
     -webkit-transition: width 0.1s;
     -moz-transition: width 0.1s;
     -ms-transition: width 0.1s;
     -o-transition: width 0.1s;
     transition: width 0.1s; }
-  .video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-mute-toggle-only {
+  .Product-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-mute-toggle-only {
     width: 4em; }
 
-.video-js .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical {
+.Product-js .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical {
   height: 8em;
   width: 3em;
   left: -3.5em;
@@ -952,14 +952,14 @@ body.vjs-full-window {
   -o-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s 1s, left 1s 1s, top 1s 1s;
   transition: visibility 1s, opacity 1s, height 1s 1s, width 1s 1s, left 1s 1s, top 1s 1s; }
 
-.video-js .vjs-volume-panel .vjs-volume-control.vjs-volume-horizontal {
+.Product-js .vjs-volume-panel .vjs-volume-control.vjs-volume-horizontal {
   -webkit-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s, left 1s 1s, top 1s 1s;
   -moz-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s, left 1s 1s, top 1s 1s;
   -ms-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s, left 1s 1s, top 1s 1s;
   -o-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s, left 1s 1s, top 1s 1s;
   transition: visibility 1s, opacity 1s, height 1s 1s, width 1s, left 1s 1s, top 1s 1s; }
 
-.video-js.vjs-no-flex .vjs-volume-panel .vjs-volume-control.vjs-volume-horizontal {
+.Product-js.vjs-no-flex .vjs-volume-panel .vjs-volume-control.vjs-volume-horizontal {
   width: 5em;
   height: 3em;
   visibility: visible;
@@ -971,19 +971,19 @@ body.vjs-full-window {
   -o-transition: none;
   transition: none; }
 
-.video-js.vjs-no-flex .vjs-volume-control.vjs-volume-vertical,
-.video-js.vjs-no-flex .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical {
+.Product-js.vjs-no-flex .vjs-volume-control.vjs-volume-vertical,
+.Product-js.vjs-no-flex .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical {
   position: absolute;
   bottom: 3em;
   left: 0.5em; }
 
-.video-js .vjs-volume-panel {
+.Product-js .vjs-volume-panel {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex; }
 
-.video-js .vjs-volume-bar {
+.Product-js .vjs-volume-bar {
   margin: 1.35em 0.45em; }
 
 .vjs-volume-bar.vjs-slider-horizontal {
@@ -995,12 +995,12 @@ body.vjs-full-window {
   height: 5em;
   margin: 1.35em auto; }
 
-.video-js .vjs-volume-level {
+.Product-js .vjs-volume-level {
   position: absolute;
   bottom: 0;
   left: 0;
   background-color: #fff; }
-  .video-js .vjs-volume-level:before {
+  .Product-js .vjs-volume-level:before {
     position: absolute;
     font-size: 0.9em; }
 
@@ -1016,7 +1016,7 @@ body.vjs-full-window {
     top: -0.3em;
     right: -0.5em; }
 
-.video-js .vjs-volume-panel.vjs-volume-panel-vertical {
+.Product-js .vjs-volume-panel.vjs-volume-panel-vertical {
   width: 4em; }
 
 .vjs-volume-bar.vjs-slider-vertical .vjs-volume-level {
@@ -1025,14 +1025,14 @@ body.vjs-full-window {
 .vjs-volume-bar.vjs-slider-horizontal .vjs-volume-level {
   width: 100%; }
 
-.video-js .vjs-volume-vertical {
+.Product-js .vjs-volume-vertical {
   width: 3em;
   height: 8em;
   bottom: 8em;
   background-color: #2B333F;
   background-color: rgba(43, 51, 63, 0.7); }
 
-.video-js .vjs-volume-horizontal .vjs-menu {
+.Product-js .vjs-volume-horizontal .vjs-menu {
   left: -2em; }
 
 .vjs-poster {
@@ -1069,7 +1069,7 @@ body.vjs-full-window {
 .vjs-using-native-controls .vjs-poster {
   display: none; }
 
-.video-js .vjs-live-control {
+.Product-js .vjs-live-control {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1091,7 +1091,7 @@ body.vjs-full-window {
   width: auto;
   text-align: left; }
 
-.video-js .vjs-time-control {
+.Product-js .vjs-time-control {
   -webkit-box-flex: none;
   -moz-box-flex: none;
   -webkit-flex: none;
@@ -1107,7 +1107,7 @@ body.vjs-full-window {
 .vjs-live .vjs-time-control {
   display: none; }
 
-.video-js .vjs-current-time,
+.Product-js .vjs-current-time,
 .vjs-no-flex .vjs-current-time {
   display: none; }
 
@@ -1115,7 +1115,7 @@ body.vjs-full-window {
   width: 0px !important;
   white-space: nowrap; }
 
-.video-js .vjs-duration,
+.Product-js .vjs-duration,
 .vjs-no-flex .vjs-duration {
   display: none; }
 
@@ -1126,7 +1126,7 @@ body.vjs-full-window {
 .vjs-live .vjs-time-divider {
   display: none; }
 
-.video-js .vjs-play-control .vjs-icon-placeholder {
+.Product-js .vjs-play-control .vjs-icon-placeholder {
   cursor: pointer;
   -webkit-box-flex: none;
   -moz-box-flex: none;
@@ -1142,10 +1142,10 @@ body.vjs-full-window {
   top: 0;
   pointer-events: none; }
 
-.video-js.vjs-user-inactive.vjs-playing .vjs-text-track-display {
+.Product-js.vjs-user-inactive.vjs-playing .vjs-text-track-display {
   bottom: 1em; }
 
-.video-js .vjs-text-track {
+.Product-js .vjs-text-track {
   font-size: 1.4em;
   text-align: center;
   margin-bottom: 0.1em;
@@ -1161,21 +1161,21 @@ body.vjs-full-window {
 .vjs-tt-cue {
   display: block; }
 
-video::-webkit-media-text-track-display {
+Product::-webkit-media-text-track-display {
   -moz-transform: translateY(-3em);
   -ms-transform: translateY(-3em);
   -o-transform: translateY(-3em);
   -webkit-transform: translateY(-3em);
   transform: translateY(-3em); }
 
-.video-js.vjs-user-inactive.vjs-playing video::-webkit-media-text-track-display {
+.Product-js.vjs-user-inactive.vjs-playing Product::-webkit-media-text-track-display {
   -moz-transform: translateY(-1.5em);
   -ms-transform: translateY(-1.5em);
   -o-transform: translateY(-1.5em);
   -webkit-transform: translateY(-1.5em);
   transform: translateY(-1.5em); }
 
-.video-js .vjs-fullscreen-control {
+.Product-js .vjs-fullscreen-control {
   cursor: pointer;
   -webkit-box-flex: none;
   -moz-box-flex: none;
@@ -1315,29 +1315,29 @@ video::-webkit-media-text-track-display {
 .vjs-chapters-button .vjs-menu ul {
   width: 24em; }
 
-.video-js .vjs-subs-caps-button + .vjs-menu .vjs-captions-menu-item .vjs-menu-item-text .vjs-icon-placeholder {
+.Product-js .vjs-subs-caps-button + .vjs-menu .vjs-captions-menu-item .vjs-menu-item-text .vjs-icon-placeholder {
   vertical-align: middle;
   display: inline-block;
   margin-bottom: -0.1em; }
 
-.video-js .vjs-subs-caps-button + .vjs-menu .vjs-captions-menu-item .vjs-menu-item-text .vjs-icon-placeholder:before {
+.Product-js .vjs-subs-caps-button + .vjs-menu .vjs-captions-menu-item .vjs-menu-item-text .vjs-icon-placeholder:before {
   font-family: VideoJS;
   content: "\f10d";
   font-size: 1.5em;
   line-height: inherit; }
 
-.video-js .vjs-audio-button + .vjs-menu .vjs-main-desc-menu-item .vjs-menu-item-text .vjs-icon-placeholder {
+.Product-js .vjs-audio-button + .vjs-menu .vjs-main-desc-menu-item .vjs-menu-item-text .vjs-icon-placeholder {
   vertical-align: middle;
   display: inline-block;
   margin-bottom: -0.1em; }
 
-.video-js .vjs-audio-button + .vjs-menu .vjs-main-desc-menu-item .vjs-menu-item-text .vjs-icon-placeholder:before {
+.Product-js .vjs-audio-button + .vjs-menu .vjs-main-desc-menu-item .vjs-menu-item-text .vjs-icon-placeholder:before {
   font-family: VideoJS;
   content: " \f11d";
   font-size: 1.5em;
   line-height: inherit; }
 
-.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-custom-control-spacer {
+.Product-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-custom-control-spacer {
   -webkit-box-flex: auto;
   -moz-box-flex: auto;
   -webkit-flex: auto;
@@ -1345,28 +1345,28 @@ video::-webkit-media-text-track-display {
   flex: auto;
   display: block; }
 
-.video-js.vjs-layout-tiny:not(.vjs-fullscreen).vjs-no-flex .vjs-custom-control-spacer {
+.Product-js.vjs-layout-tiny:not(.vjs-fullscreen).vjs-no-flex .vjs-custom-control-spacer {
   width: auto; }
 
-.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-current-time, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-time-divider, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-duration, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-remaining-time,
-.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-playback-rate, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-progress-control,
-.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-mute-control, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-volume-control, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-volume-panel,
-.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-chapters-button, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-descriptions-button, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-captions-button,
-.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-subtitles-button, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-subs-caps-button, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-audio-button {
+.Product-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-current-time, .Product-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-time-divider, .Product-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-duration, .Product-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-remaining-time,
+.Product-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-playback-rate, .Product-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-progress-control,
+.Product-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-mute-control, .Product-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-volume-control, .Product-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-volume-panel,
+.Product-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-chapters-button, .Product-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-descriptions-button, .Product-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-captions-button,
+.Product-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-subtitles-button, .Product-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-subs-caps-button, .Product-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-audio-button {
   display: none; }
 
-.video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-current-time, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-time-divider, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-duration, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-remaining-time,
-.video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-playback-rate,
-.video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-mute-control, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-volume-control, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-volume-panel,
-.video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-chapters-button, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-descriptions-button, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-captions-button,
-.video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-subtitles-button, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-subs-caps-button, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-audio-button {
+.Product-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-current-time, .Product-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-time-divider, .Product-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-duration, .Product-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-remaining-time,
+.Product-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-playback-rate,
+.Product-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-mute-control, .Product-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-volume-control, .Product-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-volume-panel,
+.Product-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-chapters-button, .Product-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-descriptions-button, .Product-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-captions-button,
+.Product-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-subtitles-button, .Product-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-subs-caps-button, .Product-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-audio-button {
   display: none; }
 
-.video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-current-time, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-time-divider, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-duration, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-remaining-time,
-.video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-playback-rate,
-.video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-mute-control, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-volume-control, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-volume-panel,
-.video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-chapters-button, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-descriptions-button, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-captions-button,
-.video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-subtitles-button, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-audio-button {
+.Product-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-current-time, .Product-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-time-divider, .Product-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-duration, .Product-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-remaining-time,
+.Product-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-playback-rate,
+.Product-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-mute-control, .Product-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-volume-control, .Product-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-volume-panel,
+.Product-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-chapters-button, .Product-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-descriptions-button, .Product-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-captions-button,
+.Product-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-subtitles-button, .Product-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-audio-button {
   display: none; }
 
 .vjs-modal-dialog.vjs-text-track-settings {
@@ -1450,7 +1450,7 @@ video::-webkit-media-text-track-display {
   margin-right: 1em; }
 
 @media print {
-  .video-js > *:not(.vjs-tech):not(.vjs-poster) {
+  .Product-js > *:not(.vjs-tech):not(.vjs-poster) {
     visibility: hidden; } }
 
 .vjs-resize-manager {
@@ -1462,8 +1462,8 @@ video::-webkit-media-text-track-display {
   border: none;
   z-index: -1000; }
 
-.js-focus-visible .video-js *:focus:not(.focus-visible) {
+.js-focus-visible .Product-js *:focus:not(.focus-visible) {
   outline: none; }
 
-.video-js *:focus:not(:focus-visible) {
+.Product-js *:focus:not(:focus-visible) {
   outline: none; }

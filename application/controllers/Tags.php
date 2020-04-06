@@ -10,7 +10,7 @@ class Tags extends Home_Core_Controller {
         $tags=str_replace("%20"," ",$tags);
         $config = array();
         $config["base_url"] = base_url() . "tags/".$tags;
-        $config["total_rows"] = $this->common_model->get_video_by_tags_record_count($tags);
+        $config["total_rows"] = $this->common_model->get_Product_by_tags_record_count($tags);
         $config["per_page"] = 24;
         $config["uri_segment"] = 3;
         $config['full_tag_open'] = '<div class="pagination-container text-center"><ul class ="pagination">';
@@ -42,11 +42,11 @@ class Tags extends Home_Core_Controller {
 
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;      
-        $data["all_published_videos"] = $this->common_model->get_video_by_tags($config["per_page"], $page, $tags);
+        $data["all_published_Products"] = $this->common_model->get_Product_by_tags($config["per_page"], $page, $tags);
         $data["links"] = $this->pagination->create_links();
         $data['total_rows']=$config["total_rows"];
         $data['tags_name']=$tags;
-        $data['title'] = "Watch ".$tags."'s". " movies & TV-Series online";
+        $data['title'] = "Watch ".$tags."'s". " products & TV-Series online";
         $data['page_name']='tags';
         $this->load->view('theme/'.$this->active_theme.'/index',$data);
 }

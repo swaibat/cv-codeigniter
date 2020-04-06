@@ -1,4 +1,4 @@
-(function(window, videojs) {
+(function(window, Productjs) {
   'use strict';
 
   var plugin = function(options) {
@@ -60,5 +60,5 @@
   };
 
   // register the plugin
-  videojs.registerPlugin('remember', plugin);
-})(window, window.videojs);
+  Productjs.registerPlugin('remember', plugin);
+})(window, window.Productjs);

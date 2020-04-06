@@ -24,12 +24,12 @@
     ovoo_player.mobileUi(option);
  </script>
  <!-- seek remember -->
-<script src="<?php echo base_url(); ?>assets/player/plugins/seek-remember/videojs-remember.js"></script>
+<script src="<?php echo base_url(); ?>assets/player/plugins/seek-remember/Productjs-remember.js"></script>
 <script>
-  ovoo_player.remember({"localStorageKey": "videojs.remember.<?php echo "videofile".$unique_file_id; ?>"});  
+  ovoo_player.remember({"localStorageKey": "Productjs.remember.<?php echo "Productfile".$unique_file_id; ?>"});  
 </script>
 <!-- hotkeys -->
-    <script src="<?php echo base_url(); ?>assets/player/plugins/hotkeys/videojs.hotkeys.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/player/plugins/hotkeys/Productjs.hotkeys.min.js"></script>
     <script>    
       ovoo_player.ready(function() {
         this.hotkeys({
@@ -41,9 +41,9 @@
 
  <?php if($player_watermark =='1' ): ?>
     <!-- Logo/watermark -->
-    <script src="<?php echo base_url(); ?>assets/player/plugins/watermark/videojs-logo.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/player/plugins/watermark/Productjs-logo.min.js"></script>
     <script>
-      ovoo_player.videoLogo({
+      ovoo_player.ProductLogo({
         watermark: ' ',
         logo: '<?php echo base_url().$player_watermark_logo; ?>',       // default 'logo.png'
         homepage: '<?php echo $player_watermark_url; ?>',
@@ -52,7 +52,7 @@
     <!-- End Logo/watermark -->
 <?php endif; if($player_share =='1' ): ?>
     <!-- Social Share -->
-    <script src="<?php echo base_url(); ?>assets/player/plugins/videojs-share/videojs-share.js"></script>
+    <script src="<?php echo base_url(); ?>assets/player/plugins/Productjs-share/Productjs-share.js"></script>
     <script>
         ovoo_player.share({
             appId: 11231434324
@@ -61,7 +61,7 @@
     <!-- End Social Share -->
 <?php endif; if($player_seek_button =='1' ): ?>
     <!--  seek button -->
-    <script src="<?php echo base_url(); ?>assets/player/plugins/videojs-seek-buttons/videojs-seek-buttons.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/player/plugins/Productjs-seek-buttons/Productjs-seek-buttons.min.js"></script>
     <script>
     ovoo_player.seekButtons({
         forward: <?php echo $player_seek_forward; ?>,
@@ -73,7 +73,7 @@
     
     <?php if($player_volume_remember =='1' ): ?>
     <!-- persistvolume -->
-    <script src="<?php echo base_url(); ?>assets/player/plugins/videojs.persistvolume/videojs.persistvolume.js"></script>
+    <script src="<?php echo base_url(); ?>assets/player/plugins/Productjs.persistvolume/Productjs.persistvolume.js"></script>
     <script>    
       ovoo_player.ready(function() {
         this.persistvolume({
@@ -84,7 +84,7 @@
     <!-- End persistvolume -->
 <?php endif; ?>
 <script type="text/javascript">
-  var player = videojs(document.getElementById('play'));
+  var player = Productjs(document.getElementById('play'));
   player.chromecast();
 </script>
 

@@ -77,18 +77,18 @@ class Collection {
     }
 
     /**
-     *  Get the Collection's Movies
+     *  Get the Collection's Products
      *
-     *  @return Movie[]
+     *  @return Product[]
      */
-    public function getMovies() {
-        $movies = array();
+    public function getProducts() {
+        $products = array();
 
         foreach($this->_data['parts'] as $data){
-            $movies[] = new Movie($data);
+            $products[] = new Product($data);
         }
 
-        return $movies;
+        return $products;
     }
 
     /**

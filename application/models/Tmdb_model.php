@@ -11,14 +11,14 @@ class Tmdb_model extends CI_Model {
         $this->tmdb           = new TMDB(); 
         $this->tmdb->setAPIKey($this->tmbd_api_key);
     }    
-    function get_movie_info($tmdb_id='', $lang ='en')
+    function get_product_info($tmdb_id='', $lang ='en')
     {
       $this->tmdb->setLang($lang);
       if($tmdb_id =='' || $tmdb_id==NULL):
         $tmdb_id  = '550';
       endif;
-      $movie          = $this->tmdb->getMovie($tmdb_id);
-      $data           = $movie ->getJSON();
+      $product          = $this->tmdb->getProduct($tmdb_id);
+      $data           = $product ->getJSON();
       $data           = json_decode($data, true);
       if(empty($data)){
         $response['status']    = 'fail';
@@ -49,7 +49,7 @@ class Tmdb_model extends CI_Model {
           $response['director']       = $directors;//$this->common_model->get_star_ids('director',$data['Director']);
           $response['writer']         = $writters;//$this->common_model->get_star_ids('writer',$data['Writer']);
           $response['country']        = $countries;//$this->common_model->get_country_ids($data['Country']);
-          $response['genre']          = $genres;//$this->common_model->get_genre_ids($movie->getGenres());
+          $response['genre']          = $genres;//$this->common_model->get_genre_ids($product->getGenres());
           $response['rating']         = $data['vote_average'];
           $response['release']        = $data['release_date'];
           $response['thumbnail']      = 'https://image.tmdb.org/t/p/w185/'.$data['poster_path'];
@@ -99,7 +99,7 @@ class Tmdb_model extends CI_Model {
           $response['director']       = $directors;//$this->common_model->get_star_ids('director',$data['Director']);
           $response['writer']         = $writters;//$this->common_model->get_star_ids('writer',$data['Writer']);
           $response['country']        = $countries;//$this->common_model->get_country_ids($data['Country']);
-          $response['genre']          = $genres;//$this->common_model->get_genre_ids($movie->getGenres());
+          $response['genre']          = $genres;//$this->common_model->get_genre_ids($product->getGenres());
           $response['rating']         = $data['vote_average'];
           $response['release']        = $data['first_air_date'];
           $response['thumbnail']      = 'https://image.tmdb.org/t/p/w185/'.$data['poster_path'];
@@ -113,14 +113,14 @@ class Tmdb_model extends CI_Model {
   }
 
 
-  function get_movie_actor_info($tmdb_id='')
+  function get_product_actor_info($tmdb_id='')
     {
       $added_star     = 0;
       if($tmdb_id =='' || $tmdb_id==NULL):
         $tmdb_id  = '00000000';
       endif;
-      //$data           = file_get_contents('http://ovoo.spagreen.net/scrapper/v20/get_movie_json/xxxxxxxxxx/'.$tmdb_id);
-      $data           = file_get_contents('http://ovoo.spagreen.net/scrapper/v20/get_movie_json/0a048a7c-8ee7-4b1c-a7ed-53085aa83f4a/'.$tmdb_id);
+      //$data           = file_get_contents('http://ovoo.spagreen.net/scrapper/v20/get_product_json/xxxxxxxxxx/'.$tmdb_id);
+      $data           = file_get_contents('http://ovoo.spagreen.net/scrapper/v20/get_product_json/0a048a7c-8ee7-4b1c-a7ed-53085aa83f4a/'.$tmdb_id);
       $data           = json_decode($data, true);
       if(isset($data['error_message'])){
         $response['status']    = 'fail';
@@ -228,7 +228,7 @@ class Tmdb_model extends CI_Model {
 
 
     
-	//echo $movie->getJSON();
+	//echo $product->getJSON();
   function filter_actors($actors){
     $actors_name = '';
     for ($i=0; $i<sizeof($actors); $i++) {
@@ -314,9 +314,9 @@ class Tmdb_model extends CI_Model {
             $data[] = $tvshow->getJSON();
         endforeach;
       else:
-        $movies          = $this->tmdb->searchMovie($title);
-        foreach ($movies as $movie):
-            $data[] = $movie->getJSON();
+        $products          = $this->tmdb->searchProduct($title);
+        foreach ($products as $product):
+            $data[] = $product->getJSON();
         endforeach;        
       endif;
       if(empty($data)):
@@ -325,15 +325,15 @@ class Tmdb_model extends CI_Model {
     return $data;
   }
 
-  function import_movie_info($tmdb_id=''){
+  function import_product_info($tmdb_id=''){
       $tmdb_language      =   $this->db->get_where('config' , array('title'=>'tmdb_language'))->row()->value;
       $this->tmdb->setLang($tmdb_language);
       $response      = TRUE;
       if($tmdb_id =='' || $tmdb_id==NULL):
         $tmdb_id  = '00000000';
       endif;
-      $movie          = $this->tmdb->getMovie($tmdb_id);
-      $data           = $movie ->getJSON();
+      $product          = $this->tmdb->getProduct($tmdb_id);
+      $data           = $product ->getJSON();
       $data           = json_decode($data, true);
       if(empty($data)){
         $response      = FALSE;
@@ -353,27 +353,27 @@ class Tmdb_model extends CI_Model {
         if(count($data) >0 && $data['title'] !='' && $data['title'] !=NULL){
           //$actors       = $this->update_actors($data['credits']['cast']);
           //$stars        = $this->update_directors_writers($data['credits']['crew']);
-          //$this->get_movie_actor_info($tmdb_id);
-          $movie_data['imdbid']         = $data['imdb_id'];//$data['imdbID'];
-          $movie_data['title']          = $data['title'];
-          $movie_data['seo_title']      = $data['title'];
-          $movie_data['description']    = $data['overview'];
-          $movie_data['runtime']        = $data['runtime'].' Min';
-          $movie_data['stars']          = $this->common_model->get_star_ids('actor',$actors);
-          $movie_data['director']       = $this->common_model->get_star_ids('director',$directors);
-          $movie_data['writer']         = $this->common_model->get_star_ids('writer',$writters);
-          $movie_data['country']        = $this->country_model->get_country_ids($countries);
-          $movie_data['genre']          = $this->genre_model->get_genre_ids($genres);
-          $movie_data['imdb_rating']    = $data['vote_average'];
-          $movie_data['release']        = $data['release_date'];
-          $movie_data['video_quality']  = 'HD';
-          $movie_data['publication']    = '1';
-          $movie_data['enable_download']= '0';
-          $this->db->insert('videos',$movie_data);
+          //$this->get_product_actor_info($tmdb_id);
+          $product_data['imdbid']         = $data['imdb_id'];//$data['imdbID'];
+          $product_data['title']          = $data['title'];
+          $product_data['seo_title']      = $data['title'];
+          $product_data['description']    = $data['overview'];
+          $product_data['runtime']        = $data['runtime'].' Min';
+          $product_data['stars']          = $this->common_model->get_star_ids('actor',$actors);
+          $product_data['director']       = $this->common_model->get_star_ids('director',$directors);
+          $product_data['writer']         = $this->common_model->get_star_ids('writer',$writters);
+          $product_data['country']        = $this->country_model->get_country_ids($countries);
+          $product_data['genre']          = $this->genre_model->get_genre_ids($genres);
+          $product_data['imdb_rating']    = $data['vote_average'];
+          $product_data['release']        = $data['release_date'];
+          $product_data['Product_quality']  = 'HD';
+          $product_data['publication']    = '1';
+          $product_data['enable_download']= '0';
+          $this->db->insert('Products',$product_data);
           $insert_id                    = $this->db->insert_id();
           //save thumbnail
           $image_source                 = 'https://image.tmdb.org/t/p/w185/'.$data['poster_path'];
-          $save_to                      = 'uploads/video_thumb/'.$insert_id.'.jpg';           
+          $save_to                      = 'uploads/Product_thumb/'.$insert_id.'.jpg';           
           $this->common_model->grab_image($image_source,$save_to);
           // save poster
           if($data['backdrop_path'] !='' && $data['backdrop_path'] !=NULL):            
@@ -383,13 +383,13 @@ class Tmdb_model extends CI_Model {
           endif;
           // update slug
           $slug                         = url_title($data['title'], 'dash', TRUE);
-          $slug_num                     = $this->common_model->slug_num('videos',$slug);
+          $slug_num                     = $this->common_model->slug_num('Products',$slug);
           if($slug_num > 0):
               $slug= $slug.'-'.$insert_id;
           endif;
           $data_update['slug']               = $slug;
-          $this->db->where('videos_id', $insert_id);
-          $this->db->update('videos', $data_update);
+          $this->db->where('Products_id', $insert_id);
+          $this->db->update('Products', $data_update);
 
         }else{
           $response      = FALSE;
@@ -424,28 +424,28 @@ class Tmdb_model extends CI_Model {
           $genres       = $this->filter_genres($data['genres']);
         }
         if(count($data) >0 && $data['name'] !='' && $data['name'] !=NULL){
-          $this->get_movie_actor_info($tmdb_id);
-          $movie_data['imdbid']         = '';//$data['imdbID'];
-          $movie_data['title']          = $data['name'];
-          $movie_data['seo_title']      = $data['name'];
-          $movie_data['description']    = $data['overview'];
-          $movie_data['runtime']        = '';
-          $movie_data['stars']          = $this->common_model->get_star_ids('actor',$actors);
-          $movie_data['director']       = $this->common_model->get_star_ids('director',$directors);
-          $movie_data['writer']         = $this->common_model->get_star_ids('writer',$writters);
-          $movie_data['country']        = $this->country_model->get_country_ids($countries);
-          $movie_data['genre']          = $this->genre_model->get_genre_ids($genres);
-          $movie_data['imdb_rating']    = $data['vote_average'];
-          $movie_data['release']        = $data['first_air_date'];
-          $movie_data['video_quality']  = 'HD';
-          $movie_data['publication']    = '1';
-          $movie_data['enable_download']= '0';
-          $movie_data['is_tvseries']    = '1';
-          $this->db->insert('videos',$movie_data);
+          $this->get_product_actor_info($tmdb_id);
+          $product_data['imdbid']         = '';//$data['imdbID'];
+          $product_data['title']          = $data['name'];
+          $product_data['seo_title']      = $data['name'];
+          $product_data['description']    = $data['overview'];
+          $product_data['runtime']        = '';
+          $product_data['stars']          = $this->common_model->get_star_ids('actor',$actors);
+          $product_data['director']       = $this->common_model->get_star_ids('director',$directors);
+          $product_data['writer']         = $this->common_model->get_star_ids('writer',$writters);
+          $product_data['country']        = $this->country_model->get_country_ids($countries);
+          $product_data['genre']          = $this->genre_model->get_genre_ids($genres);
+          $product_data['imdb_rating']    = $data['vote_average'];
+          $product_data['release']        = $data['first_air_date'];
+          $product_data['Product_quality']  = 'HD';
+          $product_data['publication']    = '1';
+          $product_data['enable_download']= '0';
+          $product_data['is_tvseries']    = '1';
+          $this->db->insert('Products',$product_data);
           $insert_id                    = $this->db->insert_id();
           //save thumbnail
           $image_source                 = 'https://image.tmdb.org/t/p/w185/'.$data['poster_path'];
-          $save_to                      = 'uploads/video_thumb/'.$insert_id.'.jpg';           
+          $save_to                      = 'uploads/Product_thumb/'.$insert_id.'.jpg';           
           $this->common_model->grab_image($image_source,$save_to);
           // save poster
           if($data['backdrop_path'] !='' && $data['backdrop_path'] !=NULL):            
@@ -455,13 +455,13 @@ class Tmdb_model extends CI_Model {
           endif;
           // update slug
           $slug                         = url_title($data['name'], 'dash', TRUE);
-          $slug_num                     = $this->common_model->slug_num('videos',$slug);
+          $slug_num                     = $this->common_model->slug_num('Products',$slug);
           if($slug_num > 0):
               $slug= $slug.'-'.$insert_id;
           endif;
           $data_update['slug']               = $slug;
-          $this->db->where('videos_id', $insert_id);
-          $this->db->update('videos', $data_update);
+          $this->db->where('Products_id', $insert_id);
+          $this->db->update('Products', $data_update);
 
         }else{
           $response      = FALSE;

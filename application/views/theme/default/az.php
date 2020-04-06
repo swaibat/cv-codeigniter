@@ -50,7 +50,7 @@
 <div class="container">
     <div class="widget az-list">
         <div class="widget-title">
-            <h1>Movies By Letter</h1> </div>
+            <h1>Products By Letter</h1> </div>
         <ul class="letters">
             <li class="first-latter"><a class="btn <?php if($param1=='' || $param1=='09'): echo "btn-primary"; else: echo "btn-default"; endif; ?>" href="<?php echo base_url('az-list/09') ?>">0-9</a></li>
             <li><a class="btn <?php if($param1=='a' || $param1=='A'): echo "btn-primary"; else: echo "btn-default"; endif; ?>" href="<?php echo base_url('az-list/a') ?>">A</a></li>
@@ -96,23 +96,23 @@
                 <tbody>
                     <?php
                         $i =    0 ;
-                        foreach ($all_videos as $videos):
+                        foreach ($all_Products as $Products):
                         $i++;
                     ?>
                         <tr>
                             <td><?php echo $i; ?></td>
-                            <td> <img class="thumb" src="<?php echo $this->common_model->get_video_thumb_url($videos['videos_id']); ?>" alt="<?php echo $videos['title'];?>"> <a class="name" href="<?php echo base_url('watch/'.$videos['slug']).'.html';?>" title="<?php echo $videos['title'];?>"><?php echo $videos['title'];?></a> </td>
-                            <td><?php echo date("Y",strtotime($videos['release']));?></td>
-                            <td><?php echo ($videos['video_quality'] =='' || $videos['video_quality'] == NULL) ? $videos['video_quality'] : 'HD';?></td>
-                            <td> <?php echo $this->country_model->generate_countries_anchor($videos['country']); ?></td>
-                            <td> <?php echo $this->genre_model->generate_genres_anchor($videos['genre']); ?> </td>
-                            <td><span class="imdb"><?php echo $videos['imdb_rating'];?></span></td>
+                            <td> <img class="thumb" src="<?php echo $this->common_model->get_Product_thumb_url($Products['Products_id']); ?>" alt="<?php echo $Products['title'];?>"> <a class="name" href="<?php echo base_url('watch/'.$Products['slug']).'.html';?>" title="<?php echo $Products['title'];?>"><?php echo $Products['title'];?></a> </td>
+                            <td><?php echo date("Y",strtotime($Products['release']));?></td>
+                            <td><?php echo ($Products['Product_quality'] =='' || $Products['Product_quality'] == NULL) ? $Products['Product_quality'] : 'HD';?></td>
+                            <td> <?php echo $this->country_model->generate_countries_anchor($Products['country']); ?></td>
+                            <td> <?php echo $this->genre_model->generate_genres_anchor($Products['genre']); ?> </td>
+                            <td><span class="imdb"><?php echo $Products['imdb_rating'];?></span></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
             <div class="text-center">
-                <?php if($total_rows > $movie_per_page): echo $links;endif; ?>
+                <?php if($total_rows > $product_per_page): echo $links;endif; ?>
             </div>
         </div>
     </div>

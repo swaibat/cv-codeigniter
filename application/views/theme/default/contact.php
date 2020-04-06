@@ -19,7 +19,7 @@
                 </h2>
 
                 <div class="sendus">
-                    <div class="movie-heading m-b-20"> <span><?php echo trans('send_us_message'); ?></span>
+                    <div class="product-heading m-b-20"> <span><?php echo trans('send_us_message'); ?></span>
                         <div class="disable-bottom-line"></div>
                     </div>
                     <?php if($this->session->flashdata('success') !=''):?>

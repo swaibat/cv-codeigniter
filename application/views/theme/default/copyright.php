@@ -16,10 +16,10 @@
             </div>
             <div class="col-sm-6 text-right">
                 <ul class="footer-list">
-                    <?php $all_video_type_on_footer_menu= $this->common_model->all_video_type_on_footer_menu();
-                                            foreach ($all_video_type_on_footer_menu as $video_type):                                                
+                    <?php $all_Product_type_on_footer_menu= $this->common_model->all_Product_type_on_footer_menu();
+                                            foreach ($all_Product_type_on_footer_menu as $Product_type):                                                
                     ?>
-                    <li><a href="<?php echo base_url().'type/'.$video_type->slug?>"><?php echo $video_type->video_type;?></a></li>
+                    <li><a href="<?php echo base_url().'type/'.$Product_type->slug?>"><?php echo $Product_type->Product_type;?></a></li>
                 <?php endforeach; ?>
                 <?php $all_page_on_footer_menu= $this->common_model->all_page_on_footer_menu();
                         foreach ($all_page_on_footer_menu as $pages):                                                

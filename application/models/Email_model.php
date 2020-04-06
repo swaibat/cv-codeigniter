@@ -89,20 +89,20 @@ class Email_model extends CI_Model {
 	}
 
 
-	function send_movie_request($name = '' , $email = '', $message='',$movie_name='')
+	function send_product_request($name = '' , $email = '', $message='',$product_name='')
 	{
 		$site_name			=	$this->db->get_where('config' , array('title' => 'site_name'))->row()->value;
 		$admin_email		=	$this->db->get_where('config' , array('title' => 'contact_email'))->row()->value;
 		$system_name		=	$this->db->get_where('config' , array('title' => 'site_name'))->row()->value;
-		$admin_email_sub 	= 	'Movie Request ( '.$movie_name.' )';
-		$client_email_sub 	= 	'Movie Request Sent';
-		$movie_request_email=	$this->db->get_where('config' , array('title' => 'movie_request_email'))->row()->value;
-		$admin_email 		= 	!empty(trim($movie_request_email)) ? $movie_request_email : $admin_email;
+		$admin_email_sub 	= 	'Product Request ( '.$product_name.' )';
+		$client_email_sub 	= 	'Product Request Sent';
+		$product_request_email=	$this->db->get_where('config' , array('title' => 'product_request_email'))->row()->value;
+		$admin_email 		= 	!empty(trim($product_request_email)) ? $product_request_email : $admin_email;
 		$admin_email_from 	=	NULL;
 		$client_name 		= 	$name;
 		$client_email 		= 	$email;
 		$client_message 	= 	$message;
-		include(APPPATH.'views/email_templete/movie_requiest.php');
+		include(APPPATH.'views/email_templete/product_requiest.php');
 		//message,subject,to,from,replay_to
 		$admin_mail = $this->send_email($admin_message , $admin_email_sub , $admin_email, $admin_email_from, $client_email);
 		// include(APPPATH.'views/email_templete/contact_response.php');
@@ -178,20 +178,20 @@ class Email_model extends CI_Model {
 		}
 	}
 
-	function new_movie_notification($video_id = NULL)
+	function new_product_notification($Product_id = NULL)
 	{	
 		$site_name			=	$this->db->get_where('config' , array('title' => 'site_name'))->row()->value;
 		$admin_email		=	$this->db->get_where('config' , array('title' => 'contact_email'))->row()->value;
 		$system_name		=	$this->db->get_where('config' , array('title' => 'site_name'))->row()->value;
-		$video 				= 	$this->db->get_where('videos', array('videos_id' => $video_id))->row();
+		$Product 				= 	$this->db->get_where('Products', array('Products_id' => $Product_id))->row();
 		$logo				= 	base_url('uploads/system_logo/logo.png');
-		$thumb_image		= 	$this->common_model->get_video_thumb_url($video->videos_id);
-		$actor 				= 	$this->common_model->convert_star_ids_to_names($video->stars);
-		$director			= 	$this->common_model->convert_star_ids_to_names($video->director);
-		$watch_url			=	base_url().'watch/'.$video->slug;		
-		$email_sub			=	"New Movie [ ".$video->title." ] Waiting for You.";
+		$thumb_image		= 	$this->common_model->get_Product_thumb_url($Product->Products_id);
+		$actor 				= 	$this->common_model->convert_star_ids_to_names($Product->stars);
+		$director			= 	$this->common_model->convert_star_ids_to_names($Product->director);
+		$watch_url			=	base_url().'watch/'.$Product->slug;		
+		$email_sub			=	"New Product [ ".$Product->title." ] Waiting for You.";
 		$admin_email_from 	=	NULL;
-		include(APPPATH.'views/email_templete/new_movie.php');
+		include(APPPATH.'views/email_templete/new_product.php');
 		
 		$subscribers = $this->db->get_where('user', array('role'=>'subscriber'))->result_array();
         foreach ($subscribers as $subscriber){
@@ -201,20 +201,20 @@ class Email_model extends CI_Model {
 		return TRUE;
 	}
 
-	function create_newslater_cron($video_id = NULL)
+	function create_newslater_cron($Product_id = NULL)
 	{	
 		$site_name			=	$this->db->get_where('config' , array('title' => 'site_name'))->row()->value;
 		$admin_email		=	$this->db->get_where('config' , array('title' => 'contact_email'))->row()->value;
 		$system_name		=	$this->db->get_where('config' , array('title' => 'site_name'))->row()->value;
-		$video 				= 	$this->db->get_where('videos', array('videos_id' => $video_id))->row();
+		$Product 				= 	$this->db->get_where('Products', array('Products_id' => $Product_id))->row();
 		$logo				= 	base_url('uploads/system_logo/logo.png');
-		$thumb_image		= 	$this->common_model->get_video_thumb_url($video->videos_id);
-		$actor 				= 	$this->common_model->convert_star_ids_to_names($video->stars);
-		$director			= 	$this->common_model->convert_star_ids_to_names($video->director);
-		$watch_url			=	base_url().'watch/'.$video->slug;		
-		$email_sub			=	"New Movie [ ".$video->title." ] Waiting for You.";
+		$thumb_image		= 	$this->common_model->get_Product_thumb_url($Product->Products_id);
+		$actor 				= 	$this->common_model->convert_star_ids_to_names($Product->stars);
+		$director			= 	$this->common_model->convert_star_ids_to_names($Product->director);
+		$watch_url			=	base_url().'watch/'.$Product->slug;		
+		$email_sub			=	"New Product [ ".$Product->title." ] Waiting for You.";
 		$admin_email_from 	=	NULL;
-		include(APPPATH.'views/email_templete/new_movie.php');
+		include(APPPATH.'views/email_templete/new_product.php');
 		
 		$subscribers = $this->db->get_where('user', array('role'=>'subscriber'))->result_array();
         foreach ($subscribers as $subscriber){
@@ -231,20 +231,20 @@ class Email_model extends CI_Model {
 		return TRUE;
 	}
 
-	function send_push_notification($video_id = NULL)
+	function send_push_notification($Product_id = NULL)
 	{	
 		$site_name			=	$this->db->get_where('config' , array('title' => 'site_name'))->row()->value;
 		$admin_email		=	$this->db->get_where('config' , array('title' => 'contact_email'))->row()->value;
 		$system_name		=	$this->db->get_where('config' , array('title' => 'site_name'))->row()->value;
-		$video 				= 	$this->db->get_where('videos', array('videos_id' => $video_id))->row();
+		$Product 				= 	$this->db->get_where('Products', array('Products_id' => $Product_id))->row();
 		$logo				= 	base_url('uploads/system_logo/logo.png');
-		$thumb_image		= 	$this->common_model->get_video_thumb_url($video->videos_id);
-		$actor 				= 	$this->common_model->convert_star_ids_to_names($video->stars);
-		$director			= 	$this->common_model->convert_star_ids_to_names($video->director);
-		$watch_url			=	base_url().'watch/'.$video->slug;		
-		$email_sub			=	"New Movie [ ".$video->title." ] Waiting for You.";
+		$thumb_image		= 	$this->common_model->get_Product_thumb_url($Product->Products_id);
+		$actor 				= 	$this->common_model->convert_star_ids_to_names($Product->stars);
+		$director			= 	$this->common_model->convert_star_ids_to_names($Product->director);
+		$watch_url			=	base_url().'watch/'.$Product->slug;		
+		$email_sub			=	"New Product [ ".$Product->title." ] Waiting for You.";
 		$admin_email_from 	=	NULL;
-		include(APPPATH.'views/email_templete/new_movie.php');
+		include(APPPATH.'views/email_templete/new_product.php');
 		
 		$subscribers = $this->db->get_where('user', array('role'=>'subscriber'))->result_array();
         foreach ($subscribers as $subscriber){
@@ -313,24 +313,24 @@ class Email_model extends CI_Model {
 		}		
 	}
 
-	function send_movie_report_to_admin($video_id="", $message=array())
+	function send_product_report_to_admin($Product_id="", $message=array())
 	{
 		$site_name			=	$this->db->get_where('config' , array('title' => 'site_name'))->row()->value;
 		$admin_email		=	$this->db->get_where('config' , array('title' => 'contact_email'))->row()->value;
 		$system_name		=	$this->db->get_where('config' , array('title' => 'site_name'))->row()->value;
-		$video 				= 	$this->db->get_where('videos', array('videos_id' => $video_id))->row();
-		$email_sub 			= 	'New Movie Report ( '.$video->title.' )';
+		$Product 				= 	$this->db->get_where('Products', array('Products_id' => $Product_id))->row();
+		$email_sub 			= 	'New Product Report ( '.$Product->title.' )';
 		$email_from 		=	NULL;
 		$client_name 		= 	"Abdul Mannan";
-		$movie_report_email	=	$this->db->get_where('config' , array('title' => 'movie_report_email'))->row()->value;
-		$email 				= 	!empty(trim($movie_report_email)) ? $movie_report_email : $admin_email;
-		$video_msg 			= 	'Not Specified';
+		$product_report_email	=	$this->db->get_where('config' , array('title' => 'product_report_email'))->row()->value;
+		$email 				= 	!empty(trim($product_report_email)) ? $product_report_email : $admin_email;
+		$Product_msg 			= 	'Not Specified';
 		$audio_msg 			= 	'Not Specified';
 		$subtitle_msg 		= 	'Not Specified';
 		$client_message		=   'Not Specified';
 		$message_msg		=   'Not Specified';
-		if(isset($message['video'])){
-			$video_msg 			= 	$message['video'];
+		if(isset($message['Product'])){
+			$Product_msg 			= 	$message['Product'];
 		}
 		if(isset($message['audio'])){
 			$audio_msg 			= 	$message['audio'];

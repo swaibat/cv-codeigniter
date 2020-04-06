@@ -844,7 +844,7 @@ class CI_Security {
 			'alert', 'area', 'prompt', 'confirm', 'applet', 'audio', 'basefont', 'base', 'behavior', 'bgsound',
 			'blink', 'body', 'embed', 'expression', 'form', 'frameset', 'frame', 'head', 'html', 'ilayer',
 			'iframe', 'input', 'button', 'select', 'isindex', 'layer', 'link', 'meta', 'keygen', 'object',
-			'plaintext', 'style', 'script', 'textarea', 'title', 'math', 'video', 'svg', 'xml', 'xss'
+			'plaintext', 'style', 'script', 'textarea', 'title', 'math', 'Product', 'svg', 'xml', 'xss'
 		);
 
 		static $evil_attributes = array(

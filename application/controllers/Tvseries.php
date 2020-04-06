@@ -58,7 +58,7 @@ class Tvseries extends Home_Core_Controller{
 
             $this->pagination->initialize($config);
             $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-            $data["all_published_videos"]   = $this->common_model->fetch_tv_series($config["per_page"], $page);
+            $data["all_published_Products"]   = $this->common_model->fetch_tv_series($config["per_page"], $page);
             $data["links"]                  = $this->pagination->create_links();
             $data['total_rows']             = $config["total_rows"];
             // seo
@@ -76,16 +76,16 @@ class Tvseries extends Home_Core_Controller{
 
 
     public function watch($slug='',$param1='',$param2=''){
-        $data['videos_id']                  = $this->common_model->get_videos_id_by_slug($slug);
+        $data['Products_id']                  = $this->common_model->get_Products_id_by_slug($slug);
         $tv_series_publish                  = $this->db->get_where('config' , array('title'=>'tv_series_publish'))->row()->value;
-        $video_is_published                 = $this->common_model->is_video_published($data['videos_id']);       
-        if($tv_series_publish =='1' && $slug !='' && $slug !=NULL && $video_is_published):
+        $Product_is_published                 = $this->common_model->is_Product_published($data['Products_id']);       
+        if($tv_series_publish =='1' && $slug !='' && $slug !=NULL && $Product_is_published):
             $this->common_model->watch_count_by_slug($slug);
-            $data['watch_videos']           = $this->common_model->get_videos_by_slug($slug);
-            $data['title']                  = $data['watch_videos']->title;
-            $data['focus_keyword']          = $data['watch_videos']->focus_keyword;
-            $data['meta_description']       = $data['watch_videos']->meta_description;
-            $data['download_links']         = $this->db->get_where('download_link', array("videos_id"=>$data['videos_id']))->result_array();
+            $data['watch_Products']           = $this->common_model->get_Products_by_slug($slug);
+            $data['title']                  = $data['watch_Products']->title;
+            $data['focus_keyword']          = $data['watch_Products']->focus_keyword;
+            $data['meta_description']       = $data['watch_Products']->meta_description;
+            $data['download_links']         = $this->db->get_where('download_link', array("Products_id"=>$data['Products_id']))->result_array();
             $data['total_download_links']   = count($data['download_links']);
             $data['slug']                   = $slug;
             $data['param1']                 = $param1;

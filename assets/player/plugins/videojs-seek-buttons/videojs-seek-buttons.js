@@ -1,16 +1,16 @@
 /**
- * videojs-seek-buttons
+ * Productjs-seek-buttons
  * @version 1.1.0
  * @copyright 2017 Ben Clifford
  * @license Apache-2.0
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('video.js')) :
-	typeof define === 'function' && define.amd ? define(['video.js'], factory) :
-	(global.videojsSeekButtons = factory(global.videojs));
-}(this, (function (videojs) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('Product.js')) :
+	typeof define === 'function' && define.amd ? define(['Product.js'], factory) :
+	(global.ProductjsSeekButtons = factory(global.Productjs));
+}(this, (function (Productjs) { 'use strict';
 
-videojs = 'default' in videojs ? videojs['default'] : videojs;
+Productjs = 'default' in Productjs ? Productjs['default'] : Productjs;
 
 var version = "1.1.0";
 
@@ -20,15 +20,15 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Button = videojs.getComponent('Button');
-var Component = videojs.getComponent('Component');
+var Button = Productjs.getComponent('Button');
+var Component = Productjs.getComponent('Component');
 
 // Default options for the plugin.
 var defaults = {};
 
 // Cross-compatibility for Video.js 5 and 6.
-var registerPlugin = videojs.registerPlugin || videojs.plugin;
-// const dom = videojs.dom || videojs;
+var registerPlugin = Productjs.registerPlugin || Productjs.plugin;
+// const dom = Productjs.dom || Productjs;
 
 /**
  * Function to invoke when the player is ready.
@@ -66,9 +66,9 @@ var onPlayerReady = function onPlayerReady(player, options) {
 };
 
 /**
- * A video.js plugin.
+ * A Product.js plugin.
  *
- * In the plugin function, the value of `this` is a video.js `Player`
+ * In the plugin function, the value of `this` is a Product.js `Player`
  * instance. You cannot rely on the player being in a "ready" state here,
  * depending on how the plugin is invoked. This may or may not be important
  * to you; if not, remove the wait for "ready"!
@@ -81,7 +81,7 @@ var seekButtons = function seekButtons(options) {
   var _this = this;
 
   this.ready(function () {
-    onPlayerReady(_this, videojs.mergeOptions(defaults, options));
+    onPlayerReady(_this, Productjs.mergeOptions(defaults, options));
   });
 };
 
@@ -136,7 +136,7 @@ var SeekButton = function (_Button) {
 
 Component.registerComponent('SeekButton', SeekButton);
 
-// Register the plugin with video.js.
+// Register the plugin with Product.js.
 registerPlugin('seekButtons', seekButtons);
 
 // Include the version number.

@@ -5,7 +5,7 @@
             <div class="col-md-9 col-sm-8 col-xs-12">
                 <div class="page-title">
                     <h1 class="text-uppercase">
-                    <?php echo trans('find_movie_by_year'); ?>
+                    <?php echo trans('find_product_by_year'); ?>
                     </h1>
                 </div>
             </div>

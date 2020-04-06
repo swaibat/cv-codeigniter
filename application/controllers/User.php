@@ -344,9 +344,9 @@ class User extends Home_Core_Controller{
             redirect(base_url() . 'login', 'refresh');
         
             $data['page_name']      = 'favorite';
-            $data['title']          = 'My Favorite Movies & Videos';
+            $data['title']          = 'My Favorite Products & Videos';
             $this->db->order_by('wish_list_id', 'desc');
-            $data['fav_videos']     = $this->db->get_where('wish_list', array('wish_list_type'=>'fav','user_id' => $this->session->userdata('user_id')))->result_array();
+            $data['fav_Products']     = $this->db->get_where('wish_list', array('wish_list_type'=>'fav','user_id' => $this->session->userdata('user_id')))->result_array();
             $this->load->view('theme/'.$this->active_theme.'/index',$data);
     }
 
@@ -358,7 +358,7 @@ class User extends Home_Core_Controller{
             $data['page_name']      = 'watch_later';
             $data['title']          = 'My Wish List';
             $this->db->order_by('wish_list_id', 'desc');
-            $data['wl_videos']      = $this->db->get_where('wish_list', array('wish_list_type'=>'wl','user_id' => $this->session->userdata('user_id')))->result_array();
+            $data['wl_Products']      = $this->db->get_where('wish_list', array('wish_list_type'=>'wl','user_id' => $this->session->userdata('user_id')))->result_array();
             $this->load->view('theme/'.$this->active_theme.'/index',$data);
     }
 
@@ -468,9 +468,9 @@ class User extends Home_Core_Controller{
     function add_to_wish_list(){
         $response = array();
         $list_type                      = trim($_POST["list_type"]);
-        $videos_id                      = trim($_POST["videos_id"]);       
+        $Products_id                      = trim($_POST["Products_id"]);       
         $response['submitted_data']     = $_POST;
-        $status                         = $this->add_to_list($list_type,$videos_id);
+        $status                         = $this->add_to_list($list_type,$Products_id);
         $response['status']             = $status;
         echo json_encode($response);
     }
@@ -485,16 +485,16 @@ class User extends Home_Core_Controller{
     }
 
 
-    function add_to_list($list_type="", $videos_id=""){
+    function add_to_list($list_type="", $Products_id=""){
         $user_id                        = $this->session->userdata('user_id');
-        $query                          = $this->db->get_where('wish_list' , array('videos_id' => $videos_id, 'user_id'=>$user_id,'wish_list_type'=>$list_type));
+        $query                          = $this->db->get_where('wish_list' , array('Products_id' => $Products_id, 'user_id'=>$user_id,'wish_list_type'=>$list_type));
         if($user_id =='' || $user_id==NULL):
            return 'login_fail'; 
         elseif ($query->num_rows() > 0):
             return 'exist';
         else:
             $data['user_id']            = $user_id;
-            $data['videos_id']          = $videos_id;
+            $data['Products_id']          = $Products_id;
             $data['wish_list_type']     = $list_type;
             $data['create_at']          = date('Y-m-d H:i:s');
             $this->db->insert('wish_list', $data);
@@ -544,10 +544,10 @@ class User extends Home_Core_Controller{
         }
     }
 
-    function report_movie($param1=''){
+    function report_product($param1=''){
         $data = array();
-        if($this->input->post('video') !="" && $this->input->post('video') !=NULL){
-            $data['video']      = $this->input->post('video');
+        if($this->input->post('Product') !="" && $this->input->post('Product') !=NULL){
+            $data['Product']      = $this->input->post('Product');
         }
         if($this->input->post('audio') !="" && $this->input->post('audio') !=NULL){
             $data['audio']      = $this->input->post('audio');
@@ -569,7 +569,7 @@ class User extends Home_Core_Controller{
             redirect($this->agent->referrer(), 'refresh');
         else:
             $this->load->model('email_model');
-            $this->email_model->send_movie_report_to_admin($param1,$data);
+            $this->email_model->send_product_report_to_admin($param1,$data);
             $this->session->set_flashdata('report_success', 'Report sent successfully.');
             redirect($this->agent->referrer(), 'refresh');
         endif;

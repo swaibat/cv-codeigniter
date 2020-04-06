@@ -1,9 +1,9 @@
 /**
  * @license
- * Video.js 6.13.0 <http://videojs.com/>
+ * Video.js 6.13.0 <http://Productjs.com/>
  * Copyright Brightcove, Inc. <https://www.brightcove.com/>
  * Available under Apache License Version 2.0
- * <https://github.com/videojs/video.js/blob/master/LICENSE>
+ * <https://github.com/Productjs/Product.js/blob/master/LICENSE>
  *
  * Includes vtt.js <https://github.com/mozilla/vtt.js>
  * Available under Apache License Version 2.0
@@ -17,7 +17,7 @@ var document = _interopDefault(require('global/document'));
 var tsml = _interopDefault(require('tsml'));
 var safeParseTuple = _interopDefault(require('safe-json-parse/tuple'));
 var xhr = _interopDefault(require('xhr'));
-var vtt = _interopDefault(require('videojs-vtt.js'));
+var vtt = _interopDefault(require('Productjs-vtt.js'));
 
 var version = "6.13.0";
 
@@ -108,7 +108,7 @@ var IS_ANY_SAFARI = (IS_SAFARI || IS_IOS) && !IS_CHROME;
 
 var TOUCH_ENABLED = isReal() && ('ontouchstart' in window || window.navigator.maxTouchPoints || window.DocumentTouch && window.document instanceof window.DocumentTouch);
 
-var BACKGROUND_SIZE_SUPPORTED = isReal() && 'backgroundSize' in window.document.createElement('video').style;
+var BACKGROUND_SIZE_SUPPORTED = isReal() && 'backgroundSize' in window.document.createElement('Product').style;
 
 var browser = (Object.freeze || Object)({
 	IS_IPAD: IS_IPAD,
@@ -486,7 +486,7 @@ function createLogger$1(name) {
   /**
    * Create a new sublogger which chains the old name to the new name.
    *
-   * For example, doing `videojs.log.createLogger('player')` and then using that logger will log the following:
+   * For example, doing `Productjs.log.createLogger('player')` and then using that logger will log the following:
    * ```js
    *  mylogger('foo');
    *  // > VIDEOJS: player: foo
@@ -1868,7 +1868,7 @@ function fixEvent(event) {
     // 0 == left; 1 == middle; 2 == right
     if (event.button !== null && event.button !== undefined) {
 
-      // The following is disabled because it does not pass videojs-standard
+      // The following is disabled because it does not pass Productjs-standard
       // and... yikes.
       /* eslint-disable */
       event.button = event.button & 1 ? 0 : event.button & 4 ? 1 : event.button & 2 ? 2 : 0;
@@ -2161,12 +2161,12 @@ var Events = (Object.freeze || Object)({
 
 /**
  * @file setup.js - Functions for setting up a player without
- * user interaction based on the data-setup `attribute` of the video tag.
+ * user interaction based on the data-setup `attribute` of the Product tag.
  *
  * @module setup
  */
 var _windowLoaded = false;
-var videojs$2 = void 0;
+var Productjs$2 = void 0;
 
 /**
  * Set up any tags that have a data-setup `attribute` when the player is started.
@@ -2174,20 +2174,20 @@ var videojs$2 = void 0;
 var autoSetup = function autoSetup() {
 
   // Protect against breakage in non-browser environments and check global autoSetup option.
-  if (!isReal() || videojs$2.options.autoSetup === false) {
+  if (!isReal() || Productjs$2.options.autoSetup === false) {
     return;
   }
 
   // One day, when we stop supporting IE8, go back to this, but in the meantime...*hack hack hack*
-  // var vids = Array.prototype.slice.call(document.getElementsByTagName('video'));
+  // var vids = Array.prototype.slice.call(document.getElementsByTagName('Product'));
   // var audios = Array.prototype.slice.call(document.getElementsByTagName('audio'));
   // var mediaEls = vids.concat(audios);
 
   // Because IE8 doesn't support calling slice on a node list, we need to loop
   // through each list of elements to build up a new, combined list of elements.
-  var vids = document.getElementsByTagName('video');
+  var vids = document.getElementsByTagName('Product');
   var audios = document.getElementsByTagName('audio');
-  var divs = document.getElementsByTagName('video-js');
+  var divs = document.getElementsByTagName('Product-js');
   var mediaEls = [];
 
   if (vids && vids.length > 0) {
@@ -2226,8 +2226,8 @@ var autoSetup = function autoSetup() {
           // Check if data-setup attr exists.
           // We only auto-setup if they've added the data-setup attr.
           if (options !== null) {
-            // Create new video.js instance.
-            videojs$2(mediaEl);
+            // Create new Product.js instance.
+            Productjs$2(mediaEl);
           }
         }
 
@@ -2238,7 +2238,7 @@ var autoSetup = function autoSetup() {
       }
     }
 
-    // No videos were found, so keep looping unless page is finished loading.
+    // No Products were found, so keep looping unless page is finished loading.
   } else if (!_windowLoaded) {
     autoSetupTimeout(1);
   }
@@ -2251,12 +2251,12 @@ var autoSetup = function autoSetup() {
  * @param {number} wait
  *        How long to wait in ms
  *
- * @param {module:videojs} [vjs]
- *        The videojs library function
+ * @param {module:Productjs} [vjs]
+ *        The Productjs library function
  */
 function autoSetupTimeout(wait, vjs) {
   if (vjs) {
-    videojs$2 = vjs;
+    Productjs$2 = vjs;
   }
 
   window.setTimeout(autoSetup, wait);
@@ -3639,7 +3639,7 @@ var Component = function () {
         throw new Error('Component ' + componentClassName + ' does not exist');
       }
 
-      // data stored directly on the videojs object may be
+      // data stored directly on the Productjs object may be
       // misidentified as a component to retain
       // backwards-compatibility with 4.x. check to make sure the
       // component class can be instantiated.
@@ -3742,8 +3742,8 @@ var Component = function () {
         var opts = child.opts;
 
         // Allow options for children to be set at the parent options
-        // e.g. videojs(id, { controlBar: false });
-        // instead of videojs(id, { children: { controlBar: false });
+        // e.g. Productjs(id, { controlBar: false });
+        // instead of Productjs(id, { children: { controlBar: false });
         if (parentOptions[name] !== undefined) {
           opts = parentOptions[name];
         }
@@ -3812,7 +3812,7 @@ var Component = function () {
       }).filter(function (child) {
         // we have to make sure that child.name isn't in the techOrder since
         // techs are registerd as Components but can't aren't compatible
-        // See https://github.com/videojs/video.js/issues/2772
+        // See https://github.com/Productjs/Product.js/issues/2772
         var c = Component.getComponent(child.opts.componentClass || toTitleCase(child.name));
 
         return c && !Tech.isTech(c);
@@ -4361,7 +4361,7 @@ var Component = function () {
 
   /**
    * Emit a 'tap' events when touch event support gets detected. This gets used to
-   * support toggling the controls through a tap on the video. They get enabled
+   * support toggling the controls through a tap on the Product. They get enabled
    * because every sub-component would have extra overhead otherwise.
    *
    * @private
@@ -4469,7 +4469,7 @@ var Component = function () {
    * controls. So touch events can't help us at the player level either.
    *
    * User activity gets checked asynchronously. So what could happen is a tap event
-   * on the video turns the controls off. Then the `touchend` event bubbles up to
+   * on the Product turns the controls off. Then the `touchend` event bubbles up to
    * the player. Which, if it reported user activity, would turn the controls right
    * back on. We also don't want to completely block touch events from bubbling up.
    * Furthermore a `touchmove` event and anything other than a tap, should not turn
@@ -4764,14 +4764,14 @@ var Component = function () {
   };
 
   /**
-   * Register a `Component` with `videojs` given the name and the component.
+   * Register a `Component` with `Productjs` given the name and the component.
    *
    * > NOTE: {@link Tech}s should not be registered as a `Component`. {@link Tech}s
    *         should be registered using {@link Tech.registerTech} or
-   *         {@link videojs:videojs.registerTech}.
+   *         {@link Productjs:Productjs.registerTech}.
    *
-   * > NOTE: This function can also be seen on videojs as
-   *         {@link videojs:videojs.registerComponent}.
+   * > NOTE: This function can also be seen on Productjs as
+   *         {@link Productjs:Productjs.registerComponent}.
    *
    * @param {string} name
    *        The name of the `Component` to register.
@@ -4844,9 +4844,9 @@ var Component = function () {
    * @return {Component}
    *         The `Component` that got registered under the given name.
    *
-   * @deprecated In `videojs` 6 this will not return `Component`s that were not
+   * @deprecated In `Productjs` 6 this will not return `Component`s that were not
    *             registered using {@link Component.registerComponent}. Currently we
-   *             check the global `videojs` object for a `Component` name and
+   *             check the global `Productjs` object for a `Component` name and
    *             return that if it exists.
    */
 
@@ -5109,11 +5109,11 @@ if (browserApi) {
  *        - number: should be a standard error code
  *        - string: an error message (the code will be 0)
  *        - Object: arbitrary properties
- *        - `MediaError` (native): used to populate a video.js `MediaError` object
- *        - `MediaError` (video.js): will return itself if it's already a
- *          video.js `MediaError` object.
+ *        - `MediaError` (native): used to populate a Product.js `MediaError` object
+ *        - `MediaError` (Product.js): will return itself if it's already a
+ *          Product.js `MediaError` object.
  *
- * @see [MediaError Spec]{@link https://dev.w3.org/html5/spec-author-view/video.html#mediaerror}
+ * @see [MediaError Spec]{@link https://dev.w3.org/html5/spec-author-view/Product.html#mediaerror}
  * @see [Encrypted MediaError Spec]{@link https://www.w3.org/TR/2013/WD-encrypted-media-20130510/#error-codes}
  *
  * @class MediaError
@@ -5156,7 +5156,7 @@ MediaError.prototype.code = 0;
 
 /**
  * An optional message that to show with the error. Message is not part of the HTML5
- * video spec but allows for more informative custom errors.
+ * Product spec but allows for more informative custom errors.
  *
  * @type {String}
  */
@@ -5345,7 +5345,7 @@ var MODAL_CLASS_NAME = 'vjs-modal-dialog';
 var ESC = 27;
 
 /**
- * The `ModalDialog` displays over the video and its controls, which blocks
+ * The `ModalDialog` displays over the Product and its controls, which blocks
  * interaction with the player until it is closed.
  *
  * Modal dialogs include a "Close" button and will close when that button
@@ -5972,7 +5972,7 @@ var TrackList = function (_EventTarget) {
    * Add a {@link Track} to the `TrackList`
    *
    * @param {Track} track
-   *        The audio, video, or text track to add to the list.
+   *        The audio, Product, or text track to add to the list.
    *
    * @fires TrackList#addtrack
    */
@@ -6011,7 +6011,7 @@ var TrackList = function (_EventTarget) {
    * Remove a {@link Track} from the `TrackList`
    *
    * @param {Track} rtrack
-   *        The audio, video, or text track to remove from the list.
+   *        The audio, Product, or text track to remove from the list.
    *
    * @fires TrackList#removetrack
    */
@@ -6230,7 +6230,7 @@ var AudioTrackList = function (_TrackList) {
 }(TrackList);
 
 /**
- * @file video-track-list.js
+ * @file Product-track-list.js
  */
 /**
  * Un-select all other {@link VideoTrack}s that are selected.
@@ -6248,15 +6248,15 @@ var disableOthers$1 = function disableOthers(list, track) {
     if (!Object.keys(list[i]).length || track.id === list[i].id) {
       continue;
     }
-    // another video track is enabled, disable it
+    // another Product track is enabled, disable it
     list[i].selected = false;
   }
 };
 
 /**
- * The current list of {@link VideoTrack} for a video.
+ * The current list of {@link VideoTrack} for a Product.
  *
- * @see [Spec]{@link https://html.spec.whatwg.org/multipage/embedded-content.html#videotracklist}
+ * @see [Spec]{@link https://html.spec.whatwg.org/multipage/embedded-content.html#Producttracklist}
  * @extends TrackList
  */
 
@@ -6721,7 +6721,7 @@ var TextTrackCueList = function () {
 /**
  * All possible `VideoTrackKind`s
  *
- * @see https://html.spec.whatwg.org/multipage/embedded-content.html#dom-videotrack-kind
+ * @see https://html.spec.whatwg.org/multipage/embedded-content.html#dom-Producttrack-kind
  * @typedef VideoTrack~Kind
  * @enum
  */
@@ -7145,7 +7145,7 @@ var loadTrack = function loadTrack(src, track) {
     track.loaded_ = true;
 
     // Make sure that vttjs has loaded, otherwise, wait till it finished loading
-    // NOTE: this is only used for the alt/video.novtt.js build
+    // NOTE: this is only used for the alt/Product.novtt.js build
     if (typeof window.WebVTT !== 'function') {
       if (track.tech_) {
         var loadHandler = function loadHandler() {
@@ -7580,7 +7580,7 @@ var AudioTrack = function (_Track) {
 /**
  * A representation of a single `VideoTrack`.
  *
- * @see [Spec]{@link https://html.spec.whatwg.org/multipage/embedded-content.html#videotrack}
+ * @see [Spec]{@link https://html.spec.whatwg.org/multipage/embedded-content.html#Producttrack}
  * @extends Track
  */
 
@@ -7834,7 +7834,7 @@ var NORMAL = {
     TrackClass: AudioTrack,
     capitalName: 'Audio'
   },
-  video: {
+  Product: {
     ListClass: VideoTrackList,
     TrackClass: VideoTrack,
     capitalName: 'Video'
@@ -7881,8 +7881,8 @@ ALL.names = [].concat(REMOTE.names).concat(NORMAL.names);
 /**
  * An Object containing a structure like: `{src: 'url', type: 'mimetype'}` or string
  * that just contains the src url alone.
- * * `var SourceObject = {src: 'http://ex.com/video.mp4', type: 'video/mp4'};`
-   * `var SourceString = 'http://example.com/some-video.mp4';`
+ * * `var SourceObject = {src: 'http://ex.com/Product.mp4', type: 'Product/mp4'};`
+   * `var SourceString = 'http://example.com/some-Product.mp4';`
  *
  * @typedef {Object|string} Tech~SourceObject
  *
@@ -8163,11 +8163,11 @@ var Tech = function (_Component) {
   };
 
   /**
-   * Get the percentage of the current video that is currently buffered.
+   * Get the percentage of the current Product that is currently buffered.
    *
    * @return {number}
    *         A number from 0 to 1 that represents the decimal percentage of the
-   *         video that is buffered.
+   *         Product that is buffered.
    *
    */
 
@@ -8230,7 +8230,7 @@ var Tech = function (_Component) {
     }
     this.currentTimeInterval = this.setInterval(function () {
       /**
-       * Triggered at an interval of 250ms to indicated that time is passing in the video.
+       * Triggered at an interval of 250ms to indicated that time is passing in the Product.
        *
        * @event Tech#timeupdate
        * @type {EventTarget~Event}
@@ -8252,7 +8252,7 @@ var Tech = function (_Component) {
   Tech.prototype.stopTrackingCurrentTime = function stopTrackingCurrentTime() {
     this.clearInterval(this.currentTimeInterval);
 
-    // #1002 - if the video ends right before the next timeupdate would happen,
+    // #1002 - if the Product ends right before the next timeupdate would happen,
     // the progress bar won't make it all the way to the end
     this.trigger({ type: 'timeupdate', target: this, manuallyTriggered: true });
   };
@@ -8285,11 +8285,11 @@ var Tech = function (_Component) {
   /**
    * Clear out a single `TrackList` or an array of `TrackLists` given their names.
    *
-   * > Note: Techs without source handlers should call this between sources for `video`
+   * > Note: Techs without source handlers should call this between sources for `Product`
    *         & `audio` tracks. You don't want to use them between tracks!
    *
    * @param {string[]|string} types
-   *        TrackList names to clear, valid names are `video`, `audio`, and
+   *        TrackList names to clear, valid names are `Product`, `audio`, and
    *        `text`.
    */
 
@@ -8366,7 +8366,7 @@ var Tech = function (_Component) {
    *         It only checks wether the source has played at all or not.
    *
    * @return {TimeRange}
-   *         - A single time range if this video has played
+   *         - A single time range if this Product has played
    *         - An empty set of ranges if not.
    */
 
@@ -8406,7 +8406,7 @@ var Tech = function (_Component) {
    * This adds {@link EventTarget~EventListeners} for `addtrack`, and  `removetrack`.
    *
    * @fires Tech#audiotrackchange
-   * @fires Tech#videotrackchange
+   * @fires Tech#Producttrackchange
    * @fires Tech#texttrackchange
    */
 
@@ -8424,7 +8424,7 @@ var Tech = function (_Component) {
     /**
      * Triggered when tracks are added or removed on the Tech {@link VideoTrackList}
      *
-     * @event Tech#videotrackchange
+     * @event Tech#Producttrackchange
      * @type {EventTarget~Event}
      */
 
@@ -8641,7 +8641,7 @@ var Tech = function (_Component) {
    *        See {@link Tech#createRemoteTextTrack} for more detailed properties.
    *
    * @param {boolean} [manualCleanup=true]
-   *        - When false: the TextTrack will be automatically removed from the video
+   *        - When false: the TextTrack will be automatically removed from the Product
    *          element whenever the source changes
    *        - When True: The TextTrack will have to be cleaned up manually
    *
@@ -8664,7 +8664,7 @@ var Tech = function (_Component) {
 
     if (manualCleanup !== true && manualCleanup !== false) {
       // deprecation warning
-      log.warn('Calling addRemoteTextTrack without explicitly setting the "manualCleanup" parameter to `true` is deprecated and default to `false` in future version of video.js');
+      log.warn('Calling addRemoteTextTrack without explicitly setting the "manualCleanup" parameter to `true` is deprecated and default to `false` in future version of Product.js');
       manualCleanup = true;
     }
 
@@ -8726,7 +8726,7 @@ var Tech = function (_Component) {
   Tech.prototype.setPoster = function setPoster() {};
 
   /**
-   * A method to check for the presence of the 'playsinine' <video> attribute.
+   * A method to check for the presence of the 'playsinine' <Product> attribute.
    *
    * @abstract
    */
@@ -8735,7 +8735,7 @@ var Tech = function (_Component) {
   Tech.prototype.playsinline = function playsinline() {};
 
   /**
-   * A method to set or unset the 'playsinine' <video> attribute.
+   * A method to set or unset the 'playsinine' <Product> attribute.
    *
    * @abstract
    */
@@ -8773,7 +8773,7 @@ var Tech = function (_Component) {
    *
    * @param {string} type
    *        The media type to check
-   * @return {string} Returns the native video element's response
+   * @return {string} Returns the native Product element's response
    */
 
 
@@ -8814,7 +8814,7 @@ var Tech = function (_Component) {
   };
 
   /**
-   * Registers a `Tech` into a shared list for videojs.
+   * Registers a `Tech` into a shared list for Productjs.
    *
    * @param {string} name
    *        Name of the `Tech` to register.
@@ -8872,9 +8872,9 @@ var Tech = function (_Component) {
       return Tech.techs_[name];
     }
 
-    if (window && window.videojs && window.videojs[name]) {
-      log.warn('The ' + name + ' tech was added to the videojs object when it should be registered using videojs.registerTech(name, tech)');
-      return window.videojs[name];
+    if (window && window.Productjs && window.Productjs[name]) {
+      log.warn('The ' + name + ' tech was added to the Productjs object when it should be registered using Productjs.registerTech(name, tech)');
+      return window.Productjs[name];
     }
   };
 
@@ -8885,7 +8885,7 @@ var Tech = function (_Component) {
  * Get the {@link VideoTrackList}
  *
  * @returns {VideoTrackList}
- * @method Tech.prototype.videoTracks
+ * @method Tech.prototype.ProductTracks
  */
 
 /**
@@ -8942,11 +8942,11 @@ ALL.names.forEach(function (name) {
  */
 
 /**
- * List of associated video tracks.
+ * List of associated Product tracks.
  *
  * @type {VideoTrackList}
  * @private
- * @property Tech#videoTracks_
+ * @property Tech#ProductTracks_
  */
 
 /**
@@ -8975,7 +8975,7 @@ Tech.prototype.featuresMuteControl = true;
 Tech.prototype.featuresFullscreenResize = false;
 
 /**
- * Boolean indicating wether the `Tech` supports changing the speed at which the video
+ * Boolean indicating wether the `Tech` supports changing the speed at which the Product
  * plays. Examples:
  *   - Set player to play 2x (twice) as fast
  *   - Set player to play 0.5x (half) as fast
@@ -8987,7 +8987,7 @@ Tech.prototype.featuresPlaybackRate = false;
 
 /**
  * Boolean indicating wether the `Tech` supports the `progress` event. This is currently
- * not triggered by video-js-swf. This will be used to determine if
+ * not triggered by Product-js-swf. This will be used to determine if
  * {@link Tech#manualProgressOn} should be called.
  *
  * @type {boolean}
@@ -9009,7 +9009,7 @@ Tech.prototype.featuresSourceset = false;
 
 /**
  * Boolean indicating wether the `Tech` supports the `timeupdate` event. This is currently
- * not triggered by video-js-swf. This will be used to determine if
+ * not triggered by Product-js-swf. This will be used to determine if
  * {@link Tech#manualTimeUpdates} should be called.
  *
  * @type {boolean}
@@ -9030,7 +9030,7 @@ Tech.prototype.featuresNativeTextTracks = false;
  * A functional mixin for techs that want to use the Source Handler pattern.
  * Source handlers are scripts for handling specific formats.
  * The source handler pattern is used for adaptive formats (HLS, DASH) that
- * manually load video data and feed it into a Source Buffer (Media Source Extensions)
+ * manually load Product data and feed it into a Source Buffer (Media Source Extensions)
  * Example: `Tech.withSourceHandlers.call(MyTech);`
  *
  * @param {Tech} _Tech
@@ -9219,7 +9219,7 @@ Tech.withSourceHandlers = function (_Tech) {
     // then we are loading something new
     // than clear all of our current tracks
     if (this.currentSource_) {
-      this.clearTracks(['audio', 'video']);
+      this.clearTracks(['audio', 'Product']);
       this.currentSource_ = null;
     }
 
@@ -9449,12 +9449,12 @@ function setSourceHelper() {
  * @enum
  */
 var MimetypesKind = {
-  opus: 'video/ogg',
-  ogv: 'video/ogg',
-  mp4: 'video/mp4',
-  mov: 'video/mp4',
-  m4v: 'video/mp4',
-  mkv: 'video/x-matroska',
+  opus: 'Product/ogg',
+  ogv: 'Product/ogg',
+  mp4: 'Product/mp4',
+  mov: 'Product/mp4',
+  m4v: 'Product/mp4',
+  mkv: 'Product/x-matroska',
   mp3: 'audio/mpeg',
   aac: 'audio/aac',
   oga: 'audio/ogg',
@@ -10646,7 +10646,7 @@ Component.registerComponent('Button', Button);
  * @file big-play-button.js
  */
 /**
- * The initial play button that shows before the video has played. The hiding of the
+ * The initial play button that shows before the Product has played. The hiding of the
  * `BigPlayButton` get done via CSS and `Player` states.
  *
  * @extends Button
@@ -10888,7 +10888,7 @@ var PlayToggle = function (_Button) {
   };
 
   /**
-   * This gets called once after the video has ended and the user seeks so that
+   * This gets called once after the Product has ended and the user seeks so that
    * we can change the replay button back to a play button.
    *
    * @param {EventTarget~Event} [event]
@@ -11054,7 +11054,7 @@ var formatTime = function (seconds) {
  * @file time-display.js
  */
 /**
- * Displays the time left in the video
+ * Displays the time left in the Product
  *
  * @extends Component
  */
@@ -11453,7 +11453,7 @@ Component.registerComponent('TimeDivider', TimeDivider);
  * @file remaining-time-display.js
  */
 /**
- * Displays the time left in the video
+ * Displays the time left in the Product
  *
  * @extends Component
  */
@@ -11527,7 +11527,7 @@ var RemainingTimeDisplay = function (_TimeDisplay) {
     }
 
     // @deprecated We should only use remainingTimeDisplay
-    // as of video.js 7
+    // as of Product.js 7
     if (this.player_.remainingTimeDisplay) {
       this.updateFormattedTime_(this.player_.remainingTimeDisplay());
     } else {
@@ -11671,7 +11671,7 @@ Component.registerComponent('LiveDisplay', LiveDisplay);
  */
 /**
  * The base functionality for a slider. Can be vertical or horizontal.
- * For instance the volume bar or the seek bar on a video is a slider.
+ * For instance the volume bar or the seek bar on a Product is a slider.
  *
  * @extends Component
  */
@@ -12656,7 +12656,7 @@ var SeekBar = function (_Slider) {
     event.stopPropagation();
     this.player_.scrubbing(true);
 
-    this.videoWasPlaying = !this.player_.paused();
+    this.ProductWasPlaying = !this.player_.paused();
     this.player_.pause();
 
     _Slider.prototype.handleMouseDown.call(this, event);
@@ -12679,7 +12679,7 @@ var SeekBar = function (_Slider) {
 
     var newTime = this.calculateDistance(event) * this.player_.duration();
 
-    // Don't let video end while scrubbing.
+    // Don't let Product end while scrubbing.
     if (newTime === this.player_.duration()) {
       newTime = newTime - 0.1;
     }
@@ -12737,7 +12737,7 @@ var SeekBar = function (_Slider) {
      * @type {EventTarget~Event}
      */
     this.player_.trigger({ type: 'timeupdate', target: this, manuallyTriggered: true });
-    if (this.videoWasPlaying) {
+    if (this.ProductWasPlaying) {
       silencePromise(this.player_.play());
     }
   };
@@ -13072,7 +13072,7 @@ Component.registerComponent('ProgressControl', ProgressControl);
  * @file fullscreen-toggle.js
  */
 /**
- * Toggle fullscreen video
+ * Toggle fullscreen Product
  *
  * @extends Button
  */
@@ -16507,7 +16507,7 @@ Component.registerComponent('ControlBar', ControlBar);
  * @file error-display.js
  */
 /**
- * A display that indicates an error has occurred. This means that the video
+ * A display that indicates an error has occurred. This means that the Product
  * is unplayable.
  *
  * @extends ModalDialog
@@ -17121,7 +17121,7 @@ Component.registerComponent('TextTrackSettings', TextTrackSettings);
  * If the ResizeObserver is available natively, it will be used. A polyfill can be passed in as an option.
  * If a `playerresize` event is not needed, the ResizeManager component can be removed from the player, see the example below.
  * @example <caption>How to disable the resize manager</caption>
- * const player = videojs('#vid', {
+ * const player = Productjs('#vid', {
  *   resizeManager: false
  * });
  *
@@ -17619,10 +17619,10 @@ var Html5 = function (_Tech) {
 
         if (nodeName === 'track') {
           if (!_this.featuresNativeTextTracks) {
-            // Empty video tag tracks so the built-in player doesn't use them also.
+            // Empty Product tag tracks so the built-in player doesn't use them also.
             // This may not be fast enough to stop HTML5 browsers from reading the tags
             // so we'll need to turn off any default tracks if we're manually doing
-            // captions and subtitles. videoElement.textTracks
+            // captions and subtitles. ProductElement.textTracks
             removeNodes.push(node);
           } else {
             // store HTMLTrackElement and TextTrack to remote list
@@ -17850,7 +17850,7 @@ var Html5 = function (_Tech) {
     var el = this.options_.tag;
 
     // Check if this browser supports moving the element into the box.
-    // On the iPhone video will break if you move the element,
+    // On the iPhone Product will break if you move the element,
     // So we have to create a brand new element.
     // If we ingested the player div, we do not need to move the media element.
     if (!el || !(this.options_.playerElIngest || this.movingMediaElementInDOM)) {
@@ -17865,7 +17865,7 @@ var Html5 = function (_Tech) {
         Html5.disposeMediaElement(el);
         el = clone;
       } else {
-        el = document.createElement('video');
+        el = document.createElement('Product');
 
         // determine if native controls should be used
         var tagAttributes = this.options_.tag && getAttributes(this.options_.tag);
@@ -17911,12 +17911,12 @@ var Html5 = function (_Tech) {
   };
 
   /**
-   * This will be triggered if the loadstart event has already fired, before videojs was
+   * This will be triggered if the loadstart event has already fired, before Productjs was
    * ready. Two known examples of when this can happen are:
    * 1. If we're loading the playback object after it has started loading
    * 2. The media is already playing the (often with autoplay on) then
    *
-   * This function will fire another loadstart so that videojs can catchup.
+   * This function will fire another loadstart so that Productjs can catchup.
    *
    * @fires Tech#loadstart
    *
@@ -17927,7 +17927,7 @@ var Html5 = function (_Tech) {
 
   Html5.prototype.handleLateInit_ = function handleLateInit_(el) {
     if (el.networkState === 0 || el.networkState === 3) {
-      // The video element hasn't started loading the source yet
+      // The Product element hasn't started loading the source yet
       // or didn't find a source
       return;
     }
@@ -18018,7 +18018,7 @@ var Html5 = function (_Tech) {
       this.el_.currentTime = seconds;
     } catch (e) {
       log(e, 'Video is not ready. (Video.js)');
-      // this.warning(VideoJS.warnings.videoNotReady);
+      // this.warning(VideoJS.warnings.ProductNotReady);
     }
   };
 
@@ -18042,7 +18042,7 @@ var Html5 = function (_Tech) {
       // several with 0
       var checkProgress = function checkProgress() {
         if (_this3.el_.currentTime > 0) {
-          // Trigger durationchange for genuinely live video
+          // Trigger durationchange for genuinely live Product
           if (_this3.el_.duration === Infinity) {
             _this3.trigger('durationchange');
           }
@@ -18145,21 +18145,21 @@ var Html5 = function (_Tech) {
 
 
   Html5.prototype.enterFullScreen = function enterFullScreen() {
-    var video = this.el_;
+    var Product = this.el_;
 
-    if (video.paused && video.networkState <= video.HAVE_METADATA) {
-      // attempt to prime the video element for programmatic access
+    if (Product.paused && Product.networkState <= Product.HAVE_METADATA) {
+      // attempt to prime the Product element for programmatic access
       // this isn't necessary on the desktop but shouldn't hurt
       this.el_.play();
 
       // playing and pausing synchronously during the transition to fullscreen
       // can get iOS ~6.1 devices into a play/pause loop
       this.setTimeout(function () {
-        video.pause();
-        video.webkitEnterFullScreen();
+        Product.pause();
+        Product.webkitEnterFullScreen();
       }, 0);
     } else {
-      video.webkitEnterFullScreen();
+      Product.webkitEnterFullScreen();
     }
   };
 
@@ -18324,7 +18324,7 @@ var Html5 = function (_Tech) {
    * @param {Object} options The object should contain values for
    * kind, language, label, and src (location of the WebVTT file)
    * @param {Boolean} [manualCleanup=true] if set to false, the TextTrack will be
-   * automatically removed from the video element whenever the source changes
+   * automatically removed from the Product element whenever the source changes
    * @return {HTMLTrackElement} An Html Track Element.
    * This can be an emulated {@link HTMLTrackElement} or a native one.
    * @deprecated The default value of the "manualCleanup" parameter will default
@@ -18382,20 +18382,20 @@ var Html5 = function (_Tech) {
       return this.el().getVideoPlaybackQuality();
     }
 
-    var videoPlaybackQuality = {};
+    var ProductPlaybackQuality = {};
 
     if (typeof this.el().webkitDroppedFrameCount !== 'undefined' && typeof this.el().webkitDecodedFrameCount !== 'undefined') {
-      videoPlaybackQuality.droppedVideoFrames = this.el().webkitDroppedFrameCount;
-      videoPlaybackQuality.totalVideoFrames = this.el().webkitDecodedFrameCount;
+      ProductPlaybackQuality.droppedVideoFrames = this.el().webkitDroppedFrameCount;
+      ProductPlaybackQuality.totalVideoFrames = this.el().webkitDecodedFrameCount;
     }
 
     if (window.performance && typeof window.performance.now === 'function') {
-      videoPlaybackQuality.creationTime = window.performance.now();
+      ProductPlaybackQuality.creationTime = window.performance.now();
     } else if (window.performance && window.performance.timing && typeof window.performance.timing.navigationStart === 'number') {
-      videoPlaybackQuality.creationTime = window.Date.now() - window.performance.timing.navigationStart;
+      ProductPlaybackQuality.creationTime = window.Date.now() - window.performance.timing.navigationStart;
     }
 
-    return videoPlaybackQuality;
+    return ProductPlaybackQuality;
   };
 
   return Html5;
@@ -18412,7 +18412,7 @@ if (isReal()) {
    * @constant
    * @private
    */
-  Html5.TEST_VID = document.createElement('video');
+  Html5.TEST_VID = document.createElement('Product');
   var track = document.createElement('track');
 
   track.kind = 'captions';
@@ -18519,7 +18519,7 @@ Html5.canMuteVolume = function () {
  */
 Html5.canControlPlaybackRate = function () {
   // Playback rate API is implemented in Android Chrome, but doesn't do anything
-  // https://github.com/videojs/video.js/issues/3180
+  // https://github.com/Productjs/Product.js/issues/3180
   if (IS_ANDROID && IS_CHROME && CHROME_VERSION < 58) {
     return false;
   }
@@ -18535,7 +18535,7 @@ Html5.canControlPlaybackRate = function () {
 };
 
 /**
- * Check if we can override a video/audio elements attributes, with
+ * Check if we can override a Product/audio elements attributes, with
  * Object.defineProperty.
  *
  * @return {boolean}
@@ -18551,9 +18551,9 @@ Html5.canOverrideAttributes = function () {
   try {
     var noop = function noop() {};
 
-    Object.defineProperty(document.createElement('video'), 'src', { get: noop, set: noop });
+    Object.defineProperty(document.createElement('Product'), 'src', { get: noop, set: noop });
     Object.defineProperty(document.createElement('audio'), 'src', { get: noop, set: noop });
-    Object.defineProperty(document.createElement('video'), 'innerHTML', { get: noop, set: noop });
+    Object.defineProperty(document.createElement('Product'), 'innerHTML', { get: noop, set: noop });
     Object.defineProperty(document.createElement('audio'), 'innerHTML', { get: noop, set: noop });
   } catch (e) {
     return false;
@@ -18581,7 +18581,7 @@ Html5.supportsNativeTextTracks = function () {
  *        - False otherwise
  */
 Html5.supportsNativeVideoTracks = function () {
-  return !!(Html5.TEST_VID && Html5.TEST_VID.videoTracks);
+  return !!(Html5.TEST_VID && Html5.TEST_VID.ProductTracks);
 };
 
 /**
@@ -18703,7 +18703,7 @@ Html5.prototype.featuresNativeAudioTracks = Html5.supportsNativeAudioTracks();
 // HTML5 Feature detection and Device Fixes --------------------------------- //
 var canPlayType = Html5.TEST_VID && Html5.TEST_VID.constructor.prototype.canPlayType;
 var mpegurlRE = /^application\/(?:x-|vnd\.apple\.)mpegurl/i;
-var mp4RE = /^video\/mp4/i;
+var mp4RE = /^Product\/mp4/i;
 
 Html5.patchCanPlayType = function () {
 
@@ -18889,7 +18889,7 @@ Html5.resetMediaElement = function (el) {
  *         - True indicates that the media should play inline.
  *         - False indicates that the media should not play inline.
  *
- * @see [Spec]{@link https://html.spec.whatwg.org/#attr-video-playsinline}
+ * @see [Spec]{@link https://html.spec.whatwg.org/#attr-Product-playsinline}
  */
 'playsinline'].forEach(function (prop) {
   Html5.prototype[prop] = function () {
@@ -18967,7 +18967,7 @@ Html5.resetMediaElement = function (el) {
  *         - True indicates that the media should play inline.
  *         - False indicates that the media should not play inline.
  *
- * @see [Spec]{@link https://html.spec.whatwg.org/#attr-video-playsinline}
+ * @see [Spec]{@link https://html.spec.whatwg.org/#attr-Product-playsinline}
  */
 'playsinline'].forEach(function (prop) {
   Html5.prototype['set' + toTitleCase(prop)] = function (v) {
@@ -18985,7 +18985,7 @@ Html5.resetMediaElement = function (el) {
 // The list is as followed
 // paused, currentTime, buffered, volume, poster, preload, error, seeking
 // seekable, ended, playbackRate, defaultPlaybackRate, played, networkState
-// readyState, videoWidth, videoHeight
+// readyState, ProductWidth, ProductHeight
 [
 /**
  * Get the value of `paused` from the media element. `paused` indicates whether the media element
@@ -19046,7 +19046,7 @@ Html5.resetMediaElement = function (el) {
  *         The value of `poster` from the media element. Value will be a url to an
  *         image.
  *
- * @see [Spec]{@link https://www.w3.org/TR/html5/embedded-content-0.html#attr-video-poster}
+ * @see [Spec]{@link https://www.w3.org/TR/html5/embedded-content-0.html#attr-Product-poster}
  */
 'poster',
 
@@ -19207,30 +19207,30 @@ Html5.resetMediaElement = function (el) {
 'readyState',
 
 /**
- * Get the value of `videoWidth` from the video element. `videoWidth` indicates
- * the current width of the video in css pixels.
+ * Get the value of `ProductWidth` from the Product element. `ProductWidth` indicates
+ * the current width of the Product in css pixels.
  *
- * @method Html5#videoWidth
+ * @method Html5#ProductWidth
  * @return {number}
- *         The value of `videoWidth` from the video element. This will be a number
+ *         The value of `ProductWidth` from the Product element. This will be a number
  *         in css pixels.
  *
- * @see [Spec] {@link https://www.w3.org/TR/html5/embedded-content-0.html#dom-video-videowidth}
+ * @see [Spec] {@link https://www.w3.org/TR/html5/embedded-content-0.html#dom-Product-Productwidth}
  */
-'videoWidth',
+'ProductWidth',
 
 /**
- * Get the value of `videoHeight` from the video element. `videoHeigth` indicates
- * the current height of the video in css pixels.
+ * Get the value of `ProductHeight` from the Product element. `ProductHeigth` indicates
+ * the current height of the Product in css pixels.
  *
- * @method Html5#videoHeight
+ * @method Html5#ProductHeight
  * @return {number}
- *         The value of `videoHeight` from the video element. This will be a number
+ *         The value of `ProductHeight` from the Product element. This will be a number
  *         in css pixels.
  *
- * @see [Spec] {@link https://www.w3.org/TR/html5/embedded-content-0.html#dom-video-videowidth}
+ * @see [Spec] {@link https://www.w3.org/TR/html5/embedded-content-0.html#dom-Product-Productwidth}
  */
-'videoHeight'].forEach(function (prop) {
+'ProductHeight'].forEach(function (prop) {
   Html5.prototype[prop] = function () {
     return this.el_[prop];
   };
@@ -19316,7 +19316,7 @@ Html5.resetMediaElement = function (el) {
 /**
  * Set the value of `defaultPlaybackRate` on the media element. `defaultPlaybackRate` indicates
  * the rate at which the media should play back upon initial startup. Changing this value
- * after a video has started will do nothing. Instead you should used {@link Html5#setPlaybackRate}.
+ * after a Product has started will do nothing. Instead you should used {@link Html5#setPlaybackRate}.
  *
  * Example Values:
  *   - if playbackRate is set to 2, media will play twice as fast.
@@ -19394,7 +19394,7 @@ Html5.nativeSourceHandler = {};
  */
 Html5.nativeSourceHandler.canPlayType = function (type) {
   // IE9 on Windows 7 without MediaPlayer throws an error here
-  // https://github.com/videojs/video.js/issues/519
+  // https://github.com/Productjs/Product.js/issues/519
   try {
     return Html5.TEST_VID.canPlayType(type);
   } catch (e) {
@@ -19420,11 +19420,11 @@ Html5.nativeSourceHandler.canHandleSource = function (source, options) {
   if (source.type) {
     return Html5.nativeSourceHandler.canPlayType(source.type);
 
-    // If no type, fall back to checking 'video/[EXTENSION]'
+    // If no type, fall back to checking 'Product/[EXTENSION]'
   } else if (source.src) {
     var ext = getFileExtension(source.src);
 
-    return Html5.nativeSourceHandler.canPlayType('video/' + ext);
+    return Html5.nativeSourceHandler.canPlayType('Product/' + ext);
   }
 
   return '';
@@ -19456,16 +19456,16 @@ Html5.registerSourceHandler(Html5.nativeSourceHandler);
 
 Tech.registerTech('Html5', Html5);
 
-var _templateObject$1 = taggedTemplateLiteralLoose(['\n        Using the tech directly can be dangerous. I hope you know what you\'re doing.\n        See https://github.com/videojs/video.js/issues/2617 for more info.\n      '], ['\n        Using the tech directly can be dangerous. I hope you know what you\'re doing.\n        See https://github.com/videojs/video.js/issues/2617 for more info.\n      ']);
+var _templateObject$1 = taggedTemplateLiteralLoose(['\n        Using the tech directly can be dangerous. I hope you know what you\'re doing.\n        See https://github.com/Productjs/Product.js/issues/2617 for more info.\n      '], ['\n        Using the tech directly can be dangerous. I hope you know what you\'re doing.\n        See https://github.com/Productjs/Product.js/issues/2617 for more info.\n      ']);
 
 /**
  * @file player.js
  */
 // Subclasses Component
 // The following imports are used only to ensure that the corresponding modules
-// are always included in the video.js package. Importing the modules will
-// execute them and they will register themselves with video.js.
-// Import Html5 tech, at least for disposing the original video tag.
+// are always included in the Product.js package. Importing the modules will
+// execute them and they will register themselves with Product.js.
+// Import Html5 tech, at least for disposing the original Product tag.
 // The following tech events are simply re-triggered
 // on the player when they happen
 var TECH_EVENTS_RETRIGGER = [
@@ -19486,7 +19486,7 @@ var TECH_EVENTS_RETRIGGER = [
 'progress',
 
 /**
- * Fires when the loading of an audio/video is aborted.
+ * Fires when the loading of an audio/Product is aborted.
  *
  * @event Player#abort
  * @type {EventTarget~Event}
@@ -19549,7 +19549,7 @@ var TECH_EVENTS_RETRIGGER = [
 'stalled',
 
 /**
- * Fires when the browser has loaded meta data for the audio/video.
+ * Fires when the browser has loaded meta data for the audio/Product.
  *
  * @event Player#loadedmetadata
  * @type {EventTarget~Event}
@@ -19565,7 +19565,7 @@ var TECH_EVENTS_RETRIGGER = [
 'loadedmetadata',
 
 /**
- * Fires when the browser has loaded the current frame of the audio/video.
+ * Fires when the browser has loaded the current frame of the audio/Product.
  *
  * @event Player#loadeddata
  * @type {event}
@@ -19597,7 +19597,7 @@ var TECH_EVENTS_RETRIGGER = [
 'timeupdate',
 
 /**
- * Fires when the video's intrinsic dimensions change
+ * Fires when the Product's intrinsic dimensions change
  *
  * @event Player#resize
  * @type {event}
@@ -19683,11 +19683,11 @@ var DEFAULT_BREAKPOINTS = {
 
 /**
  * An instance of the `Player` class is created when any of the Video.js setup methods
- * are used to initialize a video.
+ * are used to initialize a Product.
  *
  * After an instance has been created it can be accessed globally in two ways:
- * 1. By calling `videojs('example_video_1');`
- * 2. By using it directly via  `videojs.players.example_video_1;`
+ * 1. By calling `Productjs('example_Product_1');`
+ * 2. By using it directly via  `Productjs.players.example_Product_1;`
  *
  * @extends Component
  */
@@ -19699,7 +19699,7 @@ var Player = function (_Component) {
    * Create an instance of this class.
    *
    * @param {Element} tag
-   *        The original video DOM element used for configuring options.
+   *        The original Product DOM element used for configuring options.
    *
    * @param {Object} [options]
    *        Object of option names and values.
@@ -19711,10 +19711,10 @@ var Player = function (_Component) {
     classCallCheck(this, Player);
 
     // Make sure tag ID exists
-    tag.id = tag.id || options.id || 'vjs_video_' + newGUID();
+    tag.id = tag.id || options.id || 'vjs_Product_' + newGUID();
 
     // Set Options
-    // The options argument overrides options set in the video tag
+    // The options argument overrides options set in the Product tag
     // which overrides globally set options.
     // This latter part coincides with the load order
     // (tag must exist before Player)
@@ -19781,7 +19781,7 @@ var Player = function (_Component) {
     // if the global option object was accidentally blown away by
     // someone, bail early with an informative error
     if (!_this.options_ || !_this.options_.techOrder || !_this.options_.techOrder.length) {
-      throw new Error('No techOrder specified. Did you overwrite ' + 'videojs.options instead of just changing the ' + 'properties you want to override?');
+      throw new Error('No techOrder specified. Did you overwrite ' + 'Productjs.options instead of just changing the ' + 'properties you want to override?');
     }
 
     // Store the original tag used to set options
@@ -19806,7 +19806,7 @@ var Player = function (_Component) {
       _this.languages_ = Player.prototype.options_.languages;
     }
 
-    // Cache for video property values.
+    // Cache for Product property values.
     _this.cache_ = {};
 
     // Set poster
@@ -19939,9 +19939,9 @@ var Player = function (_Component) {
   }
 
   /**
-   * Destroys the video player and does any necessary cleanup.
+   * Destroys the Product player and does any necessary cleanup.
    *
-   * This is especially helpful if you are dynamically adding and removing videos
+   * This is especially helpful if you are dynamically adding and removing Products
    * to/from the DOM.
    *
    * @fires Player#dispose
@@ -20007,7 +20007,7 @@ var Player = function (_Component) {
     var tag = this.tag;
     var el = void 0;
     var playerElIngest = this.playerElIngest_ = tag.parentNode && tag.parentNode.hasAttribute && tag.parentNode.hasAttribute('data-vjs-player');
-    var divEmbed = this.tag.tagName.toLowerCase() === 'video-js';
+    var divEmbed = this.tag.tagName.toLowerCase() === 'Product-js';
 
     if (playerElIngest) {
       el = this.el_ = tag.parentNode;
@@ -20016,25 +20016,25 @@ var Player = function (_Component) {
     }
 
     // Copy over all the attributes from the tag, including ID and class
-    // ID will now reference player box, not the video tag
+    // ID will now reference player box, not the Product tag
     var attrs = getAttributes(tag);
 
     if (divEmbed) {
       el = this.el_ = tag;
-      tag = this.tag = document.createElement('video');
+      tag = this.tag = document.createElement('Product');
       while (el.children.length) {
         tag.appendChild(el.firstChild);
       }
 
-      if (!hasClass(el, 'video-js')) {
-        addClass(el, 'video-js');
+      if (!hasClass(el, 'Product-js')) {
+        addClass(el, 'Product-js');
       }
 
       el.appendChild(tag);
 
       playerElIngest = this.playerElIngest_ = el;
 
-      // copy over properties from the video-js element
+      // copy over properties from the Product-js element
       // ie8 doesn't support Object.keys nor hasOwnProperty
       // on dom elements so we have to specify properties individually
       ['autoplay', 'controls', 'crossOrigin', 'defaultMuted', 'defaultPlaybackRate', 'loop', 'muted', 'playbackRate', 'src', 'volume'].forEach(function (prop) {
@@ -20044,7 +20044,7 @@ var Player = function (_Component) {
       });
     }
 
-    // set tabindex to -1 to remove the video element from the focus order
+    // set tabindex to -1 to remove the Product element from the focus order
     tag.setAttribute('tabindex', '-1');
     attrs.tabindex = '-1';
 
@@ -20088,19 +20088,19 @@ var Player = function (_Component) {
 
     // Update tag id/class for use as HTML5 playback tech
     // Might think we should do this after embedding in container so .vjs-tech class
-    // doesn't flash 100% width/height, but class only applies with .video-js parent
+    // doesn't flash 100% width/height, but class only applies with .Product-js parent
     tag.playerId = tag.id;
     tag.id += '_html5_api';
     tag.className = 'vjs-tech';
 
     // Make player findable on elements
     tag.player = el.player = this;
-    // Default state of video is paused
+    // Default state of Product is paused
     this.addClass('vjs-paused');
 
     // Add a style element in the player that we'll use to set the width/height
     // of the player in a way that's still overrideable by CSS, just like the
-    // video element
+    // Product element
     if (window.VIDEOJS_NO_DYNAMIC_STYLE !== true) {
       this.styleEl_ = createStyleElement('vjs-styles-dimensions');
       var defaultsStyleEl = $('.vjs-styles-defaults');
@@ -20119,7 +20119,7 @@ var Player = function (_Component) {
     this.fluid(this.options_.fluid);
     this.aspectRatio(this.options_.aspectRatio);
 
-    // Hide any links within the video/audio tag, because IE doesn't hide them completely.
+    // Hide any links within the Product/audio tag, because IE doesn't hide them completely.
     var links = tag.getElementsByTagName('a');
 
     for (var i = 0; i < links.length; i++) {
@@ -20133,7 +20133,7 @@ var Player = function (_Component) {
     // keep track of the original for later so we can know if the source originally failed
     tag.initNetworkState_ = tag.networkState;
 
-    // Wrap video tag in div (el/box) container
+    // Wrap Product tag in div (el/box) container
     if (tag.parentNode && !playerElIngest) {
       tag.parentNode.insertBefore(el, tag);
     }
@@ -20367,11 +20367,11 @@ var Player = function (_Component) {
     if (this.aspectRatio_ !== undefined && this.aspectRatio_ !== 'auto') {
       // Use any aspectRatio that's been specifically set
       aspectRatio = this.aspectRatio_;
-    } else if (this.videoWidth() > 0) {
-      // Otherwise try to get the aspect ratio from the video metadata
-      aspectRatio = this.videoWidth() + ':' + this.videoHeight();
+    } else if (this.ProductWidth() > 0) {
+      // Otherwise try to get the aspect ratio from the Product metadata
+      aspectRatio = this.ProductWidth() + ':' + this.ProductHeight();
     } else {
-      // Or use a default. The video element's is 2:1, but 16:9 is more common.
+      // Or use a default. The Product element's is 2:1, but 16:9 is more common.
       aspectRatio = '16:9';
     }
 
@@ -20386,8 +20386,8 @@ var Player = function (_Component) {
       // Or calulate the width from the aspect ratio if a height has been set
       width = this.height_ / ratioMultiplier;
     } else {
-      // Or use the video's metadata, or use the video el's default of 300
-      width = this.videoWidth() || 300;
+      // Or use the Product's metadata, or use the Product el's default of 300
+      width = this.ProductWidth() || 300;
     }
 
     if (this.height_ !== undefined) {
@@ -20419,7 +20419,7 @@ var Player = function (_Component) {
    *        name of the playback technology
    *
    * @param {string} source
-   *        video source
+   *        Product source
    *
    * @private
    */
@@ -20436,7 +20436,7 @@ var Player = function (_Component) {
     var titleTechName = toTitleCase(techName);
     var camelTechName = techName.charAt(0).toLowerCase() + techName.slice(1);
 
-    // get rid of the HTML5 video tag as soon as we are using another tech
+    // get rid of the HTML5 Product tag as soon as we are using another tech
     if (titleTechName !== 'Html5' && this.tag) {
       Tech.getTech('Html5').disposeMediaElement(this.tag);
       this.tag.player = null;
@@ -20493,7 +20493,7 @@ var Player = function (_Component) {
     var TechClass = Tech.getTech(techName);
 
     if (!TechClass) {
-      throw new Error('No Tech named \'' + titleTechName + '\' exists! \'' + titleTechName + '\' should be registered using videojs.registerTech()\'');
+      throw new Error('No Tech named \'' + titleTechName + '\' exists! \'' + titleTechName + '\' should be registered using Productjs.registerTech()\'');
     }
 
     this.tech_ = new TechClass(techOptions);
@@ -20544,12 +20544,12 @@ var Player = function (_Component) {
     }
 
     // Add the tech element in the DOM if it was not already there
-    // Make sure to not insert the original video element if using Html5
+    // Make sure to not insert the original Product element if using Html5
     if (this.tech_.el().parentNode !== this.el() && (titleTechName !== 'Html5' || !this.tag)) {
       prependTo(this.tech_.el(), this.el());
     }
 
-    // Get rid of the original video tag reference after the first tech is loaded
+    // Get rid of the original Product tag reference after the first tech is loaded
     if (this.tag) {
       this.tag.player = null;
       this.tag = null;
@@ -20612,19 +20612,19 @@ var Player = function (_Component) {
   /**
    * Set up click and touch listeners for the playback element
    *
-   * - On desktops: a click on the video itself will toggle playback
-   * - On mobile devices: a click on the video toggles controls
+   * - On desktops: a click on the Product itself will toggle playback
+   * - On mobile devices: a click on the Product toggles controls
    *   which is done by toggling the user state between active and
    *   inactive
    * - A tap can signal that a user has become active or has become inactive
-   *   e.g. a quick tap on an iPhone movie should reveal the controls. Another
+   *   e.g. a quick tap on an iPhone product should reveal the controls. Another
    *   quick tap should hide them again (signaling the user is in an inactive
    *   viewing state)
    * - In addition to this, we still want the user to be considered inactive after
    *   a few seconds of inactivity.
    *
    * > Note: the only part of iOS interaction we can't mimic with this setup
-   * is a touch and hold on the video element counting as activity in order to
+   * is a touch and hold on the Product element counting as activity in order to
    * keep the controls showing, but that shouldn't be an issue. A touch and hold
    * on any controls will still keep the user active
    *
@@ -20694,8 +20694,8 @@ var Player = function (_Component) {
     this.handleTechDurationChange_();
 
     // Chrome and Safari both have issues with autoplay.
-    // In Safari (5.1.1), when we move the video element into the container div, autoplay doesn't work.
-    // In Chrome (15), if you have autoplay + a poster + no controls, the video gets hidden (but audio plays)
+    // In Safari (5.1.1), when we move the Product element into the container div, autoplay doesn't work.
+    // In Chrome (15), if you have autoplay + a poster + no controls, the Product gets hidden (but audio plays)
     // This fixes both issues. Need to wait for API, so it updates displays correctly
     if ((this.src() || this.currentSrc()) && this.tag && this.options_.autoplay && this.paused()) {
       try {
@@ -20710,7 +20710,7 @@ var Player = function (_Component) {
   /**
    * Retrigger the `loadstart` event that was triggered by the {@link Tech}. This
    * function will also trigger {@link Player#firstplay} if it is the first loadstart
-   * for a video.
+   * for a Product.
    *
    * @fires Player#loadstart
    * @fires Player#firstplay
@@ -20932,7 +20932,7 @@ var Player = function (_Component) {
       if (playerSrc && !/^blob:/.test(playerSrc) && /^blob:/.test(eventSrc)) {
 
         // if both the tech source and the player source were updated we assume
-        // something like @videojs/http-streaming did the sourceset and skip updating the source cache.
+        // something like @Productjs/http-streaming did the sourceset and skip updating the source cache.
         if (!this.lastSource_ || this.lastSource_.tech !== eventSrc && this.lastSource_.player !== playerSrc) {
           updateSourceCaches = function updateSourceCaches() {};
         }
@@ -21052,7 +21052,7 @@ var Player = function (_Component) {
     }
     this.cache_.lastPlaybackRate = this.tech_.playbackRate();
     /**
-     * Fires when the playing speed of the audio/video is changed
+     * Fires when the playing speed of the audio/Product is changed
      *
      * @event Player#ratechange
      * @type {event}
@@ -21208,7 +21208,7 @@ var Player = function (_Component) {
 
     this.addClass('vjs-has-started');
     /**
-     * Fired the first time a video is played. Not part of the HLS spec, and this is
+     * Fired the first time a Product is played. Not part of the HLS spec, and this is
      * probably not the best implementation yet, so use sparingly. If you don't have a
      * reason to prevent playback, use `myPlayer.one('play');` instead.
      *
@@ -21422,7 +21422,7 @@ var Player = function (_Component) {
   };
 
   /**
-   * Fires when an error occurred during the loading of an audio/video.
+   * Fires when an error occurred during the loading of an audio/Product.
    *
    * @private
    * @listens Tech#error
@@ -21643,7 +21643,7 @@ var Player = function (_Component) {
   };
 
   /**
-   * Pause the video playback
+   * Pause the Product playback
    *
    * @return {Player}
    *         A reference to the player object this function was called on
@@ -21739,20 +21739,20 @@ var Player = function (_Component) {
   };
 
   /**
-   * Normally gets the length in time of the video in seconds;
+   * Normally gets the length in time of the Product in seconds;
    * in all but the rarest use cases an argument will NOT be passed to the method
    *
-   * > **NOTE**: The video must have started loading before the duration can be
-   * known, and in the case of Flash, may not be known until the video starts
+   * > **NOTE**: The Product must have started loading before the duration can be
+   * known, and in the case of Flash, may not be known until the Product starts
    * playing.
    *
    * @fires Player#durationchange
    *
    * @param {number} [seconds]
-   *        The duration of the video to set in seconds
+   *        The duration of the Product to set in seconds
    *
    * @return {number}
-   *         - The duration of the video in seconds when getting
+   *         - The duration of the Product in seconds when getting
    */
 
 
@@ -21764,7 +21764,7 @@ var Player = function (_Component) {
 
     seconds = parseFloat(seconds);
 
-    // Standardize on Inifity for signaling video is live
+    // Standardize on Inifity for signaling Product is live
     if (seconds < 0) {
       seconds = Infinity;
     }
@@ -21787,8 +21787,8 @@ var Player = function (_Component) {
   };
 
   /**
-   * Calculates how much time is left in the video. Not part
-   * of the native video API.
+   * Calculates how much time is left in the Product. Not part
+   * of the native Product API.
    *
    * @return {number}
    *         The time remaining in seconds
@@ -21813,14 +21813,14 @@ var Player = function (_Component) {
   };
 
   //
-  // Kind of like an array of portions of the video that have been downloaded.
+  // Kind of like an array of portions of the Product that have been downloaded.
 
   /**
-   * Get a TimeRange object with an array of the times of the video
+   * Get a TimeRange object with an array of the times of the Product
    * that have been downloaded. If you just want the percent of the
-   * video that's been downloaded, use bufferedPercent.
+   * Product that's been downloaded, use bufferedPercent.
    *
-   * @see [Buffered Spec]{@link http://dev.w3.org/html5/spec/video.html#dom-media-buffered}
+   * @see [Buffered Spec]{@link http://dev.w3.org/html5/spec/Product.html#dom-media-buffered}
    *
    * @return {TimeRange}
    *         A mock TimeRange object (following HTML spec)
@@ -21838,8 +21838,8 @@ var Player = function (_Component) {
   };
 
   /**
-   * Get the percent (as a decimal) of the video that's been downloaded.
-   * This method is not a part of the native HTML video API.
+   * Get the percent (as a decimal) of the Product that's been downloaded.
+   * This method is not a part of the native HTML Product API.
    *
    * @return {number}
    *         A decimal between 0 and 1 representing the percent
@@ -21933,9 +21933,9 @@ var Player = function (_Component) {
    * indicates the state of muted on intial playback.
    *
    * ```js
-   *   var myPlayer = videojs('some-player-id');
+   *   var myPlayer = Productjs('some-player-id');
    *
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
+   *   myPlayer.src("http://www.example.com/path/to/Product.mp4");
    *
    *   // get, should be false
    *   console.log(myPlayer.defaultMuted());
@@ -22026,9 +22026,9 @@ var Player = function (_Component) {
   };
 
   /**
-   * Increase the size of the video to full screen
+   * Increase the size of the Product to full screen
    * In some browsers, full screen is not supported natively, so it enters
-   * "full window mode", where the video fills the browser window.
+   * "full window mode", where the Product fills the browser window.
    * In browsers and devices that support native full screen, sometimes the
    * browser's default controls will be shown, and not the Video.js custom skin.
    * This includes most mobile devices (iOS, Android) and older versions of
@@ -22045,7 +22045,7 @@ var Player = function (_Component) {
 
     if (fsApi.requestFullscreen) {
       // the browser supports going fullscreen at the element level so we can
-      // take the controls fullscreen as well as the video
+      // take the controls fullscreen as well as the Product
 
       // Trigger fullscreenchange event after change
       // We have to specifically add this each time, and remove
@@ -22068,11 +22068,11 @@ var Player = function (_Component) {
 
       this.el_[fsApi.requestFullscreen]();
     } else if (this.tech_.supportsFullScreen()) {
-      // we can't take the video.js controls fullscreen but we can go fullscreen
+      // we can't take the Product.js controls fullscreen but we can go fullscreen
       // with native controls
       this.techCall_('enterFullScreen');
     } else {
-      // fullscreen isn't supported so we'll just stretch the video element to
+      // fullscreen isn't supported so we'll just stretch the Product element to
       // fill the viewport
       this.enterFullWindow();
       /**
@@ -22084,7 +22084,7 @@ var Player = function (_Component) {
   };
 
   /**
-   * Return the video to its normal size after having been in full screen mode
+   * Return the Product to its normal size after having been in full screen mode
    *
    * @fires Player#fullscreenchange
    */
@@ -22112,7 +22112,7 @@ var Player = function (_Component) {
 
   /**
    * When fullscreen isn't supported we can stretch the
-   * video container to as wide as the browser will let us.
+   * Product container to as wide as the browser will let us.
    *
    * @fires Player#enterFullWindow
    */
@@ -22188,7 +22188,7 @@ var Player = function (_Component) {
   /**
    * Check whether the player can play a given mimetype
    *
-   * @see https://www.w3.org/TR/2011/WD-html5-20110113/video.html#dom-navigator-canplaytype
+   * @see https://www.w3.org/TR/2011/WD-html5-20110113/Product.html#dom-navigator-canplaytype
    *
    * @param {string} type
    *        The mimetype to check
@@ -22313,7 +22313,7 @@ var Player = function (_Component) {
   };
 
   /**
-   * Get or set the video source.
+   * Get or set the Product source.
    *
    * @param {Tech~SourceObject|Tech~SourceObject[]|string} [source]
    *        A SourceObject, an array of SourceObjects, or a string referencing
@@ -22501,7 +22501,7 @@ var Player = function (_Component) {
   };
 
   /**
-   * Returns the fully qualified URL of the current source value e.g. http://mysite.com/video.mp4
+   * Returns the fully qualified URL of the current source value e.g. http://mysite.com/Product.mp4
    * Can be used in conjuction with `currentType` to assist in rebuilding the current source object.
    *
    * @return {string}
@@ -22514,7 +22514,7 @@ var Player = function (_Component) {
   };
 
   /**
-   * Get the current source type e.g. video/mp4
+   * Get the current source type e.g. Product/mp4
    * This can allow you rebuild the current source object so that you could load the same
    * source and tech later
    *
@@ -22615,7 +22615,7 @@ var Player = function (_Component) {
    *         - the current value of playsinline
    *         - the player when setting
    *
-   * @see [Spec]{@link https://html.spec.whatwg.org/#attr-video-playsinline}
+   * @see [Spec]{@link https://html.spec.whatwg.org/#attr-Product-playsinline}
    */
 
 
@@ -22629,11 +22629,11 @@ var Player = function (_Component) {
   };
 
   /**
-   * Get or set the loop attribute on the video element.
+   * Get or set the loop attribute on the Product element.
    *
    * @param {boolean} [value]
-   *        - true means that we should loop the video
-   *        - false means that we should not loop the video
+   *        - true means that we should loop the Product
+   *        - false means that we should not loop the Product
    *
    * @return {string}
    *         The current value of loop when getting
@@ -23084,7 +23084,7 @@ var Player = function (_Component) {
   /**
    * Gets or sets the current default playback rate. A default playback rate of
    * 1.0 represents normal speed and 0.5 would indicate half-speed playback, for instance.
-   * defaultPlaybackRate will only represent what the intial playbackRate of a video was, not
+   * defaultPlaybackRate will only represent what the intial playbackRate of a Product was, not
    * not the current playbackRate.
    *
    * @see https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-defaultplaybackrate
@@ -23161,7 +23161,7 @@ var Player = function (_Component) {
 
   /**
    * Create a remote {@link TextTrack} and an {@link HTMLTrackElement}. It will
-   * automatically removed from the video element whenever the source changes, unless
+   * automatically removed from the Product element whenever the source changes, unless
    * manualCleanup is set to false.
    *
    * @param {Object} options
@@ -23228,27 +23228,27 @@ var Player = function (_Component) {
   };
 
   /**
-   * Get video width
+   * Get Product width
    *
    * @return {number}
-   *         current video width
+   *         current Product width
    */
 
 
-  Player.prototype.videoWidth = function videoWidth() {
-    return this.tech_ && this.tech_.videoWidth && this.tech_.videoWidth() || 0;
+  Player.prototype.ProductWidth = function ProductWidth() {
+    return this.tech_ && this.tech_.ProductWidth && this.tech_.ProductWidth() || 0;
   };
 
   /**
-   * Get video height
+   * Get Product height
    *
    * @return {number}
-   *         current video height
+   *         current Product height
    */
 
 
-  Player.prototype.videoHeight = function videoHeight() {
-    return this.tech_ && this.tech_.videoHeight && this.tech_.videoHeight() || 0;
+  Player.prototype.ProductHeight = function ProductHeight() {
+    return this.tech_ && this.tech_.ProductHeight && this.tech_.ProductHeight() || 0;
   };
 
   /**
@@ -23275,7 +23275,7 @@ var Player = function (_Component) {
 
   /**
    * Get the player's language dictionary
-   * Merge every time, because a newly added plugin might call videojs.addLanguage() at any time
+   * Merge every time, because a newly added plugin might call Productjs.addLanguage() at any time
    * Languages specified directly in the player options have precedence
    *
    * @return {Array}
@@ -23622,12 +23622,12 @@ var Player = function (_Component) {
 
 /**
  * Get the {@link VideoTrackList}
- * @link https://html.spec.whatwg.org/multipage/embedded-content.html#videotracklist
+ * @link https://html.spec.whatwg.org/multipage/embedded-content.html#Producttracklist
  *
  * @return {VideoTrackList}
- *         the current video track list
+ *         the current Product track list
  *
- * @method Player.prototype.videoTracks
+ * @method Player.prototype.ProductTracks
  */
 
 /**
@@ -23677,7 +23677,7 @@ ALL.names.forEach(function (name$$1) {
       return this.tech_[props.getterName]();
     }
 
-    // if we have not yet loadTech_, we create {video,audio,text}Tracks_
+    // if we have not yet loadTech_, we create {Product,audio,text}Tracks_
     // these will be passed to the tech during loading
     this[props.privateName] = this[props.privateName] || new props.ListClass();
     return this[props.privateName];
@@ -23724,7 +23724,7 @@ Player.prototype.options_ = {
   // locales and their language translations
   languages: {},
 
-  // Default message to show when a video cannot be played.
+  // Default message to show when a Product cannot be played.
   notSupportedMessage: 'No compatible source was found for this media.',
 
   breakpoints: {},
@@ -24468,7 +24468,7 @@ var _inherits = function _inherits(subClass, superClass) {
 
 /**
  * Function for subclassing using the same inheritance that
- * videojs uses internally
+ * Productjs uses internally
  *
  * @static
  * @const
@@ -24513,16 +24513,16 @@ var extendFn = function extendFn(superClass) {
 };
 
 /**
- * @file video.js
- * @module videojs
+ * @file Product.js
+ * @module Productjs
  */
 // Include the built-in techs
 // HTML5 Element Shim for IE8
 if (typeof HTMLVideoElement === 'undefined' && isReal()) {
-  document.createElement('video');
+  document.createElement('Product');
   document.createElement('audio');
   document.createElement('track');
-  document.createElement('video-js');
+  document.createElement('Product-js');
 }
 
 /**
@@ -24541,10 +24541,10 @@ var normalizeId = function normalizeId(id) {
 /**
  * Doubles as the main function for users to create a player instance and also
  * the main library object.
- * The `videojs` function can be used to initialize or retrieve a player.
+ * The `Productjs` function can be used to initialize or retrieve a player.
   *
  * @param {string|Element} id
- *        Video element or video element ID
+ *        Video element or Product element ID
  *
  * @param {Object} [options]
  *        Optional options object for config/settings
@@ -24555,8 +24555,8 @@ var normalizeId = function normalizeId(id) {
  * @return {Player}
  *         A player instance
  */
-function videojs(id, options, ready) {
-  var player = videojs.getPlayer(id);
+function Productjs(id, options, ready) {
+  var player = Productjs.getPlayer(id);
 
   if (player) {
     if (options) {
@@ -24571,7 +24571,7 @@ function videojs(id, options, ready) {
   var el = typeof id === 'string' ? $('#' + normalizeId(id)) : id;
 
   if (!isEl(el)) {
-    throw new TypeError('The element or ID supplied is not valid. (videojs)');
+    throw new TypeError('The element or ID supplied is not valid. (Productjs)');
   }
 
   if (!document.body.contains(el)) {
@@ -24580,7 +24580,7 @@ function videojs(id, options, ready) {
 
   options = options || {};
 
-  videojs.hooks('beforesetup').forEach(function (hookFunction) {
+  Productjs.hooks('beforesetup').forEach(function (hookFunction) {
     var opts = hookFunction(el, mergeOptions(options));
 
     if (!isObject(opts) || Array.isArray(opts)) {
@@ -24597,7 +24597,7 @@ function videojs(id, options, ready) {
 
   player = new PlayerComponent(el, options, ready);
 
-  videojs.hooks('setup').forEach(function (hookFunction) {
+  Productjs.hooks('setup').forEach(function (hookFunction) {
     return hookFunction(player);
   });
 
@@ -24608,11 +24608,11 @@ function videojs(id, options, ready) {
  * An Object that contains lifecycle hooks as keys which point to an array
  * of functions that are run when a lifecycle is triggered
  */
-videojs.hooks_ = {};
+Productjs.hooks_ = {};
 
 /**
  * Get a list of hooks for a specific lifecycle
- * @function videojs.hooks
+ * @function Productjs.hooks
  *
  * @param {string} type
  *        the lifecyle to get hooks from
@@ -24623,16 +24623,16 @@ videojs.hooks_ = {};
  * @return {Array}
  *         an array of hooks, or an empty array if there are none.
  */
-videojs.hooks = function (type, fn) {
-  videojs.hooks_[type] = videojs.hooks_[type] || [];
+Productjs.hooks = function (type, fn) {
+  Productjs.hooks_[type] = Productjs.hooks_[type] || [];
   if (fn) {
-    videojs.hooks_[type] = videojs.hooks_[type].concat(fn);
+    Productjs.hooks_[type] = Productjs.hooks_[type].concat(fn);
   }
-  return videojs.hooks_[type];
+  return Productjs.hooks_[type];
 };
 
 /**
- * Add a function hook to a specific videojs lifecycle.
+ * Add a function hook to a specific Productjs lifecycle.
  *
  * @param {string} type
  *        the lifecycle to hook the function to.
@@ -24640,12 +24640,12 @@ videojs.hooks = function (type, fn) {
  * @param {Function|Function[]}
  *        The function or array of functions to attach.
  */
-videojs.hook = function (type, fn) {
-  videojs.hooks(type, fn);
+Productjs.hook = function (type, fn) {
+  Productjs.hooks(type, fn);
 };
 
 /**
- * Add a function hook that will only run once to a specific videojs lifecycle.
+ * Add a function hook that will only run once to a specific Productjs lifecycle.
  *
  * @param {string} type
  *        the lifecycle to hook the function to.
@@ -24653,10 +24653,10 @@ videojs.hook = function (type, fn) {
  * @param {Function|Function[]}
  *        The function or array of functions to attach.
  */
-videojs.hookOnce = function (type, fn) {
-  videojs.hooks(type, [].concat(fn).map(function (original) {
+Productjs.hookOnce = function (type, fn) {
+  Productjs.hooks(type, [].concat(fn).map(function (original) {
     var wrapper = function wrapper() {
-      videojs.removeHook(type, wrapper);
+      Productjs.removeHook(type, wrapper);
       return original.apply(undefined, arguments);
     };
 
@@ -24665,7 +24665,7 @@ videojs.hookOnce = function (type, fn) {
 };
 
 /**
- * Remove a hook from a specific videojs lifecycle.
+ * Remove a hook from a specific Productjs lifecycle.
  *
  * @param {string} type
  *        the lifecycle that the function hooked to
@@ -24676,15 +24676,15 @@ videojs.hookOnce = function (type, fn) {
  * @return {boolean}
  *         The function that was removed or undef
  */
-videojs.removeHook = function (type, fn) {
-  var index = videojs.hooks(type).indexOf(fn);
+Productjs.removeHook = function (type, fn) {
+  var index = Productjs.hooks(type).indexOf(fn);
 
   if (index <= -1) {
     return false;
   }
 
-  videojs.hooks_[type] = videojs.hooks_[type].slice();
-  videojs.hooks_[type].splice(index, 1);
+  Productjs.hooks_[type] = Productjs.hooks_[type].slice();
+  Productjs.hooks_[type].splice(index, 1);
 
   return true;
 };
@@ -24700,21 +24700,21 @@ if (window.VIDEOJS_NO_DYNAMIC_STYLE !== true && isReal()) {
     if (head) {
       head.insertBefore(style, head.firstChild);
     }
-    setTextContent(style, '\n      .video-js {\n        width: 300px;\n        height: 150px;\n      }\n\n      .vjs-fluid {\n        padding-top: 56.25%\n      }\n    ');
+    setTextContent(style, '\n      .Product-js {\n        width: 300px;\n        height: 150px;\n      }\n\n      .vjs-fluid {\n        padding-top: 56.25%\n      }\n    ');
   }
 }
 
 // Run Auto-load players
 // You have to wait at least once in case this script is loaded after your
-// video in the DOM (weird behavior only with minified version)
-autoSetupTimeout(1, videojs);
+// Product in the DOM (weird behavior only with minified version)
+autoSetupTimeout(1, Productjs);
 
 /**
  * Current software version. Follows semver.
  *
  * @type {string}
  */
-videojs.VERSION = version;
+Productjs.VERSION = version;
 
 /**
  * The global options object. These are the settings that take effect
@@ -24722,7 +24722,7 @@ videojs.VERSION = version;
  *
  * @type {Object}
  */
-videojs.options = Player.prototype.options_;
+Productjs.options = Player.prototype.options_;
 
 /**
  * Get an object with the currently created players, keyed by player ID
@@ -24730,7 +24730,7 @@ videojs.options = Player.prototype.options_;
  * @return {Object}
  *         The created players
  */
-videojs.getPlayers = function () {
+Productjs.getPlayers = function () {
   return Player.players;
 };
 
@@ -24741,14 +24741,14 @@ videojs.getPlayers = function () {
  * Video.js player, but not create one if it doesn't.
  *
  * @param   {string|Element} id
- *          An HTML element - `<video>`, `<audio>`, or `<video-js>` -
+ *          An HTML element - `<Product>`, `<audio>`, or `<Product-js>` -
  *          or a string matching the `id` of such an element.
  *
  * @returns {Player|undefined}
  *          A player instance or `undefined` if there is no player instance
  *          matching the argument.
  */
-videojs.getPlayer = function (id) {
+Productjs.getPlayer = function (id) {
   var players = Player.players;
   var tag = void 0;
 
@@ -24788,7 +24788,7 @@ videojs.getPlayer = function (id) {
  *         JavaScript engines.
  *
  */
-videojs.getAllPlayers = function () {
+Productjs.getAllPlayers = function () {
   return (
 
     // Disposed players leave a key with a `null` value, so we need to make sure
@@ -24802,17 +24802,17 @@ videojs.getAllPlayers = function () {
 /**
  * Expose players object.
  *
- * @memberOf videojs
+ * @memberOf Productjs
  * @property {Object} players
  */
-videojs.players = Player.players;
+Productjs.players = Player.players;
 
 /**
  * Get a component class object by name
  *
- * @borrows Component.getComponent as videojs.getComponent
+ * @borrows Component.getComponent as Productjs.getComponent
  */
-videojs.getComponent = Component.getComponent;
+Productjs.getComponent = Component.getComponent;
 
 /**
  * Register a component so it can referred to by name. Used when adding to other
@@ -24831,9 +24831,9 @@ videojs.getComponent = Component.getComponent;
  * @return {Component}
  *         The newly registered component
  */
-videojs.registerComponent = function (name$$1, comp) {
+Productjs.registerComponent = function (name$$1, comp) {
   if (Tech.isTech(comp)) {
-    log.warn('The ' + name$$1 + ' tech was registered as a component. It should instead be registered using videojs.registerTech(name, tech)');
+    log.warn('The ' + name$$1 + ' tech was registered as a component. It should instead be registered using Productjs.registerTech(name, tech)');
   }
 
   Component.registerComponent.call(Component, name$$1, comp);
@@ -24842,17 +24842,17 @@ videojs.registerComponent = function (name$$1, comp) {
 /**
  * Get a Tech class object by name
  *
- * @borrows Tech.getTech as videojs.getTech
+ * @borrows Tech.getTech as Productjs.getTech
  */
-videojs.getTech = Tech.getTech;
+Productjs.getTech = Tech.getTech;
 
 /**
  * Register a Tech so it can referred to by name.
  * This is used in the tech order for the player.
  *
- * @borrows Tech.registerTech as videojs.registerTech
+ * @borrows Tech.registerTech as Productjs.registerTech
  */
-videojs.registerTech = Tech.registerTech;
+Productjs.registerTech = Tech.registerTech;
 
 /**
  * Register a middleware to a source type.
@@ -24860,31 +24860,31 @@ videojs.registerTech = Tech.registerTech;
  * @param {String} type A string representing a MIME type.
  * @param {function(player):object} middleware A middleware factory that takes a player.
  */
-videojs.use = use;
+Productjs.use = use;
 
 /**
  * An object that can be returned by a middleware to signify
  * that the middleware is being terminated.
  *
  * @type {object}
- * @memberOf {videojs}
+ * @memberOf {Productjs}
  * @property {object} middleware.TERMINATOR
  */
 // Object.defineProperty is not available in IE8
 if (!IS_IE8 && Object.defineProperty) {
-  Object.defineProperty(videojs, 'middleware', {
+  Object.defineProperty(Productjs, 'middleware', {
     value: {},
     writeable: false,
     enumerable: true
   });
 
-  Object.defineProperty(videojs.middleware, 'TERMINATOR', {
+  Object.defineProperty(Productjs.middleware, 'TERMINATOR', {
     value: TERMINATOR,
     writeable: false,
     enumerable: true
   });
 } else {
-  videojs.middleware = { TERMINATOR: TERMINATOR };
+  Productjs.middleware = { TERMINATOR: TERMINATOR };
 }
 
 /**
@@ -24893,25 +24893,25 @@ if (!IS_IE8 && Object.defineProperty) {
  * @type {Object}
  * @private
  */
-videojs.browser = browser;
+Productjs.browser = browser;
 
 /**
  * Whether or not the browser supports touch events. Included for backward
- * compatibility with 4.x, but deprecated. Use `videojs.browser.TOUCH_ENABLED`
+ * compatibility with 4.x, but deprecated. Use `Productjs.browser.TOUCH_ENABLED`
  * instead going forward.
  *
  * @deprecated since version 5.0
  * @type {boolean}
  */
-videojs.TOUCH_ENABLED = TOUCH_ENABLED;
+Productjs.TOUCH_ENABLED = TOUCH_ENABLED;
 
 /**
  * Subclass an existing class
  * Mimics ES6 subclassing with the `extend` keyword
  *
- * @borrows extend:extendFn as videojs.extend
+ * @borrows extend:extendFn as Productjs.extend
  */
-videojs.extend = extendFn;
+Productjs.extend = extendFn;
 
 /**
  * Merge two options objects recursively
@@ -24919,9 +24919,9 @@ videojs.extend = extendFn;
  * (not arrays, elements, anything else)
  * Other values will be copied directly from the second object.
  *
- * @borrows merge-options:mergeOptions as videojs.mergeOptions
+ * @borrows merge-options:mergeOptions as Productjs.mergeOptions
  */
-videojs.mergeOptions = mergeOptions;
+Productjs.mergeOptions = mergeOptions;
 
 /**
  * Change the context (this) of a function
@@ -24929,14 +24929,14 @@ videojs.mergeOptions = mergeOptions;
  * > NOTE: as of v5.0 we require an ES5 shim, so you should use the native
  * `function() {}.bind(newContext);` instead of this.
  *
- * @borrows fn:bind as videojs.bind
+ * @borrows fn:bind as Productjs.bind
  */
-videojs.bind = bind;
+Productjs.bind = bind;
 
 /**
  * Register a Video.js plugin.
  *
- * @borrows plugin:registerPlugin as videojs.registerPlugin
+ * @borrows plugin:registerPlugin as Productjs.registerPlugin
  * @method registerPlugin
  *
  * @param  {string} name
@@ -24951,12 +24951,12 @@ videojs.bind = bind;
  *         For advanced plugins, a factory function for that plugin. For
  *         basic plugins, a wrapper function that initializes the plugin.
  */
-videojs.registerPlugin = Plugin.registerPlugin;
+Productjs.registerPlugin = Plugin.registerPlugin;
 
 /**
  * Deregister a Video.js plugin.
  *
- * @borrows plugin:deregisterPlugin as videojs.deregisterPlugin
+ * @borrows plugin:deregisterPlugin as Productjs.deregisterPlugin
  * @method deregisterPlugin
  *
  * @param  {string} name
@@ -24965,13 +24965,13 @@ videojs.registerPlugin = Plugin.registerPlugin;
  *         prototype.
  *
  */
-videojs.deregisterPlugin = Plugin.deregisterPlugin;
+Productjs.deregisterPlugin = Plugin.deregisterPlugin;
 
 /**
  * Deprecated method to register a plugin with Video.js
  *
  * @deprecated
- *        videojs.plugin() is deprecated; use videojs.registerPlugin() instead
+ *        Productjs.plugin() is deprecated; use Productjs.registerPlugin() instead
  *
  * @param {string} name
  *        The plugin name
@@ -24979,8 +24979,8 @@ videojs.deregisterPlugin = Plugin.deregisterPlugin;
  * @param {Plugin|Function} plugin
  *         The plugin sub-class or function
  */
-videojs.plugin = function (name$$1, plugin) {
-  log.warn('videojs.plugin() is deprecated; use videojs.registerPlugin() instead');
+Productjs.plugin = function (name$$1, plugin) {
+  log.warn('Productjs.plugin() is deprecated; use Productjs.registerPlugin() instead');
   return Plugin.registerPlugin(name$$1, plugin);
 };
 
@@ -24995,7 +24995,7 @@ videojs.plugin = function (name$$1, plugin) {
  *         An object containing plugin(s) associated with their name(s) or
  *         `undefined` if no matching plugins exist).
  */
-videojs.getPlugins = Plugin.getPlugins;
+Productjs.getPlugins = Plugin.getPlugins;
 
 /**
  * Gets a plugin by name if it exists.
@@ -25006,7 +25006,7 @@ videojs.getPlugins = Plugin.getPlugins;
  * @return {Function|undefined}
  *         The plugin (or `undefined`).
  */
-videojs.getPlugin = Plugin.getPlugin;
+Productjs.getPlugin = Plugin.getPlugin;
 
 /**
  * Gets a plugin's version, if available
@@ -25017,11 +25017,11 @@ videojs.getPlugin = Plugin.getPlugin;
  * @return {string}
  *         The plugin's version or an empty string.
  */
-videojs.getPluginVersion = Plugin.getPluginVersion;
+Productjs.getPluginVersion = Plugin.getPluginVersion;
 
 /**
  * Adding languages so that they're available to all players.
- * Example: `videojs.addLanguage('es', { 'Hello': 'Hola' });`
+ * Example: `Productjs.addLanguage('es', { 'Hello': 'Hola' });`
  *
  * @param {string} code
  *        The language code or dictionary property
@@ -25032,47 +25032,47 @@ videojs.getPluginVersion = Plugin.getPluginVersion;
  * @return {Object}
  *         The resulting language dictionary object
  */
-videojs.addLanguage = function (code, data) {
+Productjs.addLanguage = function (code, data) {
   var _mergeOptions;
 
   code = ('' + code).toLowerCase();
 
-  videojs.options.languages = mergeOptions(videojs.options.languages, (_mergeOptions = {}, _mergeOptions[code] = data, _mergeOptions));
+  Productjs.options.languages = mergeOptions(Productjs.options.languages, (_mergeOptions = {}, _mergeOptions[code] = data, _mergeOptions));
 
-  return videojs.options.languages[code];
+  return Productjs.options.languages[code];
 };
 
 /**
  * Log messages
  *
- * @borrows log:log as videojs.log
+ * @borrows log:log as Productjs.log
  */
-videojs.log = log;
-videojs.createLogger = createLogger;
+Productjs.log = log;
+Productjs.createLogger = createLogger;
 
 /**
  * Creates an emulated TimeRange object.
  *
- * @borrows time-ranges:createTimeRanges as videojs.createTimeRange
+ * @borrows time-ranges:createTimeRanges as Productjs.createTimeRange
  */
 /**
- * @borrows time-ranges:createTimeRanges as videojs.createTimeRanges
+ * @borrows time-ranges:createTimeRanges as Productjs.createTimeRanges
  */
-videojs.createTimeRange = videojs.createTimeRanges = createTimeRanges;
+Productjs.createTimeRange = Productjs.createTimeRanges = createTimeRanges;
 
 /**
  * Format seconds as a time string, H:MM:SS or M:SS
  * Supplying a guide (in seconds) will force a number of leading zeros
  * to cover the length of the guide
  *
- * @borrows format-time:formatTime as videojs.formatTime
+ * @borrows format-time:formatTime as Productjs.formatTime
  */
-videojs.formatTime = formatTime;
+Productjs.formatTime = formatTime;
 
 /**
  * Replaces format-time with a custom implementation, to be used in place of the default.
  *
- * @borrows format-time:setFormatTime as videojs.setFormatTime
+ * @borrows format-time:setFormatTime as Productjs.setFormatTime
  *
  * @method setFormatTime
  *
@@ -25080,38 +25080,38 @@ videojs.formatTime = formatTime;
  *        A custom format-time function which will be called with the current time and guide (in seconds) as arguments.
  *        Passed fn should return a string.
  */
-videojs.setFormatTime = setFormatTime;
+Productjs.setFormatTime = setFormatTime;
 
 /**
  * Resets format-time to the default implementation.
  *
- * @borrows format-time:resetFormatTime as videojs.resetFormatTime
+ * @borrows format-time:resetFormatTime as Productjs.resetFormatTime
  *
  * @method resetFormatTime
  */
-videojs.resetFormatTime = resetFormatTime;
+Productjs.resetFormatTime = resetFormatTime;
 
 /**
  * Resolve and parse the elements of a URL
  *
- * @borrows url:parseUrl as videojs.parseUrl
+ * @borrows url:parseUrl as Productjs.parseUrl
  *
  */
-videojs.parseUrl = parseUrl;
+Productjs.parseUrl = parseUrl;
 
 /**
  * Returns whether the url passed is a cross domain request or not.
  *
- * @borrows url:isCrossOrigin as videojs.isCrossOrigin
+ * @borrows url:isCrossOrigin as Productjs.isCrossOrigin
  */
-videojs.isCrossOrigin = isCrossOrigin;
+Productjs.isCrossOrigin = isCrossOrigin;
 
 /**
  * Event target class.
  *
- * @borrows EventTarget as videojs.EventTarget
+ * @borrows EventTarget as Productjs.EventTarget
  */
-videojs.EventTarget = EventTarget;
+Productjs.EventTarget = EventTarget;
 
 /**
  * Add an event listener to element
@@ -25119,30 +25119,30 @@ videojs.EventTarget = EventTarget;
  * and adds a generic handler to the element's event,
  * along with a unique id (guid) to the element.
  *
- * @borrows events:on as videojs.on
+ * @borrows events:on as Productjs.on
  */
-videojs.on = on;
+Productjs.on = on;
 
 /**
  * Trigger a listener only once for an event
  *
- * @borrows events:one as videojs.one
+ * @borrows events:one as Productjs.one
  */
-videojs.one = one;
+Productjs.one = one;
 
 /**
  * Removes event listeners from an element
  *
- * @borrows events:off as videojs.off
+ * @borrows events:off as Productjs.off
  */
-videojs.off = off;
+Productjs.off = off;
 
 /**
  * Trigger an event for an element
  *
- * @borrows events:trigger as videojs.trigger
+ * @borrows events:trigger as Productjs.trigger
  */
-videojs.trigger = trigger;
+Productjs.trigger = trigger;
 
 /**
  * A cross-browser XMLHttpRequest wrapper. Here's a simple example:
@@ -25155,86 +25155,86 @@ videojs.trigger = trigger;
  *
  * @see https://github.com/Raynos/xhr
  */
-videojs.xhr = xhr;
+Productjs.xhr = xhr;
 
 /**
  * TextTrack class
  *
- * @borrows TextTrack as videojs.TextTrack
+ * @borrows TextTrack as Productjs.TextTrack
  */
-videojs.TextTrack = TextTrack;
+Productjs.TextTrack = TextTrack;
 
 /**
  * export the AudioTrack class so that source handlers can create
  * AudioTracks and then add them to the players AudioTrackList
  *
- * @borrows AudioTrack as videojs.AudioTrack
+ * @borrows AudioTrack as Productjs.AudioTrack
  */
-videojs.AudioTrack = AudioTrack;
+Productjs.AudioTrack = AudioTrack;
 
 /**
  * export the VideoTrack class so that source handlers can create
  * VideoTracks and then add them to the players VideoTrackList
  *
- * @borrows VideoTrack as videojs.VideoTrack
+ * @borrows VideoTrack as Productjs.VideoTrack
  */
-videojs.VideoTrack = VideoTrack;
+Productjs.VideoTrack = VideoTrack;
 
 /**
  * Determines, via duck typing, whether or not a value is a DOM element.
  *
- * @borrows dom:isEl as videojs.isEl
- * @deprecated Use videojs.dom.isEl() instead
+ * @borrows dom:isEl as Productjs.isEl
+ * @deprecated Use Productjs.dom.isEl() instead
  */
 
 /**
  * Determines, via duck typing, whether or not a value is a text node.
  *
- * @borrows dom:isTextNode as videojs.isTextNode
- * @deprecated Use videojs.dom.isTextNode() instead
+ * @borrows dom:isTextNode as Productjs.isTextNode
+ * @deprecated Use Productjs.dom.isTextNode() instead
  */
 
 /**
  * Creates an element and applies properties.
  *
- * @borrows dom:createEl as videojs.createEl
- * @deprecated Use videojs.dom.createEl() instead
+ * @borrows dom:createEl as Productjs.createEl
+ * @deprecated Use Productjs.dom.createEl() instead
  */
 
 /**
  * Check if an element has a CSS class
  *
- * @borrows dom:hasElClass as videojs.hasClass
- * @deprecated Use videojs.dom.hasClass() instead
+ * @borrows dom:hasElClass as Productjs.hasClass
+ * @deprecated Use Productjs.dom.hasClass() instead
  */
 
 /**
  * Add a CSS class name to an element
  *
- * @borrows dom:addElClass as videojs.addClass
- * @deprecated Use videojs.dom.addClass() instead
+ * @borrows dom:addElClass as Productjs.addClass
+ * @deprecated Use Productjs.dom.addClass() instead
  */
 
 /**
  * Remove a CSS class name from an element
  *
- * @borrows dom:removeElClass as videojs.removeClass
- * @deprecated Use videojs.dom.removeClass() instead
+ * @borrows dom:removeElClass as Productjs.removeClass
+ * @deprecated Use Productjs.dom.removeClass() instead
  */
 
 /**
  * Adds or removes a CSS class name on an element depending on an optional
  * condition or the presence/absence of the class name.
  *
- * @borrows dom:toggleElClass as videojs.toggleClass
- * @deprecated Use videojs.dom.toggleClass() instead
+ * @borrows dom:toggleElClass as Productjs.toggleClass
+ * @deprecated Use Productjs.dom.toggleClass() instead
  */
 
 /**
  * Apply attributes to an HTML element.
  *
- * @borrows dom:setElAttributes as videojs.setAttribute
- * @deprecated Use videojs.dom.setAttributes() instead
+ * @borrows dom:setElAttributes as Productjs.setAttribute
+ * @deprecated Use Productjs.dom.setAttributes() instead
  */
 
 /**
@@ -25243,15 +25243,15 @@ videojs.VideoTrack = VideoTrack;
  * or with setAttribute (which shouldn't be used with HTML)
  * This will return true or false for boolean attributes.
  *
- * @borrows dom:getElAttributes as videojs.getAttributes
- * @deprecated Use videojs.dom.getAttributes() instead
+ * @borrows dom:getElAttributes as Productjs.getAttributes
+ * @deprecated Use Productjs.dom.getAttributes() instead
  */
 
 /**
  * Empties the contents of an element.
  *
- * @borrows dom:emptyEl as videojs.emptyEl
- * @deprecated Use videojs.dom.emptyEl() instead
+ * @borrows dom:emptyEl as Productjs.emptyEl
+ * @deprecated Use Productjs.dom.emptyEl() instead
  */
 
 /**
@@ -25274,8 +25274,8 @@ videojs.VideoTrack = VideoTrack;
  *   If the sole argument, is expected to produce a string, element,
  *   node, or array.
  *
- * @borrows dom:appendContents as videojs.appendContet
- * @deprecated Use videojs.dom.appendContent() instead
+ * @borrows dom:appendContents as Productjs.appendContet
+ * @deprecated Use Productjs.dom.appendContent() instead
  */
 
 /**
@@ -25299,12 +25299,12 @@ videojs.VideoTrack = VideoTrack;
  *   If the sole argument, is expected to produce a string, element,
  *   node, or array.
  *
- * @borrows dom:insertContent as videojs.insertContent
- * @deprecated Use videojs.dom.insertContent() instead
+ * @borrows dom:insertContent as Productjs.insertContent
+ * @deprecated Use Productjs.dom.insertContent() instead
  */
 ['isEl', 'isTextNode', 'createEl', 'hasClass', 'addClass', 'removeClass', 'toggleClass', 'setAttributes', 'getAttributes', 'emptyEl', 'appendContent', 'insertContent'].forEach(function (k) {
-  videojs[k] = function () {
-    log.warn('videojs.' + k + '() is deprecated; use videojs.dom.' + k + '() instead');
+  Productjs[k] = function () {
+    log.warn('Productjs.' + k + '() is deprecated; use Productjs.dom.' + k + '() instead');
     return Dom[k].apply(null, arguments);
   };
 });
@@ -25317,20 +25317,20 @@ videojs.VideoTrack = VideoTrack;
  * that the player doesn't break in these cases.
  * See https://bugzilla.mozilla.org/show_bug.cgi?id=548397 for more details.
  *
- * @borrows computed-style:computedStyle as videojs.computedStyle
+ * @borrows computed-style:computedStyle as Productjs.computedStyle
  */
-videojs.computedStyle = computedStyle;
+Productjs.computedStyle = computedStyle;
 
 /**
  * Export the Dom utilities for use in external plugins
  * and Tech's
  */
-videojs.dom = Dom;
+Productjs.dom = Dom;
 
 /**
  * Export the Url utilities for use in external plugins
  * and Tech's
  */
-videojs.url = Url;
+Productjs.url = Url;
 
-module.exports = videojs;
+module.exports = Productjs;

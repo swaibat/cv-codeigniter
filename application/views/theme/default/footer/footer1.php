@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-md-4 col-sm-6">
                 <div class="footer-about  " >
-                    <div class="movie-heading"> <span><?php echo $footer1_title; ?></span>
+                    <div class="product-heading"> <span><?php echo $footer1_title; ?></span>
                         <div class="disable-bottom-line"></div>
                     </div>
                     <img class="img-responsive" src="<?php echo base_url(); ?>uploads/system_logo/<?php echo ovoo_config('logo'); ?>" alt="Logo">
@@ -29,7 +29,7 @@
             </div>
             <div class="col-md-4 col-sm-6">
                 <div class="bottom-post " >
-                    <div class="movie-heading"> <span><?php echo $footer2_title; ?></span>
+                    <div class="product-heading"> <span><?php echo $footer2_title; ?></span>
                         <div class="disable-bottom-line"></div>
                     </div>
                     <?php echo $footer2_content; ?>
@@ -37,7 +37,7 @@
             </div>
             <div class="col-md-4 col-sm-6">
                 <div class="sendus  ">
-                    <div class="movie-heading"> <span><?php echo trans('subscribe'); ?></span>
+                    <div class="product-heading"> <span><?php echo trans('subscribe'); ?></span>
                         <div class="disable-bottom-line"></div>
                     </div>
                     <div id="contact-form">

@@ -11,27 +11,27 @@
         </li>
         <li class="treeview <?php if ($active_menu == 6 || $active_menu == 8 || $active_menu == 9) { echo " is-expanded "; } ?>">
             <a href="#" class="app-menu__item" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-video-camera" aria-hidden="true"></i>
-                <span class="app-menu__label"><?php echo trans('movie') ?> :: <?php echo trans('video') ?> </span>
+                <i class="app-menu__icon fa fa-Product-camera" aria-hidden="true"></i>
+                <span class="app-menu__label"><?php echo trans('product') ?> :: <?php echo trans('Product') ?> </span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
                 <li>
-                    <a class="treeview-item <?php if ($active_menu == 6) {  echo " active "; } ?>" href="<?php echo base_url() . 'admin/videos_add/' ?>">
+                    <a class="treeview-item <?php if ($active_menu == 6) {  echo " active "; } ?>" href="<?php echo base_url() . 'admin/Products_add/' ?>">
                         <i class="app-menu__icon fa fa-plus"></i>
-                        <?php echo trans('new_movie_or_video') ?></span>
+                        <?php echo trans('new_product_or_Product') ?></span>
                     </a>
                 </li>
                 <li>
-                    <a class="treeview-item <?php if ($active_menu == 8) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/videos/' ?>">
+                    <a class="treeview-item <?php if ($active_menu == 8) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/Products/' ?>">
                         <i class="app-menu__icon fa fa-list"></i>
-                        <?php echo trans('all_movie_or_video') ?></span>
+                        <?php echo trans('all_product_or_Product') ?></span>
                     </a>
                 </li>
                 <li>
-                    <a class="treeview-item <?php if ($active_menu == 9) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/video_type/' ?>">
+                    <a class="treeview-item <?php if ($active_menu == 9) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/Product_type/' ?>">
                         <i class="app-menu__icon fa fa-tags"></i>
-                        <?php echo trans('movie_or_video_type') ?> </span>
+                        <?php echo trans('product_or_Product_type') ?> </span>
                     </a>
                 </li>
             </ul>
@@ -63,7 +63,7 @@
             </ul>
         </li>
         <li>
-            <a class="app-menu__item <?php if ($active_menu == 7) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/movie_importer/' ?>">
+            <a class="app-menu__item <?php if ($active_menu == 7) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/product_importer/' ?>">
                 <i class="app-menu__icon fa fa-search" aria-hidden="true"></i>
                 <span class="app-menu__label"><?php echo trans('search_and_import') ?></span>
             </a>
@@ -110,7 +110,7 @@
                 <li><a class="treeview-item <?php if ($active_menu == 31) {
                         echo " active ";
                     } ?>" href="<?php echo base_url() . 'admin/comments/' ?>"><i
-                                class="app-menu__icon fa fa-comments"></i><?php echo trans('movie_or_tv_comments') ?></span>
+                                class="app-menu__icon fa fa-comments"></i><?php echo trans('product_or_tv_comments') ?></span>
                     </a>
                 </li>
                 <li>
@@ -262,9 +262,9 @@
                     </a>
                 </li>
                 <li>
-                    <a class="treeview-item <?php if ($active_menu == 24) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/video_quality/' ?>">
+                    <a class="treeview-item <?php if ($active_menu == 24) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/Product_quality/' ?>">
                         <i class="app-menu__icon fa fa-signal" aria-hidden="true"></i>
-                        <?php echo trans('movie_or_video_quality') ?> </span>
+                        <?php echo trans('product_or_Product_quality') ?> </span>
                     </a>
                 </li>
                 <li>
@@ -314,7 +314,7 @@
         </li>
         <li class="treeview <?php if($active_menu == 36 || $active_menu == 37 || $active_menu == 370 || $active_menu == 371) {echo "is-expanded"; } ?>"> <a href="#" class="app-menu__item" data-toggle="treeview"><i class="app-menu__icon fa fa-bell" aria-hidden="true"></i><span class="app-menu__label"><?php echo trans("notification");?></span> <i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-              <li><a class="treeview-item <?php if($active_menu==370) {echo "active"; } ?>" href="<?php echo base_url().'admin/send_movie_tvseries_notification/'?>"><i class="app-menu__icon fa fa-paper-plane-o" aria-hidden="true"></i><?php echo trans("movie_and_tvseries");?></span> </a></li>
+              <li><a class="treeview-item <?php if($active_menu==370) {echo "active"; } ?>" href="<?php echo base_url().'admin/send_product_tvseries_notification/'?>"><i class="app-menu__icon fa fa-paper-plane-o" aria-hidden="true"></i><?php echo trans("product_and_tvseries");?></span> </a></li>
               <li><a class="treeview-item <?php if($active_menu==371) {echo "active"; } ?>" href="<?php echo base_url().'admin/send_web_notification/'?>"><i class="app-menu__icon fa fa-paper-plane-o" aria-hidden="true"></i><?php echo trans("webview");?></span> </a></li>
               <li><a class="treeview-item <?php if($active_menu==36) {echo "active"; } ?>" href="<?php echo base_url().'admin/push_notification_setting/'?>"><i class="app-menu__icon fa fa-gear" aria-hidden="true"></i><?php echo trans("setting");?></span> </a></li>
             </ul>

@@ -1,6 +1,6 @@
 <?php
 /**
- * 	This class handles all the data you can get from a MovieRole
+ * 	This class handles all the data you can get from a ProductRole
  *
  *	@package TMDB-V3-PHP-API
  * 	@author Alvaro Octal | <a href="https://twitter.com/Alvaro_Octal">Twitter</a>
@@ -10,7 +10,7 @@
  * 	@copyright Licensed under BSD (http://www.opensource.org/licenses/bsd-license.php)
  */
 
-class MovieRole extends Role{
+class ProductRole extends Role{
 
     //------------------------------------------------------------------------------
     // Class Variables
@@ -21,7 +21,7 @@ class MovieRole extends Role{
     /**
      * 	Construct Class
      *
-     * 	@param array $data An array with the data of a MovieRole
+     * 	@param array $data An array with the data of a ProductRole
      */
     public function __construct($data, $idPerson) {
         $this->_data = $data;
@@ -34,38 +34,38 @@ class MovieRole extends Role{
     //------------------------------------------------------------------------------
 
     /** 
-     *  Get the Movie's title of the role
+     *  Get the Product's title of the role
      *
      *  @return string
      */
-    public function getMovieTitle() {
+    public function getProductTitle() {
         return $this->_data['title'];
     }
 
     /** 
-     *  Get the Movie's id
+     *  Get the Product's id
      *
      *  @return int
      */
-    public function getMovieID() {
+    public function getProductID() {
         return $this->_data['id'];
     }
 
     /** 
-     *  Get the Movie's original title of the role
+     *  Get the Product's original title of the role
      *
      *  @return string
      */
-    public function getMovieOriginalTitle() {
+    public function getProductOriginalTitle() {
         return $this->_data['original_title'];
     }
 
     /** 
-     *  Get the Movie's release date of the role
+     *  Get the Product's release date of the role
      *
      *  @return string
      */
-    public function getMovieReleaseDate() {
+    public function getProductReleaseDate() {
         return $this->_data['release_date'];
     }
 

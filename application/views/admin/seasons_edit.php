@@ -16,7 +16,7 @@ foreach ($seasons as $row) :
     <input type="text" name="order" value="<?php echo $row['order']; ?>" class="form-control" required />
   </div>
 
-  <input type="hidden" name="videos_id" value="<?php echo $row['videos_id']; ?>">
+  <input type="hidden" name="Products_id" value="<?php echo $row['Products_id']; ?>">
 
 <?php endforeach; ?>
 <div class="form-group row">

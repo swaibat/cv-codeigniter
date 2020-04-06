@@ -1,4 +1,4 @@
-videojs.addLanguage('ru', {
+Productjs.addLanguage('ru', {
   "Share": "Поделиться",
   "Direct Link": "Прямая ссылка",
   "Embed Code": "Код для встраивания плеера",

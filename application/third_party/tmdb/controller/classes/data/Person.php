@@ -101,18 +101,18 @@ class Person{
     }
 
     /**
-     *  Get the Person's MovieRoles
+     *  Get the Person's ProductRoles
      *
-     *  @return MovieRole[]
+     *  @return ProductRole[]
      */
-    public function getMovieRoles() {
-        $movieRoles = array();
+    public function getProductRoles() {
+        $productRoles = array();
 
-        foreach($this->_data['movie_credits']['cast'] as $data){
-            $movieRoles[] = new MovieRole($data, $this->getID());
+        foreach($this->_data['product_credits']['cast'] as $data){
+            $productRoles[] = new ProductRole($data, $this->getID());
         }
 
-        return $movieRoles;
+        return $productRoles;
     }
 
     /**

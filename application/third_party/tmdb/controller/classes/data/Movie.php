@@ -1,6 +1,6 @@
 <?php
 /**
- * 	This class handles all the data you can get from a Movie
+ * 	This class handles all the data you can get from a Product
  *
  *	@package TMDB-V3-PHP-API
  * 	@author Alvaro Octal | <a href="https://twitter.com/Alvaro_Octal">Twitter</a>
@@ -9,7 +9,7 @@
  * 	@link https://github.com/Alvaroctal/TMDB-PHP-API
  * 	@copyright Licensed under BSD (http://www.opensource.org/licenses/bsd-license.php)
  */
-class Movie extends ApiBaseObject{
+class Product extends ApiBaseObject{
 
 	private $_tmdb;
 
@@ -18,7 +18,7 @@ class Movie extends ApiBaseObject{
 	//------------------------------------------------------------------------------
 
 	/** 
-	 * 	Get the Movie's title
+	 * 	Get the Product's title
 	 *
 	 * 	@return string
 	 */
@@ -27,7 +27,7 @@ class Movie extends ApiBaseObject{
 	}
 
 	/** 
-	 * 	Get the Movie's tagline
+	 * 	Get the Product's tagline
 	 *
 	 * 	@return string
 	 */
@@ -35,7 +35,7 @@ class Movie extends ApiBaseObject{
 		return $this->_data['tagline'];
 	}
 	/** 
-	 * 	Get the Movie Directors IDs
+	 * 	Get the Product Directors IDs
 	 *
 	 * 	@return array(int)
 	 */
@@ -55,7 +55,7 @@ class Movie extends ApiBaseObject{
 	}
 
 	/** 
-	 * 	Get the Movie's trailers
+	 * 	Get the Product's trailers
 	 *
 	 * 	@return array
 	 */
@@ -64,7 +64,7 @@ class Movie extends ApiBaseObject{
 	}
 
 	/** 
-	 * 	Get the Movie's trailer
+	 * 	Get the Product's trailer
 	 *
 	 * 	@return string
 	 */
@@ -74,7 +74,7 @@ class Movie extends ApiBaseObject{
 	}
 
 	/** 
-	 * 	Get the Movie's genres
+	 * 	Get the Product's genres
 	 *
 	 * 	@return Genre[]
 	 */
@@ -89,7 +89,7 @@ class Movie extends ApiBaseObject{
 	}
 
 	/** 
-	 * 	Get the Movie's reviews
+	 * 	Get the Product's reviews
 	 *
 	 * 	@return Review[]
 	 */
@@ -104,7 +104,7 @@ class Movie extends ApiBaseObject{
 	}
 
 	/**
-	 * 	Get the Movie's companies
+	 * 	Get the Product's companies
 	 *
 	 * 	@return Company[]
 	 */
@@ -136,7 +136,7 @@ class Movie extends ApiBaseObject{
 	//------------------------------------------------------------------------------
 
 	/** 
-	 * 	Get the JSON representation of the Movie
+	 * 	Get the JSON representation of the Product
 	 *
 	 * 	@return string
 	 */

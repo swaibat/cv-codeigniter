@@ -95,18 +95,18 @@ class Company {
     }
 
     /**
-     *  Get the Company's Movies
+     *  Get the Company's Products
      *
-     *  @return Movie[]
+     *  @return Product[]
      */
-    public function getMovies() {
-        $movies = array();
+    public function getProducts() {
+        $products = array();
 
-        foreach($this->_data['movies']['results'] as $data){
-            $movies[] = new Movie($data);
+        foreach($this->_data['products']['results'] as $data){
+            $products[] = new Product($data);
         }
 
-        return $movies;
+        return $products;
     }
 
     /**
@@ -125,7 +125,7 @@ class Company {
     //------------------------------------------------------------------------------
 
     /** 
-     *  Get the JSON representation of the Movie
+     *  Get the JSON representation of the Product
      *
      *  @return string
      */

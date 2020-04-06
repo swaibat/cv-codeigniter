@@ -26,7 +26,7 @@
 
 
     /**
-     * Record a user activity (e.g Bill watched a video on Youtube) (moments.insert)
+     * Record a user activity (e.g Bill watched a Product on Youtube) (moments.insert)
      *
      * @param string $userId The ID of the user to get activities for. The special value "me" can be used to indicate the authenticated user.
      * @param string $collection The collection to which to write moments.

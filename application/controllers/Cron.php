@@ -130,19 +130,19 @@ class Cron extends Home_Core_Controller {
 
     public function reset_daily_view(){
         $data['today_view'] = 0;
-        $this->db->update('videos', $data);
+        $this->db->update('Products', $data);
         return TRUE;
     }
 
     public function reset_weekly_view(){
         $data['weekly_view'] = 0;
-        $this->db->update('videos', $data);
+        $this->db->update('Products', $data);
         return TRUE;
     }
 
     public function reset_monthly_view(){
         $data['monthly_view'] = 0;
-        $this->db->update('videos', $data);
+        $this->db->update('Products', $data);
         return TRUE;
     }
 }

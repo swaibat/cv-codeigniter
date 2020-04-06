@@ -1,4 +1,4 @@
-videojs.addLanguage("gl",{
+Productjs.addLanguage("gl",{
  "Play": "Reprodución",
  "Play Video": "Reprodución Vídeo",
  "Pause": "Pausa",

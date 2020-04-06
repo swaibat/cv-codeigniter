@@ -15,7 +15,7 @@ class Star extends Home_Core_Controller {
                         $star_name                      = $this->common_model->get_star_name_by_id($star_id);
                         $config                         = array();
                         $config["base_url"]             = base_url() . "star/".$slug;
-                        $config["total_rows"]           = $this->common_model->get_video_by_star_record_count($star_id);
+                        $config["total_rows"]           = $this->common_model->get_Product_by_star_record_count($star_id);
                         $config["per_page"]             = 24;
                         $config["uri_segment"]          = 3;
                         $config['full_tag_open']        = '<div class="pagination-container text-center"><ul class ="pagination">';
@@ -47,11 +47,11 @@ class Star extends Home_Core_Controller {
 
                         $this->pagination->initialize($config);
                         $page                           = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;      
-                        $data["all_published_videos"]   = $this->common_model->get_video_by_star($config["per_page"], $page, $star_id);
+                        $data["all_published_Products"]   = $this->common_model->get_Product_by_star($config["per_page"], $page, $star_id);
                         $data["links"]                  = $this->pagination->create_links();
                         $data['total_rows']             = $config["total_rows"];
                         $data['star_name']              = $star_name;
-                        $data['title']                  = "Watch ".$star_name."'s". " movies & TV-Series online";
+                        $data['title']                  = "Watch ".$star_name."'s". " products & TV-Series online";
                         $data['page_name']              ='star';
                         $this->load->view('theme/'.$this->active_theme.'/index',$data);
                 }

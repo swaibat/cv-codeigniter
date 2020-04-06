@@ -42,7 +42,7 @@ class Role{
     }
 
     /** 
-     *  Get the Movie's poster
+     *  Get the Product's poster
      *
      *  @return string
      */

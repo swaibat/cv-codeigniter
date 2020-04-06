@@ -1,4 +1,4 @@
-videojs.addLanguage("ko",{
+Productjs.addLanguage("ko",{
  "Play": "재생",
  "Pause": "일시중지",
  "Current Time": "현재 시간",

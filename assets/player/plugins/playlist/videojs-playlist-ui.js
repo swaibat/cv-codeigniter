@@ -1,16 +1,16 @@
 /**
- * videojs-playlist-ui
+ * Productjs-playlist-ui
  * @version 3.4.0
  * @copyright 2018 Brightcove, Inc.
  * @license Apache-2.0
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('video.js')) :
-	typeof define === 'function' && define.amd ? define(['video.js'], factory) :
-	(global.videojsPlaylistUi = factory(global.videojs));
-}(this, (function (videojs) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('Product.js')) :
+	typeof define === 'function' && define.amd ? define(['Product.js'], factory) :
+	(global.ProductjsPlaylistUi = factory(global.Productjs));
+}(this, (function (Productjs) { 'use strict';
 
-videojs = videojs && videojs.hasOwnProperty('default') ? videojs['default'] : videojs;
+Productjs = Productjs && Productjs.hasOwnProperty('default') ? Productjs['default'] : Productjs;
 
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -211,8 +211,8 @@ var possibleConstructorReturn = function (self, call) {
 };
 
 // support VJS5 & VJS6 at the same time
-var dom = videojs.dom || videojs;
-var registerPlugin = videojs.registerPlugin || videojs.plugin;
+var dom = Productjs.dom || Productjs;
+var registerPlugin = Productjs.registerPlugin || Productjs.plugin;
 
 // Array#indexOf analog for IE8
 var indexOf = function indexOf(array, target) {
@@ -307,7 +307,7 @@ var createThumbnail = function createThumbnail(thumbnail) {
   return picture;
 };
 
-var Component = videojs.getComponent('Component');
+var Component = Productjs.getComponent('Component');
 
 var PlaylistMenuItem = function (_Component) {
   inherits(PlaylistMenuItem, _Component);
@@ -362,7 +362,7 @@ var PlaylistMenuItem = function (_Component) {
     // Duration
     if (item.duration) {
       var duration = document_1.createElement('time');
-      var time = videojs.formatTime(item.duration);
+      var time = Productjs.formatTime(item.duration);
 
       duration.className = 'vjs-playlist-duration';
       duration.setAttribute('datetime', 'PT0H0M' + item.duration + 'S');
@@ -416,7 +416,7 @@ var PlaylistMenu = function (_Component2) {
     classCallCheck(this, PlaylistMenu);
 
     if (!player.playlist) {
-      throw new Error('videojs-playlist is required for the playlist component');
+      throw new Error('Productjs-playlist is required for the playlist component');
     }
 
     var _this2 = possibleConstructorReturn(this, _Component2.call(this, player, options));
@@ -438,7 +438,7 @@ var PlaylistMenu = function (_Component2) {
 
     _this2.createPlaylist_();
 
-    if (!videojs.browser.TOUCH_ENABLED) {
+    if (!Productjs.browser.TOUCH_ENABLED) {
       _this2.addClass('vjs-mouse');
     }
 
@@ -625,15 +625,15 @@ var playlistUi = function playlistUi(options) {
   var player = this;
 
   if (!player.playlist) {
-    throw new Error('videojs-playlist plugin is required by the videojs-playlist-ui plugin');
+    throw new Error('Productjs-playlist plugin is required by the Productjs-playlist-ui plugin');
   }
 
   if (dom.isEl(options)) {
-    videojs.log.warn('videojs-playlist-ui: Passing an element directly to playlistUi() is deprecated, use the "el" option instead!');
+    Productjs.log.warn('Productjs-playlist-ui: Passing an element directly to playlistUi() is deprecated, use the "el" option instead!');
     options = { el: options };
   }
 
-  options = videojs.mergeOptions(defaults, options);
+  options = Productjs.mergeOptions(defaults, options);
 
   // If the player is already using this plugin, remove the pre-existing
   // PlaylistMenu, but retain the element and its location in the DOM because
@@ -671,8 +671,8 @@ var playlistUi = function playlistUi(options) {
 };
 
 // register components
-videojs.registerComponent('PlaylistMenu', PlaylistMenu);
-videojs.registerComponent('PlaylistMenuItem', PlaylistMenuItem);
+Productjs.registerComponent('PlaylistMenu', PlaylistMenu);
+Productjs.registerComponent('PlaylistMenuItem', PlaylistMenuItem);
 
 // register the plugin
 registerPlugin('playlistUi', playlistUi);

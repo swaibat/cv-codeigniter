@@ -83,7 +83,7 @@
     jQuery(document).ready(function() {
         $('#tv_series_keyword').tagsinput();
         $('#focus_keyword').tagsinput();
-        $('#movie_page_focus_keyword').tagsinput();
+        $('#product_page_focus_keyword').tagsinput();
         $('#blog_keyword').tagsinput();
     });
 </script>

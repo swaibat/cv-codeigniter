@@ -22,20 +22,20 @@ THE SOFTWARE. */
 /*global define, YT*/
 (function (root, factory) {
   if(typeof define === 'function' && define.amd) {
-    define(['video.js'], function(videojs){
-      return (root.Youtube = factory(videojs));
+    define(['Product.js'], function(Productjs){
+      return (root.Youtube = factory(Productjs));
     });
   } else if(typeof module === 'object' && module.exports) {
-    module.exports = (root.Youtube = factory(require('video.js')));
+    module.exports = (root.Youtube = factory(require('Product.js')));
   } else {
-    root.Youtube = factory(root.videojs);
+    root.Youtube = factory(root.Productjs);
   }
-}(this, function(videojs) {
+}(this, function(Productjs) {
   'use strict';
 
-  var Tech = videojs.getComponent('Tech');
+  var Tech = Productjs.getComponent('Tech');
 
-  var Youtube = videojs.extend(Tech, {
+  var Youtube = Productjs.extend(Tech, {
 
     constructor: function(options, ready) {
       Tech.call(this, options, ready);
@@ -102,7 +102,7 @@ THE SOFTWARE. */
       // Let the user set any YouTube parameter
       // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5#Parameters
       // To use YouTube controls, you must use ytControls instead
-      // To use the loop or autoplay, use the video.js settings
+      // To use the loop or autoplay, use the Product.js settings
 
       if (typeof this.options_.autohide !== 'undefined') {
         playerVars.autohide = this.options_.autohide;
@@ -129,7 +129,7 @@ THE SOFTWARE. */
       }
 
       if (!playerVars.controls) {
-        // Let video.js handle the fullscreen unless it is the YouTube native controls
+        // Let Product.js handle the fullscreen unless it is the YouTube native controls
         playerVars.fs = 0;
       } else if (typeof this.options_.fs !== 'undefined') {
         playerVars.fs = this.options_.fs;
@@ -142,7 +142,7 @@ THE SOFTWARE. */
       if (typeof this.options_.hl !== 'undefined') {
         playerVars.hl = this.options_.hl;
       } else if (typeof this.options_.language !== 'undefined') {
-        // Set the YouTube player on the same language than video.js
+        // Set the YouTube player on the same language than Product.js
         playerVars.hl = this.options_.language.substr(0, 2);
       }
 
@@ -188,11 +188,11 @@ THE SOFTWARE. */
         playerVars.theme = this.options_.theme;
       }
 
-      this.activeVideoId = this.url ? this.url.videoId : null;
+      this.activeVideoId = this.url ? this.url.ProductId : null;
       this.activeList = playerVars.list;
 
       this.ytPlayer = new YT.Player(this.options_.techId, {
-        videoId: this.activeVideoId,
+        ProductId: this.activeVideoId,
         playerVars: playerVars,
         events: {
           onReady: this.onPlayerReady.bind(this),
@@ -274,15 +274,15 @@ THE SOFTWARE. */
     error: function() {
       switch (this.errorNumber) {
         case 5:
-          return { code: 'Error while trying to play the video' };
+          return { code: 'Error while trying to play the Product' };
 
         case 2:
         case 100:
         case 150:
-          return { code: 'Unable to find the video' };
+          return { code: 'Unable to find the Product' };
 
         case 101:
-          return { code: 'Playback on other Websites has been disabled by the video owner.' };
+          return { code: 'Playback on other Websites has been disabled by the Product owner.' };
       }
 
       return { code: 'YouTube unknown error (' + this.errorNumber + ')' };
@@ -301,7 +301,7 @@ THE SOFTWARE. */
     },
 
     poster: function() {
-      // You can't start programmaticlly a video with a mobile
+      // You can't start programmaticlly a Product with a mobile
       // through the iframe so we hide the poster and the play button (with CSS)
       if (_isOnMobile) {
         return null;
@@ -324,9 +324,9 @@ THE SOFTWARE. */
       this.url = Youtube.parseUrl(source.src);
 
       if (!this.options_.poster) {
-        if (this.url.videoId) {
+        if (this.url.ProductId) {
           // Set the low resolution first
-          this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/0.jpg';
+          this.poster_ = 'https://img.youtube.com/vi/' + this.url.ProductId + '/0.jpg';
 
           // Check if their is a high res
           this.checkHighResPoster();
@@ -343,7 +343,7 @@ THE SOFTWARE. */
     },
 
     play: function() {
-      if (!this.url || !this.url.videoId) {
+      if (!this.url || !this.url.ProductId) {
         return;
       }
 
@@ -359,11 +359,11 @@ THE SOFTWARE. */
           }
         }
 
-        if (this.activeVideoId === this.url.videoId) {
+        if (this.activeVideoId === this.url.ProductId) {
           this.ytPlayer.playVideo();
         } else {
-          this.ytPlayer.loadVideoById(this.url.videoId);
-          this.activeVideoId = this.url.videoId;
+          this.ytPlayer.loadVideoById(this.url.ProductId);
+          this.activeVideoId = this.url.ProductId;
         }
       } else {
         this.trigger('waiting');
@@ -522,9 +522,9 @@ THE SOFTWARE. */
       return true;
     },
 
-    // Tries to get the highest resolution thumbnail available for the video
+    // Tries to get the highest resolution thumbnail available for the Product
     checkHighResPoster: function(){
-      var uri = 'https://img.youtube.com/vi/' + this.url.videoId + '/maxresdefault.jpg';
+      var uri = 'https://img.youtube.com/vi/' + this.url.ProductId + '/maxresdefault.jpg';
 
       try {
         var image = new Image();
@@ -553,21 +553,21 @@ THE SOFTWARE. */
   };
 
   Youtube.canPlaySource = function(e) {
-    return (e.type === 'video/youtube');
+    return (e.type === 'Product/youtube');
   };
 
   var _isOnMobile = /(iPad|iPhone|iPod|Android)/g.test(navigator.userAgent);
 
   Youtube.parseUrl = function(url) {
     var result = {
-      videoId: null
+      ProductId: null
     };
 
     var regex = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     var match = url.match(regex);
 
     if (match && match[2].length === 11) {
-      result.videoId = match[2];
+      result.ProductId = match[2];
     }
 
     var regPlaylist = /[?&]list=([^#\&\?]+)/;
@@ -622,9 +622,9 @@ THE SOFTWARE. */
   injectCss();
 
   // Older versions of VJS5 doesn't have the registerTech function
-  if (typeof videojs.registerTech !== 'undefined') {
-    videojs.registerTech('Youtube', Youtube);
+  if (typeof Productjs.registerTech !== 'undefined') {
+    Productjs.registerTech('Youtube', Youtube);
   } else {
-    videojs.registerComponent('Youtube', Youtube);
+    Productjs.registerComponent('Youtube', Youtube);
   }
 }));

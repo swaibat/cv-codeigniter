@@ -66,11 +66,11 @@
 			    border: none;
 			    border-radius: 4px;
 			}
-			.btn-all-movie {
+			.btn-all-product {
 				background-color: <?php if($front_end_theme =='blue'): echo "#0088cc";elseif($front_end_theme =='green'): echo "#5DC560";elseif($front_end_theme =='red'): echo "#ff0000";elseif($front_end_theme =='yellow'): echo "#FDD922";elseif($front_end_theme =='purple'): echo "#6d0eb1";else: echo "#0088cc";endif; ?>;
 				border-color: <?php if($front_end_theme =='blue'): echo "#0088c9";elseif($front_end_theme =='green'): echo "#5DC569";elseif($front_end_theme =='red'): echo "#ff0009";elseif($front_end_theme =='yellow'): echo "#FDD929";elseif($front_end_theme =='purple'): echo "#6d0eb9";else: echo "#0088c9";endif; ?>;
 			}
-			.btn-all-movie:hover {
+			.btn-all-product:hover {
 			    background-color: <?php if($front_end_theme =='blue'): echo "#0088c9";elseif($front_end_theme =='green'): echo "#5DC569";elseif($front_end_theme =='red'): echo "#ff0009";elseif($front_end_theme =='yellow'): echo "#FDD929";elseif($front_end_theme =='purple'): echo "#6d0eb9";else: echo "#0088c9";endif; ?>;
 				border-color: <?php if($front_end_theme =='blue'): echo "#0088c9";elseif($front_end_theme =='green'): echo "#5DC569";elseif($front_end_theme =='red'): echo "#ff0009";elseif($front_end_theme =='yellow'): echo "#FDD929";elseif($front_end_theme =='purple'): echo "#6d0eb9";else: echo "#0088c9";endif; ?>;
 			}
@@ -94,7 +94,7 @@
 			<div id="bhh-menu">
 				<ul class="top-menu">
 					<li class="active"><a href="<?php echo base_url(); ?>" title="<?php echo trans('home'); ?>"><?php echo trans('home'); ?></a></li>
-					<li><a href="<?php echo base_url('movies.html'); ?>" title="<?php echo trans('movies'); ?>"><?php echo trans('movies'); ?></a></li>
+					<li><a href="<?php echo base_url('products.html'); ?>" title="<?php echo trans('products'); ?>"><?php echo trans('products'); ?></a></li>
 					<?php 
 		              $tv_series_publish          = $this->db->get_where('config',array('title'=>'tv_series_publish'))->row()->value;
 		              $tv_series_pin_primary_menu = $this->db->get_where('config',array('title'=>'tv_series_pin_primary_menu'))->row()->value;
@@ -139,7 +139,7 @@
 		        </form>
 			</div>
 			<div class="row text-center" style="margin-top: 20px;">
-				<a href="<?php echo base_url('all-movies.html') ?>" class="btn btn-success btn-all-movie"><?php echo trans('brows_all_movies_and_tvseries'); ?></a>
+				<a href="<?php echo base_url('all-products.html') ?>" class="btn btn-success btn-all-product"><?php echo trans('brows_all_products_and_tvseries'); ?></a>
 				<div style="margin-top: 10px;margin-bottom: 10px;">
 					<?php 
 						if($this->common_model->get_ads_status('billboard')=='1'):

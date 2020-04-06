@@ -1,4 +1,4 @@
-videojs.addLanguage("ja",{
+Productjs.addLanguage("ja",{
  "Play": "再生",
  "Pause": "一時停止",
  "Current Time": "現在の時間",

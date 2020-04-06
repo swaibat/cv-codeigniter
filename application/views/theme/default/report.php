@@ -1,14 +1,14 @@
 <?php 
-  $movie_report_enable                  =   $this->db->get_where('config' , array('title' =>'movie_report_enable'))->row()->value;
-  if($movie_report_enable == '1'):
-    $movie_report_note                  =   $this->db->get_where('config' , array('title' =>'movie_report_note'))->row()->value;
+  $product_report_enable                  =   $this->db->get_where('config' , array('title' =>'product_report_enable'))->row()->value;
+  if($product_report_enable == '1'):
+    $product_report_note                  =   $this->db->get_where('config' , array('title' =>'product_report_note'))->row()->value;
     $recaptcha_enable                   =   $this->db->get_where('config' , array('title' =>'recaptcha_enable'))->row()->value;
     $report_success_message             = $this->session->flashdata('report_success');
     $report_error_message               = $this->session->flashdata('report_error');
  ?>
 
 <div class="pull-right">
-    <a data-toggle="modal" id="menu" class="btn" data-target="#report-modal" data-id="<?php echo base_url('home/view_modal/report/'.$watch_videos->videos_id) ?>" style="text-transform: lowercase;font-size: 13px;color: yellow;" href="#"><i class="fa fa-warning"></i>&nbsp;report</a>
+    <a data-toggle="modal" id="menu" class="btn" data-target="#report-modal" data-id="<?php echo base_url('home/view_modal/report/'.$watch_Products->Products_id) ?>" style="text-transform: lowercase;font-size: 13px;color: yellow;" href="#"><i class="fa fa-warning"></i>&nbsp;report</a>
 </div>
 
 <!-- report modal  -->
@@ -18,7 +18,7 @@
         <div class="panel report-panel panel-color panel-primary">
           <div class="panel-heading">
             <button type="button" class="close m-t-5" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 class="panel-title text-light"><?php echo trans('report_movie'); ?></h3>
+            <h3 class="panel-title text-light"><?php echo trans('report_product'); ?></h3>
           </div>
           <div class="modal-body">
             <?php if($report_success_message !=''): ?>
@@ -41,33 +41,33 @@
 
             <div id="modal-loader" style="display: none; text-align: center;"> <img src="<?php echo base_url(); ?>assets/images/preloader.gif" /> </div>
             
-            <?php echo form_open(base_url() . 'user/report_movie/'.$watch_videos->videos_id , array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data', 'id' =>'report_form'));?>
-              <?php echo $movie_report_note; ?>
+            <?php echo form_open(base_url() . 'user/report_product/'.$watch_Products->Products_id , array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data', 'id' =>'report_form'));?>
+              <?php echo $product_report_note; ?>
               <div class="form-group">
                 <label class="col-sm-3 control-label">To</label>
                 <div class="col-sm-9">
-                  <p class="m-t-10"><strong><?php echo $watch_videos->title;?></strong></p>
+                  <p class="m-t-10"><strong><?php echo $watch_Products->title;?></strong></p>
                 </div>
                 <!-- End col-6 -->
               </div>
               <!-- end form -group -->
-              <input type="hidden" name="videos_id" value="<?php echo $watch_videos->videos_id;?>">
+              <input type="hidden" name="Products_id" value="<?php echo $watch_Products->Products_id;?>">
               <fieldset class="form-group">
-                <legend class="col-sm-3 control-label"><?php echo trans('video'); ?></legend>
+                <legend class="col-sm-3 control-label"><?php echo trans('Product'); ?></legend>
                 <div class="col-sm-9">
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input class="form-check-input" id="video" type="radio" name="video" value="Broken" ><?php echo trans('broken'); ?>
+                      <input class="form-check-input" id="Product" type="radio" name="Product" value="Broken" ><?php echo trans('broken'); ?>
                     </label>
                   </div>
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input class="form-check-input" id="video" type="radio" name="video" value="Wrong Movie" ><?php echo trans('wrong_movie'); ?>
+                      <input class="form-check-input" id="Product" type="radio" name="Product" value="Wrong Product" ><?php echo trans('wrong_product'); ?>
                     </label>
                   </div>
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input class="form-check-input" id="video" type="radio" name="video" value="Others" ><?php echo trans('others'); ?>
+                      <input class="form-check-input" id="Product" type="radio" name="Product" value="Others" ><?php echo trans('others'); ?>
                     </label>
                   </div>
                 </div>

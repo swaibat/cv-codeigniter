@@ -43,11 +43,11 @@ class Country extends Home_Core_Controller {
 
 			$this->pagination->initialize($config);
 			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-			$data["all_published_videos"] = $this->country_model->fetch_country_video_by_slug($config["per_page"], $page, $slug);
+			$data["all_published_Products"] = $this->country_model->fetch_country_Product_by_slug($config["per_page"], $page, $slug);
 			$data["links"] = $this->pagination->create_links();
 			$data['total_rows']=$config["total_rows"];
 			$data['country_name']=$slug;
-			$data['title'] = 'Watch '.$slug.' movies & TV-Series online';
+			$data['title'] = 'Watch '.$slug.' products & TV-Series online';
 			$data['page_name']='country';
 			$this->load->view('theme/'.$this->active_theme.'/index',$data);
         }

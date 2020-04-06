@@ -66,27 +66,27 @@
 
     		<div class="panel panel-border panel-primary col-md-6">
     			<div class="panel-heading">
-    				<h3 class="panel-title"><?php echo trans('movie_page_seo'); ?></h3>
+    				<h3 class="panel-title"><?php echo trans('product_page_seo'); ?></h3>
     			</div>
     			<div class="panel-body">
     				<div class="form-group">
     					<label class=" col-sm-12 control-label"><?php echo trans('seo_title'); ?></label>
     					<div class="col-sm-12">
-    						<input type="text" name="movie_page_seo_title" class="form-control" value="<?php echo $this->db->get_where('config', array('title' => 'movie_page_seo_title'))->row()->value; ?>">
+    						<input type="text" name="product_page_seo_title" class="form-control" value="<?php echo $this->db->get_where('config', array('title' => 'product_page_seo_title'))->row()->value; ?>">
     					</div>
     				</div>
 
     				<div class="form-group">
     					<label class=" col-sm-12 control-label"><?php echo trans('seo_keyword'); ?></label>
     					<div class="col-sm-12">
-    						<input type="text" name="movie_page_focus_keyword" class="form-control" id="movie_page_focus_keyword" value="<?php echo $this->db->get_where('config', array('title' => 'movie_page_focus_keyword'))->row()->value; ?>">
+    						<input type="text" name="product_page_focus_keyword" class="form-control" id="product_page_focus_keyword" value="<?php echo $this->db->get_where('config', array('title' => 'product_page_focus_keyword'))->row()->value; ?>">
     					</div>
     				</div>
 
     				<div class="form-group">
     					<label class="control-label col-md-12"><?php echo trans('seo_meta_description'); ?></label>
     					<div class="col-sm-12">
-    						<textarea class="wysihtml5 form-control" name="movie_page_meta_description" id="footer-1" rows="5"><?php echo $this->db->get_where('config', array('title' => 'movie_page_meta_description'))->row()->value; ?></textarea>
+    						<textarea class="wysihtml5 form-control" name="product_page_meta_description" id="footer-1" rows="5"><?php echo $this->db->get_where('config', array('title' => 'product_page_meta_description'))->row()->value; ?></textarea>
     					</div>
     				</div>
     			</div>
@@ -227,7 +227,7 @@
     	jQuery(document).ready(function() {
     		$('#tv_series_keyword').tagsinput();
     		$('#focus_keyword').tagsinput();
-    		$('#movie_page_focus_keyword').tagsinput();
+    		$('#product_page_focus_keyword').tagsinput();
     		$('#blog_keyword').tagsinput();
     	});
     </script>

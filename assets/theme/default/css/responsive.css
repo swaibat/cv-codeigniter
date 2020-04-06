@@ -17,7 +17,7 @@
 	#cssmenu > ul > li > a {
 		padding: 0px 15px;
 	}
-	.bottom-movie-img-container .bottom-movie-img {
+	.bottom-product-img-container .bottom-product-img {
 		margin-bottom: 20px;
 	}
 	.btn-create-album {
@@ -30,14 +30,14 @@
 		margin-bottom: 25px;
 	}
 
-	.video-info-bar ul li:nth-last-child(2) {
+	.Product-info-bar ul li:nth-last-child(2) {
 		border-right: none;
 	}
-	#post-listing .sidebar-movie {
+	#post-listing .sidebar-product {
 		display: inline-block;
 		width: 48.5%;		
 	}
-	#post-listing .sidebar-movie:nth-child(1){
+	#post-listing .sidebar-product:nth-child(1){
 		margin-right: 15px;
 		float: left;
 	}
@@ -51,21 +51,21 @@
 	    text-align: center;
 	    width: 100%;
 	}
-	.similler-movie .post-list-container {
+	.similler-product .post-list-container {
 		margin-bottom: 30px;
 	}
-	p.blog-movie-desc {
+	p.blog-product-desc {
 	    margin-top: 15px;
 	    text-align: left;
 	    width: 100%;
 	}
-	p.post-video-aut-name {
+	p.post-Product-aut-name {
 		width: 100%;
 	}
-	.similler-movie .movie-container .latest-movie-img-container {
+	.similler-product .product-container .latest-product-img-container {
 		margin-bottom: 30px;
 	}
-	.about-video {
+	.about-Product {
 		margin-bottom: 50px;
 	}
 
@@ -157,14 +157,14 @@
 		width: 90%;
 		margin-left: 5%;
 	}
-	.latest-movie-img-container {
+	.latest-product-img-container {
 		width: 90%;
 		margin-left: 5%;
 	}
-	.sports .movie-title,.sports .movie-img {
+	.sports .product-title,.sports .product-img {
 		width: 76%;
 	}
-	.bottom-movie-img-container .bottom-movie-img {
+	.bottom-product-img-container .bottom-product-img {
 		width: 60%;
 	}
 	.footer-about,
@@ -175,24 +175,24 @@
 	.footer-about img {
 		width: 35%;
 	}
-	.movie-details-container {
+	.product-details-container {
 		margin-bottom: 40px;
 	}
-	.video-info-bar .info-ul li:first-child {
+	.Product-info-bar .info-ul li:first-child {
 			width: 50%;
 			float: left;
 			border-bottom: 1px solid #fff;
 	}
-	.video-info-bar .info-ul li:nth-child(2) {
+	.Product-info-bar .info-ul li:nth-child(2) {
 		width: 50%;
 		float: left;
 		border-bottom: 1px solid #fff;
 	}
-	.video-info-bar .info-ul li:nth-child(3) {
+	.Product-info-bar .info-ul li:nth-child(3) {
 		width: 75%;
 		float: left;
 	}
-	.video-info-bar .info-ul li:last-child {
+	.Product-info-bar .info-ul li:last-child {
 		width: 25%;
 	}
 	.blog-info-bar .info-ul li:nth-child(3) {
@@ -205,12 +205,12 @@
 		text-align: center;
 	}
 
-	#post-listing .sidebar-movie {
+	#post-listing .sidebar-product {
 		display: block;
 		width: 100%;
 		/*margin-right: 15px;*/
 	}
-	#post-listing .sidebar-movie:nth-child(1){
+	#post-listing .sidebar-product:nth-child(1){
 		margin-right: 0px;
 		float: none;
 	}
@@ -261,10 +261,10 @@
 	.user-form {
 		margin: 20px auto 50px;
 	}
-	.sports .movie-title,.sports .movie-img {
+	.sports .product-title,.sports .product-img {
 		width: 86%;
 	}
-	p.hd-movie-desc {
+	p.hd-product-desc {
 		width: 77%;
 	}
 	p.hd-vid-auth-name {

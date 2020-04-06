@@ -4380,7 +4380,7 @@ var ChromecastButton;
 * The Video.js Button class is the base class for UI button components.
 *
 * @external Button
-* @see {@link http://docs.videojs.com/Button.html|Button}
+* @see {@link http://docs.Productjs.com/Button.html|Button}
 */
 
 /** @lends ChromecastButton.prototype */
@@ -4392,7 +4392,7 @@ ChromecastButton = {
     *
     * @constructs
     * @extends external:Button
-    * @param player {Player} the video.js player instance
+    * @param player {Player} the Product.js player instance
     */
    constructor: function(player) {
       this.constructor.super_.apply(this, arguments);
@@ -4418,7 +4418,7 @@ ChromecastButton = {
     * Overrides Button#buildCSSClass to return the classes used on the button element.
     *
     * @param el {DOMElement}
-    * @see {@link http://docs.videojs.com/Button.html#buildCSSClass|Button#buildCSSClass}
+    * @see {@link http://docs.Productjs.com/Button.html#buildCSSClass|Button#buildCSSClass}
     */
    buildCSSClass: function() {
       return 'vjs-chromecast-button ' + (this._isChromecastConnected ? 'vjs-chromecast-casting-state ' : '') +
@@ -4432,7 +4432,7 @@ ChromecastButton = {
     *
     * @fires ChromecastButton#chromecastRequested
     * @param el {DOMElement}
-    * @see {@link http://docs.videojs.com/Button.html#handleClick|Button#handleClick}
+    * @see {@link http://docs.Productjs.com/Button.html#handleClick|Button#handleClick}
     */
    handleClick: function() {
       this.player().trigger('chromecastRequested');
@@ -4492,16 +4492,16 @@ ChromecastButton = {
 
 /**
  * Registers the ChromecastButton Component with Video.js. Calls
- * {@link http://docs.videojs.com/Component.html#.registerComponent}, which will add a
+ * {@link http://docs.Productjs.com/Component.html#.registerComponent}, which will add a
  * component called `chromecastButton` to the list of globally registered Video.js
  * components. The `chromecastButton` is added to the player's control bar UI
  * automatically once {@link module:enableChromecast} has been called. If you would like
  * to specify the order of the buttons that appear in the control bar, including this
- * button, you can do so in the options that you pass to the `videojs` function when
+ * button, you can do so in the options that you pass to the `Productjs` function when
  * creating a player:
  *
  * ```
- * videojs('playerID', {
+ * Productjs('playerID', {
  *    controlBar: {
  *       children: [
  *          'playToggle',
@@ -4514,14 +4514,14 @@ ChromecastButton = {
  * });
  * ```
  *
- * @param videojs {object} A reference to {@link http://docs.videojs.com/module-videojs.html|Video.js}
- * @see http://docs.videojs.com/module-videojs.html#~registerPlugin
+ * @param Productjs {object} A reference to {@link http://docs.Productjs.com/module-Productjs.html|Video.js}
+ * @see http://docs.Productjs.com/module-Productjs.html#~registerPlugin
  */
-module.exports = function(videojs) {
+module.exports = function(Productjs) {
    var ChromecastButtonImpl;
 
-   ChromecastButtonImpl = videojs.extend(videojs.getComponent('Button'), ChromecastButton);
-   videojs.registerComponent('chromecastButton', ChromecastButtonImpl);
+   ChromecastButtonImpl = Productjs.extend(Productjs.getComponent('Button'), ChromecastButton);
+   Productjs.registerComponent('chromecastButton', ChromecastButtonImpl);
 };
 
 },{}],6:[function(require,module,exports){
@@ -4660,7 +4660,7 @@ function waitUntilChromecastAPIsAreAvailable(player, options) {
 
 /**
  * Registers the Chromecast plugin with Video.js. Calls
- * [videojs#registerPlugin](http://docs.videojs.com/module-videojs.html#~registerPlugin),
+ * [Productjs#registerPlugin](http://docs.Productjs.com/module-Productjs.html#~registerPlugin),
  * which will add a plugin function called `chromecast` to any instance of a Video.js
  * player that is created after calling this function. Call `player.chromecast(options)`,
  * passing in configuration options, to enable the Chromecast plugin on your Player
@@ -4700,15 +4700,15 @@ function waitUntilChromecastAPIsAreAvailable(player, options) {
  *    addButtonToControlBar: false,
  * };
  *
- * player = videojs(document.getElementById('myVideoElement'), playerOptions);
+ * player = Productjs(document.getElementById('myVideoElement'), playerOptions);
  * player.chromecast(pluginOptions); // initializes the Chromecast plugin
  * ```
  *
- * @param {object} videojs
- * @see http://docs.videojs.com/module-videojs.html#~registerPlugin
+ * @param {object} Productjs
+ * @see http://docs.Productjs.com/module-Productjs.html#~registerPlugin
  */
-module.exports = function(videojs) {
-   videojs.registerPlugin('chromecast', function(options) {
+module.exports = function(Productjs) {
+   Productjs.registerPlugin('chromecast', function(options) {
       var pluginOptions = _.extend({ addButtonToControlBar: true }, options || {});
 
       // `this` is an instance of a Video.js Player.
@@ -4746,23 +4746,23 @@ var _ = require('underscore'),
  * {@link module:ChromecastButton} and {@link module:enableChromecast} for more details
  * about how the plugin and button are registered and configured.
  *
- * @param videojs {object} the videojs library. If `undefined`, this plugin
- * will look to `window.videojs`.
+ * @param Productjs {object} the Productjs library. If `undefined`, this plugin
+ * will look to `window.Productjs`.
  * @param userOpts {object} the options to use for configuration
  * @see module:enableChromecast
  * @see module:ChromecastButton
  */
-module.exports = function(videojs, userOpts) {
+module.exports = function(Productjs, userOpts) {
    var options = _.defaults(_.extend({}, userOpts), { preloadWebComponents: false });
 
    if (options.preloadWebComponents) {
       preloadWebComponents();
    }
 
-   videojs = videojs || window.videojs;
-   createChromecastButton(videojs);
-   createChromecastTech(videojs);
-   enableChromecast(videojs);
+   Productjs = Productjs || window.Productjs;
+   createChromecastButton(Productjs);
+   createChromecastTech(Productjs);
+   enableChromecast(Productjs);
 };
 
 },{"./components/ChromecastButton":5,"./enableChromecast":6,"./preloadWebComponents":8,"./tech/ChromecastTech":10,"underscore":2}],8:[function(require,module,exports){
@@ -4775,8 +4775,8 @@ function doesUserAgentContainString(str) {
 }
 
 // For information as to why this is needed, please see:
-// https://github.com/silvermine/videojs-chromecast/issues/17
-// https://github.com/silvermine/videojs-chromecast/issues/22
+// https://github.com/silvermine/Productjs-chromecast/issues/17
+// https://github.com/silvermine/Productjs-chromecast/issues/22
 
 module.exports = function() {
    var needsWebComponents = !document.registerElement,
@@ -4806,7 +4806,7 @@ module.exports = function() {
 'use strict';
 
 // This file is used to create a standalone javascript file for use in a script tag. The
-// file that is output assumes that Video.js is available at `window.videojs`.
+// file that is output assumes that Video.js is available at `window.Productjs`.
 
 require('./index')(undefined, window.SILVERMINE_VIDEOJS_CHROMECAST_CONFIG);
 
@@ -4828,14 +4828,14 @@ var ChromecastSessionManager = require('../chromecast/ChromecastSessionManager')
  * technology implementations to Video.js such as HTML5, Flash and HLS.
  *
  * @external Tech
- * @see {@link http://docs.videojs.com/Tech.html|Tech}
+ * @see {@link http://docs.Productjs.com/Tech.html|Tech}
  */
 
 /** @lends ChromecastTech.prototype */
 ChromecastTech = {
 
    /**
-    * Implements Video.js playback {@link http://docs.videojs.com/tutorial-tech_.html|Tech}
+    * Implements Video.js playback {@link http://docs.Productjs.com/tutorial-tech_.html|Tech}
     * for {@link https://developers.google.com/cast/|Google's Chromecast}.
     *
     * @constructs ChromecastTech
@@ -4848,13 +4848,13 @@ ChromecastTech = {
 
       this._eventListeners = [];
 
-      this.videojsPlayer = this.videojs(options.playerId);
-      this._chromecastSessionManager = this.videojsPlayer.chromecastSessionManager;
+      this.ProductjsPlayer = this.Productjs(options.playerId);
+      this._chromecastSessionManager = this.ProductjsPlayer.chromecastSessionManager;
 
       // We have to initialize the UI here, before calling super.constructor
       // because the constructor calls `createEl`, which references `this._ui`.
       this._ui = new ChromecastTechUI();
-      this._ui.updatePoster(this.videojsPlayer.poster());
+      this._ui.updatePoster(this.ProductjsPlayer.poster());
 
       // Call the super class' constructor function
       subclass = this.constructor.super_.apply(this, arguments);
@@ -4884,7 +4884,7 @@ ChromecastTech = {
     * active.
     *
     * @returns {DOMElement}
-    * @see {@link http://docs.videojs.com/Tech.html#createEl}
+    * @see {@link http://docs.Productjs.com/Tech.html#createEl}
     */
    createEl: function() {
       return this._ui.getDOMElement();
@@ -4894,7 +4894,7 @@ ChromecastTech = {
     * Resumes playback if a media item is paused or restarts an item from its beginning if
     * the item has played and ended.
     *
-    * @see {@link http://docs.videojs.com/Player.html#play}
+    * @see {@link http://docs.Productjs.com/Player.html#play}
     */
    play: function() {
       if (!this.paused()) {
@@ -4902,7 +4902,7 @@ ChromecastTech = {
       }
       if (this.ended() && !this._isMediaLoading) {
          // Restart the current item from the beginning
-         this._playSource({ src: this.videojsPlayer.src() }, 0);
+         this._playSource({ src: this.ProductjsPlayer.src() }, 0);
       } else {
          this._remotePlayerController.playOrPause();
       }
@@ -4912,7 +4912,7 @@ ChromecastTech = {
     * Pauses playback if the player is not already paused and if the current media item
     * has not ended yet.
     *
-    * @see {@link http://docs.videojs.com/Player.html#pause}
+    * @see {@link http://docs.Productjs.com/Player.html#pause}
     */
    pause: function() {
       if (!this.paused() && this._remotePlayer.canPause) {
@@ -4925,7 +4925,7 @@ ChromecastTech = {
     * "playback paused" OR "not playing".
     *
     * @returns {boolean} true if playback is paused
-    * @see {@link http://docs.videojs.com/Player.html#paused}
+    * @see {@link http://docs.Productjs.com/Player.html#paused}
     */
    paused: function() {
       return this._remotePlayer.isPaused || this.ended() || this._remotePlayer.playerState === null;
@@ -4936,7 +4936,7 @@ ChromecastTech = {
     * of the media item.
     *
     * @param source {object} the source to store and play
-    * @see {@link http://docs.videojs.com/Player.html#src}
+    * @see {@link http://docs.Productjs.com/Player.html#src}
     */
    setSource: function(source) {
       if (this._currentSource && this._currentSource.src === source.src && this._currentSource.type === source.type) {
@@ -4949,9 +4949,9 @@ ChromecastTech = {
          // media" requests, which it itself does not de-duplicate.
          return;
       }
-      // We cannot use `this.videojsPlayer.currentSource()` because the value returned by
+      // We cannot use `this.ProductjsPlayer.currentSource()` because the value returned by
       // that function is not the same as what's returned by the Video.js Player's
-      // middleware after they are run. Also, simply using `this.videojsPlayer.src()`
+      // middleware after they are run. Also, simply using `this.ProductjsPlayer.src()`
       // does not include mimetype information which we pass to the Chromecast player.
       this._currentSource = source;
       this._playSource(source, 0);
@@ -4963,7 +4963,7 @@ ChromecastTech = {
     * @private
     * @param source {object} the source to play
     * @param [startTime] The time to start playback at, in seconds
-    * @see {@link http://docs.videojs.com/Player.html#src}
+    * @see {@link http://docs.Productjs.com/Player.html#src}
     */
    _playSource: function(source, startTime) {
       var castSession = this._getCastSession(),
@@ -5015,7 +5015,7 @@ ChromecastTech = {
     * remain paused if the item was paused.
     *
     * @param time {number} the playback time position to jump to
-    * @see {@link http://docs.videojs.com/Tech.html#setCurrentTime}
+    * @see {@link http://docs.Productjs.com/Tech.html#setCurrentTime}
     */
    setCurrentTime: function(time) {
       var duration = this.duration();
@@ -5035,7 +5035,7 @@ ChromecastTech = {
     * Returns the current playback time position.
     *
     * @returns {number} the current playback time position
-    * @see {@link http://docs.videojs.com/Player.html#currentTime}
+    * @see {@link http://docs.Productjs.com/Player.html#currentTime}
     */
    currentTime: function() {
       // There is a brief period of time when Video.js has switched to the chromecast
@@ -5056,7 +5056,7 @@ ChromecastTech = {
     * if the duration of the item is not available from the Chromecast API yet.
     *
     * @returns {number} the duration of the current media item
-    * @see {@link http://docs.videojs.com/Player.html#duration}
+    * @see {@link http://docs.Productjs.com/Player.html#duration}
     */
    duration: function() {
       // There is a brief period of time when Video.js has switched to the chromecast
@@ -5067,7 +5067,7 @@ ChromecastTech = {
       // the first media item that was provided to the Tech until chromecast plays its
       // first item.
       if (!this._hasPlayedAnyItem) {
-         return this.videojsPlayer.duration();
+         return this.ProductjsPlayer.duration();
       }
       return this._remotePlayer.duration;
    },
@@ -5078,7 +5078,7 @@ ChromecastTech = {
     * playing.
     *
     * @returns {boolean} true if the current media item has finished playing
-    * @see {@link http://docs.videojs.com/Player.html#ended}
+    * @see {@link http://docs.Productjs.com/Player.html#ended}
     */
    ended: function() {
       var mediaSession = this._getMediaSession();
@@ -5090,7 +5090,7 @@ ChromecastTech = {
     * Returns the current volume level setting as a decimal number between `0` and `1`.
     *
     * @returns {number} the current volume level
-    * @see {@link http://docs.videojs.com/Player.html#volume}
+    * @see {@link http://docs.Productjs.com/Player.html#volume}
     */
    volume: function() {
       return this._remotePlayer.volumeLevel;
@@ -5102,7 +5102,7 @@ ChromecastTech = {
     *
     * @param volumeLevel {number}
     * @returns {number} the current volume level
-    * @see {@link http://docs.videojs.com/Player.html#volume}
+    * @see {@link http://docs.Productjs.com/Player.html#volume}
     */
    setVolume: function(volumeLevel) {
       this._remotePlayer.volumeLevel = volumeLevel;
@@ -5119,7 +5119,7 @@ ChromecastTech = {
     * Returns whether or not the player is currently muted.
     *
     * @returns {boolean} true if the player is currently muted
-    * @see {@link http://docs.videojs.com/Player.html#muted}
+    * @see {@link http://docs.Productjs.com/Player.html#muted}
     */
    muted: function() {
       return this._remotePlayer.isMuted;
@@ -5130,7 +5130,7 @@ ChromecastTech = {
     * `isMuted` parameter is true or if the player is not muted and `isMuted` is false.
     *
     * @param isMuted {boolean} whether or not the player should be muted
-    * @see {@link http://docs.videojs.com/Html5.html#setMuted} for an example
+    * @see {@link http://docs.Productjs.com/Html5.html#setMuted} for an example
     */
    setMuted: function(isMuted) {
       if ((this._remotePlayer.isMuted && !isMuted) || (!this._remotePlayer.isMuted && isMuted)) {
@@ -5142,7 +5142,7 @@ ChromecastTech = {
     * Gets the URL to the current poster image.
     *
     * @returns {string} URL to the current poster image or `undefined` if none exists
-    * @see {@link http://docs.videojs.com/Player.html#poster}
+    * @see {@link http://docs.Productjs.com/Player.html#poster}
     */
    poster: function() {
       return this._ui.getPoster();
@@ -5153,7 +5153,7 @@ ChromecastTech = {
     * Tech UI view is updated with this new URL.
     *
     * @param poster {string} the URL to the new poster image
-    * @see {@link http://docs.videojs.com/Tech.html#setPoster}
+    * @see {@link http://docs.Productjs.com/Tech.html#setPoster}
     */
    setPoster: function(poster) {
       this._ui.updatePoster(poster);
@@ -5171,7 +5171,7 @@ ChromecastTech = {
     * indicator in the scrubber UI.
     *
     * @returns {undefined} always returns `undefined`
-    * @see {@link http://docs.videojs.com/Player.html#buffered}
+    * @see {@link http://docs.Productjs.com/Player.html#buffered}
     */
    buffered: function() {
       return undefined;
@@ -5183,25 +5183,25 @@ ChromecastTech = {
     * {@link https://developer.mozilla.org/en-US/docs/Web/API/TimeRanges|TimeRanges}
     * object that represents the portions of the current media item that has playable
     * content. However, the Chromecast API does not currently provide a way to determine
-    * how much the media item has playable content, so we'll just assume the entire video
+    * how much the media item has playable content, so we'll just assume the entire Product
     * is an available seek target.
     *
     * The risk here lies with live streaming, where there may exist a sliding window of
     * playable content and seeking is only possible within the last X number of minutes,
-    * rather than for the entire video.
+    * rather than for the entire Product.
     *
     * Unfortunately we have no way of detecting when this is the case. Returning anything
-    * other than the full range of the video means that we lose the ability to seek during
+    * other than the full range of the Product means that we lose the ability to seek during
     * VOD.
     *
     * @returns {TimeRanges} always returns a `TimeRanges` object with one `TimeRange` that
     * starts at `0` and ends at the `duration` of the current media item
-    * @see {@link http://docs.videojs.com/Player.html#seekable}
+    * @see {@link http://docs.Productjs.com/Player.html#seekable}
     */
    seekable: function() {
       // TODO Investigate if there's a way to detect if the source is live, so that we can
       // possibly adjust the seekable `TimeRanges` accordingly.
-      return this.videojs.createTimeRange(0, this.duration());
+      return this.Productjs.createTimeRange(0, this.duration());
    },
 
    /**
@@ -5209,7 +5209,7 @@ ChromecastTech = {
     * (`false`). Not applicable to this Tech.
     *
     * @returns {boolean} always returns `false`
-    * @see {@link http://docs.videojs.com/Html5.html#controls} for an example
+    * @see {@link http://docs.Productjs.com/Html5.html#controls} for an example
     */
    controls: function() {
       return false;
@@ -5221,7 +5221,7 @@ ChromecastTech = {
     * fullscreen playback is preferred.
     *
     * @returns {boolean} always returns `true`
-    * @see {@link http://docs.videojs.com/Html5.html#playsinline} for an example
+    * @see {@link http://docs.Productjs.com/Html5.html#playsinline} for an example
     */
    playsinline: function() {
       return true;
@@ -5232,7 +5232,7 @@ ChromecastTech = {
     * because fullscreen is always supported.
     *
     * @returns {boolean} always returns `true`
-    * @see {@link http://docs.videojs.com/Html5.html#supportsFullScreen} for an example
+    * @see {@link http://docs.Productjs.com/Html5.html#supportsFullScreen} for an example
     */
    supportsFullScreen: function() {
       return true;
@@ -5243,7 +5243,7 @@ ChromecastTech = {
     * playing on page load. This is not supported because a Chromecast session must be
     * initiated by casting via the casting menu and cannot autoplay.
     *
-    * @see {@link http://docs.videojs.com/Html5.html#setAutoplay} for an example
+    * @see {@link http://docs.Productjs.com/Html5.html#setAutoplay} for an example
     */
    setAutoplay: function() {
       // Not supported
@@ -5465,7 +5465,7 @@ ChromecastTech = {
    /**
     * Triggers a 'volumechange' event
     * @private
-    * @see http://docs.videojs.com/Player.html#event:volumechange
+    * @see http://docs.Productjs.com/Player.html#event:volumechange
     */
    _triggerVolumeChangeEvent: function() {
       this.trigger('volumechange');
@@ -5474,7 +5474,7 @@ ChromecastTech = {
    /**
     * Triggers a 'timeupdate' event
     * @private
-    * @see http://docs.videojs.com/Player.html#event:timeupdate
+    * @see http://docs.Productjs.com/Player.html#event:timeupdate
     */
    _triggerTimeUpdateEvent: function() {
       this.trigger('timeupdate');
@@ -5483,7 +5483,7 @@ ChromecastTech = {
    /**
     * Triggers a 'durationchange' event
     * @private
-    * @see http://docs.videojs.com/Player.html#event:durationchange
+    * @see http://docs.Productjs.com/Player.html#event:durationchange
     */
    _triggerDurationChangeEvent: function() {
       this.trigger('durationchange');
@@ -5492,7 +5492,7 @@ ChromecastTech = {
    /**
     * Triggers an 'error' event
     * @private
-    * @see http://docs.videojs.com/Player.html#event:error
+    * @see http://docs.Productjs.com/Player.html#event:error
     */
    _triggerErrorEvent: function() {
       this.trigger('error');
@@ -5501,23 +5501,23 @@ ChromecastTech = {
 
 /**
  * Registers the ChromecastTech Tech with Video.js. Calls {@link
- * http://docs.videojs.com/Tech.html#.registerTech}, which will add a Tech called
+ * http://docs.Productjs.com/Tech.html#.registerTech}, which will add a Tech called
  * `chromecast` to the list of globally registered Video.js Tech implementations.
  *
- * [Video.js Tech](http://docs.videojs.com/Tech.html) are initialized and used
+ * [Video.js Tech](http://docs.Productjs.com/Tech.html) are initialized and used
  * automatically by Video.js Player instances. Whenever a new source is set on the player,
  * the player iterates through the list of available Tech to determine which to use to
  * play the source.
  *
- * @param videojs {object} A reference to
- * {@link http://docs.videojs.com/module-videojs.html|Video.js}
- * @see http://docs.videojs.com/Tech.html#.registerTech
+ * @param Productjs {object} A reference to
+ * {@link http://docs.Productjs.com/module-Productjs.html|Video.js}
+ * @see http://docs.Productjs.com/Tech.html#.registerTech
  */
-module.exports = function(videojs) {
-   var Tech = videojs.getComponent('Tech'),
+module.exports = function(Productjs) {
+   var Tech = Productjs.getComponent('Tech'),
        ChromecastTechImpl;
 
-   ChromecastTechImpl = videojs.extend(Tech, ChromecastTech);
+   ChromecastTechImpl = Productjs.extend(Tech, ChromecastTech);
 
    // Required for Video.js Tech implementations.
    // TODO Consider a more comprehensive check based on mimetype.
@@ -5535,10 +5535,10 @@ module.exports = function(videojs) {
    ChromecastTechImpl.prototype.featuresNativeAudioTracks = false;
    ChromecastTechImpl.prototype.featuresNativeVideoTracks = false;
 
-   // Give ChromecastTech class instances a reference to videojs
-   ChromecastTechImpl.prototype.videojs = videojs;
+   // Give ChromecastTech class instances a reference to Productjs
+   ChromecastTechImpl.prototype.Productjs = Productjs;
 
-   videojs.registerTech('chromecast', ChromecastTechImpl);
+   Productjs.registerTech('chromecast', ChromecastTechImpl);
 };
 
 },{"../chromecast/ChromecastSessionManager":4,"./ChromecastTechUI":11,"underscore":2}],11:[function(require,module,exports){

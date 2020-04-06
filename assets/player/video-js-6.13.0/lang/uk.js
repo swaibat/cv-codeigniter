@@ -1,4 +1,4 @@
-videojs.addLanguage("uk",{
+Productjs.addLanguage("uk",{
  "Play": "Відтворити",
  "Pause": "Призупинити",
  "Current Time": "Поточний час",

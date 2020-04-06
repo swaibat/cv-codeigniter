@@ -1,4 +1,4 @@
-<?php $video_source = ovoo_config('video_source');?>
+<?php $Product_source = ovoo_config('Product_source');?>
 <style>
 .tab-content {
     margin-left: 10px;
@@ -9,8 +9,8 @@
 <div class="card">
   <div class="row justify-content-md-center">
     <div class="col-md-6">
-      <a class="btn btn-sm btn-primary waves-effect mb-20" href="<?php echo base_url('admin/seasons_manage/') . $episode_info->videos_id; ?>"> <span class="btn-label"><i class="fa fa-arrow-left"></i></span><?php echo trans('back_to_seasons'); ?></a>
-      <a class="btn btn-sm btn-primary waves-effect mb-20" href="<?php echo base_url('admin/episodes_manage/') . $episode_info->videos_id.'/'.$episode_info->seasons_id; ?>"> <span class="btn-label"><i class="fa fa-arrow-left"></i></span><?php echo trans('back_to_episodes'); ?></a>
+      <a class="btn btn-sm btn-primary waves-effect mb-20" href="<?php echo base_url('admin/seasons_manage/') . $episode_info->Products_id; ?>"> <span class="btn-label"><i class="fa fa-arrow-left"></i></span><?php echo trans('back_to_seasons'); ?></a>
+      <a class="btn btn-sm btn-primary waves-effect mb-20" href="<?php echo base_url('admin/episodes_manage/') . $episode_info->Products_id.'/'.$episode_info->seasons_id; ?>"> <span class="btn-label"><i class="fa fa-arrow-left"></i></span><?php echo trans('back_to_episodes'); ?></a>
 <br><br>
       <div class="panel panel-border panel-primary">
         <div class="panel-heading">
@@ -18,7 +18,7 @@
         </div>
         <div class="panel-body">
             <?php echo form_open_multipart(base_url('admin/episodes_update/'.$episode_info->episodes_id)); ?>           
-              <input type="hidden" name="videos_id" value="<?php echo $episode_info->videos_id; ?>">
+              <input type="hidden" name="Products_id" value="<?php echo $episode_info->Products_id; ?>">
               <input type="hidden" name="seasons_id" value="<?php echo $episode_info->seasons_id; ?>">
               <div class="form-group">
                 <label class="control-label"><?php echo trans('episodes_name') ?></label>&nbsp;&nbsp;<input id="episodes_name" type="text" value="<?php echo $episode_info->episodes_name; ?>" name="episodes_name" class="form-control" placeholder="Episode-1" required="">
@@ -35,24 +35,24 @@
               <div class="form-group">
                 <label class="control-label"><?php echo trans('source'); ?></label>
                 <select class="form-control" name="source" id="selected-source">
-                  <option value="upload" <?php if($video_source =='upload' || $episode_info->file_source =='upload'): echo 'selected'; endif;?>><?php echo trans('upload');?></option>
-                  <option value="youtube" <?php if($video_source =='youtube' || $episode_info->file_source =='youtube'): echo 'selected'; endif;?>><?php echo trans('youtube');?></option>
-                  <option value="vimeo" <?php if($video_source =='vimeo' || $episode_info->file_source =='vimeo'): echo 'selected'; endif;?>><?php echo trans('video');?></option>
-                  <option value="embed" <?php if($video_source ==''): echo 'selected'; endif;?>><?php echo trans('google_drive');?></option>
-                  <option value="amazone" <?php if($video_source =='amazone' || $episode_info->file_source =='amazone'): echo 'selected'; endif;?>><?php echo trans('amazone_s3');?></option>
-                  <option value="mp4" <?php if($video_source =='mp4' || $episode_info->file_source =='mp4'): echo 'selected'; endif;?>><?php echo trans('mp4_from_url');?></option>
-                  <option value="webm" <?php if($video_source =='webm' || $episode_info->file_source =='webm'): echo 'selected'; endif;?>><?php echo trans('webm_from_url');?></option>
-                  <option value="m3u8" <?php if($video_source =='m3u8' || $episode_info->file_source =='m3u8'): echo 'selected'; endif;?>><?php echo trans('m3u8_from_url');?></option>
-                  <option value="embed" <?php if($video_source =='embed' || $episode_info->file_source =='embed'): echo 'selected'; endif;?>><?php echo trans('embed_url');?></option>
+                  <option value="upload" <?php if($Product_source =='upload' || $episode_info->file_source =='upload'): echo 'selected'; endif;?>><?php echo trans('upload');?></option>
+                  <option value="youtube" <?php if($Product_source =='youtube' || $episode_info->file_source =='youtube'): echo 'selected'; endif;?>><?php echo trans('youtube');?></option>
+                  <option value="vimeo" <?php if($Product_source =='vimeo' || $episode_info->file_source =='vimeo'): echo 'selected'; endif;?>><?php echo trans('Product');?></option>
+                  <option value="embed" <?php if($Product_source ==''): echo 'selected'; endif;?>><?php echo trans('google_drive');?></option>
+                  <option value="amazone" <?php if($Product_source =='amazone' || $episode_info->file_source =='amazone'): echo 'selected'; endif;?>><?php echo trans('amazone_s3');?></option>
+                  <option value="mp4" <?php if($Product_source =='mp4' || $episode_info->file_source =='mp4'): echo 'selected'; endif;?>><?php echo trans('mp4_from_url');?></option>
+                  <option value="webm" <?php if($Product_source =='webm' || $episode_info->file_source =='webm'): echo 'selected'; endif;?>><?php echo trans('webm_from_url');?></option>
+                  <option value="m3u8" <?php if($Product_source =='m3u8' || $episode_info->file_source =='m3u8'): echo 'selected'; endif;?>><?php echo trans('m3u8_from_url');?></option>
+                  <option value="embed" <?php if($Product_source =='embed' || $episode_info->file_source =='embed'): echo 'selected'; endif;?>><?php echo trans('embed_url');?></option>
                 </select>
               </div>
-              <div class="form-group" <?php if($video_source =='upload'): echo 'style="display:none;"'; endif;?> id="url-input">
+              <div class="form-group" <?php if($Product_source =='upload'): echo 'style="display:none;"'; endif;?> id="url-input">
                 <label class="control-label"><?php echo trans('url') ?></label>
-                <input type="text" name="url" id="url-input-field" class="form-control" value="<?php echo $episode_info->file_url; ?>" placeholder="http://server-2.com/movies/titalic.mp4" <?php if($video_source !='upload'): echo 'required'; endif;?> ><br>
+                <input type="text" name="url" id="url-input-field" class="form-control" value="<?php echo $episode_info->file_url; ?>" placeholder="http://server-2.com/products/titalic.mp4" <?php if($Product_source !='upload'): echo 'required'; endif;?> ><br>
               </div>
-              <div class="form-group" <?php if($video_source !='upload'): echo 'style="display:none;"'; endif;?> id="image-input">
-                <label class="control-label"><?php echo trans('select_video'); ?></label>
-                <input class="videoselect" name="videofile" id="image-input-field" type="file" accept="video/*" <?php if($video_source =='upload'): echo 'required'; endif;?> />
+              <div class="form-group" <?php if($Product_source !='upload'): echo 'style="display:none;"'; endif;?> id="image-input">
+                <label class="control-label"><?php echo trans('select_Product'); ?></label>
+                <input class="Productselect" name="Productfile" id="image-input-field" type="file" accept="Product/*" <?php if($Product_source =='upload'): echo 'required'; endif;?> />
               </div>
               <div class="form-group">
                 <button class="btn btn-sm btn-primary waves-effect" type="submit"> <span class="btn-label"><i class="fa fa-plus"></i></span><?php echo trans('save_changes') ?> </button>
@@ -78,12 +78,12 @@
               badge: true,
               badgeName: "badge-danger"
           });
-          $(".videoselect").filestyle({
+          $(".Productselect").filestyle({
               input: true,
               icon: true,
               buttonBefore: true,
-              text: "<?php echo trans('select_video'); ?>",
-              htmlIcon: '<span class="fa fa-file-video-o"></span>',
+              text: "<?php echo trans('select_Product'); ?>",
+              htmlIcon: '<span class="fa fa-file-Product-o"></span>',
               badge: true,
               badgeName: "badge-danger"
           });

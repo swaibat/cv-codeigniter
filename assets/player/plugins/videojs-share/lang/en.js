@@ -1,4 +1,4 @@
-videojs.addLanguage('en', {
+Productjs.addLanguage('en', {
   "Share": "Share",
   "Direct Link": "Direct Link",
   "Embed Code": "Embed Code",

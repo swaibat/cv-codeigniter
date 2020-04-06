@@ -2,17 +2,17 @@
       <div class="row"> 
         <!-- panel  -->
         <div class="col-md-12">
-          <?php echo form_open(base_url() . 'admin/send_movie_tvseries_notification/send/' , array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data'));?> 
+          <?php echo form_open(base_url() . 'admin/send_product_tvseries_notification/send/' , array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data'));?> 
           <div class="panel panel-border panel-primary">
             <div class="panel-heading">
-              <h3 class="panel-title">Send Movie/TV-Series Notification(OneSignal)</h3>
+              <h3 class="panel-title">Send Product/TV-Series Notification(OneSignal)</h3>
             </div>
             <div class="panel-body"> 
               <!-- panel  -->
               <div class="form-group row">
-              <label class="control-label col-sm-4">Movie/TV-Series</label>
+              <label class="control-label col-sm-4">Product/TV-Series</label>
               <div class="col-sm-8">
-                <select class="form-control" name="videos_id"  id="videos_id" required></select>
+                <select class="form-control" name="Products_id"  id="Products_id" required></select>
               </div>
             </div>            
               <div class="form-group row">
@@ -61,11 +61,11 @@
 
 <script src="<?php echo base_url() ?>assets/plugins/select2/select2.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-      $('#videos_id').select2({
-        placeholder: 'Select Movie/TV-Series',
+      $('#Products_id').select2({
+        placeholder: 'Select Product/TV-Series',
         minimumInputLength: 2,
         ajax: {
-          url: '<?=base_url('admin/get_movie_by_search_title')?>',
+          url: '<?=base_url('admin/get_product_by_search_title')?>',
           dataType: 'json',
           delay: 250,
           processResults: function (data) {
@@ -78,13 +78,13 @@
       });
 </script>
 <script>
-    $("#videos_id").change(function() {
-        var videos_id = $("#videos_id option:selected").val();
-        if (videos_id != '' && videos_id !=null){
+    $("#Products_id").change(function() {
+        var Products_id = $("#Products_id option:selected").val();
+        if (Products_id != '' && Products_id !=null){
           $.ajax({
-            url: '<?=base_url('admin/get_single_movie_details_by_id')?>',
+            url: '<?=base_url('admin/get_single_product_details_by_id')?>',
             type: 'POST',
-            data: {"videos_id":videos_id},
+            data: {"Products_id":Products_id},
             dataType: 'json'
          })
          .done(function(response){

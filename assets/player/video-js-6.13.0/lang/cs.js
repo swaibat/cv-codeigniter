@@ -1,4 +1,4 @@
-videojs.addLanguage("cs",{
+Productjs.addLanguage("cs",{
  "Audio Player": "Audio Přehravač",
  "Video Player": "Video Přehravač",
  "Play": "Přehrát",
@@ -33,7 +33,7 @@ videojs.addLanguage("cs",{
  "The media playback was aborted due to a corruption problem or because the media used features your browser did not support.": "Váš prohlížeč nepodporuje tento formát videa.",
  "No compatible source was found for this media.": "Nevalidní zadaný zdroj videa.",
  "The media is encrypted and we do not have the keys to decrypt it.": "Chyba při dešifrování videa.",
- "Play Video": "Přehrát video",
+ "Play Video": "Přehrát Product",
  "Close": "Zavřit",
  "Close Modal Dialog": "Zavřít okno",
  "Modal Window": "Modální okno",

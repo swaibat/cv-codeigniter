@@ -17,10 +17,10 @@
 
 <div id="section-opt">
     <div class="container">
-        <div class="movies-list-wrap mlw-latestmovie">
+        <div class="products-list-wrap mlw-latestproduct">
             <div class="ml-title">
-                <span class="pull-left title"><?php echo trans('movie_suggestion'); ?></span>
-                <a href="<?php echo base_url(); ?>movies.html" class="pull-right cat-more"><?php echo trans('view_more'); ?> »</a>
+                <span class="pull-left title"><?php echo trans('product_suggestion'); ?></span>
+                <a href="<?php echo base_url(); ?>products.html" class="pull-right cat-more"><?php echo trans('view_more'); ?> »</a>
                 <ul role="tablist" class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" role="tab" href="#hot" aria-expanded="true"><?php echo trans('popular'); ?></a></li>
                     <li class=""><a data-toggle="tab" role="tab" href="#top-today" aria-expanded="false"><?php echo trans('top_view_today'); ?></a></li>
@@ -31,11 +31,11 @@
             </div>
             <div class="tab-content">
                 <!-- hot -->
-                <div id="hot" class="movies-list movies-list-full tab-pane fade active in">
+                <div id="hot" class="products-list products-list-full tab-pane fade active in">
                     <div class="row clean-preset">
-                        <div class="movie-container">
-                            <?php $hot_videos = $this->common_model->get_hot_videos(); ?>
-                            <?php foreach ($hot_videos as $videos) :?>
+                        <div class="product-container">
+                            <?php $hot_Products = $this->common_model->get_hot_Products(); ?>
+                            <?php foreach ($hot_Products as $Products) :?>
                             <div class="col-md-2 col-sm-3 col-xs-6">
                                 <?php include('thumbnail.php'); ?>
                             </div>
@@ -46,11 +46,11 @@
 
 
                 <!-- top-today -->
-                <div id="top-today" class="movies-list movies-list-full tab-pane fade in">
+                <div id="top-today" class="products-list products-list-full tab-pane fade in">
                     <div class="row clean-preset">
-                        <div class="movie-container">
-                            <?php $top_today = $this->common_model->get_today_hot_videos(); ?>
-                            <?php foreach ($top_today as $videos) :?>
+                        <div class="product-container">
+                            <?php $top_today = $this->common_model->get_today_hot_Products(); ?>
+                            <?php foreach ($top_today as $Products) :?>
                             <div class="col-md-2 col-sm-3 col-xs-6">
                                 <?php include('thumbnail.php'); ?>
                             </div>
@@ -60,11 +60,11 @@
                 </div>
 
                 <!-- top-weekly -->
-                <div id="top-weekly" class="movies-list movies-list-full tab-pane fade in">
+                <div id="top-weekly" class="products-list products-list-full tab-pane fade in">
                     <div class="row clean-preset">
-                        <div class="movie-container">
-                            <?php $top_rated_videos = $this->common_model->get_weekly_hot_videos(); ?>
-                            <?php foreach ($top_rated_videos as $videos) :?>
+                        <div class="product-container">
+                            <?php $top_rated_Products = $this->common_model->get_weekly_hot_Products(); ?>
+                            <?php foreach ($top_rated_Products as $Products) :?>
                             <div class="col-md-2 col-sm-3 col-xs-6">
                                 <?php include('thumbnail.php'); ?>
                             </div>
@@ -75,11 +75,11 @@
 
 
                 <!-- top-rated -->
-                <div id="top-rating" class="movies-list movies-list-full tab-pane fade in">
+                <div id="top-rating" class="products-list products-list-full tab-pane fade in">
                     <div class="row clean-preset">
-                        <div class="movie-container">
-                            <?php $top_rated_videos = $this->common_model->get_top_rated_videos(); ?>
-                            <?php foreach ($top_rated_videos as $videos) :?>
+                        <div class="product-container">
+                            <?php $top_rated_Products = $this->common_model->get_top_rated_Products(); ?>
+                            <?php foreach ($top_rated_Products as $Products) :?>
                             <div class="col-md-2 col-sm-3 col-xs-6">
                                 <?php include('thumbnail.php'); ?>
                             </div>
@@ -96,10 +96,10 @@
 
 <div id="section-opt">
     <div class="container">
-        <div class="movies-list-wrap mlw-latestmovie">
+        <div class="products-list-wrap mlw-latestproduct">
             <div class="ml-title m-b-10">
-                <span class="pull-left title"><?php echo trans('latest_movies'); ?></span>
-                <a href="<?php echo base_url('movies.html') ?>" class="pull-right cat-more"><?php echo trans('view_more'); ?>e »</a>
+                <span class="pull-left title"><?php echo trans('latest_products'); ?></span>
+                <a href="<?php echo base_url('products.html') ?>" class="pull-right cat-more"><?php echo trans('view_more'); ?>e »</a>
                 <ul role="tablist" class="nav nav-tabs">
                     
                     <li class="active">
@@ -117,12 +117,12 @@
                 <div class="clearfix"></div>
             </div>
             <div class="tab-content">
-                <div id="latest-all" class="movies-list movies-list-full tab-pane fade active in">
+                <div id="latest-all" class="products-list products-list-full tab-pane fade active in">
                     <div class="row clean-preset">
-                        <div class="movie-container">
+                        <div class="product-container">
                             <?php
-                                $latest_published_videos = $this->common_model->latest_published_videos();
-                                foreach ($latest_published_videos as $videos) :
+                                $latest_published_Products = $this->common_model->latest_published_Products();
+                                foreach ($latest_published_Products as $Products) :
                             ?>
                             <div class="col-md-2 col-sm-3 col-xs-6">
                                 <?php include('thumbnail.php'); ?>
@@ -136,12 +136,12 @@
                     $featured_genres = $this->common_model->get_features_genres(6);
                     foreach ($featured_genres as $genre) :
                 ?>
-                <div id="<?php echo $genre['slug']; ?>" class="movies-list movies-list-full tab-pane fade">
+                <div id="<?php echo $genre['slug']; ?>" class="products-list products-list-full tab-pane fade">
                     <div class="row clean-preset">
-                        <div class="movie-container">
+                        <div class="product-container">
                             <?php
-                                $genre_videos = $this->genre_model->get_video_by_genre_id($genre['genre_id']);
-                                foreach ($genre_videos as $videos) :
+                                $genre_Products = $this->genre_model->get_Product_by_genre_id($genre['genre_id']);
+                                foreach ($genre_Products as $Products) :
                             ?>
                             <div class="col-md-2 col-sm-3 col-xs-6">
                                 <?php include('thumbnail.php'); ?>
@@ -164,7 +164,7 @@
 
 <div id="section-opt">
     <div class="container">
-        <div class="movies-list-wrap mlw-latestmovie">
+        <div class="products-list-wrap mlw-latestproduct">
             <div class="ml-title">
                 <span class="pull-left title"><?php echo trans('tv_series_suggestion'); ?></span>
                 <a href="<?php echo base_url(); ?>tv-series.html" class="pull-right cat-more"><?php echo trans('view_more'); ?> »</a>
@@ -178,11 +178,11 @@
             </div>
             <div class="tab-content">
                 <!-- hot -->
-                <div id="hot-tvseries" class="movies-list movies-list-full tab-pane fade active in">
+                <div id="hot-tvseries" class="products-list products-list-full tab-pane fade active in">
                     <div class="row clean-preset">
-                        <div class="movie-container">
-                            <?php $hot_videos = $this->common_model->get_hot_tvseries(); ?>
-                            <?php foreach ($hot_videos as $videos) :?>
+                        <div class="product-container">
+                            <?php $hot_Products = $this->common_model->get_hot_tvseries(); ?>
+                            <?php foreach ($hot_Products as $Products) :?>
                             <div class="col-md-2 col-sm-3 col-xs-6">
                                 <?php include('thumbnail.php'); ?>
                             </div>
@@ -193,11 +193,11 @@
 
 
                 <!-- top-today -->
-                <div id="top-today-tvseries" class="movies-list movies-list-full tab-pane fade in">
+                <div id="top-today-tvseries" class="products-list products-list-full tab-pane fade in">
                     <div class="row clean-preset">
-                        <div class="movie-container">
+                        <div class="product-container">
                             <?php $top_today = $this->common_model->get_today_hot_tvseries(); ?>
-                            <?php foreach ($top_today as $videos) :?>
+                            <?php foreach ($top_today as $Products) :?>
                             <div class="col-md-2 col-sm-3 col-xs-6">
                                 <?php include('thumbnail.php'); ?>
                             </div>
@@ -207,11 +207,11 @@
                 </div>
 
                 <!-- top-today -->
-                <div id="top-weekly-tvseries" class="movies-list movies-list-full tab-pane fade in">
+                <div id="top-weekly-tvseries" class="products-list products-list-full tab-pane fade in">
                     <div class="row clean-preset">
-                        <div class="movie-container">
-                            <?php $top_rated_videos = $this->common_model->get_weekly_hot_tvseries(); ?>
-                            <?php foreach ($top_rated_videos as $videos) :?>
+                        <div class="product-container">
+                            <?php $top_rated_Products = $this->common_model->get_weekly_hot_tvseries(); ?>
+                            <?php foreach ($top_rated_Products as $Products) :?>
                             <div class="col-md-2 col-sm-3 col-xs-6">
                                 <?php include('thumbnail.php'); ?>
                             </div>
@@ -222,11 +222,11 @@
 
 
                 <!-- top-today -->
-                <div id="top-rating-tvseries" class="movies-list movies-list-full tab-pane fade in">
+                <div id="top-rating-tvseries" class="products-list products-list-full tab-pane fade in">
                     <div class="row clean-preset">
-                        <div class="movie-container">
-                            <?php $top_rated_videos = $this->common_model->get_top_rated_tvseries(); ?>
-                            <?php foreach ($top_rated_videos as $videos) :?>
+                        <div class="product-container">
+                            <?php $top_rated_Products = $this->common_model->get_top_rated_tvseries(); ?>
+                            <?php foreach ($top_rated_Products as $Products) :?>
                             <div class="col-md-2 col-sm-3 col-xs-6">
                                 <?php include('thumbnail.php'); ?>
                             </div>
@@ -244,7 +244,7 @@
 
 <div id="section-opt">
     <div class="container">
-        <div class="movies-list-wrap mlw-latestmovie">
+        <div class="products-list-wrap mlw-latestproduct">
             <div class="ml-title m-b-10">
                 <span class="pull-left title"><?php echo trans('latest_tv_series'); ?></span>
                 <a href="<?php echo base_url('tv-series.html') ?>" class="pull-right cat-more"><?php echo trans('view_more'); ?> »</a>
@@ -265,12 +265,12 @@
                 <div class="clearfix"></div>
             </div>
             <div class="tab-content">
-                <div id="latest-all-tvseries" class="movies-list movies-list-full tab-pane fade active in">
+                <div id="latest-all-tvseries" class="products-list products-list-full tab-pane fade active in">
                     <div class="row clean-preset">
-                        <div class="movie-container">
+                        <div class="product-container">
                             <?php
-                                $latest_published_videos = $this->common_model->latest_published_tv_series();
-                                foreach ($latest_published_videos as $videos) :
+                                $latest_published_Products = $this->common_model->latest_published_tv_series();
+                                foreach ($latest_published_Products as $Products) :
                             ?>
                             <div class="col-md-2 col-sm-3 col-xs-6">
                                 <?php include('thumbnail.php'); ?>
@@ -284,12 +284,12 @@
                     $featured_genres = $this->common_model->get_features_genres(6);
                     foreach ($featured_genres as $genre) :
                 ?>
-                <div id="<?php echo $genre['slug']; ?>-tvseries" class="movies-list movies-list-full tab-pane fade">
+                <div id="<?php echo $genre['slug']; ?>-tvseries" class="products-list products-list-full tab-pane fade">
                     <div class="row clean-preset">
-                        <div class="movie-container">
+                        <div class="product-container">
                             <?php
-                                $genre_videos = $this->genre_model->get_tvseries_by_genre_id($genre['genre_id']);
-                                foreach ($genre_videos as $videos) :
+                                $genre_Products = $this->genre_model->get_tvseries_by_genre_id($genre['genre_id']);
+                                foreach ($genre_Products as $Products) :
                             ?>
                             <div class="col-md-2 col-sm-3 col-xs-6">
                                 <?php include('thumbnail.php'); ?>

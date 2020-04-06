@@ -3,7 +3,7 @@
 <h4 class="text-center"><?php echo trans('add_subtitle'); ?></h4>
 <hr>
 
-<input type="hidden" name="videos_id" value="<?php echo $param2; ?>">
+<input type="hidden" name="Products_id" value="<?php echo $param2; ?>">
 <input type="hidden" name="seasons_id" value="<?php echo $param3; ?>">
 <input type="hidden" name="episodes_id" value="<?php echo $param4; ?>">
 <div class="form-group row">

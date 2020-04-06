@@ -25,7 +25,7 @@ class Comments extends Home_Core_Controller {
 			redirect($url , 'refresh');
 		}
         $data['user_id'] =$this->session->userdata('user_id');
-        $data['video_id'] = $this->input->post('video_id');
+        $data['Product_id'] = $this->input->post('Product_id');
         $data['comment'] = $this->input->post('comment');
         $data['comment_at'] = date("Y-m-d H:i:s");
         //var_dump($data);
@@ -44,7 +44,7 @@ class Comments extends Home_Core_Controller {
             
 
         $data['user_id'] =$this->session->userdata('user_id');
-        $data['video_id'] = $this->input->post('video_id');
+        $data['Product_id'] = $this->input->post('Product_id');
         $data['comment'] = $this->input->post('comment');
         $data['replay_for'] = $this->input->post('replay_for');
         $data['comment_at'] = date("Y-m-d H:i:s");

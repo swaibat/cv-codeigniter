@@ -5073,19 +5073,19 @@ ISOBox.prototype._boxProcessors['mdhd'] = function() {
   this._procField('pre_defined',        'uint', 16);
 };
 
-// ISO/IEC 14496-12:2012 - 8.8.2 Movie Extends Header Box
+// ISO/IEC 14496-12:2012 - 8.8.2 Product Extends Header Box
 ISOBox.prototype._boxProcessors['mehd'] = function() {
   this._procFullBox();
   this._procField('fragment_duration', 'uint', (this.version == 1) ? 64 : 32);
 };
 
-// ISO/IEC 14496-12:2012 - 8.8.5 Movie Fragment Header Box
+// ISO/IEC 14496-12:2012 - 8.8.5 Product Fragment Header Box
 ISOBox.prototype._boxProcessors['mfhd'] = function() {
   this._procFullBox();
   this._procField('sequence_number', 'uint', 32);
 };
 
-// ISO/IEC 14496-12:2012 - 8.8.11 Movie Fragment Random Access Box
+// ISO/IEC 14496-12:2012 - 8.8.11 Product Fragment Random Access Box
 ISOBox.prototype._boxProcessors['mfro'] = function() {
   this._procFullBox();
   this._procField('mfra_size', 'uint', 32); // Called mfra_size to distinguish from the normal "size" attribute of a box
@@ -5108,7 +5108,7 @@ ISOBox.prototype._boxProcessors['mp4a'] = ISOBox.prototype._boxProcessors['enca'
   this._procField('esds',                 'data', -1);
 };
 
-// ISO/IEC 14496-12:2012 - 8.2.2 Movie Header Box
+// ISO/IEC 14496-12:2012 - 8.2.2 Product Header Box
 ISOBox.prototype._boxProcessors['mvhd'] = function() {
   this._procFullBox();
   this._procField('creation_time',      'uint',     (this.version == 1) ? 64 : 32);
@@ -15197,7 +15197,7 @@ var FactoryMaker = (function () {
     /**
      * Use this method from your extended object.  this.factory is injected into your object.
      * this.factory.getSingletonInstance(this.context, 'VideoModel')
-     * will return the video model for use in the extended object.
+     * will return the Product model for use in the extended object.
      *
      * @param {Object} context - injected into extended object as this.context
      * @param {string} className - string name found in all dash.js objects
@@ -15538,7 +15538,7 @@ var CoreEvents = (function (_EventsBase) {
         this.TIMED_TEXT_REQUESTED = 'timedTextRequested';
         this.TIME_SYNCHRONIZATION_COMPLETED = 'timeSynchronizationComplete';
         this.URL_RESOLUTION_FAILED = 'urlResolutionFailed';
-        this.VIDEO_CHUNK_RECEIVED = 'videoChunkReceived';
+        this.VIDEO_CHUNK_RECEIVED = 'ProductChunkReceived';
         this.WALLCLOCK_TIME_UPDATED = 'wallclockTimeUpdated';
         this.XLINK_ELEMENT_LOADED = 'xlinkElementLoaded';
         this.XLINK_READY = 'xlinkReady';
@@ -16939,7 +16939,7 @@ function DashMetrics(config) {
     /**
      * This method returns the current max index based on what is defined in the MPD.
      *
-     * @param {string} bufferType - String 'audio' or 'video',
+     * @param {string} bufferType - String 'audio' or 'Product',
      * @param {number} periodIdx - Make sure this is the period index not id
      * @return {number}
      * @memberof module:DashMetrics
@@ -21247,7 +21247,7 @@ function getIndexBasedSegment(timelineConverter, isDynamic, representation, inde
     seg.availabilityStartTime = timelineConverter.calcAvailabilityStartTimeFromPresentationTime(seg.presentationStartTime, representation.adaptation.period.mpd, isDynamic);
     seg.availabilityEndTime = timelineConverter.calcAvailabilityEndTimeFromPresentationTime(presentationEndTime, representation.adaptation.period.mpd, isDynamic);
 
-    // at this wall clock time, the video element currentTime should be seg.presentationStartTime
+    // at this wall clock time, the Product element currentTime should be seg.presentationStartTime
     seg.wallStartTime = timelineConverter.calcWallTimeForSegment(seg, isDynamic);
 
     seg.replacementNumber = getNumberForSegment(seg, index);
@@ -21279,7 +21279,7 @@ function getTimeBasedSegment(timelineConverter, isDynamic, representation, time,
     seg.availabilityStartTime = representation.adaptation.period.mpd.manifest.loadedTime;
     seg.availabilityEndTime = timelineConverter.calcAvailabilityEndTimeFromPresentationTime(presentationEndTime, representation.adaptation.period.mpd, isDynamic);
 
-    // at this wall clock time, the video element currentTime should be seg.presentationStartTime
+    // at this wall clock time, the Product element currentTime should be seg.presentationStartTime
     seg.wallStartTime = timelineConverter.calcWallTimeForSegment(seg, isDynamic);
 
     seg.replacementTime = tManifest ? tManifest : time;
@@ -22442,7 +22442,7 @@ var Segment = function Segment() {
   // This is supposed to match the time encoded in the media Segment
   this.mediaStartTime = NaN;
   // When the source buffer timeOffset is set to MSETimeOffset this is the
-  // time that will match the seekTarget and video.currentTime
+  // time that will match the seekTarget and Product.currentTime
   this.presentationStartTime = NaN;
   // Do not schedule this segment until
   this.availabilityStartTime = NaN;
@@ -22450,7 +22450,7 @@ var Segment = function Segment() {
   this.availabilityEndTime = NaN;
   // The index of the segment inside the availability window
   this.availabilityIdx = NaN;
-  // For dynamic mpd's, this is the wall clock time that the video
+  // For dynamic mpd's, this is the wall clock time that the Product
   // element currentTime should be presentationStartTime
   this.wallStartTime = NaN;
   this.representation = null;
@@ -23334,7 +23334,7 @@ function MediaPlayer() {
 
     var STREAMING_NOT_INITIALIZED_ERROR = 'You must first call initialize() and set a source before calling this method';
     var PLAYBACK_NOT_INITIALIZED_ERROR = 'You must first call initialize() and set a valid source and view before calling this method';
-    var ELEMENT_NOT_ATTACHED_ERROR = 'You must first call attachView() to set the video element before calling this method';
+    var ELEMENT_NOT_ATTACHED_ERROR = 'You must first call attachView() to set the Product element before calling this method';
     var SOURCE_NOT_ATTACHED_ERROR = 'You must first call attachSource() with a valid source before calling this method';
     var MEDIA_PLAYER_NOT_INITIALIZED_ERROR = 'MediaPlayer not initialized!';
     var MEDIA_PLAYER_BAD_ARGUMENT_ERROR = 'MediaPlayer Invalid Arguments!';
@@ -23367,7 +23367,7 @@ function MediaPlayer() {
         dashMetrics = undefined,
         dashManifestModel = undefined,
         manifestModel = undefined,
-        videoModel = undefined,
+        ProductModel = undefined,
         textController = undefined,
         domStorage = undefined;
 
@@ -23386,7 +23386,7 @@ function MediaPlayer() {
         adapter = null;
         _coreEventsEvents2['default'].extend(_MediaPlayerEvents2['default']);
         mediaPlayerModel = (0, _modelsMediaPlayerModel2['default'])(context).getInstance();
-        videoModel = (0, _modelsVideoModel2['default'])(context).getInstance();
+        ProductModel = (0, _modelsVideoModel2['default'])(context).getInstance();
     }
 
     /**
@@ -23428,7 +23428,7 @@ function MediaPlayer() {
      * ALL arguments are optional and there are individual methods to set each argument later on.
      * The args in this method are just for convenience and should only be used for a simple player setup.
      *
-     * @param {HTML5MediaElement=} view - Optional arg to set the video element. {@link module:MediaPlayer#attachView attachView()}
+     * @param {HTML5MediaElement=} view - Optional arg to set the Product element. {@link module:MediaPlayer#attachView attachView()}
      * @param {string=} source - Optional arg to set the media source. {@link module:MediaPlayer#attachSource attachSource()}
      * @param {boolean=} AutoPlay - Optional arg to set auto play. {@link module:MediaPlayer#setAutoPlay setAutoPlay()}
      * @see {@link module:MediaPlayer#attachView attachView()}
@@ -23506,7 +23506,7 @@ function MediaPlayer() {
     }
 
     /**
-     * Sets the MPD source and the video element to null. You can also reset the MediaPlayer by
+     * Sets the MPD source and the Product element to null. You can also reset the MediaPlayer by
      * calling attachSource with a new source file.
      *
      * Calling this method is all that is necessary to destroy a MediaPlayer instance.
@@ -23529,7 +23529,7 @@ function MediaPlayer() {
     }
 
     /**
-     * The ready state of the MediaPlayer based on both the video element and MPD source being defined.
+     * The ready state of the MediaPlayer based on both the Product element and MPD source being defined.
      *
      * @returns {boolean} The current ready state of the MediaPlayer
      * @see {@link module:MediaPlayer#attachView attachView()}
@@ -23538,7 +23538,7 @@ function MediaPlayer() {
      * @instance
      */
     function isReady() {
-        return !!source && !!videoModel.getElement();
+        return !!source && !!ProductModel.getElement();
     }
 
     /**
@@ -23605,7 +23605,7 @@ function MediaPlayer() {
      * @instance
      */
     function preload() {
-        if (videoModel.getElement() || streamingInitialized) {
+        if (ProductModel.getElement() || streamingInitialized) {
             return false;
         }
         if (source) {
@@ -23659,7 +23659,7 @@ function MediaPlayer() {
     }
 
     /**
-     * Sets the currentTime property of the attached video element.  If it is a live stream with a
+     * Sets the currentTime property of the attached Product element.  If it is a live stream with a
      * timeShiftBufferLength, then the DVR window offset will be automatically calculated.
      *
      * @param {number} value - A relative time, in seconds, based on the return value of the {@link module:MediaPlayer#duration duration()} method is expected
@@ -23713,7 +23713,7 @@ function MediaPlayer() {
      * @instance
      */
     function setPlaybackRate(value) {
-        if (!videoModel.getElement()) {
+        if (!ProductModel.getElement()) {
             throw ELEMENT_NOT_ATTACHED_ERROR;
         }
         getVideoElement().playbackRate = value;
@@ -23726,7 +23726,7 @@ function MediaPlayer() {
      * @instance
      */
     function getPlaybackRate() {
-        if (!videoModel.getElement()) {
+        if (!ProductModel.getElement()) {
             throw ELEMENT_NOT_ATTACHED_ERROR;
         }
         return getVideoElement().playbackRate;
@@ -23739,7 +23739,7 @@ function MediaPlayer() {
      * @instance
      */
     function setMute(value) {
-        if (!videoModel.getElement()) {
+        if (!ProductModel.getElement()) {
             throw ELEMENT_NOT_ATTACHED_ERROR;
         }
         getVideoElement().muted = value;
@@ -23752,7 +23752,7 @@ function MediaPlayer() {
      * @instance
      */
     function isMuted() {
-        if (!videoModel.getElement()) {
+        if (!ProductModel.getElement()) {
             throw ELEMENT_NOT_ATTACHED_ERROR;
         }
         return getVideoElement().muted;
@@ -23765,7 +23765,7 @@ function MediaPlayer() {
      * @instance
      */
     function setVolume(value) {
-        if (!videoModel.getElement()) {
+        if (!ProductModel.getElement()) {
             throw ELEMENT_NOT_ATTACHED_ERROR;
         }
         getVideoElement().volume = value;
@@ -23778,7 +23778,7 @@ function MediaPlayer() {
      * @instance
      */
     function getVolume() {
-        if (!videoModel.getElement()) {
+        if (!ProductModel.getElement()) {
             throw ELEMENT_NOT_ATTACHED_ERROR;
         }
         return getVideoElement().volume;
@@ -23786,8 +23786,8 @@ function MediaPlayer() {
 
     /**
      * The length of the buffer for a given media type, in seconds. Valid media
-     * types are "video", "audio" and "fragmentedText". If no type is passed
-     * in, then the minimum of video, audio and fragmentedText buffer length is
+     * types are "Product", "audio" and "fragmentedText". If no type is passed
+     * in, then the minimum of Product, audio and fragmentedText buffer length is
      * returned. NaN is returned if an invalid type is requested, the
      * presentation does not contain that type, or if no arguments are passed
      * and the presentation does not include any adaption sets of valid media
@@ -23837,7 +23837,7 @@ function MediaPlayer() {
     /**
      * This method should only be used with a live stream that has a valid timeShiftBufferLength (DVR Window).
      * NOTE - If you do not need the raw offset value (i.e. media analytics, tracking, etc) consider using the {@link module:MediaPlayer#seek seek()} method
-     * which will calculate this value for you and set the video element's currentTime property all in one simple call.
+     * which will calculate this value for you and set the Product element's currentTime property all in one simple call.
      *
      * @param {number} value - A relative time, in seconds, based on the return value of the {@link module:MediaPlayer#duration duration()} method is expected.
      * @returns {number} A value that is relative the available range within the timeShiftBufferLength (DVR Window).
@@ -23965,7 +23965,7 @@ function MediaPlayer() {
      *
      * This feature is typically used to reserve higher bitrates for playback only when the player is in large or full-screen format.
      *
-     * @param {string} type - 'video' or 'audio' are the type options.
+     * @param {string} type - 'Product' or 'audio' are the type options.
      * @param {number} value - Value in kbps representing the maximum bitrate allowed.
      * @memberof module:MediaPlayer
      * @instance
@@ -23985,7 +23985,7 @@ function MediaPlayer() {
      *
      * This feature is used to force higher quality playback.
      *
-     * @param {string} type - 'video' or 'audio' are the type options.
+     * @param {string} type - 'Product' or 'audio' are the type options.
      * @param {number} value - Value in kbps representing the minimum bitrate allowed.
      * @memberof module:MediaPlayer
      * @instance
@@ -23995,7 +23995,7 @@ function MediaPlayer() {
     }
 
     /**
-     * @param {string} type - 'video' or 'audio' are the type options.
+     * @param {string} type - 'Product' or 'audio' are the type options.
      * @memberof module:MediaPlayer
      * @see {@link module:MediaPlayer#setMaxAllowedBitrateFor setMaxAllowedBitrateFor()}
      * @instance
@@ -24005,7 +24005,7 @@ function MediaPlayer() {
     }
 
     /**
-     * @param {string} type - 'video' or 'audio' are the type options.
+     * @param {string} type - 'Product' or 'audio' are the type options.
      * @memberof module:MediaPlayer
      * @see {@link module:MediaPlayer#setMinAllowedBitrateFor setMinAllowedBitrateFor()}
      * @instance
@@ -24026,7 +24026,7 @@ function MediaPlayer() {
      *
      * This feature is typically used to reserve higher representations for playback only when connected over a fast connection.
      *
-     * @param {string} type - 'video' or 'audio' are the type options.
+     * @param {string} type - 'Product' or 'audio' are the type options.
      * @param {number} value - number between 0 and 1, where 1 is allow all representations, and 0 is allow only the lowest.
      * @memberof module:MediaPlayer
      * @instance
@@ -24036,7 +24036,7 @@ function MediaPlayer() {
     }
 
     /**
-     * @param {string} type - 'video' or 'audio' are the type options.
+     * @param {string} type - 'Product' or 'audio' are the type options.
      * @returns {number} The current representation ratio cap.
      * @memberof module:MediaPlayer
      * @see {@link module:MediaPlayer#setMaxAllowedRepresentationRatioFor setMaxAllowedRepresentationRatioFor()}
@@ -24047,11 +24047,11 @@ function MediaPlayer() {
     }
 
     /**
-     * Gets the current download quality for media type video, audio or images. For video and audio types the ABR
+     * Gets the current download quality for media type Product, audio or images. For Product and audio types the ABR
      * rules update this value before every new download unless setAutoSwitchQualityFor(type, false) is called. For 'image'
      * type, thumbnails, there is no ABR algorithm and quality is set manually.
      *
-     * @param {string} type - 'video', 'audio' or 'image' (thumbnails)
+     * @param {string} type - 'Product', 'audio' or 'image' (thumbnails)
      * @returns {number} the quality index, 0 corresponding to the lowest bitrate
      * @memberof module:MediaPlayer
      * @see {@link module:MediaPlayer#setAutoSwitchQualityFor setAutoSwitchQualityFor()}
@@ -24080,7 +24080,7 @@ function MediaPlayer() {
      * Sets the current quality for media type instead of letting the ABR Heuristics automatically selecting it.
      * This value will be overwritten by the ABR rules unless setAutoSwitchQualityFor(type, false) is called.
      *
-     * @param {string} type - 'video', 'audio' or 'image'
+     * @param {string} type - 'Product', 'audio' or 'image'
      * @param {number} value - the quality index, 0 corresponding to the lowest bitrate
      * @memberof module:MediaPlayer
      * @see {@link module:MediaPlayer#setAutoSwitchQualityFor setAutoSwitchQualityFor()}
@@ -24105,7 +24105,7 @@ function MediaPlayer() {
     }
 
     /**
-     * Update the video element size variables
+     * Update the Product element size variables
      * Should be called on window resize (or any other time player is resized). Fullscreen does trigger a window resize event.
      *
      * Once windowResizeEventCalled = true, abrController.checkPortalSize() will use element size variables rather than querying clientWidth every time.
@@ -24159,7 +24159,7 @@ function MediaPlayer() {
     }
 
     /**
-     * Use this method to explicitly set the starting bitrate for audio | video
+     * Use this method to explicitly set the starting bitrate for audio | Product
      *
      * @param {string} type
      * @param {number} value - A value of the initial bitrate, kbps
@@ -24204,7 +24204,7 @@ function MediaPlayer() {
     }
 
     /**
-     * @param {string} type - 'audio' | 'video'
+     * @param {string} type - 'audio' | 'Product'
      * @returns {boolean} Current state of adaptive bitrate switching
      * @memberof module:MediaPlayer
      * @instance
@@ -24216,7 +24216,7 @@ function MediaPlayer() {
     /**
      * Set to false to switch off adaptive bitrate switching.
      *
-     * @param {string} type - 'audio' | 'video'
+     * @param {string} type - 'audio' | 'Product'
      * @param {boolean} value
      * @default true
      * @memberof module:MediaPlayer
@@ -24353,7 +24353,7 @@ function MediaPlayer() {
     }
 
     /**
-     * Set to false if you would like to disable the last known lang for audio (or camera angle for video) from being stored during playback and used
+     * Set to false if you would like to disable the last known lang for audio (or camera angle for Product) from being stored during playback and used
      * to set the initial settings for subsequent playback within the expiration window.
      *
      * The default expiration is one hour, defined in milliseconds. If expired, the default settings will be used
@@ -24372,7 +24372,7 @@ function MediaPlayer() {
 
     /**
      * Set to true if you would like dash.js to keep downloading fragments in the background
-     * when the video element is paused.
+     * when the Product element is paused.
      *
      * @default true
      * @param {boolean} value
@@ -24823,10 +24823,10 @@ function MediaPlayer() {
     /**
      * For a given media type, the threshold which defines if the response to a fragment
      * request is coming from browser cache or not.
-     * Valid media types are "video", "audio"
+     * Valid media types are "Product", "audio"
      *
-     * @default 50 milliseconds for video fragment requests; 5 milliseconds for audio fragment requests.
-     * @param {string} type 'video' or 'audio' are the type options.
+     * @default 50 milliseconds for Product fragment requests; 5 milliseconds for audio fragment requests.
+     * @param {string} type 'Product' or 'audio' are the type options.
      * @param {number} value Threshold value in milliseconds.
      * @memberof module:MediaPlayer
      * @instance
@@ -25138,7 +25138,7 @@ function MediaPlayer() {
 
     /**
      * Use this method to change the current text track for both external time text files and fragmented text tracks. There is no need to
-     * set the track mode on the video object to switch a track when using this method.
+     * set the track mode on the Product object to switch a track when using this method.
      * @param {number} idx - Index of track based on the order of the order the tracks are added Use -1 to disable all tracks. (turn captions off).  Use module:MediaPlayer#dashjs.MediaPlayer.events.TEXT_TRACK_ADDED.
      * @see {@link MediaPlayerEvents#event:TEXT_TRACK_ADDED dashjs.MediaPlayer.events.TEXT_TRACK_ADDED}
      * @memberof module:MediaPlayer
@@ -25174,7 +25174,7 @@ function MediaPlayer() {
     function displayCaptionsOnTop(value) {
         var textTracks = (0, _textTextTracks2['default'])(context).getInstance();
         textTracks.setConfig({
-            videoModel: videoModel
+            ProductModel: ProductModel
         });
         textTracks.initialize();
         textTracks.displayCConTop(value);
@@ -25193,10 +25193,10 @@ function MediaPlayer() {
      * @instance
      */
     function getVideoElement() {
-        if (!videoModel.getElement()) {
+        if (!ProductModel.getElement()) {
             throw ELEMENT_NOT_ATTACHED_ERROR;
         }
-        return videoModel.getElement();
+        return ProductModel.getElement();
     }
 
     /**
@@ -25206,21 +25206,21 @@ function MediaPlayer() {
      * @instance
      */
     function getVideoContainer() {
-        return videoModel ? videoModel.getVideoContainer() : null;
+        return ProductModel ? ProductModel.getVideoContainer() : null;
     }
 
     /**
-     * Use this method to attach an HTML5 element that wraps the video element.
+     * Use this method to attach an HTML5 element that wraps the Product element.
      *
-     * @param {HTMLElement} container - The HTML5 element containing the video element.
+     * @param {HTMLElement} container - The HTML5 element containing the Product element.
      * @memberof module:MediaPlayer
      * @instance
      */
     function attachVideoContainer(container) {
-        if (!videoModel.getElement()) {
+        if (!ProductModel.getElement()) {
             throw ELEMENT_NOT_ATTACHED_ERROR;
         }
-        videoModel.setVideoContainer(container);
+        ProductModel.setVideoContainer(container);
     }
 
     /**
@@ -25236,7 +25236,7 @@ function MediaPlayer() {
         }
 
         if (element) {
-            videoModel.setElement(element);
+            ProductModel.setElement(element);
             detectProtection();
             detectMetricsReporting();
             detectMss();
@@ -25261,21 +25261,21 @@ function MediaPlayer() {
      * @instance
      */
     function getTTMLRenderingDiv() {
-        return videoModel ? videoModel.getTTMLRenderingDiv() : null;
+        return ProductModel ? ProductModel.getTTMLRenderingDiv() : null;
     }
 
     /**
      * Use this method to attach an HTML5 div for dash.js to render rich TTML subtitles.
      *
-     * @param {HTMLDivElement} div - An unstyled div placed after the video element. It will be styled to match the video size and overlay z-order.
+     * @param {HTMLDivElement} div - An unstyled div placed after the Product element. It will be styled to match the Product size and overlay z-order.
      * @memberof module:MediaPlayer
      * @instance
      */
     function attachTTMLRenderingDiv(div) {
-        if (!videoModel.getElement()) {
+        if (!ProductModel.getElement()) {
             throw ELEMENT_NOT_ATTACHED_ERROR;
         }
-        videoModel.setTTMLRenderingDiv(div);
+        ProductModel.setTTMLRenderingDiv(div);
     }
 
     /*
@@ -25437,7 +25437,7 @@ function MediaPlayer() {
      * This method sets the current track switch mode. Available options are:
      *
      * MediaController.TRACK_SWITCH_MODE_NEVER_REPLACE
-     * (used to forbid clearing the buffered data (prior to current playback position) after track switch. Default for video)
+     * (used to forbid clearing the buffered data (prior to current playback position) after track switch. Default for Product)
      *
      * MediaController.TRACK_SWITCH_MODE_ALWAYS_REPLACE
      * (used to clear the buffered data (prior to current playback position) after track switch. Default for audio)
@@ -25766,7 +25766,7 @@ function MediaPlayer() {
             dashMetrics: dashMetrics,
             errHandler: errHandler,
             timelineConverter: timelineConverter,
-            videoModel: videoModel,
+            ProductModel: ProductModel,
             playbackController: playbackController,
             domStorage: domStorage,
             abrController: abrController,
@@ -25782,7 +25782,7 @@ function MediaPlayer() {
             mediaPlayerModel: mediaPlayerModel,
             dashManifestModel: dashManifestModel,
             adapter: adapter,
-            videoModel: videoModel
+            ProductModel: ProductModel
         });
 
         abrController.setConfig({
@@ -25793,7 +25793,7 @@ function MediaPlayer() {
             dashMetrics: dashMetrics,
             dashManifestModel: dashManifestModel,
             manifestModel: manifestModel,
-            videoModel: videoModel,
+            ProductModel: ProductModel,
             adapter: adapter
         });
         abrController.createAbrRulesCollection();
@@ -25804,7 +25804,7 @@ function MediaPlayer() {
             dashManifestModel: dashManifestModel,
             mediaController: mediaController,
             streamController: streamController,
-            videoModel: videoModel
+            ProductModel: ProductModel
         });
 
         // initialises controller
@@ -25840,7 +25840,7 @@ function MediaPlayer() {
             protectionController = protection.createProtectionSystem({
                 log: log,
                 errHandler: errHandler,
-                videoModel: videoModel,
+                ProductModel: ProductModel,
                 capabilities: capabilities,
                 eventBus: eventBus,
                 events: _coreEventsEvents2['default'],
@@ -26174,20 +26174,20 @@ var MediaPlayerEvents = (function (_EventsBase) {
      */
     this.AST_IN_FUTURE = 'astInFuture';
     /**
-     * Triggered when the video element's buffer state changes to stalled.
+     * Triggered when the Product element's buffer state changes to stalled.
      * Check mediaType in payload to determine type (Video, Audio, FragmentedText).
      * @event MediaPlayerEvents#BUFFER_EMPTY
      */
     this.BUFFER_EMPTY = 'bufferStalled';
     /**
-     * Triggered when the video element's buffer state changes to loaded.
+     * Triggered when the Product element's buffer state changes to loaded.
      * Check mediaType in payload to determine type (Video, Audio, FragmentedText).
      * @event MediaPlayerEvents#BUFFER_LOADED
      */
     this.BUFFER_LOADED = 'bufferLoaded';
 
     /**
-     * Triggered when the video element's buffer state changes, either stalled or loaded. Check payload for state.
+     * Triggered when the Product element's buffer state changes, either stalled or loaded. Check payload for state.
      * @event MediaPlayerEvents#BUFFER_LEVEL_STATE_CHANGED
      */
     this.BUFFER_LEVEL_STATE_CHANGED = 'bufferStateChanged';
@@ -26292,12 +26292,12 @@ var MediaPlayerEvents = (function (_EventsBase) {
     this.STREAM_TEARDOWN_COMPLETE = 'streamTeardownComplete';
 
     /**
-     * Triggered once all text tracks detected in the MPD are added to the video element.
+     * Triggered once all text tracks detected in the MPD are added to the Product element.
      * @event MediaPlayerEvents#TEXT_TRACKS_ADDED
      */
     this.TEXT_TRACKS_ADDED = 'allTextTracksAdded';
     /**
-     * Triggered when a text track is added to the video element's TextTrackList
+     * Triggered when a text track is added to the Product element's TextTrackList
      * @event MediaPlayerEvents#TEXT_TRACK_ADDED
      */
     this.TEXT_TRACK_ADDED = 'textTrackAdded';
@@ -26428,41 +26428,41 @@ function MediaPlayerFactory() {
     var SUPPORTED_MIME_TYPE = 'application/dash+xml';
 
     /**
-     *  A new MediaPlayer is instantiated for the supplied videoElement and optional source and context.  If no context is provided,
-     *  a default DashContext is used. If no source is provided, the videoElement is interrogated to extract the first source whose
+     *  A new MediaPlayer is instantiated for the supplied ProductElement and optional source and context.  If no context is provided,
+     *  a default DashContext is used. If no source is provided, the ProductElement is interrogated to extract the first source whose
      *  type is application/dash+xml.
-     * The autoplay property of the videoElement is preserved. Any preload attribute is ignored. This method should be called after the page onLoad event is dispatched.
-     * @param {HTMLMediaElement} video
+     * The autoplay property of the ProductElement is preserved. Any preload attribute is ignored. This method should be called after the page onLoad event is dispatched.
+     * @param {HTMLMediaElement} Product
      * @param {HTMLSourceElement} source
      * @param {Object} context
      * @returns {MediaPlayer|null}
      */
-    function create(video, source, context) {
-        if (!video || video.nodeName !== 'VIDEO') return null;
+    function create(Product, source, context) {
+        if (!Product || Product.nodeName !== 'VIDEO') return null;
 
-        if (video._dashjs_player) return video._dashjs_player;
+        if (Product._dashjs_player) return Product._dashjs_player;
 
         var player = undefined;
-        var videoID = video.id || video.name || 'video element';
+        var ProductID = Product.id || Product.name || 'Product element';
 
-        source = source || [].slice.call(video.querySelectorAll('source')).filter(function (s) {
+        source = source || [].slice.call(Product.querySelectorAll('source')).filter(function (s) {
             return s.type == SUPPORTED_MIME_TYPE;
         })[0];
-        if (!source && video.src) {
+        if (!source && Product.src) {
             source = document.createElement('source');
-            source.src = video.src;
-        } else if (!source && !video.src) {
+            source.src = Product.src;
+        } else if (!source && !Product.src) {
             return null;
         }
 
         context = context || {};
         player = (0, _MediaPlayer2['default'])(context).create();
-        player.initialize(video, source.src, video.autoplay);
-        player.getDebug().log('Converted ' + videoID + ' to dash.js player and added content: ' + source.src);
+        player.initialize(Product, source.src, Product.autoplay);
+        player.getDebug().log('Converted ' + ProductID + ' to dash.js player and added content: ' + source.src);
 
-        // Store a reference to the player on the video element so it can be gotten at for debugging and so we know its
+        // Store a reference to the player on the Product element so it can be gotten at for debugging and so we know its
         // already been setup.
-        video._dashjs_player = player;
+        Product._dashjs_player = player;
 
         return player;
     }
@@ -26470,9 +26470,9 @@ function MediaPlayerFactory() {
     /**
      * Searches the provided scope for all instances of the indicated selector. If no scope is provided, document is used. If no selector is
      * specified, [data-dashjs-player] is used. The declarative setup also looks for source elements with the type attribute set to 'application/dash+xml'.
-     * It then looks for those video elements which have a source element defined with a type matching 'application/dash+xml'.
-     * A new MediaPlayer is instantiated for each matching video element and the appropriate source is assigned.
-     * The autoplay property of the video element is preserved. Any preload attribute is ignored. This method should be called after the page onLoad event is dispatched.
+     * It then looks for those Product elements which have a source element defined with a type matching 'application/dash+xml'.
+     * A new MediaPlayer is instantiated for each matching Product element and the appropriate source is assigned.
+     * The autoplay property of the Product element is preserved. Any preload attribute is ignored. This method should be called after the page onLoad event is dispatched.
      * Returns an array holding all the MediaPlayer instances that were added by this method.
      * @param {string} selector - CSS selector
      * @param {Object} scope
@@ -26482,16 +26482,16 @@ function MediaPlayerFactory() {
         var aPlayers = [];
         selector = selector || '[data-dashjs-player]';
         scope = scope || document;
-        var videos = scope.querySelectorAll(selector);
-        for (var i = 0; i < videos.length; i++) {
-            var player = create(videos[i], null);
+        var Products = scope.querySelectorAll(selector);
+        for (var i = 0; i < Products.length; i++) {
+            var player = create(Products[i], null);
             aPlayers.push(player);
         }
 
         var sources = scope.querySelectorAll('source[type="' + SUPPORTED_MIME_TYPE + '"]');
         for (var i = 0; i < sources.length; i++) {
-            var video = findVideo(sources[i]);
-            var player = create(video, null);
+            var Product = findVideo(sources[i]);
+            var player = create(Product, null);
             aPlayers.push(player);
         }
 
@@ -26505,7 +26505,7 @@ function MediaPlayerFactory() {
             var el = _x;
             _again = false;
 
-            if (el.nodeName.toLowerCase() === 'video') {
+            if (el.nodeName.toLowerCase() === 'Product') {
                 return el;
             } else {
                 _x = el.parentNode;
@@ -26602,7 +26602,7 @@ var _coreFactoryMaker = _dereq_(49);
 var _coreFactoryMaker2 = _interopRequireDefault(_coreFactoryMaker);
 
 /**
- * This is a sink that is used to temporarily hold onto media chunks before a video element is added.
+ * This is a sink that is used to temporarily hold onto media chunks before a Product element is added.
  * The discharge() function is used to get the chunks out of the PreBuffer for adding to a real SourceBuffer.
  *
  * @class PreBufferSink
@@ -27524,7 +27524,7 @@ function Stream(config) {
 
     function checkIfInitializationCompleted() {
         var ln = streamProcessors.length;
-        var hasError = !!updateError.audio || !!updateError.video;
+        var hasError = !!updateError.audio || !!updateError.Product;
         var error = hasError ? new Error(DATA_UPDATE_FAILED_ERROR_CODE, 'Data update failed', null) : null;
 
         for (var i = 0; i < ln; i++) {
@@ -27588,7 +27588,7 @@ function Stream(config) {
 
         // if there is at least one buffer controller that has not completed buffering yet do nothing
         for (var i = 0; i < ln; i++) {
-            //if audio or video buffer is not buffering completed state, do not send STREAM_BUFFERING_COMPLETED
+            //if audio or Product buffer is not buffering completed state, do not send STREAM_BUFFERING_COMPLETED
             if (!processors[i].isBufferingCompleted() && (processors[i].getType() === _constantsConstants2['default'].AUDIO || processors[i].getType() === _constantsConstants2['default'].VIDEO)) {
                 log('[Stream] onBufferingCompleted - can\'t trigger STREAM_BUFFERING_COMPLETED because streamProcessor ' + processors[i].getType() + ' is not buffering completed');
                 return;
@@ -28624,7 +28624,7 @@ var Constants = (function () {
         key: 'init',
         value: function init() {
             this.STREAM = 'stream';
-            this.VIDEO = 'video';
+            this.VIDEO = 'Product';
             this.AUDIO = 'audio';
             this.TEXT = 'text';
             this.FRAGMENTED_TEXT = 'fragmentedText';
@@ -28947,7 +28947,7 @@ function AbrController() {
         manifestModel = undefined,
         dashManifestModel = undefined,
         adapter = undefined,
-        videoModel = undefined,
+        ProductModel = undefined,
         mediaPlayerModel = undefined,
         domStorage = undefined,
         playbackIndex = undefined,
@@ -28999,7 +28999,7 @@ function AbrController() {
     }
 
     function resetInitialSettings() {
-        autoSwitchBitrate = { video: true, audio: true };
+        autoSwitchBitrate = { Product: true, audio: true };
         topQualities = {};
         qualityDict = {};
         bitrateDict = {};
@@ -29061,15 +29061,15 @@ function AbrController() {
         if (config.manifestModel) {
             manifestModel = config.manifestModel;
         }
-        if (config.videoModel) {
-            videoModel = config.videoModel;
+        if (config.ProductModel) {
+            ProductModel = config.ProductModel;
         }
     }
 
     function onQualityChangeRendered(e) {
         if (e.mediaType === _constantsConstants2['default'].VIDEO) {
             playbackIndex = e.oldQuality;
-            droppedFramesHistory.push(playbackIndex, videoModel.getPlaybackQuality());
+            droppedFramesHistory.push(playbackIndex, ProductModel.getPlaybackQuality());
         }
     }
 
@@ -29161,7 +29161,7 @@ function AbrController() {
         return NaN;
     }
 
-    //TODO  change bitrateDict structure to hold one object for video and audio with initial and max values internal.
+    //TODO  change bitrateDict structure to hold one object for Product and audio with initial and max values internal.
     // This means you need to update all the logic around initial bitrate DOMStorage, RebController etc...
     function setMaxAllowedBitrateFor(type, value) {
         bitrateDict.max = bitrateDict.max || {};
@@ -29256,7 +29256,7 @@ function AbrController() {
             });
 
             if (droppedFramesHistory) {
-                var playbackQuality = videoModel.getPlaybackQuality();
+                var playbackQuality = ProductModel.getPlaybackQuality();
                 if (playbackQuality) {
                     droppedFramesHistory.push(playbackIndex, playbackQuality);
                 }
@@ -29432,9 +29432,9 @@ function AbrController() {
     function isPlayingAtTopQuality(streamInfo) {
         var streamId = streamInfo.id;
         var audioQuality = getQualityFor(_constantsConstants2['default'].AUDIO);
-        var videoQuality = getQualityFor(_constantsConstants2['default'].VIDEO);
+        var ProductQuality = getQualityFor(_constantsConstants2['default'].VIDEO);
 
-        var isAtTop = audioQuality === getTopQualityIndexFor(_constantsConstants2['default'].AUDIO, streamId) && videoQuality === getTopQualityIndexFor(_constantsConstants2['default'].VIDEO, streamId);
+        var isAtTop = audioQuality === getTopQualityIndexFor(_constantsConstants2['default'].AUDIO, streamId) && ProductQuality === getTopQualityIndexFor(_constantsConstants2['default'].VIDEO, streamId);
 
         return isAtTop;
     }
@@ -29502,11 +29502,11 @@ function AbrController() {
     }
 
     function setElementSize() {
-        if (videoModel) {
+        if (ProductModel) {
             var hasPixelRatio = usePixelRatioInLimitBitrateByPortal && window.hasOwnProperty('devicePixelRatio');
             var pixelRatio = hasPixelRatio ? window.devicePixelRatio : 1;
-            elementWidth = videoModel.getClientWidth() * pixelRatio;
-            elementHeight = videoModel.getClientHeight() * pixelRatio;
+            elementWidth = ProductModel.getClientWidth() * pixelRatio;
+            elementHeight = ProductModel.getClientHeight() * pixelRatio;
         }
     }
 
@@ -30454,8 +30454,8 @@ function BufferController(config) {
     }
 
     function checkIfSufficientBuffer() {
-        // No need to check buffer if type is not audio or video (for example if several errors occur during text parsing, so that the buffer cannot be filled, no error must occur on video playback)
-        if (type !== 'audio' && type !== 'video') return;
+        // No need to check buffer if type is not audio or Product (for example if several errors occur during text parsing, so that the buffer cannot be filled, no error must occur on Product playback)
+        if (type !== 'audio' && type !== 'Product') return;
 
         if (seekClearedBufferingCompleted && !isBufferingCompleted && playbackController && playbackController.getTimeToStreamEnd() - bufferLevel < STALL_THRESHOLD) {
             seekClearedBufferingCompleted = false;
@@ -31258,7 +31258,7 @@ function FragmentController(config) {
 
         if (e.error) {
             if (e.request.mediaType === _constantsConstants2['default'].AUDIO || e.request.mediaType === _constantsConstants2['default'].VIDEO) {
-                // add service location to blacklist controller - only for audio or video. text should not set errors
+                // add service location to blacklist controller - only for audio or Product. text should not set errors
                 eventBus.trigger(_coreEventsEvents2['default'].SERVICE_LOCATION_BLACKLIST_ADD, { entry: e.request.serviceLocation });
             }
         }
@@ -31675,14 +31675,14 @@ function MediaController() {
     function resetSwitchMode() {
         switchMode = {
             audio: TRACK_SWITCH_MODE_ALWAYS_REPLACE,
-            video: TRACK_SWITCH_MODE_NEVER_REPLACE
+            Product: TRACK_SWITCH_MODE_NEVER_REPLACE
         };
     }
 
     function resetInitialSettings() {
         initialSettings = {
             audio: null,
-            video: null
+            Product: null
         };
     }
 
@@ -31758,7 +31758,7 @@ function MediaController() {
                 storeLastSettings: true,
                 current: null
             },
-            video: {
+            Product: {
                 list: [],
                 storeLastSettings: true,
                 current: null
@@ -31877,17 +31877,17 @@ function MediaSourceController() {
         return null;
     }
 
-    function attachMediaSource(source, videoModel) {
+    function attachMediaSource(source, ProductModel) {
 
         var objectURL = window.URL.createObjectURL(source);
 
-        videoModel.setSource(objectURL);
+        ProductModel.setSource(objectURL);
 
         return objectURL;
     }
 
-    function detachMediaSource(videoModel) {
-        videoModel.setSource(null);
+    function detachMediaSource(ProductModel) {
+        ProductModel.setSource(null);
     }
 
     function setDuration(source, value) {
@@ -32023,7 +32023,7 @@ function PlaybackController() {
         manifestModel = undefined,
         dashManifestModel = undefined,
         adapter = undefined,
-        videoModel = undefined,
+        ProductModel = undefined,
         currentTime = undefined,
         liveStartTime = undefined,
         wallclockTimeIntervalId = undefined,
@@ -32070,49 +32070,49 @@ function PlaybackController() {
     }
 
     function play() {
-        if (streamInfo && videoModel && videoModel.getElement()) {
-            videoModel.play();
+        if (streamInfo && ProductModel && ProductModel.getElement()) {
+            ProductModel.play();
         } else {
             playOnceInitialized = true;
         }
     }
 
     function isPaused() {
-        return streamInfo && videoModel ? videoModel.isPaused() : null;
+        return streamInfo && ProductModel ? ProductModel.isPaused() : null;
     }
 
     function pause() {
-        if (streamInfo && videoModel) {
-            videoModel.pause();
+        if (streamInfo && ProductModel) {
+            ProductModel.pause();
         }
     }
 
     function isSeeking() {
-        return streamInfo && videoModel ? videoModel.isSeeking() : null;
+        return streamInfo && ProductModel ? ProductModel.isSeeking() : null;
     }
 
     function seek(time) {
-        if (streamInfo && videoModel) {
+        if (streamInfo && ProductModel) {
             eventBus.trigger(_coreEventsEvents2['default'].PLAYBACK_SEEK_ASKED);
             log('Requesting seek to time: ' + time);
-            videoModel.setCurrentTime(time);
+            ProductModel.setCurrentTime(time);
         }
     }
 
     function getTime() {
-        return streamInfo && videoModel ? videoModel.getTime() : null;
+        return streamInfo && ProductModel ? ProductModel.getTime() : null;
     }
 
     function getPlaybackRate() {
-        return streamInfo && videoModel ? videoModel.getPlaybackRate() : null;
+        return streamInfo && ProductModel ? ProductModel.getPlaybackRate() : null;
     }
 
     function getPlayedRanges() {
-        return streamInfo && videoModel ? videoModel.getPlayedRanges() : null;
+        return streamInfo && ProductModel ? ProductModel.getPlayedRanges() : null;
     }
 
     function getEnded() {
-        return streamInfo && videoModel ? videoModel.getEnded() : null;
+        return streamInfo && ProductModel ? ProductModel.getEnded() : null;
     }
 
     function getIsDynamic() {
@@ -32180,7 +32180,7 @@ function PlaybackController() {
         commonEarliestTime = {};
         liveDelay = 0;
         bufferedRange = {};
-        if (videoModel) {
+        if (ProductModel) {
             eventBus.off(_coreEventsEvents2['default'].DATA_UPDATE_COMPLETED, onDataUpdateCompleted, this);
             eventBus.off(_coreEventsEvents2['default'].BUFFER_LEVEL_STATE_CHANGED, onBufferLevelStateChanged, this);
             eventBus.off(_coreEventsEvents2['default'].BYTES_APPENDED, onBytesAppended, this);
@@ -32188,7 +32188,7 @@ function PlaybackController() {
             stopUpdatingWallclockTime();
             removeAllListeners();
         }
-        videoModel = null;
+        ProductModel = null;
         streamInfo = null;
         isDynamic = null;
     }
@@ -32217,8 +32217,8 @@ function PlaybackController() {
         if (config.adapter) {
             adapter = config.adapter;
         }
-        if (config.videoModel) {
-            videoModel = config.videoModel;
+        if (config.ProductModel) {
+            ProductModel = config.ProductModel;
         }
     }
 
@@ -32273,7 +32273,7 @@ function PlaybackController() {
                 presentationStartTime = startTimeOffset;
             } else {
                 var earliestTime = commonEarliestTime[streamInfo.id]; //set by ready bufferStart after first onBytesAppended
-                presentationStartTime = earliestTime !== undefined ? Math.max(earliestTime.audio !== undefined ? earliestTime.audio : 0, earliestTime.video !== undefined ? earliestTime.video : 0, streamInfo.start) : streamInfo.start;
+                presentationStartTime = earliestTime !== undefined ? Math.max(earliestTime.audio !== undefined ? earliestTime.audio : 0, earliestTime.Product !== undefined ? earliestTime.Product : 0, streamInfo.start) : streamInfo.start;
             }
         }
 
@@ -32317,7 +32317,7 @@ function PlaybackController() {
     }
 
     function updateCurrentTime() {
-        if (isPaused() || !isDynamic || videoModel.getReadyState() === 0) return;
+        if (isPaused() || !isDynamic || ProductModel.getReadyState() === 0) return;
         var currentTime = getTime();
         var actualTime = getActualPresentationTime(currentTime);
         var timeChanged = !isNaN(actualTime) && actualTime !== currentTime;
@@ -32343,7 +32343,7 @@ function PlaybackController() {
     }
 
     function onPlaybackStart() {
-        log('Native video element event: play');
+        log('Native Product element event: play');
         updateCurrentTime();
         startUpdatingWallclockTime();
         eventBus.trigger(_coreEventsEvents2['default'].PLAYBACK_STARTED, {
@@ -32352,14 +32352,14 @@ function PlaybackController() {
     }
 
     function onPlaybackPlaying() {
-        log('Native video element event: playing');
+        log('Native Product element event: playing');
         eventBus.trigger(_coreEventsEvents2['default'].PLAYBACK_PLAYING, {
             playingTime: getTime()
         });
     }
 
     function onPlaybackPaused() {
-        log('Native video element event: pause');
+        log('Native Product element event: pause');
         eventBus.trigger(_coreEventsEvents2['default'].PLAYBACK_PAUSED, {
             ended: getEnded()
         });
@@ -32375,7 +32375,7 @@ function PlaybackController() {
     }
 
     function onPlaybackSeeked() {
-        log('Native video element event: seeked');
+        log('Native Product element event: seeked');
         eventBus.trigger(_coreEventsEvents2['default'].PLAYBACK_SEEKED);
     }
 
@@ -32402,20 +32402,20 @@ function PlaybackController() {
 
     function onPlaybackRateChanged() {
         var rate = getPlaybackRate();
-        log('Native video element event: ratechange: ', rate);
+        log('Native Product element event: ratechange: ', rate);
         eventBus.trigger(_coreEventsEvents2['default'].PLAYBACK_RATE_CHANGED, {
             playbackRate: rate
         });
     }
 
     function onPlaybackMetaDataLoaded() {
-        log('Native video element event: loadedmetadata');
+        log('Native Product element event: loadedmetadata');
         eventBus.trigger(_coreEventsEvents2['default'].PLAYBACK_METADATA_LOADED);
         startUpdatingWallclockTime();
     }
 
     function onPlaybackEnded() {
-        log('Native video element event: ended');
+        log('Native Product element event: ended');
         pause();
         stopUpdatingWallclockTime();
         eventBus.trigger(_coreEventsEvents2['default'].PLAYBACK_ENDED);
@@ -32435,7 +32435,7 @@ function PlaybackController() {
         });
 
         // Updates playback time for paused dynamic streams
-        // (video element doesn't call timeupdate when the playback is paused)
+        // (Product element doesn't call timeupdate when the playback is paused)
         if (getIsDynamic() && isPaused()) {
             updateLivePlaybackTime();
         }
@@ -32485,19 +32485,19 @@ function PlaybackController() {
         initialStartTime = getStreamStartTime(false);
 
         if (hasAudioTrack && hasVideoTrack) {
-            //current stream has audio and video contents
-            if (!isNaN(commonEarliestTime[streamInfo.id].audio) && !isNaN(commonEarliestTime[streamInfo.id].video)) {
+            //current stream has audio and Product contents
+            if (!isNaN(commonEarliestTime[streamInfo.id].audio) && !isNaN(commonEarliestTime[streamInfo.id].Product)) {
 
-                if (commonEarliestTime[streamInfo.id].audio < commonEarliestTime[streamInfo.id].video) {
-                    // common earliest is video time
-                    // check buffered audio range has video time, if ok, we seek, otherwise, we wait some other data
-                    earliestTime = commonEarliestTime[streamInfo.id].video > initialStartTime ? commonEarliestTime[streamInfo.id].video : initialStartTime;
+                if (commonEarliestTime[streamInfo.id].audio < commonEarliestTime[streamInfo.id].Product) {
+                    // common earliest is Product time
+                    // check buffered audio range has Product time, if ok, we seek, otherwise, we wait some other data
+                    earliestTime = commonEarliestTime[streamInfo.id].Product > initialStartTime ? commonEarliestTime[streamInfo.id].Product : initialStartTime;
                     ranges = bufferedRange[streamInfo.id].audio;
                 } else {
                     // common earliest is audio time
-                    // check buffered video range has audio time, if ok, we seek, otherwise, we wait some other data
+                    // check buffered Product range has audio time, if ok, we seek, otherwise, we wait some other data
                     earliestTime = commonEarliestTime[streamInfo.id].audio > initialStartTime ? commonEarliestTime[streamInfo.id].audio : initialStartTime;
-                    ranges = bufferedRange[streamInfo.id].video;
+                    ranges = bufferedRange[streamInfo.id].Product;
                 }
                 if (checkTimeInRanges(earliestTime, ranges)) {
                     if (!isSeeking()) {
@@ -32507,7 +32507,7 @@ function PlaybackController() {
                 }
             }
         } else {
-            //current stream has only audio or only video content
+            //current stream has only audio or only Product content
             if (commonEarliestTime[streamInfo.id][type]) {
                 earliestTime = commonEarliestTime[streamInfo.id][type] > initialStartTime ? commonEarliestTime[streamInfo.id][type] : initialStartTime;
                 if (!isSeeking()) {
@@ -32521,37 +32521,37 @@ function PlaybackController() {
     function onBufferLevelStateChanged(e) {
         // do not stall playback when get an event from Stream that is not active
         if (e.streamInfo.id !== streamInfo.id) return;
-        videoModel.setStallState(e.mediaType, e.state === _BufferController2['default'].BUFFER_EMPTY);
+        ProductModel.setStallState(e.mediaType, e.state === _BufferController2['default'].BUFFER_EMPTY);
     }
 
     function addAllListeners() {
-        videoModel.addEventListener('canplay', onCanPlay);
-        videoModel.addEventListener('play', onPlaybackStart);
-        videoModel.addEventListener('playing', onPlaybackPlaying);
-        videoModel.addEventListener('pause', onPlaybackPaused);
-        videoModel.addEventListener('error', onPlaybackError);
-        videoModel.addEventListener('seeking', onPlaybackSeeking);
-        videoModel.addEventListener('seeked', onPlaybackSeeked);
-        videoModel.addEventListener('timeupdate', onPlaybackTimeUpdated);
-        videoModel.addEventListener('progress', onPlaybackProgress);
-        videoModel.addEventListener('ratechange', onPlaybackRateChanged);
-        videoModel.addEventListener('loadedmetadata', onPlaybackMetaDataLoaded);
-        videoModel.addEventListener('ended', onPlaybackEnded);
+        ProductModel.addEventListener('canplay', onCanPlay);
+        ProductModel.addEventListener('play', onPlaybackStart);
+        ProductModel.addEventListener('playing', onPlaybackPlaying);
+        ProductModel.addEventListener('pause', onPlaybackPaused);
+        ProductModel.addEventListener('error', onPlaybackError);
+        ProductModel.addEventListener('seeking', onPlaybackSeeking);
+        ProductModel.addEventListener('seeked', onPlaybackSeeked);
+        ProductModel.addEventListener('timeupdate', onPlaybackTimeUpdated);
+        ProductModel.addEventListener('progress', onPlaybackProgress);
+        ProductModel.addEventListener('ratechange', onPlaybackRateChanged);
+        ProductModel.addEventListener('loadedmetadata', onPlaybackMetaDataLoaded);
+        ProductModel.addEventListener('ended', onPlaybackEnded);
     }
 
     function removeAllListeners() {
-        videoModel.removeEventListener('canplay', onCanPlay);
-        videoModel.removeEventListener('play', onPlaybackStart);
-        videoModel.removeEventListener('playing', onPlaybackPlaying);
-        videoModel.removeEventListener('pause', onPlaybackPaused);
-        videoModel.removeEventListener('error', onPlaybackError);
-        videoModel.removeEventListener('seeking', onPlaybackSeeking);
-        videoModel.removeEventListener('seeked', onPlaybackSeeked);
-        videoModel.removeEventListener('timeupdate', onPlaybackTimeUpdated);
-        videoModel.removeEventListener('progress', onPlaybackProgress);
-        videoModel.removeEventListener('ratechange', onPlaybackRateChanged);
-        videoModel.removeEventListener('loadedmetadata', onPlaybackMetaDataLoaded);
-        videoModel.removeEventListener('ended', onPlaybackEnded);
+        ProductModel.removeEventListener('canplay', onCanPlay);
+        ProductModel.removeEventListener('play', onPlaybackStart);
+        ProductModel.removeEventListener('playing', onPlaybackPlaying);
+        ProductModel.removeEventListener('pause', onPlaybackPaused);
+        ProductModel.removeEventListener('error', onPlaybackError);
+        ProductModel.removeEventListener('seeking', onPlaybackSeeking);
+        ProductModel.removeEventListener('seeked', onPlaybackSeeked);
+        ProductModel.removeEventListener('timeupdate', onPlaybackTimeUpdated);
+        ProductModel.removeEventListener('progress', onPlaybackProgress);
+        ProductModel.removeEventListener('ratechange', onPlaybackRateChanged);
+        ProductModel.removeEventListener('loadedmetadata', onPlaybackMetaDataLoaded);
+        ProductModel.removeEventListener('ended', onPlaybackEnded);
     }
 
     instance = {
@@ -33450,13 +33450,13 @@ function StreamController() {
         hasMediaError = undefined,
         hasInitialisationError = undefined,
         mediaSource = undefined,
-        videoModel = undefined,
+        ProductModel = undefined,
         playbackController = undefined,
         mediaPlayerModel = undefined,
         isPaused = undefined,
         initialPlayback = undefined,
         playListMetrics = undefined,
-        videoTrackDetected = undefined,
+        ProductTrackDetected = undefined,
         audioTrackDetected = undefined,
         isStreamBufferingCompleted = undefined,
         playbackEndedTimerId = undefined,
@@ -33513,7 +33513,7 @@ function StreamController() {
      */
     function onPlaybackTimeUpdated() /*e*/{
         if (isVideoTrackPresent()) {
-            var playbackQuality = videoModel.getPlaybackQuality();
+            var playbackQuality = ProductModel.getPlaybackQuality();
             if (playbackQuality) {
                 metricsModel.addDroppedFrames(_constantsConstants2['default'].VIDEO, playbackQuality);
             }
@@ -33733,7 +33733,7 @@ function StreamController() {
         var nextStream = getNextStream();
         if (nextStream) {
             audioTrackDetected = undefined;
-            videoTrackDetected = undefined;
+            ProductTrackDetected = undefined;
             switchStream(activeStream, nextStream, NaN);
         } else {
             log('StreamController no next stream found');
@@ -33775,7 +33775,7 @@ function StreamController() {
         }
         activeStream = newStream;
         playbackController.initialize(activeStream.getStreamInfo());
-        if (videoModel.getElement()) {
+        if (ProductModel.getElement()) {
             //TODO detect if we should close jump to activateStream.
             openMediaSource(seekTime, oldStream, false);
         } else {
@@ -33816,12 +33816,12 @@ function StreamController() {
         if (!mediaSource) {
             mediaSource = mediaSourceController.createMediaSource();
         } else {
-            mediaSourceController.detachMediaSource(videoModel);
+            mediaSourceController.detachMediaSource(ProductModel);
         }
 
         mediaSource.addEventListener('sourceopen', onMediaSourceOpen, false);
         mediaSource.addEventListener('webkitsourceopen', onMediaSourceOpen, false);
-        sourceUrl = mediaSourceController.attachMediaSource(mediaSource, videoModel);
+        sourceUrl = mediaSourceController.attachMediaSource(mediaSource, ProductModel);
         log('MediaSource attached to element.  Waiting on open...');
     }
 
@@ -33829,7 +33829,7 @@ function StreamController() {
         activeStream.activate(mediaSource);
 
         audioTrackDetected = checkTrackPresence(_constantsConstants2['default'].AUDIO);
-        videoTrackDetected = checkTrackPresence(_constantsConstants2['default'].VIDEO);
+        ProductTrackDetected = checkTrackPresence(_constantsConstants2['default'].VIDEO);
 
         if (!initialPlayback) {
             if (!isNaN(seekTime)) {
@@ -33880,7 +33880,7 @@ function StreamController() {
             var manifestUpdateInfo = dashMetrics.getCurrentManifestUpdate(metricsModel.getMetricsFor(_constantsConstants2['default'].STREAM));
             metricsModel.updateManifestUpdateInfo(manifestUpdateInfo, {
                 currentTime: playbackController.getTime(),
-                buffered: videoModel.getBufferRange(),
+                buffered: ProductModel.getBufferRange(),
                 presentationStartTime: streamsInfo[0].start,
                 clientTimeOffset: timelineConverter.getClientTimeOffset()
             });
@@ -33909,7 +33909,7 @@ function StreamController() {
                         playbackController: playbackController,
                         mediaController: mediaController,
                         textController: textController,
-                        videoModel: videoModel,
+                        ProductModel: ProductModel,
                         streamController: instance
                     });
                     streams.push(stream);
@@ -33948,7 +33948,7 @@ function StreamController() {
                 controller: protectionController,
                 manifest: manifest
             });
-            protectionController.setMediaElement(videoModel.getElement());
+            protectionController.setMediaElement(ProductModel.getElement());
             if (protectionData) {
                 protectionController.setProtectionData(protectionData);
             }
@@ -34012,7 +34012,7 @@ function StreamController() {
     }
 
     function isVideoTrackPresent() {
-        return videoTrackDetected;
+        return ProductTrackDetected;
     }
 
     function checkTrackPresence(type) {
@@ -34178,8 +34178,8 @@ function StreamController() {
         if (config.timelineConverter) {
             timelineConverter = config.timelineConverter;
         }
-        if (config.videoModel) {
-            videoModel = config.videoModel;
+        if (config.ProductModel) {
+            ProductModel = config.ProductModel;
         }
         if (config.playbackController) {
             playbackController = config.playbackController;
@@ -34209,7 +34209,7 @@ function StreamController() {
         activeStream = null;
         hasMediaError = false;
         hasInitialisationError = false;
-        videoTrackDetected = undefined;
+        ProductTrackDetected = undefined;
         audioTrackDetected = undefined;
         initialPlayback = true;
         isPaused = false;
@@ -34252,10 +34252,10 @@ function StreamController() {
         initCache.reset();
 
         if (mediaSource) {
-            mediaSourceController.detachMediaSource(videoModel);
+            mediaSourceController.detachMediaSource(ProductModel);
             mediaSource = null;
         }
-        videoModel = null;
+        ProductModel = null;
         if (protectionController) {
             protectionController.setMediaElement(null);
             protectionController = null;
@@ -39433,7 +39433,7 @@ function VideoModel() {
     var instance = undefined,
         element = undefined,
         TTMLRenderingDiv = undefined,
-        videoContainer = undefined,
+        ProductContainer = undefined,
         previousPlaybackRate = undefined;
 
     var context = this.context;
@@ -39475,8 +39475,8 @@ function VideoModel() {
             // providing playbackRate property equals to zero.
             if (element.currentTime == currentTime) return;
 
-            // TODO Despite the fact that MediaSource 'open' event has been fired IE11 cannot set videoElement.currentTime
-            // immediately (it throws InvalidStateError). It seems that this is related to videoElement.readyState property
+            // TODO Despite the fact that MediaSource 'open' event has been fired IE11 cannot set ProductElement.currentTime
+            // immediately (it throws InvalidStateError). It seems that this is related to ProductElement.readyState property
             // Initially it is 0, but soon after 'open' event it goes to 1 and setting currentTime is allowed. Chrome allows to
             // set currentTime even if readyState = 0.
             // setTimeout is used to workaround InvalidStateError in IE11
@@ -39518,11 +39518,11 @@ function VideoModel() {
     }
 
     function getVideoContainer() {
-        return videoContainer;
+        return ProductContainer;
     }
 
     function setVideoContainer(value) {
-        videoContainer = value;
+        ProductContainer = value;
     }
 
     function getTTMLRenderingDiv() {
@@ -39531,7 +39531,7 @@ function VideoModel() {
 
     function setTTMLRenderingDiv(div) {
         TTMLRenderingDiv = div;
-        // The styling will allow the captions to match the video window size and position.
+        // The styling will allow the captions to match the Product window size and position.
         TTMLRenderingDiv.style.position = 'absolute';
         TTMLRenderingDiv.style.display = 'flex';
         TTMLRenderingDiv.style.overflow = 'hidden';
@@ -39701,11 +39701,11 @@ function VideoModel() {
     }
 
     function getVideoWidth() {
-        return element ? element.videoWidth : NaN;
+        return element ? element.ProductWidth : NaN;
     }
 
     function getVideoHeight() {
-        return element ? element.videoHeight : NaN;
+        return element ? element.ProductHeight : NaN;
     }
 
     function getVideoRelativeOffsetTop() {
@@ -40211,19 +40211,19 @@ function Protection() {
         var log = config.log;
         var eventBus = config.eventBus;
         var errHandler = config.errHandler;
-        var videoElement = config.videoModel ? config.videoModel.getElement() : null;
+        var ProductElement = config.ProductModel ? config.ProductModel.getElement() : null;
 
-        if ((!videoElement || videoElement.onencrypted !== undefined) && (!videoElement || videoElement.mediaKeys !== undefined)) {
+        if ((!ProductElement || ProductElement.onencrypted !== undefined) && (!ProductElement || ProductElement.mediaKeys !== undefined)) {
             log('EME detected on this user agent! (ProtectionModel_21Jan2015)');
             return (0, _modelsProtectionModel_21Jan20152['default'])(context).create({ log: log, eventBus: eventBus, events: config.events });
-        } else if (getAPI(videoElement, APIS_ProtectionModel_3Feb2014)) {
+        } else if (getAPI(ProductElement, APIS_ProtectionModel_3Feb2014)) {
 
             log('EME detected on this user agent! (ProtectionModel_3Feb2014)');
-            return (0, _modelsProtectionModel_3Feb20142['default'])(context).create({ log: log, eventBus: eventBus, events: config.events, api: getAPI(videoElement, APIS_ProtectionModel_3Feb2014) });
-        } else if (getAPI(videoElement, APIS_ProtectionModel_01b)) {
+            return (0, _modelsProtectionModel_3Feb20142['default'])(context).create({ log: log, eventBus: eventBus, events: config.events, api: getAPI(ProductElement, APIS_ProtectionModel_3Feb2014) });
+        } else if (getAPI(ProductElement, APIS_ProtectionModel_01b)) {
 
             log('EME detected on this user agent! (ProtectionModel_01b)');
-            return (0, _modelsProtectionModel_01b2['default'])(context).create({ log: log, eventBus: eventBus, errHandler: errHandler, events: config.events, api: getAPI(videoElement, APIS_ProtectionModel_01b) });
+            return (0, _modelsProtectionModel_01b2['default'])(context).create({ log: log, eventBus: eventBus, errHandler: errHandler, events: config.events, api: getAPI(ProductElement, APIS_ProtectionModel_01b) });
         } else {
 
             log('No supported version of EME detected on this user agent! - Attempts to play encrypted content will fail!');
@@ -40231,13 +40231,13 @@ function Protection() {
         }
     }
 
-    function getAPI(videoElement, apis) {
+    function getAPI(ProductElement, apis) {
 
         for (var i = 0; i < apis.length; i++) {
             var api = apis[i];
             // detect if api is supported by browser
             // check only first function in api -> should be fine
-            if (typeof videoElement[api[Object.keys(api)[0]]] !== 'function') {
+            if (typeof ProductElement[api[Object.keys(api)[0]]] !== 'function') {
                 continue;
             }
 
@@ -40454,7 +40454,7 @@ var ProtectionEvents = (function (_EventsBase) {
      * associated with the protection set
      * @ignore
      */
-    this.VIDEO_ELEMENT_SELECTED = 'videoElementSelected';
+    this.VIDEO_ELEMENT_SELECTED = 'ProductElementSelected';
   }
 
   return ProtectionEvents;
@@ -40558,7 +40558,7 @@ function ProtectionController(config) {
 
     /**
      * Initialize this protection system with a given audio
-     * or video stream information.
+     * or Product stream information.
      *
      * @param {StreamInfo} [mediaInfo] Media information
      * @memberof module:ProtectionController
@@ -40577,7 +40577,7 @@ function ProtectionController(config) {
         mediaInfoArr.push(mediaInfo);
 
         // ContentProtection elements are specified at the AdaptationSet level, so the CP for audio
-        // and video will be the same.  Just use one valid MediaInfo object
+        // and Product will be the same.  Just use one valid MediaInfo object
         var supportedKS = protectionKeyController.getSupportedKeySystemsFromContentProtection(mediaInfo.contentProtection);
         if (supportedKS && supportedKS.length > 0) {
             selectKeySystem(supportedKS, true);
@@ -40732,7 +40732,7 @@ function ProtectionController(config) {
     }
 
     /**
-     * Sets the robustness level for video and audio capabilities. Optional to remove Chrome warnings.
+     * Sets the robustness level for Product and audio capabilities. Optional to remove Chrome warnings.
      * Possible values are SW_SECURE_CRYPTO, SW_SECURE_DECODE, HW_SECURE_CRYPTO, HW_SECURE_CRYPTO, HW_SECURE_DECODE, HW_SECURE_ALL.
      *
      * @param {string} level the robustness level
@@ -40799,19 +40799,19 @@ function ProtectionController(config) {
     function getKeySystemConfiguration(keySystem) {
         var protData = getProtData(keySystem);
         var audioCapabilities = [];
-        var videoCapabilities = [];
+        var ProductCapabilities = [];
         var audioRobustness = protData && protData.audioRobustness && protData.audioRobustness.length > 0 ? protData.audioRobustness : robustnessLevel;
-        var videoRobustness = protData && protData.videoRobustness && protData.videoRobustness.length > 0 ? protData.videoRobustness : robustnessLevel;
+        var ProductRobustness = protData && protData.ProductRobustness && protData.ProductRobustness.length > 0 ? protData.ProductRobustness : robustnessLevel;
 
         mediaInfoArr.forEach(function (media) {
             if (media.type === constants.AUDIO) {
                 audioCapabilities.push(new _voMediaCapability2['default'](media.codec, audioRobustness));
             } else if (media.type === constants.VIDEO) {
-                videoCapabilities.push(new _voMediaCapability2['default'](media.codec, videoRobustness));
+                ProductCapabilities.push(new _voMediaCapability2['default'](media.codec, ProductRobustness));
             }
         });
 
-        return new _voKeySystemConfiguration2['default'](audioCapabilities, videoCapabilities, 'optional', sessionType === 'temporary' ? 'optional' : 'required', [sessionType]);
+        return new _voKeySystemConfiguration2['default'](audioCapabilities, ProductCapabilities, 'optional', sessionType === 'temporary' ? 'optional' : 'required', [sessionType]);
     }
 
     function selectKeySystem(supportedKS, fromManifest) {
@@ -42277,7 +42277,7 @@ function ProtectionModel_01b(config) {
     var errHandler = config.errHandler;
 
     var instance = undefined,
-        videoElement = undefined,
+        ProductElement = undefined,
         keySystem = undefined,
         protectionKeyController = undefined,
 
@@ -42305,7 +42305,7 @@ function ProtectionModel_01b(config) {
     eventHandler = undefined;
 
     function setup() {
-        videoElement = null;
+        ProductElement = null;
         keySystem = null;
         pendingSessions = [];
         sessions = [];
@@ -42314,7 +42314,7 @@ function ProtectionModel_01b(config) {
     }
 
     function reset() {
-        if (videoElement) {
+        if (ProductElement) {
             removeEventListeners();
         }
         for (var i = 0; i < sessions.length; i++) {
@@ -42339,10 +42339,10 @@ function ProtectionModel_01b(config) {
     }
 
     function requestKeySystemAccess(ksConfigurations) {
-        var ve = videoElement;
+        var ve = ProductElement;
         if (!ve) {
-            // Must have a video element to do this capability tests
-            ve = document.createElement('video');
+            // Must have a Product element to do this capability tests
+            ve = document.createElement('Product');
         }
 
         // Try key systems in order, first one with supported key system configuration
@@ -42354,23 +42354,23 @@ function ProtectionModel_01b(config) {
             var supportedAudio = null;
             var supportedVideo = null;
 
-            // Try key system configs in order, first one with supported audio/video
+            // Try key system configs in order, first one with supported audio/Product
             // is used
             for (var configIdx = 0; configIdx < configs.length; configIdx++) {
                 //let audios = configs[configIdx].audioCapabilities;
-                var videos = configs[configIdx].videoCapabilities;
-                // Look for supported video container/codecs
-                if (videos && videos.length !== 0) {
-                    supportedVideo = []; // Indicates that we have a requested video config
-                    for (var videoIdx = 0; videoIdx < videos.length; videoIdx++) {
-                        if (ve.canPlayType(videos[videoIdx].contentType, systemString) !== '') {
-                            supportedVideo.push(videos[videoIdx]);
+                var Products = configs[configIdx].ProductCapabilities;
+                // Look for supported Product container/codecs
+                if (Products && Products.length !== 0) {
+                    supportedVideo = []; // Indicates that we have a requested Product config
+                    for (var ProductIdx = 0; ProductIdx < Products.length; ProductIdx++) {
+                        if (ve.canPlayType(Products[ProductIdx].contentType, systemString) !== '') {
+                            supportedVideo.push(Products[ProductIdx]);
                         }
                     }
                 }
 
-                // No supported audio or video in this configuration OR we have
-                // requested audio or video configuration that is not supported
+                // No supported audio or Product in this configuration OR we have
+                // requested audio or Product configuration that is not supported
                 if (!supportedAudio && !supportedVideo || supportedAudio && supportedAudio.length === 0 || supportedVideo && supportedVideo.length === 0) {
                     continue;
                 }
@@ -42384,7 +42384,7 @@ function ProtectionModel_01b(config) {
             }
         }
         if (!found) {
-            eventBus.trigger(events.KEY_SYSTEM_ACCESS_COMPLETE, { error: 'Key system access denied! -- No valid audio/video content configurations detected!' });
+            eventBus.trigger(events.KEY_SYSTEM_ACCESS_COMPLETE, { error: 'Key system access denied! -- No valid audio/Product content configurations detected!' });
         }
     }
 
@@ -42394,23 +42394,23 @@ function ProtectionModel_01b(config) {
     }
 
     function setMediaElement(mediaElement) {
-        if (videoElement === mediaElement) {
+        if (ProductElement === mediaElement) {
             return;
         }
 
         // Replacing the previous element
-        if (videoElement) {
+        if (ProductElement) {
             removeEventListeners();
         }
 
-        videoElement = mediaElement;
+        ProductElement = mediaElement;
 
         // Only if we are not detaching from the existing element
-        if (videoElement) {
-            videoElement.addEventListener(api.keyerror, eventHandler);
-            videoElement.addEventListener(api.needkey, eventHandler);
-            videoElement.addEventListener(api.keymessage, eventHandler);
-            videoElement.addEventListener(api.keyadded, eventHandler);
+        if (ProductElement) {
+            ProductElement.addEventListener(api.keyerror, eventHandler);
+            ProductElement.addEventListener(api.needkey, eventHandler);
+            ProductElement.addEventListener(api.keymessage, eventHandler);
+            ProductElement.addEventListener(api.keyadded, eventHandler);
             eventBus.trigger(events.VIDEO_ELEMENT_SELECTED);
         }
     }
@@ -42440,7 +42440,7 @@ function ProtectionModel_01b(config) {
             pendingSessions.push(newSession);
 
             // Send our request to the CDM
-            videoElement[api.generateKeyRequest](keySystem.systemString, new Uint8Array(initData));
+            ProductElement[api.generateKeyRequest](keySystem.systemString, new Uint8Array(initData));
 
             return newSession;
         } else {
@@ -42452,18 +42452,18 @@ function ProtectionModel_01b(config) {
         var sessionID = sessionToken.sessionID;
         if (!protectionKeyController.isClearKey(keySystem)) {
             // Send our request to the CDM
-            videoElement[api.addKey](keySystem.systemString, new Uint8Array(message), new Uint8Array(sessionToken.initData), sessionID);
+            ProductElement[api.addKey](keySystem.systemString, new Uint8Array(message), new Uint8Array(sessionToken.initData), sessionID);
         } else {
             // For clearkey, message is a ClearKeyKeySet
             for (var i = 0; i < message.keyPairs.length; i++) {
-                videoElement[api.addKey](keySystem.systemString, message.keyPairs[i].key, message.keyPairs[i].keyID, sessionID);
+                ProductElement[api.addKey](keySystem.systemString, message.keyPairs[i].key, message.keyPairs[i].keyID, sessionID);
             }
         }
     }
 
     function closeKeySession(sessionToken) {
         // Send our request to the CDM
-        videoElement[api.cancelKeyRequest](keySystem.systemString, sessionToken.sessionID);
+        ProductElement[api.cancelKeyRequest](keySystem.systemString, sessionToken.sessionID);
     }
 
     function setServerCertificate() /*serverCertificate*/{/* Not supported */}
@@ -42597,10 +42597,10 @@ function ProtectionModel_01b(config) {
     }
 
     function removeEventListeners() {
-        videoElement.removeEventListener(api.keyerror, eventHandler);
-        videoElement.removeEventListener(api.needkey, eventHandler);
-        videoElement.removeEventListener(api.keymessage, eventHandler);
-        videoElement.removeEventListener(api.keyadded, eventHandler);
+        ProductElement.removeEventListener(api.keyerror, eventHandler);
+        ProductElement.removeEventListener(api.needkey, eventHandler);
+        ProductElement.removeEventListener(api.keymessage, eventHandler);
+        ProductElement.removeEventListener(api.keyadded, eventHandler);
     }
 
     instance = {
@@ -42710,7 +42710,7 @@ function ProtectionModel_21Jan2015(config) {
 
     var instance = undefined,
         keySystem = undefined,
-        videoElement = undefined,
+        ProductElement = undefined,
         mediaKeys = undefined,
         sessions = undefined,
         eventHandler = undefined,
@@ -42718,7 +42718,7 @@ function ProtectionModel_21Jan2015(config) {
 
     function setup() {
         keySystem = null;
-        videoElement = null;
+        ProductElement = null;
         mediaKeys = null;
         sessions = [];
         protectionKeyController = (0, _controllersProtectionKeyController2['default'])(context).getInstance();
@@ -42735,9 +42735,9 @@ function ProtectionModel_21Jan2015(config) {
                 var done = function done(session) {
                     removeSession(session);
                     if (sessions.length === 0) {
-                        if (videoElement) {
-                            videoElement.removeEventListener('encrypted', eventHandler);
-                            videoElement.setMediaKeys(null).then(function () {
+                        if (ProductElement) {
+                            ProductElement.removeEventListener('encrypted', eventHandler);
+                            ProductElement.setMediaKeys(null).then(function () {
                                 eventBus.trigger(events.TEARDOWN_COMPLETE);
                             });
                         } else {
@@ -42785,8 +42785,8 @@ function ProtectionModel_21Jan2015(config) {
         keySystemAccess.mksa.createMediaKeys().then(function (mkeys) {
             keySystem = keySystemAccess.keySystem;
             mediaKeys = mkeys;
-            if (videoElement) {
-                videoElement.setMediaKeys(mediaKeys).then(function () {
+            if (ProductElement) {
+                ProductElement.setMediaKeys(mediaKeys).then(function () {
                     eventBus.trigger(events.INTERNAL_KEY_SYSTEM_SELECTED);
                 });
             } else {
@@ -42798,23 +42798,23 @@ function ProtectionModel_21Jan2015(config) {
     }
 
     function setMediaElement(mediaElement) {
-        if (videoElement === mediaElement) return;
+        if (ProductElement === mediaElement) return;
 
         // Replacing the previous element
-        if (videoElement) {
-            videoElement.removeEventListener('encrypted', eventHandler);
-            if (videoElement.setMediaKeys) {
-                videoElement.setMediaKeys(null);
+        if (ProductElement) {
+            ProductElement.removeEventListener('encrypted', eventHandler);
+            if (ProductElement.setMediaKeys) {
+                ProductElement.setMediaKeys(null);
             }
         }
 
-        videoElement = mediaElement;
+        ProductElement = mediaElement;
 
         // Only if we are not detaching from the existing element
-        if (videoElement) {
-            videoElement.addEventListener('encrypted', eventHandler);
-            if (videoElement.setMediaKeys && mediaKeys) {
-                videoElement.setMediaKeys(mediaKeys);
+        if (ProductElement) {
+            ProductElement.addEventListener('encrypted', eventHandler);
+            if (ProductElement.setMediaKeys && mediaKeys) {
+                ProductElement.setMediaKeys(mediaKeys);
             }
         }
     }
@@ -43135,7 +43135,7 @@ function ProtectionModel_3Feb2014(config) {
     var api = config.api;
 
     var instance = undefined,
-        videoElement = undefined,
+        ProductElement = undefined,
         keySystem = undefined,
         mediaKeys = undefined,
         keySystemAccess = undefined,
@@ -43144,7 +43144,7 @@ function ProtectionModel_3Feb2014(config) {
         protectionKeyController = undefined;
 
     function setup() {
-        videoElement = null;
+        ProductElement = null;
         keySystem = null;
         mediaKeys = null;
         keySystemAccess = null;
@@ -43158,8 +43158,8 @@ function ProtectionModel_3Feb2014(config) {
             for (var i = 0; i < sessions.length; i++) {
                 closeKeySession(sessions[i]);
             }
-            if (videoElement) {
-                videoElement.removeEventListener(api.needkey, eventHandler);
+            if (ProductElement) {
+                ProductElement.removeEventListener(api.needkey, eventHandler);
             }
             eventBus.trigger(events.TEARDOWN_COMPLETE);
         } catch (error) {
@@ -43190,11 +43190,11 @@ function ProtectionModel_3Feb2014(config) {
             var supportedAudio = null;
             var supportedVideo = null;
 
-            // Try key system configs in order, first one with supported audio/video
+            // Try key system configs in order, first one with supported audio/Product
             // is used
             for (var configIdx = 0; configIdx < configs.length; configIdx++) {
                 var audios = configs[configIdx].audioCapabilities;
-                var videos = configs[configIdx].videoCapabilities;
+                var Products = configs[configIdx].ProductCapabilities;
 
                 // Look for supported audio container/codecs
                 if (audios && audios.length !== 0) {
@@ -43206,18 +43206,18 @@ function ProtectionModel_3Feb2014(config) {
                     }
                 }
 
-                // Look for supported video container/codecs
-                if (videos && videos.length !== 0) {
-                    supportedVideo = []; // Indicates that we have a requested video config
-                    for (var videoIdx = 0; videoIdx < videos.length; videoIdx++) {
-                        if (window[api.MediaKeys].isTypeSupported(systemString, videos[videoIdx].contentType)) {
-                            supportedVideo.push(videos[videoIdx]);
+                // Look for supported Product container/codecs
+                if (Products && Products.length !== 0) {
+                    supportedVideo = []; // Indicates that we have a requested Product config
+                    for (var ProductIdx = 0; ProductIdx < Products.length; ProductIdx++) {
+                        if (window[api.MediaKeys].isTypeSupported(systemString, Products[ProductIdx].contentType)) {
+                            supportedVideo.push(Products[ProductIdx]);
                         }
                     }
                 }
 
-                // No supported audio or video in this configuration OR we have
-                // requested audio or video configuration that is not supported
+                // No supported audio or Product in this configuration OR we have
+                // requested audio or Product configuration that is not supported
                 if (!supportedAudio && !supportedVideo || supportedAudio && supportedAudio.length === 0 || supportedVideo && supportedVideo.length === 0) {
                     continue;
                 }
@@ -43231,7 +43231,7 @@ function ProtectionModel_3Feb2014(config) {
             }
         }
         if (!found) {
-            eventBus.trigger(events.KEY_SYSTEM_ACCESS_COMPLETE, { error: 'Key system access denied! -- No valid audio/video content configurations detected!' });
+            eventBus.trigger(events.KEY_SYSTEM_ACCESS_COMPLETE, { error: 'Key system access denied! -- No valid audio/Product content configurations detected!' });
         }
     }
 
@@ -43240,7 +43240,7 @@ function ProtectionModel_3Feb2014(config) {
             mediaKeys = ksAccess.mediaKeys = new window[api.MediaKeys](ksAccess.keySystem.systemString);
             keySystem = ksAccess.keySystem;
             keySystemAccess = ksAccess;
-            if (videoElement) {
+            if (ProductElement) {
                 setMediaKeys();
             }
             eventBus.trigger(events.INTERNAL_KEY_SYSTEM_SELECTED);
@@ -43250,18 +43250,18 @@ function ProtectionModel_3Feb2014(config) {
     }
 
     function setMediaElement(mediaElement) {
-        if (videoElement === mediaElement) return;
+        if (ProductElement === mediaElement) return;
 
         // Replacing the previous element
-        if (videoElement) {
-            videoElement.removeEventListener(api.needkey, eventHandler);
+        if (ProductElement) {
+            ProductElement.removeEventListener(api.needkey, eventHandler);
         }
 
-        videoElement = mediaElement;
+        ProductElement = mediaElement;
 
         // Only if we are not detaching from the existing element
-        if (videoElement) {
-            videoElement.addEventListener(api.needkey, eventHandler);
+        if (ProductElement) {
+            ProductElement.addEventListener(api.needkey, eventHandler);
             if (mediaKeys) {
                 setMediaKeys();
             }
@@ -43274,13 +43274,13 @@ function ProtectionModel_3Feb2014(config) {
             throw new Error('Can not create sessions until you have selected a key system');
         }
 
-        // Use the first video capability for the contentType.
+        // Use the first Product capability for the contentType.
         // TODO:  Not sure if there is a way to concatenate all capability data into a RFC6386-compatible format
 
         // If player is trying to playback Audio only stream - don't error out.
         var capabilities = null;
 
-        if (keySystemAccess.ksConfiguration.videoCapabilities !== null && keySystemAccess.ksConfiguration.videoCapabilities.length > 0) capabilities = keySystemAccess.ksConfiguration.videoCapabilities[0];
+        if (keySystemAccess.ksConfiguration.ProductCapabilities !== null && keySystemAccess.ksConfiguration.ProductCapabilities.length > 0) capabilities = keySystemAccess.ksConfiguration.ProductCapabilities[0];
 
         if (capabilities === null && keySystemAccess.ksConfiguration.audioCapabilities !== null && keySystemAccess.ksConfiguration.audioCapabilities.length > 0) capabilities = keySystemAccess.ksConfiguration.audioCapabilities[0];
 
@@ -43369,15 +43369,15 @@ function ProtectionModel_3Feb2014(config) {
     function setMediaKeys() {
         var boundDoSetKeys = null;
         var doSetKeys = function doSetKeys() {
-            videoElement.removeEventListener('loadedmetadata', boundDoSetKeys);
-            videoElement[api.setMediaKeys](mediaKeys);
+            ProductElement.removeEventListener('loadedmetadata', boundDoSetKeys);
+            ProductElement[api.setMediaKeys](mediaKeys);
             eventBus.trigger(events.VIDEO_ELEMENT_SELECTED);
         };
-        if (videoElement.readyState >= 1) {
+        if (ProductElement.readyState >= 1) {
             doSetKeys();
         } else {
             boundDoSetKeys = doSetKeys.bind(this);
-            videoElement.addEventListener('loadedmetadata', boundDoSetKeys);
+            ProductElement.addEventListener('loadedmetadata', boundDoSetKeys);
         }
     }
 
@@ -44328,8 +44328,8 @@ var KeySystemConfiguration =
  * @param {Array.<MediaCapability>} audioCapabilities array of
  * desired audio capabilities.  Higher preference capabilities should be placed earlier
  * in the array.
- * @param {Array.<MediaCapability>} videoCapabilities array of
- * desired video capabilities.  Higher preference capabilities should be placed earlier
+ * @param {Array.<MediaCapability>} ProductCapabilities array of
+ * desired Product capabilities.  Higher preference capabilities should be placed earlier
  * in the array.
  * @param {string} distinctiveIdentifier desired use of distinctive identifiers.
  * One of "required", "optional", or "not-allowed"
@@ -44339,15 +44339,15 @@ var KeySystemConfiguration =
  * be supported by the key system
  * @class
  */
-function KeySystemConfiguration(audioCapabilities, videoCapabilities, distinctiveIdentifier, persistentState, sessionTypes) {
+function KeySystemConfiguration(audioCapabilities, ProductCapabilities, distinctiveIdentifier, persistentState, sessionTypes) {
     _classCallCheck(this, KeySystemConfiguration);
 
     this.initDataTypes = ['cenc'];
     if (audioCapabilities && audioCapabilities.length) {
         this.audioCapabilities = audioCapabilities;
     }
-    if (videoCapabilities && videoCapabilities.length) {
-        this.videoCapabilities = videoCapabilities;
+    if (ProductCapabilities && ProductCapabilities.length) {
+        this.ProductCapabilities = ProductCapabilities;
     }
     this.distinctiveIdentifier = distinctiveIdentifier;
     this.persistentState = persistentState;
@@ -46599,24 +46599,24 @@ function BufferLevelRule(config) {
 
     function setup() {}
 
-    function execute(streamProcessor, type, videoTrackPresent) {
+    function execute(streamProcessor, type, ProductTrackPresent) {
         var bufferLevel = dashMetrics.getCurrentBufferLevel(metricsModel.getReadOnlyMetricsFor(type));
-        return bufferLevel < getBufferTarget(streamProcessor, type, videoTrackPresent);
+        return bufferLevel < getBufferTarget(streamProcessor, type, ProductTrackPresent);
     }
 
-    function getBufferTarget(streamProcessor, type, videoTrackPresent) {
+    function getBufferTarget(streamProcessor, type, ProductTrackPresent) {
         var bufferTarget = NaN;
         var representationInfo = streamProcessor.getCurrentRepresentationInfo();
         if (type === _constantsConstants2['default'].FRAGMENTED_TEXT) {
             bufferTarget = textController.getAllTracksAreDisabled() ? 0 : representationInfo.fragmentDuration;
-        } else if (type === _constantsConstants2['default'].AUDIO && videoTrackPresent) {
-            var videoBufferLevel = dashMetrics.getCurrentBufferLevel(metricsModel.getReadOnlyMetricsFor(_constantsConstants2['default'].VIDEO));
+        } else if (type === _constantsConstants2['default'].AUDIO && ProductTrackPresent) {
+            var ProductBufferLevel = dashMetrics.getCurrentBufferLevel(metricsModel.getReadOnlyMetricsFor(_constantsConstants2['default'].VIDEO));
             if (isNaN(representationInfo.fragmentDuration)) {
-                bufferTarget = videoBufferLevel;
+                bufferTarget = ProductBufferLevel;
             } else {
-                bufferTarget = Math.max(videoBufferLevel, representationInfo.fragmentDuration);
+                bufferTarget = Math.max(ProductBufferLevel, representationInfo.fragmentDuration);
             }
-            // console.log('videoBufferLevel  - ' + videoBufferLevel + ' target : ' + bufferTarget);
+            // console.log('ProductBufferLevel  - ' + ProductBufferLevel + ' target : ' + bufferTarget);
         } else {
                 var streamInfo = representationInfo.mediaInfo.streamInfo;
                 if (abrController.isPlayingAtTopQuality(streamInfo)) {
@@ -46864,8 +46864,8 @@ function EmbeddedTextHtmlRender() {
         return color;
     }
 
-    function getStyle(videoElement, style) {
-        var fontSize = videoElement.videoHeight / 15.0;
+    function getStyle(ProductElement, style) {
+        var fontSize = ProductElement.ProductHeight / 15.0;
         if (style) {
             return 'font-size: ' + fontSize + 'px; font-family: Menlo, Consolas, \'Cutive Mono\', monospace; color: ' + (style.foreground ? createRGB(style.foreground) : 'rgb(255, 255, 255)') + '; font-style: ' + (style.italics ? 'italic' : 'normal') + '; text-decoration: ' + (style.underline ? 'underline' : 'none') + '; white-space: pre; background-color: ' + (style.background ? createRGB(style.background) : 'transparent') + ';';
         } else {
@@ -46882,7 +46882,7 @@ function EmbeddedTextHtmlRender() {
         return trimmed;
     }
 
-    function createHTMLCaptionsFromScreen(videoElement, startTime, endTime, captionScreen) {
+    function createHTMLCaptionsFromScreen(ProductElement, startTime, endTime, captionScreen) {
 
         var currRegion = null;
         var existingRegion = null;
@@ -47019,7 +47019,7 @@ function EmbeddedTextHtmlRender() {
 
             var bodyDiv = document.createElement('div');
             bodyDiv.className = 'paragraph bodyStyle';
-            bodyDiv.style.cssText = getStyle(videoElement);
+            bodyDiv.style.cssText = getStyle(ProductElement);
 
             var cueUniWrapper = document.createElement('div');
             cueUniWrapper.className = 'cueUniWrapper';
@@ -47044,7 +47044,7 @@ function EmbeddedTextHtmlRender() {
                         var spanStyle = styleStates[span.name];
                         var spanElement = document.createElement('span');
                         spanElement.className = 'spanPadding ' + span.name + ' customSpanColor';
-                        spanElement.style.cssText = getStyle(videoElement, spanStyle);
+                        spanElement.style.cssText = getStyle(ProductElement, spanStyle);
                         /* If this is not the first span, and it's on the same
                          * row as the last one */
                         if (s !== 0 && sameRow) {
@@ -47096,8 +47096,8 @@ function EmbeddedTextHtmlRender() {
                 isFromCEA608: true,
                 regions: regions,
                 regionID: region.name,
-                videoHeight: videoElement.videoHeight,
-                videoWidth: videoElement.videoWidth,
+                ProductHeight: ProductElement.ProductHeight,
+                ProductWidth: ProductElement.ProductWidth,
                 fontSize: fontSize,
                 lineHeight: {},
                 linePadding: {}
@@ -47638,7 +47638,7 @@ function TextController() {
         dashManifestModel = undefined,
         manifestModel = undefined,
         mediaController = undefined,
-        videoModel = undefined,
+        ProductModel = undefined,
         streamController = undefined,
         textTracks = undefined,
         vttParser = undefined,
@@ -47683,8 +47683,8 @@ function TextController() {
         if (config.mediaController) {
             mediaController = config.mediaController;
         }
-        if (config.videoModel) {
-            videoModel = config.videoModel;
+        if (config.ProductModel) {
+            ProductModel = config.ProductModel;
         }
         if (config.streamController) {
             streamController = config.streamController;
@@ -47705,7 +47705,7 @@ function TextController() {
             dashManifestModel: dashManifestModel,
             manifestModel: manifestModel,
             mediaController: mediaController,
-            videoModel: videoModel,
+            ProductModel: ProductModel,
             streamController: streamController,
             textTracks: textTracks,
             vttParser: vttParser,
@@ -47988,7 +47988,7 @@ function TextSourceBuffer() {
         initializationSegmentReceived = undefined,
         timescale = undefined,
         fragmentedTracks = undefined,
-        videoModel = undefined,
+        ProductModel = undefined,
         streamController = undefined,
         firstSubtitleStart = undefined,
         currFragmentedTrackIdx = undefined,
@@ -48014,7 +48014,7 @@ function TextSourceBuffer() {
 
         mediaInfos = streamProcessor.getMediaInfoArr();
         textTracks.setConfig({
-            videoModel: videoModel
+            ProductModel: ProductModel
         });
         textTracks.initialize();
         isFragmented = !dashManifestModel.getIsTextTrack(type);
@@ -48049,7 +48049,7 @@ function TextSourceBuffer() {
         initializationSegmentReceived = false;
         timescale = NaN;
         fragmentedTracks = [];
-        videoModel = null;
+        ProductModel = null;
         streamController = null;
         embeddedInitialized = false;
         embeddedTracks = null;
@@ -48068,7 +48068,7 @@ function TextSourceBuffer() {
         mediaInfos = [];
         textTracks = (0, _TextTracks2['default'])(context).getInstance();
         textTracks.setConfig({
-            videoModel: videoModel
+            ProductModel: ProductModel
         });
         textTracks.initialize();
         boxParser = (0, _utilsBoxParser2['default'])(context).getInstance();
@@ -48128,8 +48128,8 @@ function TextSourceBuffer() {
         if (config.mediaController) {
             mediaController = config.mediaController;
         }
-        if (config.videoModel) {
-            videoModel = config.videoModel;
+        if (config.ProductModel) {
+            ProductModel = config.ProductModel;
         }
         if (config.streamController) {
             streamController = config.streamController;
@@ -48150,7 +48150,7 @@ function TextSourceBuffer() {
             errHandler: errHandler,
             dashManifestModel: dashManifestModel,
             mediaController: mediaController,
-            videoModel: videoModel,
+            ProductModel: ProductModel,
             fragmentModel: fragmentModel,
             streamController: streamController,
             textTracks: textTracks,
@@ -48329,8 +48329,8 @@ function TextSourceBuffer() {
                 var makeCueAdderForIndex = function makeCueAdderForIndex(self, trackIndex) {
                     function newCue(startTime, endTime, captionScreen) {
                         var captionsArray = null;
-                        if (videoModel.getTTMLRenderingDiv()) {
-                            captionsArray = embeddedTextHtmlRender.createHTMLCaptionsFromScreen(videoModel.getElement(), startTime, endTime, captionScreen);
+                        if (ProductModel.getTTMLRenderingDiv()) {
+                            captionsArray = embeddedTextHtmlRender.createHTMLCaptionsFromScreen(ProductModel.getElement(), startTime, endTime, captionScreen);
                         } else {
                             var text = captionScreen.getDisplayText();
                             //log("CEA text: " + startTime + "-" + endTime + "  '" + text + "'");
@@ -48583,7 +48583,7 @@ function TextTracks() {
 
     var instance = undefined,
         Cue = undefined,
-        videoModel = undefined,
+        ProductModel = undefined,
         textTrackQueue = undefined,
         trackElementArr = undefined,
         currentTrackIdx = undefined,
@@ -48592,7 +48592,7 @@ function TextTracks() {
         actualVideoWidth = undefined,
         actualVideoHeight = undefined,
         captionContainer = undefined,
-        videoSizeCheckInterval = undefined,
+        ProductSizeCheckInterval = undefined,
         isChrome = undefined,
         fullscreenAttribute = undefined,
         displayCCOnTop = undefined,
@@ -48613,7 +48613,7 @@ function TextTracks() {
         actualVideoWidth = 0;
         actualVideoHeight = 0;
         captionContainer = null;
-        videoSizeCheckInterval = null;
+        ProductSizeCheckInterval = null;
         displayCCOnTop = false;
         topZIndex = 2147483647;
         previousISDState = null;
@@ -48644,7 +48644,7 @@ function TextTracks() {
         var lang = textTrackQueue[i].lang;
         var isTTML = textTrackQueue[i].isTTML;
         var isEmbedded = textTrackQueue[i].isEmbedded;
-        var track = isChrome ? document.createElement('track') : videoModel.addTextTrack(kind, label, lang);
+        var track = isChrome ? document.createElement('track') : ProductModel.addTextTrack(kind, label, lang);
 
         if (isChrome) {
             track.kind = kind;
@@ -48679,11 +48679,11 @@ function TextTracks() {
                 //Sort in same order as in manifest
                 return a.index - b.index;
             });
-            captionContainer = videoModel.getTTMLRenderingDiv();
+            captionContainer = ProductModel.getTTMLRenderingDiv();
             var defaultIndex = -1;
             for (var i = 0; i < textTrackQueue.length; i++) {
                 var track = createTrackForUserAgent.call(this, i);
-                trackElementArr.push(track); //used to remove tracks from video element when added manually
+                trackElementArr.push(track); //used to remove tracks from Product element when added manually
 
                 if (textTrackQueue[i].defaultTrack) {
                     // track.default is an object property identifier that is a reserved word
@@ -48693,7 +48693,7 @@ function TextTracks() {
                     defaultIndex = i;
                 }
                 if (isChrome) {
-                    videoModel.appendChild(track);
+                    ProductModel.appendChild(track);
                 }
 
                 var textTrack = getTrackByIdx(i);
@@ -48716,9 +48716,9 @@ function TextTracks() {
 
             if (defaultIndex >= 0) {
                 for (var idx = 0; idx < textTrackQueue.length; idx++) {
-                    var videoTextTrack = getTrackByIdx(idx);
-                    if (videoTextTrack) {
-                        videoTextTrack.mode = idx === defaultIndex ? _constantsConstants2['default'].TEXT_SHOWING : _constantsConstants2['default'].TEXT_HIDDEN;
+                    var ProductTextTrack = getTrackByIdx(idx);
+                    if (ProductTextTrack) {
+                        ProductTextTrack.mode = idx === defaultIndex ? _constantsConstants2['default'].TEXT_SHOWING : _constantsConstants2['default'].TEXT_HIDDEN;
                     }
                 }
             }
@@ -48730,62 +48730,62 @@ function TextTracks() {
         }
     }
 
-    function getVideoVisibleVideoSize(viewWidth, viewHeight, videoWidth, videoHeight, aspectRatio, use80Percent) {
+    function getVideoVisibleVideoSize(viewWidth, viewHeight, ProductWidth, ProductHeight, aspectRatio, use80Percent) {
         var viewAspectRatio = viewWidth / viewHeight;
-        var videoAspectRatio = videoWidth / videoHeight;
+        var ProductAspectRatio = ProductWidth / ProductHeight;
 
-        var videoPictureWidth = 0;
-        var videoPictureHeight = 0;
+        var ProductPictureWidth = 0;
+        var ProductPictureHeight = 0;
 
-        if (viewAspectRatio > videoAspectRatio) {
-            videoPictureHeight = viewHeight;
-            videoPictureWidth = videoPictureHeight / videoHeight * videoWidth;
+        if (viewAspectRatio > ProductAspectRatio) {
+            ProductPictureHeight = viewHeight;
+            ProductPictureWidth = ProductPictureHeight / ProductHeight * ProductWidth;
         } else {
-            videoPictureWidth = viewWidth;
-            videoPictureHeight = videoPictureWidth / videoWidth * videoHeight;
+            ProductPictureWidth = viewWidth;
+            ProductPictureHeight = ProductPictureWidth / ProductWidth * ProductHeight;
         }
 
-        var videoPictureXAspect = 0;
-        var videoPictureYAspect = 0;
-        var videoPictureWidthAspect = 0;
-        var videoPictureHeightAspect = 0;
-        var videoPictureAspect = videoPictureWidth / videoPictureHeight;
+        var ProductPictureXAspect = 0;
+        var ProductPictureYAspect = 0;
+        var ProductPictureWidthAspect = 0;
+        var ProductPictureHeightAspect = 0;
+        var ProductPictureAspect = ProductPictureWidth / ProductPictureHeight;
 
-        if (videoPictureAspect > aspectRatio) {
-            videoPictureHeightAspect = videoPictureHeight;
-            videoPictureWidthAspect = videoPictureHeight * aspectRatio;
+        if (ProductPictureAspect > aspectRatio) {
+            ProductPictureHeightAspect = ProductPictureHeight;
+            ProductPictureWidthAspect = ProductPictureHeight * aspectRatio;
         } else {
-            videoPictureWidthAspect = videoPictureWidth;
-            videoPictureHeightAspect = videoPictureWidth / aspectRatio;
+            ProductPictureWidthAspect = ProductPictureWidth;
+            ProductPictureHeightAspect = ProductPictureWidth / aspectRatio;
         }
-        videoPictureXAspect = (viewWidth - videoPictureWidthAspect) / 2;
-        videoPictureYAspect = (viewHeight - videoPictureHeightAspect) / 2;
+        ProductPictureXAspect = (viewWidth - ProductPictureWidthAspect) / 2;
+        ProductPictureYAspect = (viewHeight - ProductPictureHeightAspect) / 2;
 
         if (use80Percent) {
             return {
-                x: videoPictureXAspect + videoPictureWidthAspect * 0.1,
-                y: videoPictureYAspect + videoPictureHeightAspect * 0.1,
-                w: videoPictureWidthAspect * 0.8,
-                h: videoPictureHeightAspect * 0.8
-            }; /* Maximal picture size in videos aspect ratio */
+                x: ProductPictureXAspect + ProductPictureWidthAspect * 0.1,
+                y: ProductPictureYAspect + ProductPictureHeightAspect * 0.1,
+                w: ProductPictureWidthAspect * 0.8,
+                h: ProductPictureHeightAspect * 0.8
+            }; /* Maximal picture size in Products aspect ratio */
         } else {
                 return {
-                    x: videoPictureXAspect,
-                    y: videoPictureYAspect,
-                    w: videoPictureWidthAspect,
-                    h: videoPictureHeightAspect
-                }; /* Maximal picture size in videos aspect ratio */
+                    x: ProductPictureXAspect,
+                    y: ProductPictureYAspect,
+                    w: ProductPictureWidthAspect,
+                    h: ProductPictureHeightAspect
+                }; /* Maximal picture size in Products aspect ratio */
             }
     }
 
     function checkVideoSize(track, forceDrawing) {
-        var clientWidth = videoModel.getClientWidth();
-        var clientHeight = videoModel.getClientHeight();
-        var videoWidth = videoModel.getVideoWidth();
-        var videoHeight = videoModel.getVideoHeight();
-        var videoOffsetTop = videoModel.getVideoRelativeOffsetTop();
-        var videoOffsetLeft = videoModel.getVideoRelativeOffsetLeft();
-        var aspectRatio = videoWidth / videoHeight;
+        var clientWidth = ProductModel.getClientWidth();
+        var clientHeight = ProductModel.getClientHeight();
+        var ProductWidth = ProductModel.getVideoWidth();
+        var ProductHeight = ProductModel.getVideoHeight();
+        var ProductOffsetTop = ProductModel.getVideoRelativeOffsetTop();
+        var ProductOffsetLeft = ProductModel.getVideoRelativeOffsetLeft();
+        var aspectRatio = ProductWidth / ProductHeight;
         var use80Percent = false;
         if (track.isFromCEA608) {
             // If this is CEA608 then use predefined aspect ratio
@@ -48793,7 +48793,7 @@ function TextTracks() {
             use80Percent = true;
         }
 
-        var realVideoSize = getVideoVisibleVideoSize.call(this, clientWidth, clientHeight, videoWidth, videoHeight, aspectRatio, use80Percent);
+        var realVideoSize = getVideoVisibleVideoSize.call(this, clientWidth, clientHeight, ProductWidth, ProductHeight, aspectRatio, use80Percent);
 
         var newVideoWidth = realVideoSize.w;
         var newVideoHeight = realVideoSize.h;
@@ -48801,8 +48801,8 @@ function TextTracks() {
         var newVideoTop = realVideoSize.y;
 
         if (newVideoWidth != actualVideoWidth || newVideoHeight != actualVideoHeight || newVideoLeft != actualVideoLeft || newVideoTop != actualVideoTop || forceDrawing) {
-            actualVideoLeft = newVideoLeft + videoOffsetLeft;
-            actualVideoTop = newVideoTop + videoOffsetTop;
+            actualVideoLeft = newVideoLeft + ProductOffsetLeft;
+            actualVideoTop = newVideoTop + ProductOffsetTop;
             actualVideoWidth = newVideoWidth;
             actualVideoHeight = newVideoHeight;
             captionContainer.style.left = actualVideoLeft + 'px';
@@ -48825,8 +48825,8 @@ function TextTracks() {
     }
 
     function scaleCue(activeCue) {
-        var videoWidth = actualVideoWidth;
-        var videoHeight = actualVideoHeight;
+        var ProductWidth = actualVideoWidth;
+        var ProductHeight = actualVideoHeight;
         var key = undefined,
             replaceValue = undefined,
             valueFontSize = undefined,
@@ -48834,7 +48834,7 @@ function TextTracks() {
             elements = undefined;
 
         if (activeCue.cellResolution) {
-            var cellUnit = [videoWidth / activeCue.cellResolution[0], videoHeight / activeCue.cellResolution[1]];
+            var cellUnit = [ProductWidth / activeCue.cellResolution[0], ProductHeight / activeCue.cellResolution[1]];
             if (activeCue.linePadding) {
                 for (key in activeCue.linePadding) {
                     if (activeCue.linePadding.hasOwnProperty(key)) {
@@ -49014,7 +49014,7 @@ function TextTracks() {
     }
 
     function getTrackByIdx(idx) {
-        return idx >= 0 && textTrackQueue[idx] ? videoModel.getTextTrack(textTrackQueue[idx].kind, textTrackQueue[idx].label, textTrackQueue[idx].lang, textTrackQueue[idx].isTTML, textTrackQueue[idx].isEmbedded) : null;
+        return idx >= 0 && textTrackQueue[idx] ? ProductModel.getTextTrack(textTrackQueue[idx].kind, textTrackQueue[idx].label, textTrackQueue[idx].lang, textTrackQueue[idx].isTTML, textTrackQueue[idx].isEmbedded) : null;
     }
 
     function getCurrentTrackIdx() {
@@ -49041,14 +49041,14 @@ function TextTracks() {
         var track = getTrackByIdx(currentTrackIdx);
         setCueStyleOnTrack.call(this, track);
 
-        if (videoSizeCheckInterval) {
-            clearInterval(videoSizeCheckInterval);
-            videoSizeCheckInterval = null;
+        if (ProductSizeCheckInterval) {
+            clearInterval(ProductSizeCheckInterval);
+            ProductSizeCheckInterval = null;
         }
 
         if (track && track.renderingType === 'html') {
             checkVideoSize.call(this, track, true);
-            videoSizeCheckInterval = setInterval(checkVideoSize.bind(this, track), 500);
+            ProductSizeCheckInterval = setInterval(checkVideoSize.bind(this, track), 500);
         }
     }
 
@@ -49087,7 +49087,7 @@ function TextTracks() {
         var ln = trackElementArr ? trackElementArr.length : 0;
         for (var i = 0; i < ln; i++) {
             if (isChrome) {
-                videoModel.removeChild(trackElementArr[i]);
+                ProductModel.removeChild(trackElementArr[i]);
             } else {
                 var track = getTrackByIdx(i);
                 if (track) {
@@ -49098,16 +49098,16 @@ function TextTracks() {
         }
         trackElementArr = [];
         textTrackQueue = [];
-        if (videoSizeCheckInterval) {
-            clearInterval(videoSizeCheckInterval);
-            videoSizeCheckInterval = null;
+        if (ProductSizeCheckInterval) {
+            clearInterval(ProductSizeCheckInterval);
+            ProductSizeCheckInterval = null;
         }
         currentTrackIdx = -1;
         clearCaptionContainer.call(this);
     }
 
     function deleteTextTrack(idx) {
-        videoModel.removeChild(trackElementArr[idx]);
+        ProductModel.removeChild(trackElementArr[idx]);
         trackElementArr.splice(idx, 1);
     }
 
@@ -49125,14 +49125,14 @@ function TextTracks() {
         styleElement.id = 'native-cue-style';
         document.head.appendChild(styleElement);
         var stylesheet = styleElement.sheet;
-        var video = videoModel.getElement();
-        if (video) {
-            if (video.id) {
-                stylesheet.insertRule('#' + video.id + '::cue {background: transparent}', 0);
-            } else if (video.classList.length !== 0) {
-                stylesheet.insertRule('.' + video.className + '::cue {background: transparent}', 0);
+        var Product = ProductModel.getElement();
+        if (Product) {
+            if (Product.id) {
+                stylesheet.insertRule('#' + Product.id + '::cue {background: transparent}', 0);
+            } else if (Product.classList.length !== 0) {
+                stylesheet.insertRule('.' + Product.className + '::cue {background: transparent}', 0);
             } else {
-                stylesheet.insertRule('video::cue {background: transparent}', 0);
+                stylesheet.insertRule('Product::cue {background: transparent}', 0);
             }
         }
     }
@@ -49160,8 +49160,8 @@ function TextTracks() {
         if (!config) {
             return;
         }
-        if (config.videoModel) {
-            videoModel = config.videoModel;
+        if (config.ProductModel) {
+            ProductModel = config.ProductModel;
         }
     }
 
@@ -50149,7 +50149,7 @@ var _coreDebug = _dereq_(47);
 
 var _coreDebug2 = _interopRequireDefault(_coreDebug);
 
-var legacyKeysAndReplacements = [{ oldKey: 'dashjs_vbitrate', newKey: 'dashjs_video_bitrate' }, { oldKey: 'dashjs_abitrate', newKey: 'dashjs_audio_bitrate' }, { oldKey: 'dashjs_vsettings', newKey: 'dashjs_video_settings' }, { oldKey: 'dashjs_asettings', newKey: 'dashjs_audio_settings' }];
+var legacyKeysAndReplacements = [{ oldKey: 'dashjs_vbitrate', newKey: 'dashjs_Product_bitrate' }, { oldKey: 'dashjs_abitrate', newKey: 'dashjs_audio_bitrate' }, { oldKey: 'dashjs_vsettings', newKey: 'dashjs_Product_settings' }, { oldKey: 'dashjs_asettings', newKey: 'dashjs_audio_settings' }];
 
 var LOCAL_STORAGE_BITRATE_KEY_TEMPLATE = 'dashjs_?_bitrate';
 var LOCAL_STORAGE_SETTINGS_KEY_TEMPLATE = 'dashjs_?_settings';
@@ -53211,7 +53211,7 @@ exports["default"] = URIFragmentData;
     temporal (t)     - This dimension denotes a specific time range in the original media, such as "starting at second 10, continuing until second 20";
     spatial  (xywh)  - this dimension denotes a specific range of pixels in the original media, such as "a rectangle with size (100,100) with its top-left at coordinate (10,10)";
                        Media fragments support also addressing the media along two additional dimensions (in the advanced version defined in Media Fragments 1.0 URI (advanced)):
-    track    (track) - this dimension denotes one or more tracks in the original media, such as "the english audio and the video track";
+    track    (track) - this dimension denotes one or more tracks in the original media, such as "the english audio and the Product track";
     id       (id)    - this dimension denotes a named temporal fragment within the original media, such as "chapter 2", and can be seen as a convenient way of specifying a temporal fragment.
 
 
@@ -53340,7 +53340,7 @@ var _controllersBufferController2 = _interopRequireDefault(_controllersBufferCon
 
 var BufferState =
 /**
- * @description This Object holds reference to the current buffer state of the video element.
+ * @description This Object holds reference to the current buffer state of the Product element.
  */
 function BufferState() {
   _classCallCheck(this, BufferState);
@@ -53410,7 +53410,7 @@ function DVRInfo() {
   _classCallCheck(this, DVRInfo);
 
   /**
-   * The current time of the video element when this was created.
+   * The current time of the Product element when this was created.
    * @public
    */
   this.time = null;
@@ -53605,7 +53605,7 @@ function HTTPRequest() {
   this.trace = [];
 
   /**
-   * Type of stream ("audio" | "video" etc..)
+   * Type of stream ("audio" | "Product" etc..)
    * @public
    */
   this._stream = null;

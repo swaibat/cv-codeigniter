@@ -1,4 +1,4 @@
-videojs.addLanguage("it",{
+Productjs.addLanguage("it",{
  "Play": "Play",
  "Pause": "Pausa",
  "Current Time": "Orario attuale",

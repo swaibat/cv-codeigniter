@@ -9,7 +9,7 @@
                     <small><?php echo trans('recover_your_password_by_existing_email.'); ?></small>
                 </h2>
                 <div class="sendus">
-                    <div class="movie-heading m-b-20"> <span><?php echo trans('enter_email'); ?></span>
+                    <div class="product-heading m-b-20"> <span><?php echo trans('enter_email'); ?></span>
                         <div class="disable-bottom-line"></div>
                     </div>
                     <?php if($this->session->flashdata('success') !=''):?>

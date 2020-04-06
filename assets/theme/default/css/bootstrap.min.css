@@ -35,7 +35,7 @@ summary {
 audio,
 canvas,
 progress,
-video {
+Product {
     display: inline-block;
     vertical-align: baseline
 }
@@ -579,7 +579,7 @@ th {
     content: "\e058"
 }
 
-.glyphicon-facetime-video:before {
+.glyphicon-facetime-Product:before {
     content: "\e059"
 }
 
@@ -1067,11 +1067,11 @@ th {
     content: "\e185"
 }
 
-.glyphicon-sd-video:before {
+.glyphicon-sd-Product:before {
     content: "\e186"
 }
 
-.glyphicon-hd-video:before {
+.glyphicon-hd-Product:before {
     content: "\e187"
 }
 
@@ -6950,7 +6950,7 @@ button.list-group-item-danger.active:hover {
 .embed-responsive embed,
 .embed-responsive iframe,
 .embed-responsive object,
-.embed-responsive video {
+.embed-responsive Product {
     position: absolute;
     top: 0;
     bottom: 0;

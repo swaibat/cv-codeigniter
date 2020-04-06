@@ -2,7 +2,7 @@
 
 [![Join the chat at https://gitter.im/pixelead0/tmdb_v3-PHP-API-](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pixelead0/tmdb_v3-PHP-API-?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-TMDB API v3 PHP Library - wrapper to [API](http://help.themoviedb.org/kb/api/about-3) version 3 of [themoviedb.org](http://themoviedb.org).
+TMDB API v3 PHP Library - wrapper to [API](http://help.theproductdb.org/kb/api/about-3) version 3 of [theproductdb.org](http://theproductdb.org).
 
 For using this library maybe you should take a look at the full [Documentation](http://code.octal.es/php/tmdb-api/) of this project.
 
@@ -41,7 +41,7 @@ Forked from a similar [project](https://github.com/glamorous/TMDb-PHP-API) by [J
 
   * [07/11/2012] v0.2
     - Fixed issue #2 (Object created in class php file)
-    - Added functions latestMovie, nowPlayingMovies (thank's to steffmeister)
+    - Added functions latestProduct, nowPlayingProducts (thank's to steffmeister)
 
   * [12/02/2012] v0.1
     - This is the first version of the class without inline documentation or testing
@@ -79,28 +79,28 @@ If you have no $conf array it uses the default conf but you need to have an API 
 		$tmdb->setAPIKey('YOUR_API_KEY');
 		
 	?>
-## Movies ##
-### Search a Movie ###
+## Products ##
+### Search a Product ###
 	<?php
 		//Title to search for
 		$title = 'back to the future';
-		$movies = $tmdb->searchMovie($title);
-		// returns an array of Movie Object
-		foreach($movies as $movie){
-			echo $movie->getTitle() .'<br>;
+		$products = $tmdb->searchProduct($title);
+		// returns an array of Product Object
+		foreach($products as $product){
+			echo $product->getTitle() .'<br>;
 		}
 	?>
-returns an array of [Movie](http://code.octal.es/php/tmdb-api/class-Movie.html) Objects.
-### Get a Movie ###
-You should take a look at the Movie class [Documentation](http://code.octal.es/php/tmdb-api/class-Movie.html) and see all the info you can get from a Movie Object.
+returns an array of [Product](http://code.octal.es/php/tmdb-api/class-Product.html) Objects.
+### Get a Product ###
+You should take a look at the Product class [Documentation](http://code.octal.es/php/tmdb-api/class-Product.html) and see all the info you can get from a Product Object.
 
 	<?php
-		$idMovie = 11;
-		$movie = $tmdb->getMovie($idMovie);
-		// returns a Movie Object
-		echo $movie->getTitle();
+		$idProduct = 11;
+		$product = $tmdb->getProduct($idProduct);
+		// returns a Product Object
+		echo $product->getTitle();
 	?>
-returns a [Movie](http://code.octal.es/php/tmdb-api/class-Movie.html) Object.
+returns a [Product](http://code.octal.es/php/tmdb-api/class-Product.html) Object.
 ## TV Shows ##
 ### Search a TV Show ###
 	<?php
@@ -170,17 +170,17 @@ returns a [Person](http://code.octal.es/php/tmdb-api/class-Person.html) Object.
 You should take a look at the Role class [Documentation](http://code.octal.es/php/tmdb-api/class-Role.html) and see all the info you can get from a Role Object.
 
 	<?php
-		$movieRoles = $person->getMovieRoles();
-		foreach($movieRoles as $movieRole){
-            echo $movieRole->getCharacter() .' in '. $movieRole->getMovieTitle() .'<br>';
+		$productRoles = $person->getProductRoles();
+		foreach($productRoles as $productRole){
+            echo $productRole->getCharacter() .' in '. $productRole->getProductTitle() .'<br>';
         }
 	?>
-returns an array of [MovieRole](http://code.octal.es/php/tmdb-api/class-MovieRole.html) Objects.
+returns an array of [ProductRole](http://code.octal.es/php/tmdb-api/class-ProductRole.html) Objects.
 
 	<?php
 		$tvShowRoles = $person->getTVShow();
 		foreach($tvShowRoles as $tvShowRole){
-            echo $tvShowRole->getCharacter() .' in '. $tvShowRole->getMovieName() .'<br>';
+            echo $tvShowRole->getCharacter() .' in '. $tvShowRole->getProductName() .'<br>';
         }
 	?>
 returns an array of [TVShowRole](http://code.octal.es/php/tmdb-api/class-TVShowRole.html) Objects.

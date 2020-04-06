@@ -1,4 +1,4 @@
-videojs.addLanguage("de",{
+Productjs.addLanguage("de",{
  "Play": "Wiedergabe",
  "Pause": "Pause",
  "Replay": "Erneut abspielen",

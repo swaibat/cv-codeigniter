@@ -25,16 +25,16 @@
     <div class="container">
         <div class="row">
             <?php if ($total_rows>0){?>
-            <!-- All Movies -->
+            <!-- All Products -->
             <?php if($total_rows > 24){
                 echo $links;
             }
             ?>
             <div class="col-md-12 col-sm-12">
-                <div class="latest-movie movie-opt">
+                <div class="latest-product product-opt">
                     <div class="row clean-preset">
-                        <div class="movie-container">
-                            <?php foreach ($all_published_videos as $videos) :?>
+                        <div class="product-container">
+                            <?php foreach ($all_published_Products as $Products) :?>
                             <div class="col-md-2 col-sm-3 col-xs-6">
                                 <?php include('thumbnail.php'); ?>
                             </div>
@@ -43,10 +43,10 @@
                     </div>
                 </div>
             </div>
-            <!-- End All Movies -->
+            <!-- End All Products -->
             <?php }
             else{
-                echo "<h2 class='text-center text-capitalize'>No Movie Found by ".$director_name;
+                echo "<h2 class='text-center text-capitalize'>No Product Found by ".$director_name;
             } ?>
         </div>
         <?php if($total_rows > 24){ echo $links; } ?>

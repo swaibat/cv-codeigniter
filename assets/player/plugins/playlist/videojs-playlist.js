@@ -1,16 +1,16 @@
 /**
- * videojs-playlist
+ * Productjs-playlist
  * @version 4.2.0
  * @copyright 2018 Brightcove, Inc.
  * @license Apache-2.0
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('video.js')) :
-	typeof define === 'function' && define.amd ? define(['video.js'], factory) :
-	(global.videojsPlaylist = factory(global.videojs));
-}(this, (function (videojs) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('Product.js')) :
+	typeof define === 'function' && define.amd ? define(['Product.js'], factory) :
+	(global.ProductjsPlaylist = factory(global.Productjs));
+}(this, (function (Productjs) { 'use strict';
 
-videojs = videojs && videojs.hasOwnProperty('default') ? videojs['default'] : videojs;
+Productjs = Productjs && Productjs.hasOwnProperty('default') ? Productjs['default'] : Productjs;
 
 /**
  * Validates a number of seconds to use as the auto-advance delay.
@@ -388,8 +388,8 @@ var randomize = function randomize(arr) {
  *
  * @param  {number=}  initialIndex
  *         If given, the index of the item in the list that should
- *         be loaded first. If -1, no video is loaded. If omitted, The
- *         the first video is loaded.
+ *         be loaded first. If -1, no Product is loaded. If omitted, The
+ *         the first Product is loaded.
  *
  * @return {Function}
  *         Returns the playlist function specific to the given player.
@@ -412,8 +412,8 @@ function factory(player, initialList) {
    *
    * @param  {number}  [newIndex]
    *         If given, the index of the item in the list that should
-   *         be loaded first. If -1, no video is loaded. If omitted, The
-   *         the first video is loaded.
+   *         be loaded first. If -1, no Product is loaded. If omitted, The
+   *         the first Product is loaded.
    *
    * @return {Array}
    *         The playlist
@@ -704,8 +704,8 @@ function factory(player, initialList) {
   };
 
   /**
-   * Sets `repeat` option, which makes the "next" video of the last video in
-   * the playlist be the first video in the playlist.
+   * Sets `repeat` option, which makes the "next" Product of the last Product in
+   * the playlist be the first Product in the playlist.
    *
    * @param  {boolean} [val]
    *         The value to set repeat to
@@ -719,7 +719,7 @@ function factory(player, initialList) {
     }
 
     if (typeof val !== 'boolean') {
-      videojs.log.error('videojs-playlist: Invalid value for repeat', val);
+      Productjs.log.error('Productjs-playlist: Invalid value for repeat', val);
       return;
     }
 
@@ -800,7 +800,7 @@ function factory(player, initialList) {
    * @param {boolean} [options.rest = false]
    *        By default, the entire playlist is randomized. However, this may
    *        not be desirable in all cases, such as when a user is already
-   *        watching a video.
+   *        watching a Product.
    *
    *        When `true` is passed for this option, it will only shuffle
    *        playlist items after the current item. For example, when on the
@@ -862,10 +862,10 @@ function factory(player, initialList) {
 }
 
 // Video.js 5/6 cross-compatible.
-var registerPlugin = videojs.registerPlugin || videojs.plugin;
+var registerPlugin = Productjs.registerPlugin || Productjs.plugin;
 
 /**
- * The video.js playlist plugin. Invokes the playlist-maker to create a
+ * The Product.js playlist plugin. Invokes the playlist-maker to create a
  * playlist function on the specific player.
  *
  * @param {Array} list

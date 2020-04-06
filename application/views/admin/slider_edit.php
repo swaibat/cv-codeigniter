@@ -54,7 +54,7 @@ foreach ( $sliders as $row):
     <label class="control-label col-md-12" >Action Type</label>
     <div class="col-sm-12">
         <select class="form-control m-bot15" name="action_type" id="action_type">
-          <option value="movie" <?php if($row['action_type']=='movie'): echo "selected"; endif; ?>>Play Movie</option>
+          <option value="product" <?php if($row['action_type']=='product'): echo "selected"; endif; ?>>Play Product</option>
           <option value="tvseries" <?php if($row['action_type']=='tvseries'): echo "selected"; endif; ?>>Play TVSeries</option>
           <option value="tv" <?php if($row['action_type']=='tv'): echo "selected"; endif; ?>>Watch TV Channel</option>
           <option value="external_browser" <?php if($row['action_type']=='external_browser'): echo "selected"; endif; ?>>Open URL by External Browser</option>
@@ -63,13 +63,13 @@ foreach ( $sliders as $row):
     </div>
 </div>
 
-<div class="form-group" id="movie" <?php if($row['action_type'] !='movie'): echo 'style="display: none;"'; endif; ?> >
-  <label class="control-label col-md-12">Movie</label>
+<div class="form-group" id="product" <?php if($row['action_type'] !='product'): echo 'style="display: none;"'; endif; ?> >
+  <label class="control-label col-md-12">Product</label>
   <div class="col-sm-12">
-    <select class="form-control" name="movie_id" id="select_movie">
-        <?php if($row['action_id'] !='' && $row['action_id'] !=NULL &&  $row['action_type'] =='movie'): ?>
+    <select class="form-control" name="product_id" id="select_product">
+        <?php if($row['action_id'] !='' && $row['action_id'] !=NULL &&  $row['action_type'] =='product'): ?>
             <option value="<?php echo $row['action_id']; ?>" selected>
-                <?php echo $this->common_model->get_title_by_videos_id($row['action_id']); ?>
+                <?php echo $this->common_model->get_title_by_Products_id($row['action_id']); ?>
             </option>
         <?php endif; ?>
     </select>
@@ -82,7 +82,7 @@ foreach ( $sliders as $row):
     <select class="form-control" name="tvseries_id" id="select_tvseries">
         <?php if($row['action_id'] !='' && $row['action_id'] !=NULL && $row['action_type'] =='tvseries'): ?>
             <option value="<?php echo $row['action_id']; ?>" selected>
-                <?php echo $this->common_model->get_title_by_videos_id($row['action_id']); ?>
+                <?php echo $this->common_model->get_title_by_Products_id($row['action_id']); ?>
             </option>
         <?php endif; ?>
     </select>
@@ -129,23 +129,23 @@ foreach ( $sliders as $row):
 <script>
   jQuery(document).ready(function() {
     $('#action_type').on('change', function() {
-      if( this.value == 'movie'){
-        $("#movie").show();
+      if( this.value == 'product'){
+        $("#product").show();
         $("#tvseries").hide();
         $("#tv").hide();
         $("#url").hide();
       }else if(this.value == 'tvseries'){
-        $("#movie").hide();
+        $("#product").hide();
         $("#tvseries").show();
         $("#tv").hide();
         $("#url").hide();
       }else if(this.value == 'tv'){
-        $("#movie").hide();
+        $("#product").hide();
         $("#tvseries").hide();
         $("#tv").show();
         $("#url").hide();
       }else if(this.value == 'external_browser' || this.value == 'webview'){
-        $("#movie").hide();
+        $("#product").hide();
         $("#tvseries").hide();
         $("#tv").hide();
         $("#url").show();
@@ -157,11 +157,11 @@ foreach ( $sliders as $row):
 </script>
 <script src="<?php echo base_url() ?>assets/plugins/select2/select2.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-  $('#select_movie').select2({
-    placeholder: 'Select Movie',
+  $('#select_product').select2({
+    placeholder: 'Select Product',
     minimumInputLength: 2,
     ajax: {
-      url: '<?=base_url('admin/load_movie')?>',
+      url: '<?=base_url('admin/load_product')?>',
       dataType: 'json',
       delay: 250,
       processResults: function (data) {

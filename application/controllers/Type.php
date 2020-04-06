@@ -11,7 +11,7 @@ class Type extends Home_Core_Controller {
         if ($slug !='' && $slug !=NULL && $type) {
 			$config = array();
 			$config["base_url"] = base_url() . "type/".$slug;
-			$config["total_rows"] = $this->common_model->fetch_video_type_video_by_slug_record_count($slug);
+			$config["total_rows"] = $this->common_model->fetch_Product_type_Product_by_slug_record_count($slug);
 			$config["per_page"] = 24;
 			$config["uri_segment"] = 3;
 			$config['full_tag_open'] = '<div class="pagination-container text-center"><ul class ="pagination">';
@@ -43,11 +43,11 @@ class Type extends Home_Core_Controller {
 
 			$this->pagination->initialize($config);
 			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-			$data["all_published_videos"] = $this->common_model->fetch_video_type_video_by_slug($config["per_page"], $page, $slug);
+			$data["all_published_Products"] = $this->common_model->fetch_Product_type_Product_by_slug($config["per_page"], $page, $slug);
 			$data["links"] = $this->pagination->create_links();
 			$data['total_rows']=$config["total_rows"];
 			$data['type_name']=$slug;
-			$data['title'] = 'Watch '.$slug.' movies & TV-Series online';
+			$data['title'] = 'Watch '.$slug.' products & TV-Series online';
 			$data['page_name']='type';
 			$this->load->view('theme/'.$this->active_theme.'/index',$data);
 		}else{

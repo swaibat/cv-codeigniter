@@ -23,7 +23,7 @@ $default_quality    =   $this->db->get_where('config', array('title' => 'default
     <div class="col-lg-6 offset-md-3 ">
         <div class="panel panel-border panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title"><?php echo trans('import_movies_tvshow_from_tmdb'); ?></h3>
+                <h3 class="panel-title"><?php echo trans('import_products_tvshow_from_tmdb'); ?></h3>
             </div>
             <div class="panel-body">
                 <div class="input-group mb-3">
@@ -42,7 +42,7 @@ $default_quality    =   $this->db->get_where('config', array('title' => 'default
                         <button class="btn btn-outline-primary" id="import_btn" type="button" id="button-addon2"><?php echo trans('fetch'); ?></button>
                     </div>
                 </div>
-                <small class="form-text text-muted" id=""><a href="https://youtu.be/DZrv95huYUk" target="_blank"><?php echo trans('tutorial'); ?> | </a> <?php echo trans('get_tmdb_id_from_here'); ?>: <a href="https://www.themoviedb.org/movie/" target="_blank">TheMovieDB.org.</a> </small>
+                <small class="form-text text-muted" id=""><a href="https://youtu.be/DZrv95huYUk" target="_blank"><?php echo trans('tutorial'); ?> | </a> <?php echo trans('get_tmdb_id_from_here'); ?>: <a href="https://www.theproductdb.org/product/" target="_blank">TheProductDB.org.</a> </small>
                 <div id="result" class="m-t-15">
                     <div class="alert alert-info"><strong><?php echo trans('note'); ?>:</strong><?php echo trans('actors_directors_and_writers_photo_will_import_by_cron'); ?></div>
                 </div>
@@ -55,7 +55,7 @@ $default_quality    =   $this->db->get_where('config', array('title' => 'default
     <div class="col-md-6">
         <div class="card cta cta--featured p-a">
             <div class="card-block">
-                <h3 class="card-title no-margin-top"><?php echo trans('movie_info'); ?></h3>
+                <h3 class="card-title no-margin-top"><?php echo trans('product_info'); ?></h3>
             </div>
             <span class="header-line"></span>
             <div class="card-block">
@@ -119,13 +119,13 @@ $default_quality    =   $this->db->get_where('config', array('title' => 'default
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="control-label"><?php echo trans('video_type'); ?></label>
-                    <select class="form-control select2" name="video_type[]" multiple="multiple" id="video_type">
-                        <?php $video_types = $this->db->get('video_type')->result_array();
-                        foreach ($video_types as $video_type) : ?>
-                            <option value="<?php echo $video_type['video_type_id']; ?>" <?php if ($video_type['video_type'] == "Movie") {
+                    <label class="control-label"><?php echo trans('Product_type'); ?></label>
+                    <select class="form-control select2" name="Product_type[]" multiple="multiple" id="Product_type">
+                        <?php $Product_types = $this->db->get('Product_type')->result_array();
+                        foreach ($Product_types as $Product_type) : ?>
+                            <option value="<?php echo $Product_type['Product_type_id']; ?>" <?php if ($Product_type['Product_type'] == "Product") {
                                                                                                 echo "readonly selected";
-                                                                                            } ?>><?php echo $video_type['video_type']; ?></option>
+                                                                                            } ?>><?php echo $Product_type['Product_type']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -134,8 +134,8 @@ $default_quality    =   $this->db->get_where('config', array('title' => 'default
                     <input type="text" name="runtime" id="runtime" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label class="control-label"><?php echo trans('video_quality'); ?></label>
-                    <select class="form-control m-bot15" name="video_quality">
+                    <label class="control-label"><?php echo trans('Product_quality'); ?></label>
+                    <select class="form-control m-bot15" name="Product_quality">
                         <?php $quality = $this->db->get_where('quality', array('status' => '1'))->result_array();
                         foreach ($quality as $quality) : ?>
                             <option value="<?php echo $quality['quality'] ?>" <?php if ($default_quality == $quality['quality']) : echo "selected";
@@ -323,7 +323,7 @@ $default_quality    =   $this->db->get_where('config', array('title' => 'default
         $('#genre').select2({
             placeholder: 'Select Genre'
         });
-        $('#video_type').select2({
+        $('#Product_type').select2({
             placeholder: 'Select Video Type'
         });
         $('#focus_keyword').tagsinput();
@@ -369,7 +369,7 @@ $default_quality    =   $this->db->get_where('config', array('title' => 'default
             if (!error) {
                 $.ajax({
                     type: 'POST',
-                    url: '<?php echo base_url() . "admin/import_movie"; ?>',
+                    url: '<?php echo base_url() . "admin/import_product"; ?>',
                     data: {
                         "id": id,
                         "from": "tv",

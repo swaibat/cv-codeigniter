@@ -1,4 +1,4 @@
-/*! videojs-resolution-switcher - 2015-7-26
+/*! Productjs-resolution-switcher - 2015-7-26
  * Copyright (c) 2016 Kasper Moskwiak
  * Modified by Pierre Kraft
  * Licensed under the Apache-2.0 license. */
@@ -7,18 +7,18 @@
   /* jshint eqnull: true*/
   /* global require */
   'use strict';
-  var videojs = null;
-  if(typeof window.videojs === 'undefined' && typeof require === 'function') {
-    videojs = require('video.js');
+  var Productjs = null;
+  if(typeof window.Productjs === 'undefined' && typeof require === 'function') {
+    Productjs = require('Product.js');
   } else {
-    videojs = window.videojs;
+    Productjs = window.Productjs;
   }
 
-  (function(window, videojs) {
+  (function(window, Productjs) {
 
 
     var defaults = {},
-        videoJsResolutionSwitcher,
+        ProductJsResolutionSwitcher,
         currentResolution = {}, // stores current resolution
         menuItemsHolder = {}; // stores menuItems
 
@@ -38,8 +38,8 @@
   /*
    * Resolution menu item
    */
-  var MenuItem = videojs.getComponent('MenuItem');
-  var ResolutionMenuItem = videojs.extend(MenuItem, {
+  var MenuItem = Productjs.getComponent('MenuItem');
+  var ResolutionMenuItem = Productjs.extend(MenuItem, {
     constructor: function(player, options, onClickListener, label){
       this.onClickListener = onClickListener;
       this.label = label;
@@ -81,9 +81,9 @@
         typeof this.options_.customSourcePicker === 'function'){
         customSourcePicker = this.options_.customSourcePicker;
       }
-      // Change player source and wait for loadeddata event, then play video
+      // Change player source and wait for loadeddata event, then play Product
       // loadedmetadata doesn't work right now for flash.
-      // Probably because of https://github.com/videojs/video-js-swf/issues/124
+      // Probably because of https://github.com/Productjs/Product-js-swf/issues/124
       // If player preload is 'none' and then loadeddata not fired. So, we need timeupdate event for seek handle (timeupdate doesn't work properly with flash)
       var handleSeekEvent = 'loadeddata';
       if(this.player_.techName_ !== 'Youtube' && this.player_.preload() === 'none' && this.player_.techName_ !== 'Flash') {
@@ -105,8 +105,8 @@
     /*
      * Resolution menu button
      */
-     var MenuButton = videojs.getComponent('MenuButton');
-     var ResolutionMenuButton = videojs.extend(MenuButton, {
+     var MenuButton = Productjs.getComponent('MenuButton');
+     var ResolutionMenuButton = Productjs.extend(MenuButton, {
        constructor: function(player, options, settings, label){
         this.sources = options.sources;
         this.label = label;
@@ -119,7 +119,7 @@
           this.el().appendChild(label);
         }else{
           var staticLabel = document.createElement('span');
-					videojs.addClass(staticLabel, 'vjs-resolution-button-staticlabel');
+					Productjs.addClass(staticLabel, 'vjs-resolution-button-staticlabel');
           this.el().appendChild(staticLabel);
         }
        },
@@ -157,18 +157,18 @@
      * Initialize the plugin.
      * @param {object} [options] configuration for the plugin
      */
-    videoJsResolutionSwitcher = function(options) {
-      var settings = videojs.mergeOptions(defaults, options),
+    ProductJsResolutionSwitcher = function(options) {
+      var settings = Productjs.mergeOptions(defaults, options),
           player = this,
           label = document.createElement('span'),
           groupedSrc = {};
 
-			videojs.addClass(label, 'vjs-resolution-button-label');
+			Productjs.addClass(label, 'vjs-resolution-button-label');
 			
       /**
        * Updates player sources or returns current source URL
        * @param   {Array}  [src] array of sources [{src: '', type: '', label: '', res: ''}]
-       * @returns {Object|String|Array} videojs player object if used as setter or current source URL, object, or array of sources
+       * @returns {Object|String|Array} Productjs player object if used as setter or current source URL, object, or array of sources
        */
       player.updateSrc = function(src){
         //Return current src if src is not given
@@ -183,7 +183,7 @@
         groupedSrc = bucketSources(src);
         var choosen = chooseSrc(groupedSrc, src);
         var menuButton = new ResolutionMenuButton(player, { sources: groupedSrc, initialySelectedLabel: choosen.label , initialySelectedRes: choosen.res , customSourcePicker: settings.customSourcePicker}, settings, label);
-				videojs.addClass(menuButton.el(), 'vjs-resolution-button');
+				Productjs.addClass(menuButton.el(), 'vjs-resolution-button');
         player.controlBar.resolutionSwitcher = player.controlBar.el_.insertBefore(menuButton.el_, player.controlBar.getChild('fullscreenToggle').el_);
         player.controlBar.resolutionSwitcher.dispose = function(){
           this.parentNode.removeChild(this);
@@ -340,7 +340,7 @@
 			player.ready(function(){
 				if(player.options_.sources.length > 1){
 					// tech: Html5 and Flash
-					// Create resolution switcher for videos form <source> tag inside <video>
+					// Create resolution switcher for Products form <source> tag inside <Product>
 					player.updateSrc(player.options_.sources);
 				}
 				
@@ -353,6 +353,6 @@
     };
 
     // register the plugin
-    videojs.plugin('videoJsResolutionSwitcher', videoJsResolutionSwitcher);
-  })(window, videojs);
+    Productjs.plugin('ProductJsResolutionSwitcher', ProductJsResolutionSwitcher);
+  })(window, Productjs);
 })();

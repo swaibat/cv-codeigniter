@@ -47,7 +47,7 @@
 
 </head>
 
-<body class="app sidebar-mini rtl <?php //if(isset($page_name) && ($page_name=='videos_add' || $page_name=='videos_edit'|| $page_name=='videos_manage')){ echo 'sidebar-collapse';}  
+<body class="app sidebar-mini rtl <?php //if(isset($page_name) && ($page_name=='Products_add' || $page_name=='Products_edit'|| $page_name=='Products_manage')){ echo 'sidebar-collapse';}  
                                     ?>">
     <!-- Navbar-->
     <header class="app-header hidden-print"><a class="app-header__logo" href="<?php echo base_url(); ?>">

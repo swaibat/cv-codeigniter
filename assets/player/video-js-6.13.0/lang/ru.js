@@ -1,4 +1,4 @@
-videojs.addLanguage("ru",{
+Productjs.addLanguage("ru",{
  "Audio Player": "Аудио проигрыватель",
  "Video Player": "Видео проигрыватель",
  "Play": "Воспроизвести",

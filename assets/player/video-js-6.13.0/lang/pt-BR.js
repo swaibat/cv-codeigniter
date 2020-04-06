@@ -1,4 +1,4 @@
-videojs.addLanguage("pt-BR",{
+Productjs.addLanguage("pt-BR",{
  "Play": "Tocar",
  "Pause": "Pausar",
  "Current Time": "Tempo",

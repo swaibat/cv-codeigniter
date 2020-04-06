@@ -90,7 +90,7 @@ class FacebookResumableUploader
         ];
         $response = $this->sendUploadRequest($endpoint, $params);
 
-        return new FacebookTransferChunk($file, $response['upload_session_id'], $response['video_id'], $response['start_offset'], $response['end_offset']);
+        return new FacebookTransferChunk($file, $response['upload_session_id'], $response['Product_id'], $response['start_offset'], $response['end_offset']);
     }
 
     /**
@@ -110,7 +110,7 @@ class FacebookResumableUploader
             'upload_phase' => 'transfer',
             'upload_session_id' => $chunk->getUploadSessionId(),
             'start_offset' => $chunk->getStartOffset(),
-            'video_file_chunk' => $chunk->getPartialFile(),
+            'Product_file_chunk' => $chunk->getPartialFile(),
         ];
 
         try {

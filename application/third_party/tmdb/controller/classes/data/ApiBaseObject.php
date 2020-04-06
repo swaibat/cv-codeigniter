@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 	This class is the base class for all data all the data you can get from a Movie
+ * 	This class is the base class for all data all the data you can get from a Product
  *
  *	@package TMDB-V3-PHP-API
  * 	@author Bogdan Finn | <a href="https://twitter.com/BogdanFinn">Twitter</a>
@@ -16,7 +16,7 @@ class ApiBaseObject
     // Class Constants
     //------------------------------------------------------------------------------
 
-    const MEDIA_TYPE_MOVIE = 'movie';
+    const MEDIA_TYPE_MOVIE = 'product';
     const CREDITS_TYPE_CAST = 'cast';
     const CREDITS_TYPE_CREW = 'crew';
     const MEDIA_TYPE_TV = 'tv';
