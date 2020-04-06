@@ -1,17 +1,17 @@
 <!-- Footer Area -->
 <?php    
-    $facebook_url               =   ovoo_config('facebook_url');
-    $twitter_url                =   ovoo_config('twitter_url');
-    $vimeo_url                  =   ovoo_config('vimeo_url');
-    $linkedin_url               =   ovoo_config('linkedin_url');
-    $youtube_url                =   ovoo_config('youtube_url');
-    $footer1_title              =   ovoo_config('footer1_title');
-    $footer1_content            =   ovoo_config('footer1_content');
-    $footer2_title              =   ovoo_config('footer2_title');
-    $footer2_content            =   ovoo_config('footer2_content');
-    $footer3_title              =   ovoo_config('footer3_title');
-    $footer3_content            =   ovoo_config('footer3_content');
-    $footer_text                =   ovoo_config('copyright_text');
+    $facebook_url               =   app_config('facebook_url');
+    $twitter_url                =   app_config('twitter_url');
+    $vimeo_url                  =   app_config('vimeo_url');
+    $linkedin_url               =   app_config('linkedin_url');
+    $youtube_url                =   app_config('youtube_url');
+    $footer1_title              =   app_config('footer1_title');
+    $footer1_content            =   app_config('footer1_content');
+    $footer2_title              =   app_config('footer2_title');
+    $footer2_content            =   app_config('footer2_content');
+    $footer3_title              =   app_config('footer3_title');
+    $footer3_content            =   app_config('footer3_content');
+    $footer_text                =   app_config('copyright_text');
     $theme_dir                  =   'theme/default/';
     $assets_dir                 =   'assets/theme/default/';
 ?>
@@ -23,7 +23,7 @@
                     <div class="product-heading"> <span><?php echo $footer1_title; ?></span>
                         <div class="disable-bottom-line"></div>
                     </div>
-                    <img class="img-responsive" src="<?php echo base_url(); ?>uploads/system_logo/<?php echo ovoo_config('logo'); ?>" alt="Logo">
+                    <img class="img-responsive" src="<?php echo base_url(); ?>uploads/system_logo/<?php echo app_config('logo'); ?>" alt="Logo">
                     <?php echo $footer1_content; ?>
                 </div>
             </div>

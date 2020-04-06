@@ -1522,7 +1522,7 @@ class Common_model extends CI_Model {
 
     public function check_cron_key($user_cron_key=''){
         $result         =   FALSE;
-        $cron_key       =   ovoo_config('cron_key');
+        $cron_key       =   app_config('cron_key');
         if($cron_key == $user_cron_key):
             $result     =  TRUE;
         endif;
@@ -1624,8 +1624,8 @@ class Common_model extends CI_Model {
         $posts 				= $this->db->get_where('posts', array('publication'=>'1'))->result_array();
         $countries 			= $this->db->get_where('country', array('publication'=>'1'))->result_array();
         $genres 			= $this->db->get_where('genre', array('publication'=>'1'))->result_array();
-        $blog_enable        = ovoo_config('blog_enable');
-		$landing_page_enable= ovoo_config('landing_page_enable');
+        $blog_enable        = app_config('blog_enable');
+		$landing_page_enable= app_config('landing_page_enable');
 		
 		$xml = new SimpleXMLElement("<?xml version='1.0' encoding='UTF-8' ?>\n".'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" />');
 		// home page page
@@ -1729,7 +1729,7 @@ class Common_model extends CI_Model {
     // product file
     public function Product_file_order(){
         // season order
-        $season_order   =   ovoo_config('Product_file_order');
+        $season_order   =   app_config('Product_file_order');
         if($season_order == 'DESC'):
             $season_order = 'DESC';
         else:

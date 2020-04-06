@@ -6,7 +6,7 @@ class Core_Controller extends CI_Controller
     {
         parent::__construct();
         // timezone
-        date_default_timezone_set(ovoo_config('timezone'));
+        date_default_timezone_set(app_config('timezone'));
     }
 }
 

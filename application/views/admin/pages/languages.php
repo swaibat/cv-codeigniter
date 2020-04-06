@@ -10,7 +10,7 @@
                     <div class="form-group row">
                         <select name="site_lang" class="form-control">
                             <?php foreach ($languages as $language) : ?>
-                                <option value="<?php echo $language->id; ?>" <?php echo (ovoo_config('active_language_id') == $language->id) ? 'selected' : ''; ?>><?php echo $language->name; ?></option>
+                                <option value="<?php echo $language->id; ?>" <?php echo (app_config('active_language_id') == $language->id) ? 'selected' : ''; ?>><?php echo $language->name; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>

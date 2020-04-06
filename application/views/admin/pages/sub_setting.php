@@ -1,13 +1,13 @@
 <?php 
-  $trial_enable               =   ovoo_config('trial_enable');
-  $paypal_email               =   ovoo_config('paypal_email');  
-  $paypal_client_id           =   ovoo_config('paypal_client_id');  
-  $stripe_publishable_key     =   ovoo_config('stripe_publishable_key');  
-  $stripe_secret_key          =   ovoo_config('stripe_secret_key');   
-  $currency_symbol            =   ovoo_config('currency_symbol');
-  $currency                   =   ovoo_config('currency');  
-  $exchange_rate_update_by_cron=   ovoo_config('exchange_rate_update_by_cron');  
-  $enable_ribbon              =   ovoo_config('enable_ribbon');  
+  $trial_enable               =   app_config('trial_enable');
+  $paypal_email               =   app_config('paypal_email');  
+  $paypal_client_id           =   app_config('paypal_client_id');  
+  $stripe_publishable_key     =   app_config('stripe_publishable_key');  
+  $stripe_secret_key          =   app_config('stripe_secret_key');   
+  $currency_symbol            =   app_config('currency_symbol');
+  $currency                   =   app_config('currency');  
+  $exchange_rate_update_by_cron=   app_config('exchange_rate_update_by_cron');  
+  $enable_ribbon              =   app_config('enable_ribbon');  
   $exchnage_rate              =   $this->common_model->get_usd_exchange_rate($currency);
 
 ?>
