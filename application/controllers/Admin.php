@@ -219,8 +219,6 @@ class Admin extends Admin_Core_Controller {
                 $data['action_id']        =   $this->input->post('movie_id');
             elseif($data['action_type'] == 'tvseries'):
                 $data['action_id']        =   $this->input->post('tvseries_id');
-            elseif($data['action_type'] == 'tv'):
-                $data['action_id']        =   $this->input->post('tv_id');
             elseif($data['action_type'] == 'external_browser' || $data['action_type'] == 'webview'):
                 $data['action_url']       =   $this->input->post('action_url');
             endif;
@@ -257,8 +255,6 @@ class Admin extends Admin_Core_Controller {
                 $data['action_id']        =   $this->input->post('movie_id');
             elseif($data['action_type'] == 'tvseries'):
                 $data['action_id']        =   $this->input->post('tvseries_id');
-            elseif($data['action_type'] == 'tv'):
-                $data['action_id']        =   $this->input->post('tv_id');
             elseif($data['action_type'] == 'external_browser' || $data['action_type'] == 'webview'):
                 $data['action_url']       =   $this->input->post('action_url');
             endif;
@@ -1146,279 +1142,7 @@ class Admin extends Admin_Core_Controller {
         $data['page_title']                 = trans('video_quality_manage');
         $data['quality']                    = $this->db->get('quality')->result_array();             
         $this->load->view('admin/index', $data);
-    }
-
-    // live tv
-    function manage_live_tv($param1 = '', $param2 = ''){
-        if ($this->session->userdata('admin_is_login') != 1)
-            redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '26');
-            /* end menu active/inactive section*/ 
-
-        if ($param1 == 'new') {
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '35');
-            /* end menu active/inactive section*/
-
-            $data['page_name']              = 'live_tv_add';
-            $data['page_title']             = trans('live_tv_add');
-            $this->load->view('admin/index', $data);
-        }        
-        else if ($param1 == 'edit') {
-            $data['page_name']              =   'live_tv_edit';
-            $data['page_title']             =   trans('live_tv_edit');
-            $data['param2']                 =   $param2;
-            $data['live_tvs']               = $this->db->get_where('live_tv' , array('live_tv_id' => $param2) )->result_array(); 
-            $this->load->view('admin/index', $data);
-        }        
-        else if ($param1 == 'add') {
-            $data['tv_name']                = $this->input->post('tv_name');
-            $data['seo_title']              = $this->input->post('seo_title');
-            $data['slug']                   = $this->common_model->generate_slug('live_tv',$this->input->post('tv_name'));
-            $data['stream_from']            = $this->input->post('stream_from');
-            $data['stream_label']           = $this->input->post('stream_label');
-            $data['stream_url']             = $this->input->post('stream_url');   
-            $data['description']            = $this->input->post('description');
-            $data['is_paid']                = $this->input->post('is_paid');  
-            $data['focus_keyword']          = $this->input->post('focus_keyword');   
-            $data['meta_description']       = $this->input->post('meta_description');   
-            $data['tags']                   = $this->input->post('tags');
-            $data['live_tv_category_id']    = $this->input->post('live_tv_category_id');
-            $publish                        = $this->input->post('publish');
-            $featured                       = $this->input->post('featured');
-            if($publish =='on'){
-                $data['publish']            = '1';
-            }else{
-                $data['publish']            = '0';
-            }
-
-            if($featured =='on'){
-                $data['featured']           = '1';
-            }else{
-                $data['featured']           = '0';
-            }
-
-            $this->db->insert('live_tv', $data);
-            $insert_id = $this->db->insert_id();
-            if(isset($_FILES['thumbnail']) && $_FILES['thumbnail']['name']!=''){
-                $extention                  = '.'.$this->common_model->get_extension($_FILES['poster']['name']);
-                $file_name                  = $data['slug'].$extention;
-                $file_path                  = 'uploads/tv_image/sm/'.$file_name;                
-                move_uploaded_file($_FILES['thumbnail']['tmp_name'], $file_path);
-                $data_update['thumbnail']   = $file_name;
-                $this->db->where('live_tv_id', $insert_id);
-                $this->db->update('live_tv', $data_update);
-            }
-
-            if(isset($_FILES['poster']) && $_FILES['poster']['name']!=''){
-                $extention                  = '.'.$this->common_model->get_extension($_FILES['poster']['name']);
-                $file_name                  = $data['slug'].$extention;
-                $file_path                  = 'uploads/tv_image/'.$file_name;                
-                move_uploaded_file($_FILES['poster']['tmp_name'], $file_path);
-                $data_update['poster']      = $file_name;
-                $this->db->where('live_tv_id', $insert_id);
-                $this->db->update('live_tv', $data_update);
-            }
-            $data1['source']                = $this->input->post('stream_from1');
-            $data1['label']                 = $this->input->post('stream_label1');
-            $data1['url']                   = $this->input->post('stream_url1');
-            $data1['quality']               = 'SD';
-            $data1['stream_key']            = $this->generate_random_string();
-            $data1['live_tv_id']            = $insert_id;
-            $data1['url_for']               = 'opt1';
-            $this->db->insert('live_tv_url', $data1);
-
-            $data2['source']                = $this->input->post('stream_from2');
-            $data2['label']                 = $this->input->post('stream_label2');
-            $data2['url']                   = $this->input->post('stream_url2');
-            $data2['quality']               = 'LQ';
-            $data2['stream_key']            = $this->generate_random_string();
-            $data2['live_tv_id']            = $insert_id;
-            $data2['url_for']               = 'opt2';
-            $this->db->insert('live_tv_url', $data2);
-
-            $this->session->set_flashdata('success', trans('add_success'));
-            redirect($this->agent->referrer());
-        }
-        else if ($param1 == 'update') {
-            $data['tv_name']                = $this->input->post('tv_name');
-            $data['seo_title']              = $this->input->post('seo_title');
-            $data['slug']                   = $this->common_model->regenerate_slug('live_tv',$param2,$this->input->post('tv_name'));
-            $data['stream_from']            = $this->input->post('stream_from');
-            $data['stream_label']           = $this->input->post('stream_label');
-            $data['stream_url']             = $this->input->post('stream_url');   
-            $data['description']            = $this->input->post('description');
-            $data['is_paid']                = $this->input->post('is_paid');   
-            $data['focus_keyword']          = $this->input->post('focus_keyword');   
-            $data['meta_description']       = $this->input->post('meta_description');   
-            $data['tags']                   = $this->input->post('tags');
-            $data['live_tv_category_id']    = $this->input->post('live_tv_category_id');
-            $publish                        = $this->input->post('publish');
-            $featured                       = $this->input->post('featured');
-            if($publish =='on'){
-                $data['publish']            = '1';
-            }else{
-                $data['publish']            = '0';
-            }
-
-            if($featured =='on'){
-                $data['featured']           = '1';
-            }else{
-                $data['featured']           = '0';
-            }
-
-            $this->db->where('live_tv_id', $param2);
-            $this->db->update('live_tv', $data);
-            if(isset($_FILES['thumbnail']) && $_FILES['thumbnail']['name']!=''){
-                $extention                  = '.'.$this->common_model->get_extension($_FILES['poster']['name']);
-                $file_name                  = $data['slug'].$extention;
-                $file_path                  = 'uploads/tv_image/sm/'.$file_name;                
-                move_uploaded_file($_FILES['thumbnail']['tmp_name'], $file_path);
-                $data_update['thumbnail']   = $file_name;
-                $this->db->where('live_tv_id', $param2);
-                $this->db->update('live_tv', $data_update);
-            }
-
-            if(isset($_FILES['poster']) && $_FILES['poster']['name']!=''){
-                $extention                  = '.'.$this->common_model->get_extension($_FILES['poster']['name']);
-                $file_name                  = $data['slug'].$extention;
-                $file_path                  = 'uploads/tv_image/'.$file_name;                
-                move_uploaded_file($_FILES['poster']['tmp_name'], $file_path);
-                $data_update['poster']      = $file_name;
-                $this->db->where('live_tv_id', $param2);
-                $this->db->update('live_tv', $data_update);
-            }
-            
-            $this->db->where('live_tv_id', $param2);
-            $this->db->delete('live_tv_url');
-            $data1['source']                = $this->input->post('stream_from1');
-            $data1['label']                 = $this->input->post('stream_label1');
-            $data1['url']                   = $this->input->post('stream_url1');
-            $data1['quality']               = 'SD';
-            $data1['stream_key']            = $this->generate_random_string();
-            $data1['live_tv_id']            = $param2;
-            $data1['url_for']               = 'opt1';
-            $this->db->insert('live_tv_url', $data1);
-
-            $data2['source']                = $this->input->post('stream_from2');
-            $data2['label']                 = $this->input->post('stream_label2');
-            $data2['url']                   = $this->input->post('stream_url2');
-            $data2['quality']               = 'LQ';
-            $data2['stream_key']            = $this->generate_random_string();
-            $data2['live_tv_id']            = $param2;
-            $data2['url_for']               = 'opt2';
-            $this->db->insert('live_tv_url', $data2);
-
-
-            $this->session->set_flashdata('success', trans('update_success'));
-            redirect($this->agent->referrer());
-        }else{
-            $total_rows                     = $this->live_tv_model->num_live_tv();
-            $config                         = $this->common_model->pagination();
-            $config["base_url"]             = base_url() . "admin/manage_live_tv/";
-            $config["total_rows"]           = $total_rows;
-            $config["per_page"]             = 10;
-            $config["uri_segment"]          = 3;  
-            //$config['use_page_numbers']   = TRUE;
-            $config['page_query_string']    = TRUE;    
-
-            $this->pagination->initialize($config);
-            $data['last_row_num']           =   $this->uri->segment(3);
-            $page                           =   $this->input->get('per_page');//($this->uri->segment(3)) ? $this->uri->segment(3) : 0;   
-            $data["tvs"]                    =   $this->live_tv_model->get_live_tvs($config["per_page"], $page);
-            $data["links"]                  =   $this->pagination->create_links();
-            $data['total_rows']             =   $config["total_rows"];
-            $data['page_name']              =   'live_tv_manage';
-            $data['page_title']             =   trans('live_tv_manage');            
-            $this->load->view('admin/index', $data);
-        }
-    }
-
-    // live tv category
-    function live_tv_category($param1 = '', $param2 = ''){
-        if ($this->session->userdata('admin_is_login') != 1)
-            redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '39');
-            /* end menu active/inactive section*/ 
-        
-        if ($param1 == 'add') {            
-            $data['live_tv_category']             = $this->input->post('live_tv_category');
-            $data['live_tv_category_desc']        = $this->input->post('live_tv_category_desc');      
-            $data['slug']                         = url_title($this->input->post('live_tv_category'), 'dash', TRUE);     
-            
-            $this->db->insert('live_tv_category', $data);
-
-            $this->session->set_flashdata('success', trans('add_success'));
-            redirect($this->agent->referrer());
-        }
-        if ($param1 == 'update') {         
-            
-            $data['live_tv_category']             = $this->input->post('live_tv_category');
-            $data['live_tv_category_desc']        = $this->input->post('live_tv_category_desc');           
-            $this->db->where('live_tv_category_id', $param2);
-            $this->db->update('live_tv_category', $data);
-            $this->session->set_flashdata('success', trans('update_success'));
-            redirect($this->agent->referrer());
-        }
-        
-        $data['page_name']                      = 'live_tv_category_manage';
-        $data['page_title']                     = trans('live_tv_category_manage');
-        $data['live_tv_categories']             = $this->db->get('live_tv_category')->result_array();             
-        $this->load->view('admin/index', $data);
-    }
-    function live_tv_setting($param1 = '', $param2 = ''){
-        if ($this->session->userdata('admin_is_login') != 1)
-            redirect(base_url(), 'refresh');
-        /* start menu active/inactive section*/
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '27');
-        /* end menu active/inactive section*/
-        if ($param1 == 'update') {
-            $publish = $this->input->post('live_tv_publish');
-            if($publish =='on'){
-                $data['value'] = '1';
-                $this->db->where('title' , 'live_tv_publish');
-                 $this->db->update('config' , $data);
-            }else{
-                $data['value'] = '0';
-                 $this->db->where('title' , 'live_tv_publish');
-                 $this->db->update('config' , $data);
-            }
-
-            $live_tv_pin_primary_menu = $this->input->post('live_tv_pin_primary_menu');
-            if($live_tv_pin_primary_menu =='on'){
-                $data['value'] = '1';
-                $this->db->where('title' , 'live_tv_pin_primary_menu');
-                 $this->db->update('config' , $data);
-            }else{
-                $data['value'] = '0';
-                 $this->db->where('title' , 'live_tv_pin_primary_menu');
-                 $this->db->update('config' , $data);
-             }
-
-             $live_tv_pin_footer_menu = $this->input->post('live_tv_pin_footer_menu');
-            if($live_tv_pin_footer_menu =='on'){
-                $data['value'] = '1';
-                $this->db->where('title' , 'live_tv_pin_footer_menu');
-                 $this->db->update('config' , $data);
-            }else{
-                $data['value'] = '0';
-                 $this->db->where('title' , 'live_tv_pin_footer_menu');
-                 $this->db->update('config' , $data);
-             } 
-             $this->session->set_flashdata('success', trans('update_success'));          
-             redirect($this->agent->referrer());
-        } 
-
-        $data['page_name']      = 'live_tv_setting';
-        $data['page_title']     = trans('live_tv_setting'); 
-        $this->load->view('admin/index', $data);
-    }
+    } 
 
     // videos or movies types
     function comments($param1 = '', $param2 = ''){
@@ -2825,19 +2549,6 @@ class Admin extends Admin_Core_Controller {
             $this->db->where('title' , 'tv_series_meta_description');
             $this->db->update('config' , $data);
 
-            // live tv
-            $data['value'] = $this->input->post('live_tv_title');
-            $this->db->where('title' , 'live_tv_title');
-            $this->db->update('config' , $data);
-
-            $data['value'] = $this->input->post('live_tv_meta_description');
-            $this->db->where('title' , 'live_tv_meta_description');
-            $this->db->update('config' , $data);
-             
-            $data['value'] = $this->input->post('live_tv_keyword');
-            $this->db->where('title' , 'live_tv_keyword');
-            $this->db->update('config' , $data);
-
             $this->session->set_flashdata('success', trans('setting_update_success')); 
             redirect($this->agent->referrer());
         }
@@ -3037,39 +2748,6 @@ class Admin extends Admin_Core_Controller {
         $this->load->view('admin/index', $data);
     }
 
-    function send_live_tv_notification($param1 = '', $param2 = ''){
-        if ($this->session->userdata('admin_is_login') != 1)
-            redirect(base_url(), 'refresh');
-            // active menu session
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '37');
-            /* end menu active/inactive section*/
-
-        if ($param1 == 'send'):
-            $live_tv_id                  = $this->input->post("live_tv_id");
-            if(!empty($live_tv_id) && $live_tv_id !='' && $live_tv_id !=NULL && is_numeric($live_tv_id)):
-                $verify                 = $this->common_model->verify_live_tv_id($live_tv_id);
-                if($verify):
-                    $data['message']    = $this->input->post("message");
-                    $data['headings']   = $this->input->post("headings");
-                    $data['icon']       = $this->input->post("icon");         
-                    $data['img']        = $this->input->post("img");
-                    $data['id']         = $live_tv_id;
-                    $this->load->model('notify_model');
-                    $this->notify_model->send_live_tv_notification($data);
-                    $this->session->set_flashdata('success', trans('notification_send_success'));                   
-                else:
-                $this->session->set_flashdata('error', trans('movie_id_not_found'));
-                endif;
-            else:
-                $this->session->set_flashdata('error', trans('invalid_movie_id'));
-            endif;
-            redirect($this->agent->referrer());
-        endif;
-        $data['page_name']      = 'send_live_tv_notification';
-        $data['page_title']     = trans('send_live_tv_notification');
-        $this->load->view('admin/index', $data);
-    }
 
     function send_movie_notification($type='',$videos_id = '',$param2=''){
         if ($this->session->userdata('admin_is_login') != 1)
@@ -4392,18 +4070,6 @@ class Admin extends Admin_Core_Controller {
         $response['poster_url']         = $this->common_model->get_video_poster_url($movie->videos_id);
         echo json_encode($response);
     }
-    public function get_single_tv_details_by_id(){
-        $response                       = array();
-        $id                             = $this->input->post('live_tv_id');
-        $this->db->where('live_tv_id', $id);
-        $tv                             =   $this->db->get('live_tv')->row();        
-        $response['live_tv_id']         = $tv->live_tv_id;
-        $response['title']              = $tv->tv_name;
-        $response['description']        = strip_tags($tv->description);        
-        $response['thumbnail_url']      = $this->live_tv_model->get_tv_thumbnail($tv->thumbnail);
-        $response['poster_url']         = $this->live_tv_model->get_tv_poster($tv->poster);    
-        echo json_encode($response);
-    }
     public function get_movie_by_search_title(){
         $q                          = $this->input->get('q');
         $movies                     = [];
@@ -4418,19 +4084,6 @@ class Admin extends Admin_Core_Controller {
         echo json_encode($movies);
     }
 
-    public function get_live_tv_by_search_title(){
-        $q                          = $this->input->get('q');
-        $movies                     = [];
-        $this->db->limit(50);
-        $this->db->like('tv_name',$q,'both');
-        $live_tvs                      = $this->db->get('live_tv')->result_array();
-        foreach( $live_tvs as $live_tv){
-            $live_tv_id          = $live_tv['live_tv_id'];
-            $title              = $live_tv['tv_name'];
-            $movies[]           = ["id" => $live_tv_id, "text" => $title];
-        }
-        echo json_encode($movies);
-    }
 
     public function get_transaction_details(){
         $data = "";

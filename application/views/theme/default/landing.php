@@ -102,13 +102,6 @@
 		            ?>
 					<li><a href="<?php echo base_url('tv-series.html'); ?>" title="<?php echo trans('tv_series'); ?>"><?php echo trans('tv_series'); ?></a></li>
 					<?php endif; ?>
-					<?php 
-		              $live_tv_publish          = $this->db->get_where('config',array('title'=>'live_tv_publish'))->row()->value;
-		              $live_tv_pin_primary_menu = $this->db->get_where('config',array('title'=>'live_tv_pin_primary_menu'))->row()->value;
-		              if($live_tv_publish =='1' && $live_tv_pin_primary_menu =='1'):
-		            ?>
-					<li><a href="<?php echo base_url('live-tv.html'); ?>" title="<?php echo trans('live_tv'); ?>"><?php echo trans('tv'); ?></a></li>
-					<?php endif; ?>
 				</ul>
 				<div class="clearfix"></div>
 			</div>

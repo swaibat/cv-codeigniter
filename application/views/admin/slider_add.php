@@ -175,24 +175,6 @@
   });
 </script>
 
-<script type="text/javascript">
-  $('#select_tv').select2({
-    placeholder: 'Select TV Channel',
-    minimumInputLength: 2,
-    ajax: {
-      url: '<?=base_url('admin/get_live_tv_by_search_title')?>',
-      dataType: 'json',
-      delay: 250,
-      processResults: function (data) {
-        return {
-          results: data
-        };
-      },
-      cache: true
-    }
-  });
-</script>
-
 <script>
   jQuery(document).ready(function(){
     $('#thumb_link').click(function(){

@@ -62,41 +62,6 @@
                 </li>
             </ul>
         </li>
-        <li class="treeview <?php if ($active_menu == 26 || $active_menu == 27 || $active_menu == 35 || $active_menu == 39) { echo " is-expanded "; } ?>">
-            <a href="#" class="app-menu__item" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-tv" aria-hidden="true"></i>
-                <span class="app-menu__label"><?php echo trans('tv') ?>&nbsp;
-                    <span class="label label-danger"><?php echo trans('live') ?></span>
-                </span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item <?php if ($active_menu == 35) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/manage_live_tv/new' ?>">
-                        <i class="app-menu__icon fa fa-plus" aria-hidden="true"></i>
-                        <?php echo trans('new_tv_channel') ?></span>
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item <?php if ($active_menu == 26) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/manage_live_tv/' ?>">
-                        <i class="app-menu__icon fa fa-list" aria-hidden="true"></i>
-                        <?php echo trans('all_tv_channel') ?></span>
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item <?php if ($active_menu == 39) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/live_tv_category/' ?>">
-                        <i class="app-menu__icon fa fa-tags" aria-hidden="true"></i>
-                        <?php echo trans('category') ?> </span>
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item <?php if ($active_menu == 27) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/live_tv_setting/' ?>">
-                        <i class="app-menu__icon fa fa-gear" aria-hidden="true"></i>
-                        <?php echo trans('setting') ?></span>
-                    </a>
-                </li>
-            </ul>
-        </li>
         <li>
             <a class="app-menu__item <?php if ($active_menu == 7) { echo " active "; } ?>" href="<?php echo base_url() . 'admin/movie_importer/' ?>">
                 <i class="app-menu__icon fa fa-search" aria-hidden="true"></i>
@@ -349,8 +314,6 @@
         </li>
         <li class="treeview <?php if($active_menu == 36 || $active_menu == 37 || $active_menu == 370 || $active_menu == 371) {echo "is-expanded"; } ?>"> <a href="#" class="app-menu__item" data-toggle="treeview"><i class="app-menu__icon fa fa-bell" aria-hidden="true"></i><span class="app-menu__label"><?php echo trans("notification");?></span> <i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-              
-              <li><a class="treeview-item <?php if($active_menu==37) {echo "active"; } ?>" href="<?php echo base_url().'admin/send_live_tv_notification/'?>"><i class="app-menu__icon fa fa-paper-plane-o" aria-hidden="true"></i><?php echo trans("live_tv");?></span> </a></li>
               <li><a class="treeview-item <?php if($active_menu==370) {echo "active"; } ?>" href="<?php echo base_url().'admin/send_movie_tvseries_notification/'?>"><i class="app-menu__icon fa fa-paper-plane-o" aria-hidden="true"></i><?php echo trans("movie_and_tvseries");?></span> </a></li>
               <li><a class="treeview-item <?php if($active_menu==371) {echo "active"; } ?>" href="<?php echo base_url().'admin/send_web_notification/'?>"><i class="app-menu__icon fa fa-paper-plane-o" aria-hidden="true"></i><?php echo trans("webview");?></span> </a></li>
               <li><a class="treeview-item <?php if($active_menu==36) {echo "active"; } ?>" href="<?php echo base_url().'admin/push_notification_setting/'?>"><i class="app-menu__icon fa fa-gear" aria-hidden="true"></i><?php echo trans("setting");?></span> </a></li>

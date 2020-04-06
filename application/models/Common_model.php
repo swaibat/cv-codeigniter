@@ -1652,13 +1652,10 @@ class Common_model extends CI_Model {
     public function generator_sitemap(){
         $movies 			= $this->db->get_where('videos', array('publication'=>'1'))->result_array();
         $movie_types 		= $this->db->get('video_type')->result_array();
-        $live_tvs 			= $this->db->get_where('live_tv', array('publish'=>'1'))->result_array();
         $pages 				= $this->db->get_where('page', array('publication'=>'1'))->result_array();
         $posts 				= $this->db->get_where('posts', array('publication'=>'1'))->result_array();
         $countries 			= $this->db->get_where('country', array('publication'=>'1'))->result_array();
         $genres 			= $this->db->get_where('genre', array('publication'=>'1'))->result_array();
-        $tv_series_publish  = ovoo_config('tv_series_publish');
-        $live_tv_publish    = ovoo_config('live_tv_publish');
         $blog_enable        = ovoo_config('blog_enable');
 		$landing_page_enable= ovoo_config('landing_page_enable');
 		
@@ -1693,14 +1690,6 @@ class Common_model extends CI_Model {
 		$url = $xml->addChild('url');
 		$url->addChild('loc',base_url('contact-us.html'));
 		$url->addChild('priority','0.9');
-
-		if($live_tv_publish =='1'):
-			// contact page
-			$url = $xml->addChild('url');
-			$url->addChild('loc',base_url('live-tv.html'));
-			$url->addChild('priority','0.9');
-		endif;
-
 
 		// country page
 		foreach($countries as $country):

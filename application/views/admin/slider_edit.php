@@ -88,19 +88,6 @@ foreach ( $sliders as $row):
     </select>
   </div>
 </div>
-
-<div class="form-group" id="tv" <?php if($row['action_type'] !='tv'): echo 'style="display: none;"'; endif; ?>>
-  <label class="control-label col-md-12">TV Channel</label>
-  <div class="col-sm-12">
-    <select class="form-control" name="tv_id" id="select_tv">
-        <?php if($row['action_id'] !='' && $row['action_id'] !=NULL && $row['action_type'] =='tv'): ?>
-            <option value="<?php echo $row['action_id']; ?>" selected>
-                <?php echo $this->live_tv_model->get_live_tv_title_by_id($row['action_id']); ?>
-            </option>
-        <?php endif; ?>
-    </select>
-  </div>
-</div>
 <div id="url" <?php if($row['action_type'] !='external_browser' && $row['action_type'] !='webview'): echo 'style="display: none;"'; endif; ?>>
   <div class="form-group">
     <label class=" col-sm-12 control-label">URL</label>
@@ -204,25 +191,6 @@ foreach ( $sliders as $row):
     }
   });
 </script>
-
-<script type="text/javascript">
-  $('#select_tv').select2({
-    placeholder: 'Select TV Channel',
-    minimumInputLength: 2,
-    ajax: {
-      url: '<?=base_url('admin/get_live_tv_by_search_title')?>',
-      dataType: 'json',
-      delay: 250,
-      processResults: function (data) {
-        return {
-          results: data
-        };
-      },
-      cache: true
-    }
-  });
-</script>
-
 <script>
 jQuery(document).ready(function() {
     $('#thumb_link').click(function() {
