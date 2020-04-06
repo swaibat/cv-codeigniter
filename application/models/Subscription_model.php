@@ -86,29 +86,8 @@ class Subscription_model extends CI_Model {
         return $error;
     }
 
-    function check_live_tv_availability($slug=''){
-        $error = FALSE;
-        if ($slug == '' || $slug==NULL)
-            $error = TRUE;
-
-        $videos_exist = $this->common_model->live_tv_exist_by_slug($slug);
-        if (!$videos_exist )
-            $error = TRUE;
-        return $error;
-    }
-
     function videos_exist_by_slug($slug='') {
         $rows = $this->db->get_where('videos', array('slug' => $slug,'publication'=>'1'))->num_rows();
-        if($rows >0){
-          return TRUE;
-        }
-        else{
-          return FALSE;
-        }    
-    }
-
-    function live_tv_exist_by_slug($slug='') {
-        $rows = $this->db->get_where('live_tv', array('slug' => $slug,'publish'=>'1'))->num_rows();
         if($rows >0){
           return TRUE;
         }
@@ -122,28 +101,6 @@ class Subscription_model extends CI_Model {
         $accessibility = "denied";        
         // free content can access by all
         $is_paid = $this->db->get_where('videos',array('videos_id'=>$videos_id))->row()->is_paid;
-        if($is_paid =='0')
-            $accessibility = "allowed";        
-        if($is_paid =='1'):
-            $subscription = $this->check_validated_subscription_plan();
-            //var_dump($subscription);
-            if($subscription == "login_required"):
-                $accessibility = "login_required";
-            elseif($subscription === "TRUE"):
-                $accessibility = "allowed";
-            endif;
-        endif;
-        // admin can access all movie
-        if ($this->session->userdata('admin_is_login') == 1)
-            $accessibility = "allowed";
-        return $accessibility;
-    }
-
-    function check_live_tv_accessibility($live_tv_id=''){
-        $accessibility = "denied";
-        
-        // free content can access by all
-        $is_paid = $this->db->get_where('live_tv',array('live_tv_id'=>$live_tv_id))->row()->is_paid;
         if($is_paid =='0')
             $accessibility = "allowed";        
         if($is_paid =='1'):

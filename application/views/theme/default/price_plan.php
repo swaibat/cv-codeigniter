@@ -43,7 +43,6 @@
             <li class="grey"><?php echo $currency_symbol.''.$plan['price']; ?></li>
             <li><span><?php echo $plan['day']; ?></span> <?php echo trans("days");?></li>
             <li><?php echo trans("unlimited_movies_and_series");?></li>
-            <li><?php echo trans("unlimited_live_tv");?></li>
             <li><?php echo trans("cancel_anytime");?></li>
             <li class="grey">
               <input type="radio" id="<?php echo 'checkbox_'.$plan['plan_id']; ?>" name="plan_id" value="<?php echo $plan['plan_id']; ?>" onChange="enable_btn()">

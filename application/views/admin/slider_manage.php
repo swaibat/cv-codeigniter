@@ -30,8 +30,6 @@
                                     echo "Movie: " .$this->common_model->get_title_by_videos_id($slider['action_id']);
                                 elseif($slider['action_type'] == 'tvseries'):
                                     echo "TVSeries: " .$this->common_model->get_title_by_videos_id($slider['action_id']);
-                                elseif($slider['action_type'] == 'tv'):
-                                    echo "TV Channel: " .$this->live_tv_model->get_live_tv_title_by_id($slider['action_id']);
                                 elseif($slider['action_type'] == 'external_browser'):
                                     echo "External URL: " .$slider['action_url'];
                                 elseif($slider['action_type'] == 'webview'):

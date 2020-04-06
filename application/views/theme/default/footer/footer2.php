@@ -16,7 +16,6 @@
     $about_us_to_footer_menu    =   $this->db->get_where('config' , array('title'=>'about_us_to_footer_menu'))->row()->value;
     $contact_to_footer_menu     =   $this->db->get_where('config' , array('title' =>'contact_to_footer_menu'))->row()->value; 
     $tv_series_pin_footer_menu  =   $this->db->get_where('config' , array('title' =>'tv_series_pin_footer_menu'))->row()->value; 
-    $live_tv_pin_footer_menu    =   $this->db->get_where('config' , array('title' =>'live_tv_pin_footer_menu'))->row()->value;
     $privacy_policy_to_footer_menu  =   $this->db->get_where('config' , array('title'=>'privacy_policy_to_footer_menu'))->row()->value;
     $dmca_to_footer_menu            =   $this->db->get_where('config' , array('title'=>'dmca_to_footer_menu'))->row()->value; 
     $theme_dir                  =   'theme/default/';
@@ -90,9 +89,6 @@
                     <?php endforeach; ?>
                     <?php if($about_us_enable =='1' && $about_us_to_footer_menu =='1'):?>
                     <li><a href="<?php echo base_url('about-us.html')?>"><?php echo trans('about_us'); ?></a></li>
-                    <?php endif; ?>
-                    <?php if($live_tv_pin_footer_menu == '1'): ?>
-                        <li><a href="<?php echo base_url('live-tv.html')?>"><?php echo trans('live_tv'); ?></a></li>
                     <?php endif; ?>
                     <?php if($tv_series_pin_footer_menu == '1'): ?>
                         <li><a href="<?php echo base_url('tv-series.html')?>"><?php echo trans('tv_series'); ?></a></li>

@@ -78,24 +78,6 @@
   <?php if($az_to_primary_menu == '1'): ?>
     <li><a href="<?php echo base_url('az.html')?>"><?php echo trans('az'); ?></a></li>
   <?php endif; ?>
-  <?php 
-    $live_tv_publish          = ovoo_config('live_tv_publish');
-    $live_tv_pin_primary_menu = ovoo_config('live_tv_pin_primary_menu');
-    if($live_tv_publish =='1' && $live_tv_pin_primary_menu =='1'):
-  ?>
-  <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="<?php echo base_url('live-tv.html')?>"><?php echo trans('tv'); ?>&nbsp;<span class="badge badge-danger" style="background-color: #d00202;"><?php echo trans('live'); ?></span>
-    <span class="caret"></span></a>
-    <ul class="dropdown-menu">
-      <li><a href="<?php echo base_url('live-tv.html')?>"><?php echo trans('all_channels'); ?></a></li>
-      <?php $live_tv_category= $this->live_tv_model->get_all_live_tv_category();
-        foreach ($live_tv_category as $item):                                                
-      ?>
-        <li><a href="<?php echo base_url('live-tv/category/'.$item['slug'].'.html'); ?>"><?php echo $item['live_tv_category']; ?></a></li>
-      <?php endforeach; ?>
-    </ul>
-  </li>
-  <?php endif; ?>
   <?php $all_video_type_on_primary_menu= $this->common_model->all_video_type_on_primary_menu();
     foreach ($all_video_type_on_primary_menu as $video_type):                                                
   ?>

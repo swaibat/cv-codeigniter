@@ -16,14 +16,6 @@
     </div>
   </div>
   <div class="col-md-3">
-    <div class="widget-small warning"><i class="icon fa fa-tv fa-3x"></i>
-      <div class="info">
-        <h4><?php echo trans('live_tv'); ?></h4>
-        <p><b class="counter"><?php echo $this->db->get_where('live_tv', array('publish' => '1'))->num_rows(); ?></b></p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
     <div class="widget-small danger"><i class="icon fa fa-star fa-3x"></i>
       <div class="info">
         <h4><?php echo trans('stars'); ?></h4>

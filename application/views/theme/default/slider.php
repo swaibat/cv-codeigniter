@@ -68,8 +68,6 @@
             if($slider->action_type == 'movie' || $slider->action_type == 'tvseries' || $slider->action_type == 'tv'):
               if($slider->action_type == 'movie' || $slider->action_type == 'tvseries'):
                 $action_url = base_url("watch/".$this->common_model->get_slug_by_videos_id($slider->action_id).'.html');
-              elseif($slider->action_type == 'tv'):
-                $action_url = base_url("live-tv/".$this->live_tv_model->get_slug_by_live_tv_id($slider->action_id).'.html');
               endif;
             endif;
       ?>

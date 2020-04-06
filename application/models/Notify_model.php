@@ -56,24 +56,6 @@ class Notify_model extends CI_Model {
         return TRUE;
     }
 
-
-    function send_live_tv_notification($udata = array())
-    {   
-        $live_tv            =   $this->db->get_where('live_tv', array('live_tv_id' => $udata['id']))->row();
-        $watch_url          =   base_url().'live_tv/'.$live_tv->slug.'.html';
-
-        $data['message']    =   $udata['message'];
-        $data['url']        =   $watch_url;
-        $data['headings']   =   $udata['headings'];
-        $data['icon']       =   $udata['icon'];        
-        $data['img']        =   $udata['img'];
-        $data['id']         =   $udata['id'];
-        $data['vtype']      =   'tv';
-        $data['open_with']  =   'app';
-        $this->send_notification($data);        
-        return TRUE;
-    }
-
     function send_movie_notification($video_id = NULL)
     {   
         $site_name          =   $this->db->get_where('config' , array('title' => 'site_name'))->row()->value;

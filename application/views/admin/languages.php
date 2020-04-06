@@ -158,7 +158,6 @@
     jQuery(document).ready(function() {
         $('#tv_series_keyword').tagsinput();
         $('#focus_keyword').tagsinput();
-        $('#live_tv_keyword').tagsinput();
         $('#movie_page_focus_keyword').tagsinput();
         $('#blog_keyword').tagsinput();
     });

@@ -784,12 +784,6 @@ INSERT INTO `config` (`config_id`, `title`, `value`) VALUES
 (95, 'player_volume_remember', '0'),
 (93, 'player_seek_forward', '10'),
 (94, 'player_seek_back', '5'),
-(98, 'live_tv_publish', '1'),
-(99, 'live_tv_title', 'Latest TV Page SEO Title'),
-(100, 'live_tv_keyword', ''),
-(101, 'live_tv_meta_description', '                                                                                          '),
-(102, 'live_tv_pin_primary_menu', '1'),
-(103, 'live_tv_pin_footer_menu', '1'),
 (104, 'registration_enable', '1'),
 (105, 'frontend_login_enable', '1'),
 (106, 'push_notification_enable', ''),
@@ -1493,71 +1487,6 @@ INSERT INTO `language_list` (`id`, `name`, `short_form`, `language_code`, `folde
 (1, 'English', 'en', 'en_us', 'english', 'ltr', 1, 1);
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `live_tv`
---
-
-DROP TABLE IF EXISTS `live_tv`;
-CREATE TABLE IF NOT EXISTS `live_tv` (
-  `live_tv_id` int(11) NOT NULL AUTO_INCREMENT,
-  `tv_name` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `seo_title` varchar(250) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `live_tv_category_id` int(50) DEFAULT NULL,
-  `slug` longtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `language` varchar(10) COLLATE utf8mb4_unicode_520_ci DEFAULT 'en',
-  `stream_from` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `stream_label` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `stream_url` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `poster` longtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `thumbnail` longtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `focus_keyword` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `meta_description` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `featured` int(2) DEFAULT 1,
-  `is_paid` int(5) NOT NULL DEFAULT 1,
-  `tags` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `publish` int(10) UNSIGNED DEFAULT 0,
-  PRIMARY KEY (`live_tv_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `live_tv_category`
---
-
-DROP TABLE IF EXISTS `live_tv_category`;
-CREATE TABLE IF NOT EXISTS `live_tv_category` (
-  `live_tv_category_id` int(11) NOT NULL AUTO_INCREMENT,
-  `live_tv_category` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `slug` mediumtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `live_tv_category_desc` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `status` int(11) DEFAULT 1,
-  PRIMARY KEY (`live_tv_category_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `live_tv_url`
---
-
-DROP TABLE IF EXISTS `live_tv_url`;
-CREATE TABLE IF NOT EXISTS `live_tv_url` (
-  `live_tv_url_id` int(11) NOT NULL AUTO_INCREMENT,
-  `stream_key` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `live_tv_id` int(11) DEFAULT NULL,
-  `url_for` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `source` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `label` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `quality` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `url` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  PRIMARY KEY (`live_tv_url_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
 --
 -- Table structure for table `logs`
 --
