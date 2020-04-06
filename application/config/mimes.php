@@ -143,6 +143,7 @@ return array(
 	'aac'   =>	array('audio/x-aac', 'audio/aac'),
 	'm4u'   =>	'application/vnd.mpegurl',
 	'm3u'   =>	'text/plain',
+	'm3u8'   =>	'application/x-mpegurl',
 	'xspf'  =>	'application/xspf+xml',
 	'vlc'   =>	'application/videolan',
 	'wmv'   =>	array('video/x-ms-wmv', 'video/x-ms-asf'),
