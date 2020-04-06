@@ -1,15 +1,15 @@
 <?php
-  $registration_enable            =   ovoo_config('registration_enable');    
-  $frontend_login_enable          =   ovoo_config('frontend_login_enable');    
-  $country_to_primary_menu        =   ovoo_config('country_to_primary_menu');    
-  $genre_to_primary_menu          =   ovoo_config('genre_to_primary_menu');
-  $release_to_primary_menu        =   ovoo_config('release_to_primary_menu');    
-  $contact_to_primary_menu        =   ovoo_config('contact_to_primary_menu');
-  $privacy_policy_to_primary_menu =   ovoo_config('privacy_policy_to_primary_menu');
-  $dmca_to_primary_menu           =   ovoo_config('dmca_to_primary_menu');
-  $az_to_primary_menu             =   ovoo_config('az_to_primary_menu');
-  $az_to_footer_menu              =   ovoo_config('az_to_footer_menu');
-  $product_request_enable           =   ovoo_config('product_request_enable');    
+  $registration_enable            =   app_config('registration_enable');    
+  $frontend_login_enable          =   app_config('frontend_login_enable');    
+  $country_to_primary_menu        =   app_config('country_to_primary_menu');    
+  $genre_to_primary_menu          =   app_config('genre_to_primary_menu');
+  $release_to_primary_menu        =   app_config('release_to_primary_menu');    
+  $contact_to_primary_menu        =   app_config('contact_to_primary_menu');
+  $privacy_policy_to_primary_menu =   app_config('privacy_policy_to_primary_menu');
+  $dmca_to_primary_menu           =   app_config('dmca_to_primary_menu');
+  $az_to_primary_menu             =   app_config('az_to_primary_menu');
+  $az_to_footer_menu              =   app_config('az_to_footer_menu');
+  $product_request_enable           =   app_config('product_request_enable');    
 ?>
 
 <ul class="nav navbar-nav navbar-left">
@@ -61,7 +61,7 @@
   <li><a href="<?php echo base_url().'type/'.$Product_type->slug?>"><?php echo $Product_type->Product_type;?></a></li>
   <?php endforeach; ?>
   <?php 
-    $blog_enable          = ovoo_config('blog_enable');
+    $blog_enable          = app_config('blog_enable');
     if($blog_enable =='1'):
   ?>
   <li><a href="<?php echo base_url('blog.html')?>"><?php echo trans('blog'); ?></a></li>

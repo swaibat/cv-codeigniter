@@ -1,4 +1,4 @@
-<?php $Product_source = ovoo_config('Product_source');?>
+<?php $Product_source = app_config('Product_source');?>
 <style>
 .tab-content {
     margin-left: 10px;

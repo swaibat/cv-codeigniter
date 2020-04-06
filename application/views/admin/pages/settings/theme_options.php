@@ -14,10 +14,10 @@
             <label class="col-sm-3 control-label"><?php echo trans('dark_theme_enable'); ?></label>
             <div class="col-sm-3 ">
               <select class="form-control" name="dark_theme" required>
-                <option value="1" <?php if (ovoo_config("dark_theme") == "1") {
+                <option value="1" <?php if (app_config("dark_theme") == "1") {
                                     echo "selected";
                                   } ?>><?php echo trans('enable'); ?></option>
-                <option value="0" <?php if (ovoo_config("dark_theme") == "0") {
+                <option value="0" <?php if (app_config("dark_theme") == "0") {
                                     echo "selected";
                                   } ?>><?php echo trans('disable'); ?></option>
               </select>
@@ -27,10 +27,10 @@
             <label class="col-sm-3 control-label"><?php echo trans('landing_page_with_search'); ?></label>
             <div class="col-sm-3 ">
               <select class="form-control" name="landing_page_enable" required>
-                <option value="1" <?php if (ovoo_config("landing_page_enable") == "1") {
+                <option value="1" <?php if (app_config("landing_page_enable") == "1") {
                                     echo "selected";
                                   } ?>><?php echo trans('enable'); ?></option>
-                <option value="0" <?php if (ovoo_config("landing_page_enable") == "0") {
+                <option value="0" <?php if (app_config("landing_page_enable") == "0") {
                                     echo "selected";
                                   } ?>><?php echo trans('disable'); ?></option>
               </select>
@@ -39,7 +39,7 @@
           <div class="form-group row">
             <label class="col-sm-3 control-label"><?php echo trans('landing_page_image'); ?></label>
             <div class="col-sm-3">
-              <img class="img-fluid" id="landing_page_image" src="<?php echo (ovoo_config("landing_page_image_url") != '') ? base_url('uploads/').ovoo_config("landing_bg") : base_url('uploads/landing_page/bg.jpg'); ?>" alt="Landing Page BG">
+              <img class="img-fluid" id="landing_page_image" src="<?php echo (app_config("landing_page_image_url") != '') ? base_url('uploads/').app_config("landing_bg") : base_url('uploads/landing_page/bg.jpg'); ?>" alt="Landing Page BG">
             </div>
           </div>
           <div class="form-group row">
@@ -52,22 +52,22 @@
             <label class="col-sm-3 control-label"><?php echo trans('front_end_theme_color'); ?></label>
             <div class="col-sm-3 ">
               <select class="form-control" name="front_end_theme" required>
-                <option value="blue" <?php if (ovoo_config("front_end_theme") == "default") {
+                <option value="blue" <?php if (app_config("front_end_theme") == "default") {
                                         echo "selected";
                                       } ?>>Default</option>
-                <option value="green" <?php if (ovoo_config("front_end_theme") == "green") {
+                <option value="green" <?php if (app_config("front_end_theme") == "green") {
                                         echo "selected";
                                       } ?>>Green</option>
-                <option value="blue" <?php if (ovoo_config("front_end_theme") == "blue") {
+                <option value="blue" <?php if (app_config("front_end_theme") == "blue") {
                                         echo "selected";
                                       } ?>>Blue</option>
-                <option value="red" <?php if (ovoo_config("front_end_theme") == "red") {
+                <option value="red" <?php if (app_config("front_end_theme") == "red") {
                                       echo "selected";
                                     } ?>>Red</option>
-                <option value="yellow" <?php if (ovoo_config("front_end_theme") == "yellow") {
+                <option value="yellow" <?php if (app_config("front_end_theme") == "yellow") {
                                           echo "selected";
                                         } ?>>Yellow</option>
-                <option value="purple" <?php if (ovoo_config("front_end_theme") == "purple") {
+                <option value="purple" <?php if (app_config("front_end_theme") == "purple") {
                                           echo "selected";
                                         } ?>>Purple</option>
               </select>
@@ -78,19 +78,19 @@
             <label class="col-sm-3 control-label"><?php echo trans('header_template'); ?></label>
             <div class="col-sm-3 ">
               <select class="form-control" name="header_templete" required>
-                <option value="header1" <?php if (ovoo_config("header_templete") == "header1") {
+                <option value="header1" <?php if (app_config("header_templete") == "header1") {
                                           echo "selected";
                                         } ?>>Header Default</option>
-                <option value="header2" <?php if (ovoo_config("header_templete") == "header2") {
+                <option value="header2" <?php if (app_config("header_templete") == "header2") {
                                           echo "selected";
                                         } ?>>Header2</option>
-                <option value="header3" <?php if (ovoo_config("header_templete") == "header3") {
+                <option value="header3" <?php if (app_config("header_templete") == "header3") {
                                           echo "selected";
                                         } ?>>Header3</option>
-                <option value="header4" <?php if (ovoo_config("header_templete") == "header4") {
+                <option value="header4" <?php if (app_config("header_templete") == "header4") {
                                           echo "selected";
                                         } ?>>Header4</option>
-                <option value="header5" <?php if (ovoo_config("header_templete") == "header5") {
+                <option value="header5" <?php if (app_config("header_templete") == "header5") {
                                           echo "selected";
                                         } ?>>Header5</option>
               </select>
@@ -102,19 +102,19 @@
             <label class="col-sm-3 control-label"><?php echo trans('footer_template'); ?></label>
             <div class="col-sm-3 ">
               <select class="form-control" name="footer_templete" required>
-                <option value="footer1" <?php if (ovoo_config("footer_templete") == "footer1") {
+                <option value="footer1" <?php if (app_config("footer_templete") == "footer1") {
                                           echo "selected";
                                         } ?>>Footer Default</option>
-                <option value="footer2" <?php if (ovoo_config("footer_templete") == "footer2") {
+                <option value="footer2" <?php if (app_config("footer_templete") == "footer2") {
                                           echo "selected";
                                         } ?>>Footer2</option>
-                <option value="footer3" <?php if (ovoo_config("footer_templete") == "footer3") {
+                <option value="footer3" <?php if (app_config("footer_templete") == "footer3") {
                                           echo "selected";
                                         } ?>>Footer3</option>
-                <option value="footer4" <?php if (ovoo_config("footer_templete") == "footer4") {
+                <option value="footer4" <?php if (app_config("footer_templete") == "footer4") {
                                           echo "selected";
                                         } ?>>Footer4</option>
-                <option value="footer5" <?php if (ovoo_config("footer_templete") == "footer5") {
+                <option value="footer5" <?php if (app_config("footer_templete") == "footer5") {
                                           echo "selected";
                                         } ?>>Footer5</option>
               </select>
@@ -124,19 +124,19 @@
           <div class="form-group row">
             <label class="col-sm-3 control-label"><?php echo trans('google_map_api'); ?></label>
             <div class="col-sm-9">
-              <input type="text" value="<?php echo ovoo_config("map_api"); ?>" name="map_api" class="form-control" />
+              <input type="text" value="<?php echo app_config("map_api"); ?>" name="map_api" class="form-control" />
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 control-label"><?php echo trans('google_map_lat'); ?></label>
             <div class="col-sm-9">
-              <input type="text" value="<?php echo ovoo_config("map_lat"); ?>" name="map_lat" class="form-control" />
+              <input type="text" value="<?php echo app_config("map_lat"); ?>" name="map_lat" class="form-control" />
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 control-label"><?php echo trans('google_map_lang'); ?></label>
             <div class="col-sm-9">
-              <input type="text" value="<?php echo ovoo_config("map_lng"); ?>" name="map_lng" class="form-control" />
+              <input type="text" value="<?php echo app_config("map_lng"); ?>" name="map_lng" class="form-control" />
             </div>
           </div>
 

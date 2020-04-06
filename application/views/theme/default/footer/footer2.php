@@ -64,7 +64,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <h2 class="logo"><a href="<?php echo base_url(); ?>"> <img class="img-responsive" src="<?php echo base_url() ?>uploads/system_logo/<?php echo ovoo_config('logo'); ?>" alt="Logo"> </a></h2>
+                <h2 class="logo"><a href="<?php echo base_url(); ?>"> <img class="img-responsive" src="<?php echo base_url() ?>uploads/system_logo/<?php echo app_config('logo'); ?>" alt="Logo"> </a></h2>
             </div>
             <div class="col-sm-2">
                 <h5><?php echo $footer1_title; ?></h5>

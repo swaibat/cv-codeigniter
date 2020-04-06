@@ -7,7 +7,7 @@ class Language_model extends CI_Model
     function __construct()
     {
         parent::__construct();
-        date_default_timezone_set(ovoo_config('timezone'));
+        date_default_timezone_set(app_config('timezone'));
     }
 
     public function input_values()

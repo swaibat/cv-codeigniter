@@ -12,7 +12,7 @@
           <div class="form-group row">
             <label class="control-label col-sm-3"></label>
             <div class="col-sm-9">
-               <img id="website_logo" src="<?php echo base_url().'uploads/system_logo/'.ovoo_config('logo'); ?>"  alt="logo" >
+               <img id="website_logo" src="<?php echo base_url().'uploads/system_logo/'.app_config('logo'); ?>"  alt="logo" >
             </div>
           </div>              
 
@@ -27,7 +27,7 @@
           <div class="form-group row">
             <label class="control-label col-sm-3"></label>
             <div class="col-sm-9">
-               <img id="website_favicon" src="<?php echo base_url().'uploads/system_logo/'.ovoo_config('favicon'); ?>"  alt="favicon" ><br>
+               <img id="website_favicon" src="<?php echo base_url().'uploads/system_logo/'.app_config('favicon'); ?>"  alt="favicon" ><br>
                <small><?php echo trans('favicon_recommended_text'); ?></small>
             </div>
           </div>              

@@ -1,6 +1,6 @@
 <?php
-  $registration_enable            =   ovoo_config('registration_enable');    
-  $frontend_login_enable          =   ovoo_config('frontend_login_enable');
+  $registration_enable            =   app_config('registration_enable');    
+  $frontend_login_enable          =   app_config('frontend_login_enable');
 ?>
 <ul class="nav navbar-nav navbar-right">
 <?php if($this->session->userdata('login_status') == 1):?>

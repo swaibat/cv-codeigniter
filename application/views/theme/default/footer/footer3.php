@@ -108,7 +108,7 @@
     </div>
     <div class="second-bar">
        <div class="container">
-            <h2 class="logo"><a href="<?php echo base_url(); ?>"> <img class="img-responsive" src="<?php echo base_url() ?>uploads/system_logo/<?php echo ovoo_config('logo'); ?>" alt="Logo"> </a></h2>
+            <h2 class="logo"><a href="<?php echo base_url(); ?>"> <img class="img-responsive" src="<?php echo base_url() ?>uploads/system_logo/<?php echo app_config('logo'); ?>" alt="Logo"> </a></h2>
             <div class="social-icons">
                 <?php if($twitter_url !=''): ?>                    
                 <a href="<?php echo $twitter_url; ?>" class="twitter"><i class="fa fa-twitter"></i></a>

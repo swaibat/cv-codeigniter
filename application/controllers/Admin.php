@@ -85,7 +85,8 @@ class Admin extends Admin_Core_Controller {
             }
             $this->session->set_flashdata('success', trans('update_success'));
             redirect($this->agent->referrer());
-        }        
+		}
+		$data['folder_name']        = 'categories';        
         $data['page_name']          = 'genre_manage';
         $data['page_title']         = trans('genre_manage');
         $data['genres']             = $this->db->get('genre')->result_array(); 
@@ -140,7 +141,8 @@ class Admin extends Admin_Core_Controller {
             }
             $this->session->set_flashdata('success', trans('update_success'));
             redirect($this->agent->referrer());          
-        }
+		}
+		$data['folder_name']        = 'sliders';  
         $data['page_name']      = 'slider_setting';
         $data['page_title']     = trans('slider_setting');
         $this->load->view('admin/index', $data);
@@ -220,27 +222,30 @@ class Admin extends Admin_Core_Controller {
             $this->db->update('slider', $data);
             $this->session->set_flashdata('success', 'Slider update successed.');
             redirect($this->agent->referrer());
-        }        
+		} 
+		$data['folder_name']        = 'sliders';       
         $data['page_name']      = 'slider_manage';
         $data['page_title']     = 'Slider Management';
         $this->db->order_by('order',"DESC");
         $data['sliders']        = $this->db->get('slider')->result_array(); 
         $this->load->view('admin/index', $data);
-    }
-    // add products or products 
+	}
+
+    // add products 
     function products_add(){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
         // start menu active/inactive section
         $this->session->unset_userdata('active_menu');
         $this->session->set_userdata('active_menu', '6');
-        // end menu active/inactive section
+		// end menu active/inactive section
+		$data['folder_name']        = 'products';
         $data['page_name']      = 'products_add';
         $data['page_title']     = trans('products_add'); 
         $this->load->view('admin/index', $data);
     }
 
-    // edit products or products 
+    // edit products 
     function products_edit($param1='',$param2=''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
@@ -249,13 +254,14 @@ class Admin extends Admin_Core_Controller {
             $this->session->set_userdata('active_menu', '6');
             /* end menu active/inactive section*/
             $data['param1']         = $param1;
-            $data['param2']         = $param2;
+			$data['param2']         = $param2;
+			$data['folder_name']        = 'products';
             $data['page_name']      = 'products_edit';
             $data['page_title']     = trans('product_edit').' | '.$this->common_model->get_title_by_products_id($param1);
             $this->load->view('admin/index', $data);
     }
 
-    // add,edit products or products 
+    // add,edit products 
     function products($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
@@ -273,7 +279,6 @@ class Admin extends Admin_Core_Controller {
             $writers                        = $this->input->post('writer');            
             $countries                      = $this->input->post('country');            
             $genres                         = $this->input->post('genre');
-            $product_types                    = $this->input->post('product_type');
             if($actors !='' && $actors !=NULL){
                 $data['stars']              = implode(',',$actors);
             }
@@ -485,341 +490,12 @@ class Admin extends Admin_Core_Controller {
         $page                       = $this->input->get('per_page');//($this->uri->segment(3)) ? $this->uri->segment(3) : 0;   
         $data["products"]             = $this->common_model->get_products($filter,$config["per_page"], $page);
         $data["links"]              = $this->pagination->create_links();
-        $data['total_rows']         = $config["total_rows"];
+		$data['total_rows']         = $config["total_rows"];
+		$data['folder_name']          = 'products';
         $data['page_name']          = 'products_manage';
         $data['page_title']         = trans('products_manage');             
         $this->load->view('admin/index', $data);
     }
-
-
-
-    // add products or products 
-    function tvseries_add(){
-        if ($this->session->userdata('admin_is_login') != 1)
-            redirect(base_url(), 'refresh');
-        // start menu active/inactive section
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '29');
-        // end menu active/inactive section
-        $data['page_name']      = 'tvseries_add';
-        $data['page_title']     = trans('tvseries_add'); 
-        $this->load->view('admin/index', $data);
-    }
-
-    // edit products or products 
-    function tvseries_edit($param1='',$param2=''){
-        if ($this->session->userdata('admin_is_login') != 1)
-            redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '29');
-            /* end menu active/inactive section*/
-
-
-            $data['param1']         = $param1;
-            $data['param2']         = $param2;
-            $data['page_name']      = 'tvseries_edit';
-            $data['page_title']     = trans('tvseries_edit');
-            $this->load->view('admin/index', $data);
-    }
-
-     // add,edit products or products 
-    function tvseries($param1 = '', $param2 = ''){
-        if ($this->session->userdata('admin_is_login') != 1)
-            redirect(base_url(), 'refresh');
-        // active menu session
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '30');            
-        
-        if ($param1 == 'add') {
-            $data['imdbid']             = $this->input->post('imdbid');          
-            $data['title']              = $this->input->post('title');
-            $data['seo_title']          = $this->input->post('seo_title');
-            $data['description']        = $this->input->post('description');
-            $data['is_paid']                = $this->input->post('is_paid');
-            $actors                     = $this->input->post('actor');            
-            $directors                  = $this->input->post('director');            
-            $writers                    = $this->input->post('writer');            
-            $countries                  = $this->input->post('country');            
-            $genres                     = $this->input->post('genre');
-            $product_types                = $this->input->post('product_type');
-            if($actors !='' && $actors !=NULL){
-                $data['stars']              = implode(',',$actors);
-            }
-            if($directors !='' && $directors !=NULL){
-                $data['director']           = implode(',',$directors);
-            }
-            if($writers !='' && $writers !=NULL){
-                $data['writer']             = implode(',',$writers);
-            }
-            if($countries !='' && $countries !=NULL){
-                $data['country']            = implode(',',$countries);
-            }
-            if($genres !='' && $genres !=NULL){
-                $data['genre']              = implode(',',$genres);
-            }  
-            $data['imdb_rating']        = $this->input->post('rating');
-            $data['release']            = $this->input->post('release');
-            $data['is_tvseries']        = '1';
-            $data['runtime']            = $this->input->post('runtime');
-            $data['product_quality']      = $this->input->post('product_quality');
-            $data['publication']        = '0';
-            if(isset($_POST['publication'])) {
-                $data['publication']    = '1';
-            }
-            
-            $data['enable_download']    = '0';
-            if(isset($_POST['enable_download'])) {
-                $data['enable_download']    = '1';
-            }
-            $data['focus_keyword']      = $this->input->post('focus_keyword');
-            $data['meta_description']   = $this->input->post('meta_description');
-            $data['tags']               = $this->input->post('tags');       
-                        
-            $this->db->insert('products', $data);
-            $insert_id = $this->db->insert_id();
-            $slug                       = url_title($this->input->post('slug'), 'dash', TRUE);
-            $slug_num                   = $this->common_model->slug_num('products',$slug);
-            if($slug_num > 0){
-                $slug= $slug.'-'.$insert_id;
-            }
-            $data_update['slug']               = $slug;            
-            if(isset($_FILES['thumbnail']) && $_FILES['thumbnail']['name']!=''){
-                move_uploaded_file($_FILES['thumbnail']['tmp_name'], 'uploads/product_thumb/'.$insert_id.'.jpg');                
-            }
-
-            if(isset($_FILES['poster_file']) && $_FILES['poster_file']['name']!=''){
-                move_uploaded_file($_FILES['poster_file']['tmp_name'], 'uploads/poster_image/'.$insert_id.'.jpg');                                
-            }
-
-            if($this->input->post('thumb_link')!=''){ 
-                $image_source =$this->input->post('thumb_link');
-                $save_to = 'uploads/product_thumb/'.$insert_id.'.jpg';           
-                $this->common_model->grab_image($image_source,$save_to);
-            }
-
-            if($this->input->post('poster_link')!=''){ 
-                $image_source =$this->input->post('poster_link');
-                $save_to = 'uploads/poster_image/'.$insert_id.'.jpg';           
-                $this->common_model->grab_image($image_source,$save_to);
-            }
-
-            $this->db->where('products_id', $insert_id);
-            $this->db->update('products', $data_update);
-            // email newslater
-            if(isset($_POST['email_notify'])) {
-                $this->load->model('email_model');
-                $this->email_model->create_newslater_cron($insert_id);
-            }
-            // push notification
-            if(isset($_POST['push_notify'])) {
-                $this->load->model('notify_model');
-                $this->notify_model->send_push_notification($insert_id);
-            }
-            $this->session->set_flashdata('success', trans('add_success'));
-            redirect(base_url() . 'admin/seasons_manage/'.$insert_id, 'refresh');
-        }
-        else if ($param1 == 'update') {
-            $data['imdbid']             = $this->input->post('imdbid');          
-            $data['title']              = $this->input->post('title');
-            $data['seo_title']          = $this->input->post('seo_title');
-            $data['description']        = $this->input->post('description');
-            $data['is_paid']                = $this->input->post('is_paid');
-            $actors                     = $this->input->post('actor');            
-            $directors                  = $this->input->post('director');            
-            $writers                    = $this->input->post('writer');            
-            $countries                  = $this->input->post('country');            
-            $genres                     = $this->input->post('genre');
-            $product_types                = $this->input->post('product_type');
-            if($actors !='' && $actors !=NULL){
-                $data['stars']              = implode(',',$actors);
-            }
-            if($directors !='' && $directors !=NULL){
-                $data['director']           = implode(',',$directors);
-            }
-            if($writers !='' && $writers !=NULL){
-                $data['writer']             = implode(',',$writers);
-            }
-            if($countries !='' && $countries !=NULL){
-                $data['country']            = implode(',',$countries);
-            }
-            if($genres !='' && $genres !=NULL){
-                $data['genre']              = implode(',',$genres);
-            }
-            $data['imdb_rating']        = $this->input->post('rating');
-            $data['release']            = $this->input->post('release');
-            $data['is_tvseries']        = '1';
-            $data['runtime']            = $this->input->post('runtime');
-            $data['product_quality']      = $this->input->post('product_quality');
-            $publication = $this->input->post('publication');
-            if($publication =='on'){
-                $data['publication'] = '1';
-            }else{
-                $data['publication'] = '0';
-            }
-            $enable_download            = $this->input->post('enable_download');
-            if($enable_download =='on'){
-                $data['enable_download'] = '1';
-            }else{
-                $data['enable_download'] = '0';
-            }            
-            $data['focus_keyword']      = $this->input->post('focus_keyword');
-            $data['meta_description']   = $this->input->post('meta_description');
-            $data['tags']               = $this->input->post('tags');
-            //var_dump($data);
-            $this->db->where('products_id', $param2);
-            $this->db->update('products', $data);
-            $this->db->where('products_id', $param2);
-
-            $slug                       = url_title($this->input->post('slug'), 'dash', TRUE);
-            $slug_num                   = $this->common_model->slug_num('products',$slug);
-            if($slug_num > 1){
-                $slug= $slug.'-'.$param2;
-            }
-            $data_update['slug']               = $slug;            
-            if(isset($_FILES['thumbnail']) && $_FILES['thumbnail']['name']!=''){
-                move_uploaded_file($_FILES['thumbnail']['tmp_name'], 'uploads/product_thumb/'.$param2.'.jpg');                
-            }
-
-            if(isset($_FILES['poster_file']) && $_FILES['poster_file']['name']!=''){
-                move_uploaded_file($_FILES['poster_file']['tmp_name'], 'uploads/poster_image/'.$param2.'.jpg');                                
-            }
-
-            if($this->input->post('thumb_link')!=''){ 
-                $image_source =$this->input->post('thumb_link');
-                $save_to = 'uploads/product_thumb/'.$param2.'.jpg';           
-                //$this->common_model->grab_image($image_source,$save_to);
-                $cron_data['type']       = "image";       
-                $cron_data['action']     = "download";       
-                $cron_data['image_url']  = $image_source;       
-                $cron_data['save_to']    = $save_to;
-                $this->db->insert('cron',$cron_data);
-            }
-
-            if($this->input->post('poster_link')!=''){ 
-                $image_source =$this->input->post('poster_link');
-                $save_to = 'uploads/poster_image/'.$param2.'.jpg';           
-                $this->common_model->grab_image($image_source,$save_to);
-                // $cron_data['type']       = "image";       
-                // $cron_data['action']     = "download";       
-                // $cron_data['image_url']  = $image_source;       
-                // $cron_data['save_to']    = $save_to;
-                // $this->db->insert('cron',$cron_data);
-            }
-
-            $this->db->where('products_id', $param2);
-            $this->db->update('products', $data_update);
-            // email newslater
-            if(isset($_POST['email_notify'])) {
-                $this->load->model('email_model');
-                $this->email_model->create_newslater_cron($param2);
-            }
-            // push notification
-            if(isset($_POST['push_notify'])) {
-                $this->load->model('notify_model');
-                $this->notify_model->send_push_notification($param2);
-            }
-
-            $this->session->set_flashdata('success', trans('add_success'));
-            redirect(base_url() . 'admin/tvseries_edit/'.$param2, 'refresh');
-            //redirect($this->agent->referrer());
-        }
-        // filter
-        $title          = $this->input->get('title');
-        $release        = $this->input->get('release');
-        $publication    = $this->input->get('publication');
-        $filter = array();
-        $filter['is_tvseries '] = 1;
-        $search_string = '';
-        if($title !="" && $title !=NULL){
-            $filter['title '] = $title;
-            $search_string.= 'title='.$title.'&';
-            $data['title'] = $title;
-        }
-        if($release !="" && $release !=NULL){
-            $filter['release'] = $release;
-            $search_string.= 'release='.$release.'&';
-            $data['release'] = $release;
-        }
-        if($publication !="" && $publication !=NULL){
-            $filter['publication'] = $publication;
-            $search_string.= '&&publication='.$publication;
-            $data['publication'] = $publication;            
-
-        }
-        $total_rows = $this->common_model->get_products_num_rows($filter);
-        //var_dump($total_rows,$filter);
-        // page
-        //$config                         =   array();
-        $config                         =   $this->common_model->pagination();
-        $config["base_url"]             =   base_url() . "admin/tvseries?".$search_string;
-        $config["total_rows"]           =   $total_rows;
-        $config["per_page"]             =   10;
-        $config["uri_segment"]          =   3;
-         
-        //$config['use_page_numbers'] = TRUE;
-        $config['page_query_string']    =  TRUE;      
-
-        $this->pagination->initialize($config);
-        $data['last_row_num']           =   $this->uri->segment(3);
-        $page                           =   $this->input->get('per_page');//($this->uri->segment(3)) ? $this->uri->segment(3) : 0;   
-        $data["products"]                 =   $this->common_model->get_products($filter,10, $page);
-        $data["links"]                  =   $this->pagination->create_links();
-        //var_dump($data["links"]);
-        $data['total_rows']             =   $total_rows;
-        $data['page_name']              =   'tvseries_manage';
-        $data['page_title']             =   trans('tvseries_manage');
-        $this->load->view('admin/index', $data);
-    }
-
-    function seasons_manage($param1='',$param2=''){
-        //$this->common_model->clear_cache();
-        if ($this->session->userdata('admin_is_login') != 1)
-            redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '30');
-            /* end menu active/inactive section*/
-        if ($param1 == 'add') {            
-            $data['products_id']         = $this->input->post('products_id');
-            $data['seasons_name']      = $this->input->post('seasons_name');            
-            $data['order']             = $this->input->post('order');            
-            
-            $this->db->insert('seasons', $data);
-            $this->session->set_flashdata('success', trans('add_success'));
-            redirect(base_url() . 'admin/seasons_manage/'.$data['products_id'], 'refresh');
-        }
-        if ($param1 == 'update') {
-            $data['products_id']         = $this->input->post('products_id');
-            $data['seasons_name']      = $this->input->post('seasons_name');
-            $data['order']             = $this->input->post('order'); 
-            
-            $this->db->where('seasons_id', $param2);
-            $this->db->update('seasons', $data);
-            $this->session->set_flashdata('success', trans('update_success'));
-            redirect(base_url() . 'admin/seasons_manage/'.$data['products_id'], 'refresh');
-        }
-        if ($param1 == 'change_order') {
-            $products_id           = $this->input->post('products_id');
-            $seasons_ids         = $this->input->post('seasons_id');
-            $orders              = $this->input->post('order');
-            $i=0;
-            for($i=0; $i<sizeof($orders); $i++):
-                $data['order'] = $orders[$i];
-                $this->db->where('seasons_id', $seasons_ids[$i]);
-                $this->db->update('seasons', $data);
-            endfor;
-            $this->session->set_flashdata('success', trans('update_success'));
-            redirect(base_url() . 'admin/seasons_manage/'.$products_id, 'refresh');
-        }
-        $data['param1']         = $param1;
-        $data['param2']         = $param2;
-        $data['slug']           = $this->common_model->get_slug_by_products_id($param1);
-        $data['page_name']      = 'seasons_manage';
-        $data['page_title']     = $this->common_model->get_title_by_products_id($param1);
-        $this->load->view('admin/index', $data);
-    }
-
 
     function file_and_download($param1 = '', $param2 = ''){
     if ($this->session->userdata('admin_is_login') != 1)
@@ -968,7 +644,7 @@ class Admin extends Admin_Core_Controller {
             $this->session->set_flashdata('success', trans('update_success'));
             redirect($this->agent->referrer());
         }      
-        
+       		$data['folder_name']              = 'products';
             $data['page_name']              = 'product_type_manage';
             $data['page_title']             = 'Videos Type Management';
             $data['product_types']            = $this->db->get('product_type')->result_array();             
@@ -1001,7 +677,8 @@ class Admin extends Admin_Core_Controller {
             $this->db->update('quality', $data);
             $this->session->set_flashdata('success', trans('update_success'));
             redirect($this->agent->referrer());
-        }
+		}
+		$data['folder_name']                = 'products';
         $data['page_name']                  = 'product_quality_manage';
         $data['page_title']                 = trans('product_quality_manage');
         $data['quality']                    = $this->db->get('quality')->result_array();             
@@ -1099,12 +776,12 @@ class Admin extends Admin_Core_Controller {
             $this->session->unset_userdata('active_menu');
             $this->session->set_userdata('active_menu', '10');
             /* end menu active/inactive section*/
-
-
+			$data['folder_name']      = 'pages';
             $data['page_name']      = 'pages_add';
             $data['page_title']     = trans('pages_add'); 
             $this->load->view('admin/index', $data);
-    }
+	}
+
     // edit custom page
     function pages_edit($param1='',$param2=''){
         if ($this->session->userdata('admin_is_login') != 1)
@@ -1115,7 +792,8 @@ class Admin extends Admin_Core_Controller {
         /* end menu active/inactive section*/
 
         $data['param1']         = $param1;
-        $data['param2']         = $param2;
+		$data['param2']         = $param2;
+		$data['folder_name']      = 'pages';
         $data['page_name']      = 'pages_edit';
         $data['page_title']     = trans('pages_edit');
         $this->load->view('admin/index', $data);
@@ -1189,14 +867,14 @@ class Admin extends Admin_Core_Controller {
             else{
                 $data['type']      = '';
             }
-        }        
+		}
+		$data['folder_name']      = 'pages';       
         $data['page_name']      = 'pages_manage';
         $data['page_title']     = trans('pages_manage');          
         $this->load->view('admin/index', $data);
     }
 
     // add blog post
-
     function posts_add(){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
@@ -1205,11 +883,12 @@ class Admin extends Admin_Core_Controller {
             $this->session->set_userdata('active_menu', '12');
             /* end menu active/inactive section*/
 
-
+			$data['folder_name']      = 'blog';
             $data['page_name']      = 'posts_add';
             $data['page_title']     = trans('posts_add'); 
             $this->load->view('admin/index', $data);
-    }
+	}
+
     // edit blog post
     function posts_edit($param1='',$param2=''){
         if ($this->session->userdata('admin_is_login') != 1)
@@ -1221,7 +900,9 @@ class Admin extends Admin_Core_Controller {
 
 
             $data['param1']         = $param1;
-            $data['param2']         = $param2;
+			$data['param2']         = $param2;
+
+			$data['folder_name']      = 'blog';
             $data['page_name']      = 'posts_edit';
             $data['page_title']     = trans('posts_edit');
             $this->load->view('admin/index', $data);
@@ -1311,13 +992,15 @@ class Admin extends Admin_Core_Controller {
             else{
                 $data['type']      = '';
             }
-        }        
+		}
+		$data['folder_name']      = 'blog';       
         $data['page_name']      = 'posts_manage';
         $data['page_title']     = trans('');          
         $this->load->view('admin/index', $data);
 
 
-    }
+	}
+
     // post category
     function post_category($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
@@ -1368,7 +1051,8 @@ class Admin extends Admin_Core_Controller {
             $this->session->set_flashdata('success', trans('update_success'));
             redirect($this->agent->referrer());
         }  
-        
+		
+			$data['folder_name']      = 'blog';
             $data['page_name']          = 'post_category_manage';
             $data['page_title']         = trans('post_category_manage');
             $data['post_categories']    = $this->db->get('post_category')->result_array();             
@@ -1411,7 +1095,8 @@ class Admin extends Admin_Core_Controller {
             $this->db->update('user', $data);
             $this->session->set_flashdata('success', trans('update_success'));
             redirect($this->agent->referrer());
-        }        
+		}        
+		$data['folder_name']      = 'users';
         $data['page_name']      = 'user_manage';
         $data['page_title']     = trans('user_manage');
         $data['users']          = $this->db->get('user')->result_array(); 
@@ -1492,13 +1177,6 @@ class Admin extends Admin_Core_Controller {
             /* end menu active/inactive section*/
 
             if ($param1 == 'update') {
-
-             $purchase_code = $this->input->post('purchase_code');
-             if(strpos($purchase_code, '***********') === false):
-                $data['value'] = $purchase_code;
-                 $this->db->where('title' , 'purchase_code');
-                 $this->db->update('config' , $data);
-             endif;
 
              $data['value'] = $this->input->post('timezone');
              $this->db->where('title' , 'timezone');
@@ -1692,7 +1370,8 @@ class Admin extends Admin_Core_Controller {
 
             $this->session->set_flashdata('success', trans('setting_update_success'));           
             redirect($this->agent->referrer());
-        }
+		}
+		$data['folder_name']      = 'settings';
         $data['page_name']      = 'system_setting';
         $data['page_title']     = trans('system_setting');
         $this->load->view('admin/index', $data);
@@ -1910,7 +1589,8 @@ class Admin extends Admin_Core_Controller {
 
             $this->session->set_flashdata('success', trans('setting_update_success'));           
             redirect($this->agent->referrer());
-        }
+		}
+		$data['folder_name']      = 'settings';
         $data['page_name']      = 'theme_options';
         $data['page_title']     = trans('theme_options');
         $this->load->view('admin/index', $data);
@@ -2002,7 +1682,8 @@ class Admin extends Admin_Core_Controller {
              
              $this->session->set_flashdata('success', trans('setting_update_success'));            
              //redirect(base_url() . 'admin/player_setting/', 'refresh');
-        }
+		}
+		    $data['folder_name']      = 'settings';
             $data['page_name']      = 'player_setting';
             $data['page_title']     = trans('player_setting');
             $this->load->view('admin/index', $data);
@@ -2063,7 +1744,8 @@ class Admin extends Admin_Core_Controller {
 
              $this->session->set_flashdata('success', trans('setting_update_success'));            
              redirect($this->agent->referrer());
-        }
+		}
+		$data['folder_name']      = 'users';
             $data['page_name']      = 'email_setting';
             $data['page_title']     = trans('email_setting');
             $this->load->view('admin/index', $data);
@@ -2128,7 +1810,8 @@ class Admin extends Admin_Core_Controller {
             endif;
             
             redirect($this->agent->referrer());
-        }
+		}
+		$data['folder_name']      = 'settings';
 
             $data['page_name']      = 'logo_setting';
             $data['page_title']     = trans('logo_setting');
@@ -2178,6 +1861,7 @@ class Admin extends Admin_Core_Controller {
             redirect($this->agent->referrer());
         }
 
+		$data['folder_name']      = 'settings';
             $data['page_name']      = 'footer_setting';
             $data['page_title']     = trans('footer_setting');
             $this->load->view('admin/index', $data);
@@ -2281,7 +1965,7 @@ class Admin extends Admin_Core_Controller {
             $this->session->set_flashdata('success', trans('setting_update_success')); 
             redirect($this->agent->referrer());
         }
-
+		$data['folder_name']      = 'settings';
             $data['page_name']      = 'seo_setting';
             $data['page_title']     = trans('seo_setting');
             $this->load->view('admin/index', $data);
@@ -2372,7 +2056,8 @@ class Admin extends Admin_Core_Controller {
 
             $this->session->set_flashdata('success', trans('setting_update_success')); 
             redirect($this->agent->referrer());
-        }
+		}
+		$data['folder_name']      = 'pages';
         $data['page_name']      = 'copyright_privacy';
         $data['page_title']     = trans('copyright_privacy');
         $this->load->view('admin/index', $data);
@@ -2442,41 +2127,6 @@ class Admin extends Admin_Core_Controller {
         $data['page_title']             = trans('send_web_notification');
         $this->load->view('admin/index', $data);
     }
-
-    function send_product_tvseries_notification($param1 = '', $param2 = ''){
-        if ($this->session->userdata('admin_is_login') != 1)
-            redirect(base_url(), 'refresh');
-            // active menu session
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '370');
-            /* end menu active/inactive section*/
-
-        if ($param1 == 'send'):
-            $products_id                  = $this->input->post("products_id");
-            if(!empty($products_id) && $products_id !='' && $products_id !=NULL && is_numeric($products_id)):
-                $verify                 = $this->common_model->verify_product_tvseries_id($products_id);
-                if($verify):
-                    $data['message']    = $this->input->post("message");
-                    $data['headings']   = $this->input->post("headings");
-                    $data['icon']       = $this->input->post("icon");         
-                    $data['img']        = $this->input->post("img");
-                    $data['id']         = $products_id;
-                    $this->load->model('notify_model');
-                    $this->notify_model->send_product_tvseries_notification($data);
-                    $this->session->set_flashdata('success', trans('notification_send_success'));                    
-                else:
-                $this->session->set_flashdata('error', 'Product ID not found.');
-                endif;
-            else:
-                $this->session->set_flashdata('error', 'Invalid product ID');
-            endif;
-            redirect($this->agent->referrer());
-        endif;
-        $data['page_name']      = 'send_product_tvseries_notification';
-        $data['page_title']     = trans('send_product_tvseries_notification');
-        $this->load->view('admin/index', $data);
-    }
-
 
     function send_product_notification($type='',$products_id = '',$param2=''){
         if ($this->session->userdata('admin_is_login') != 1)
@@ -2572,38 +2222,12 @@ class Admin extends Admin_Core_Controller {
 
             $this->session->set_flashdata('success', trans('setting_update_success')); 
             redirect($this->agent->referrer());
-        }
+		}
+		$data['folder_name']      = 'settings';
         $data['page_name']      = 'social_login_setting';
         $data['page_title']     = trans('social_login_setting');
         $this->load->view('admin/index', $data);
     }
-
-    //tmdb setting
-    function tmdb_setting($param1 = '', $param2 = ''){
-        if ($this->session->userdata('admin_is_login') != 1)
-            redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '80');
-            /* end menu active/inactive section*/
-
-        if ($param1 == 'update') {
-            $data['value'] = $this->input->post('tmbd_api_key');
-            $this->db->where('title' , 'tmbd_api_key');
-            $this->db->update('config' , $data);
-
-            $data['value'] = $this->input->post('tmdb_language');
-            $this->db->where('title' , 'tmdb_language');
-            $this->db->update('config' , $data);
-
-            $this->session->set_flashdata('success', trans('update_success'));
-            redirect($this->agent->referrer());
-        }
-        $data['page_name']      = 'tmdb_setting';
-        $data['page_title']     = trans('tmdb_setting');
-        $this->load->view('admin/index', $data);
-    }
-
 
     //ads setting
     function ad_setting($param1 = '', $param2 = ''){
@@ -2720,7 +2344,7 @@ class Admin extends Admin_Core_Controller {
             $this->session->set_flashdata('success', trans('backup_restored'));
             redirect($this->agent->referrer());
         }
-        
+        	$data['folder_name']  = 'database';
             $data['page_info']  = 'Create backup / restore from backup';
             $data['page_name']  = 'backup_restore';
             $data['page_title'] = trans('backup_restore');
@@ -2837,58 +2461,6 @@ class Admin extends Admin_Core_Controller {
         echo json_encode($response);        
     }  
 
-    //imdb import
-    function import_product(){
-        $response                   = array();        
-        $id                         = trim($this->input->post("id"));
-        $from                       = $this->input->post("from");
-        $lang                       = $this->input->post("lang");
-        
-        // $id = 550;
-        // $from ='product';
-        // $lang = 'de';
-        $response['submitted_data'] = $_POST;
-        $this->load->model('tmdb_model');
-        if($from=='tv'){
-            $data = $this->tmdb_model->get_tvseries_info($id,$lang);            
-        }else{
-            $data = $this->tmdb_model->get_product_info($id,$lang);            
-        }
-        //var_dump($data);      
-        if(isset($data['status']) && $data['status']=='success'){
-            $response['imdb_status']    = 'success';
-            $response['imdbid']         = $data['imdbid'];
-            $response['title']          = $data['title'];
-            $response['plot']           = $data['plot'];
-            $response['runtime']        = $data['runtime'];
-            $response['actor']          = $this->common_model->get_star_ids_for_product_import('actor',$data['actor']);
-            $response['director']       = $this->common_model->get_star_ids_for_product_import('director',$data['director']);
-            $response['writer']         = $this->common_model->get_star_ids_for_product_import('writer',$data['writer']);
-            $response['genre']          = $this->genre_model->get_genre_ids($data['genre']);
-            $response['rating']         = $data['rating'];
-            $response['release']        = $data['release'];
-            $response['thumbnail']      = $data['thumbnail'];
-            $response['poster']         = $data['poster'];
-            $response['response']       = 'yes';
-        }
-        else{
-            $response['imdb_status']    = 'fail';
-            $response['title']          = '';
-            $response['plot']           = '';
-            $response['runtime']        = '';
-            $response['actor']          = '';
-            $response['director']       = '';
-            $response['writer']         = '';
-            $response['country']        = '';
-            $response['genre']          = '';
-            $response['rating']         = '';
-            $response['release']        = '';
-            $response['thumbnail']      = '';
-            $response['poster']         = '';
-            $response['response']       = 'no';
-        }
-        echo json_encode($response);
-    }
 
     function fetch_actor_from_tmdb(){
         $response                   = array();        

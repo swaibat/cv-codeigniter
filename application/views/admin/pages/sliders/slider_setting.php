@@ -15,10 +15,10 @@
                         <label class="control-label col-md-3"><?php echo trans('slider_type'); ?></label>
                         <div class="col-sm-6">
                             <select class="form-control m-bot15" id="slider_type" name="slider_type">
-                                <option value="image" <?php if(ovoo_config('slider_type')=='image'){echo 'selected';}?> id="ad1_image_selection"><?php echo trans('image_slider'); ?></option>
-                                <option value="product" <?php if(ovoo_config('slider_type')=='product'){echo 'selected';}?> id="ad1_code_selection"><?php echo trans('latest_products'); ?></option>
-                                <option value="tv" <?php if(ovoo_config('slider_type')=='tv'){echo 'selected';}?> id="ad1_code_selection"><?php echo trans('latest_tv_channels'); ?></option>
-                                <option value="disable" <?php if(ovoo_config('slider_type')=='disable'){echo 'selected';}?> id="ad1_disable"><?php echo trans('disable'); ?></option>
+                                <option value="image" <?php if(app_config('slider_type')=='image'){echo 'selected';}?> id="ad1_image_selection"><?php echo trans('image_slider'); ?></option>
+                                <option value="product" <?php if(app_config('slider_type')=='product'){echo 'selected';}?> id="ad1_code_selection"><?php echo trans('latest_products'); ?></option>
+                                <option value="tv" <?php if(app_config('slider_type')=='tv'){echo 'selected';}?> id="ad1_code_selection"><?php echo trans('latest_tv_channels'); ?></option>
+                                <option value="disable" <?php if(app_config('slider_type')=='disable'){echo 'selected';}?> id="ad1_disable"><?php echo trans('disable'); ?></option>
                             </select>
                         </div>
                     </div>
@@ -34,8 +34,8 @@
                         <label class=" col-sm-6 control-label"><?php echo trans('slider_wide'); ?></label>
                         <div class="col-sm-6">
                             <select class="form-control m-bot15" id="slider_fullwide" name="slider_fullwide">
-                                <option value="1" <?php if(ovoo_config('slider_fullwide')=='1'){echo 'selected';}?> id="ad1_disable"><?php echo trans('fullwide'); ?></option>
-                                <option value="0" <?php if(ovoo_config('slider_fullwide')=='0'){echo 'selected';}?> id="ad1_disable"><?php echo trans('box'); ?></option>
+                                <option value="1" <?php if(app_config('slider_fullwide')=='1'){echo 'selected';}?> id="ad1_disable"><?php echo trans('fullwide'); ?></option>
+                                <option value="0" <?php if(app_config('slider_fullwide')=='0'){echo 'selected';}?> id="ad1_disable"><?php echo trans('box'); ?></option>
                             </select>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                     <div class="form-group">
                         <label class=" col-sm-6 control-label"><?php echo trans('slider_height').'(px)'; ?></label>
                         <div class="col-sm-6">
-                            <input type="number" name="slider_height" value="<?php echo ovoo_config('slider_height'); ?>" class="form-control" required>
+                            <input type="number" name="slider_height" value="<?php echo app_config('slider_height'); ?>" class="form-control" required>
                             <small><?php echo trans('slider_height_note'); ?></small>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                     <div class="form-group">
                         <label class=" col-sm-6 control-label"><?php echo trans('slider_border_radius').'(px)'; ?></label>
                         <div class="col-sm-6">
-                            <input type="number" name="slider_border_radius" value="<?php echo ovoo_config('slider_border_radius'); ?>" class="form-control" required>
+                            <input type="number" name="slider_border_radius" value="<?php echo app_config('slider_border_radius'); ?>" class="form-control" required>
                             <small><?php echo trans('slider_border_radius_note'); ?></small>
                         </div>
                     </div>
@@ -60,8 +60,8 @@
                         <label class=" col-sm-6 control-label"><?php echo trans('slider_bullet'); ?></label>
                         <div class="col-sm-6">
                             <select class="form-control m-bot15" id="slider_bullet" name="slider_bullet">
-                                <option value="1" <?php if(ovoo_config('slider_bullet')=='1'){echo 'selected';}?> id="ad1_disable"><?php echo trans('enable'); ?></option>
-                                <option value="0" <?php if(ovoo_config('slider_bullet')=='0'){echo 'selected';}?> id="ad1_disable"><?php echo trans('disable'); ?></option>
+                                <option value="1" <?php if(app_config('slider_bullet')=='1'){echo 'selected';}?> id="ad1_disable"><?php echo trans('enable'); ?></option>
+                                <option value="0" <?php if(app_config('slider_bullet')=='0'){echo 'selected';}?> id="ad1_disable"><?php echo trans('disable'); ?></option>
                             </select>
                         </div>
                     </div>
@@ -70,8 +70,8 @@
                         <label class=" col-sm-6 control-label"><?php echo trans('slider_arrow'); ?></label>
                         <div class="col-sm-6">
                             <select class="form-control m-bot15" id="slider_arrow" name="slider_arrow">
-                                <option value="1" <?php if(ovoo_config('slider_arrow')=='1'){echo 'selected';}?> id="ad1_disable"><?php echo trans('enable'); ?></option>
-                                <option value="0" <?php if(ovoo_config('slider_arrow')=='0'){echo 'selected';}?> id="ad1_disable"><?php echo trans('disable'); ?></option>
+                                <option value="1" <?php if(app_config('slider_arrow')=='1'){echo 'selected';}?> id="ad1_disable"><?php echo trans('enable'); ?></option>
+                                <option value="0" <?php if(app_config('slider_arrow')=='0'){echo 'selected';}?> id="ad1_disable"><?php echo trans('disable'); ?></option>
                             </select>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
 
 <script>
     $(document).ready(function() {
-        <?php $slider_type=ovoo_config('slider_type');
+        <?php $slider_type=app_config('slider_type');
         if ($slider_type=='image'):?>
         $("#total_product_in_slider").fadeOut();
         <?php endif; if ($slider_type=='product'):?>

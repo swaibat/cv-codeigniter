@@ -5,7 +5,7 @@ class Email_model extends CI_Model {
 	function __construct()
     {
         parent::__construct();
-        date_default_timezone_set(ovoo_config('timezone'));
+        date_default_timezone_set(app_config('timezone'));
     }
 
     function test_mail($email = NULL)
