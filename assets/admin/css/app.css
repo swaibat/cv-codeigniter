@@ -284,3 +284,33 @@ span.pf-grab:after {
 .custom-checkbox .custom-control-label::before {
 	border-radius: 0.1rem;
 }
+
+.hamburger-toggle {
+    position: relative;
+    padding: 0;
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    order: 1;
+}
+.hamburger-toggle [class*='bar-'] {
+    display: block;
+    background: #f0efef;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .2s ease all;
+    transition: .2s ease all;
+    border-radius: 2px;
+    height: 2px;
+    width: 24px;
+    margin-bottom: 4px;
+}
+
+.hamburger-toggle [class*='bar-']:nth-child(2) {
+    width: 18px;
+}
+.hamburger-toggle [class*='bar-']:last-child {
+    margin-bottom: 0;
+    width: 12px;
+}
+

@@ -17,14 +17,14 @@ li {
 		top: 0;
 		left: 0;
 		height: 100vh;
-   }
+	}
 	.navbar-expand-lg .sidenav {
 		flex-direction: column;
-   }
+	}
 	.content-wrapper {
 		margin-left: 210px;
 		margin-right: 1rem;
-   }
+	}
 }
 .filter-nav {
 	color: #f0f0f0;
@@ -48,19 +48,19 @@ li {
 	.cv-container {
 		width: 100%;
 		padding: 0.5rem;
-   }
+	}
 	.sidenav {
 		display: none;
 		position: absolute;
 		width: 225px;
 		box-sizing: border-box;
-   }
+	}
 	.cv-container {
 		width: 100%;
 		padding-top: 4.5rem;
 		margin-right: auto;
 		margin-left: auto;
-   }
+	}
 }
 .fav-side-btn {
 	top: 7.5rem;
@@ -107,10 +107,10 @@ li {
 @media screen and (max-height: 450px) {
 	.fav-sidenav {
 		padding-top: 15px;
-   }
+	}
 	.fav-sidenav a {
 		font-size: 18px;
-   }
+	}
 }
 
 .h-7 {
@@ -220,7 +220,7 @@ a > * {
 	position: absolute;
 	top: 0;
 	transform: translateY(-100%);
-	content: '';
+	content: "";
 	width: 0;
 	height: 0;
 	border-style: solid;
@@ -232,7 +232,7 @@ a > * {
 	position: absolute;
 	top: 3px;
 	transform: translateY(-100%);
-	content: '';
+	content: "";
 	width: 0;
 	height: 0;
 	border-style: solid;
@@ -273,7 +273,7 @@ a.cv-nav {
 .cv-nav:after {
 	-webkit-transition: unset;
 	transition: unset;
-	content: ' ';
+	content: " ";
 	width: 6rem;
 	height: 4rem;
 	height: 40px;
@@ -293,21 +293,23 @@ a.cv-nav {
 .cv-sidenav:before {
 	-webkit-transition: unset;
 	transition: unset;
-	content: ' ';
+	content: " ";
 	width: 0.4rem;
 	height: 0.4rem;
 	display: inline-block;
 	position: absolute;
 }
+
 .cv-sidenav.selected {
-	color: #0f0f0f !important;
-	background: #6c757d 2b;
+	color: #0f0f0f;
+	background: #6c757d2b;
 }
+
 .cv-sidenav.selected:before {
 	-webkit-transition: 0.3s;
 	transition: 0.3s;
 	height: 2rem;
-	border-radius: 0 3px 3px 0;
+	border-radius: 0 0.5rem 0.5rem 0;
 	background: #0f0f0f;
 	left: 0;
 	margin-top: -0.3rem;
@@ -357,7 +359,7 @@ a.cv-nav {
 .cv-prdct-nav.active:after {
 	-webkit-transition: unset;
 	transition: unset;
-	content: ' ';
+	content: " ";
 	width: 6rem;
 	height: 0.6rem;
 	display: block;
@@ -367,4 +369,18 @@ a.cv-nav {
 }
 .cv-breadcrumb-item a :last-child {
 	color: gray;
+}
+
+ion-icon {
+	margin-bottom: -0.15rem;
+}
+
+.sidenav ion-icon {
+	font-size: 1.2rem;
+	margin-right: 0.4rem;
+	margin-bottom: -0.25rem;
+}
+
+.font-size-lg {
+	font-size: 1.9rem;
 }

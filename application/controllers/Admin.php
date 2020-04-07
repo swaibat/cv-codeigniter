@@ -26,11 +26,8 @@ class Admin extends Admin_Core_Controller {
     //dashboard
     function dashboard(){
         if ($this->session->userdata('admin_is_login') != 1)
-            redirect(base_url(), 'refresh');
-		/* start menu active/inactive section*/
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '1');
-        /* end menu active/inactive section*/
+			redirect(base_url(), 'refresh');
+		$data['folder_name']           = 'dashboard';
         $data['page_name']             = 'dashboard';
         $data['page_title']            = trans('admin_dashboard');
         $this->load->view('admin/index', $data);		
@@ -41,11 +38,6 @@ class Admin extends Admin_Core_Controller {
     function genre($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-        /* start menu active/inactive section*/
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '3');
-        /* end menu active/inactive section*/ 
-        
         if ($param1 == 'add') {
             $data['name']           = $this->input->post('name');
             $data['description']    = $this->input->post('description');
@@ -97,13 +89,8 @@ class Admin extends Admin_Core_Controller {
     function slider_setting($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '5');
-            /* end menu active/inactive section*/
         if ($param1 == 'update') {
             $slider_type  = $this->input->post('slider_type');
-
             // update slider type
             $data['value']    =   $slider_type;
             $this->db->where('title' , 'slider_type');
@@ -142,7 +129,7 @@ class Admin extends Admin_Core_Controller {
             $this->session->set_flashdata('success', trans('update_success'));
             redirect($this->agent->referrer());          
 		}
-		$data['folder_name']        = 'sliders';  
+		$data['folder_name']    = 'sliders';  
         $data['page_name']      = 'slider_setting';
         $data['page_title']     = trans('slider_setting');
         $this->load->view('admin/index', $data);
@@ -150,10 +137,6 @@ class Admin extends Admin_Core_Controller {
 
     // slider
     function slider($param1 = '', $param2 = ''){
-        // active menu session
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '4'); 
-        
         if ($param1 == 'add') {
             $data['title']              =   $this->input->post('title');
             $data['description']        =   $this->input->post('description');
@@ -235,11 +218,7 @@ class Admin extends Admin_Core_Controller {
     function products_add(){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-        // start menu active/inactive section
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '6');
-		// end menu active/inactive section
-		$data['folder_name']        = 'products';
+		$data['folder_name']    = 'products';
         $data['page_name']      = 'products_add';
         $data['page_title']     = trans('products_add'); 
         $this->load->view('admin/index', $data);
@@ -249,10 +228,6 @@ class Admin extends Admin_Core_Controller {
     function products_edit($param1='',$param2=''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '6');
-            /* end menu active/inactive section*/
             $data['param1']         = $param1;
 			$data['param2']         = $param2;
 			$data['folder_name']        = 'products';
@@ -265,9 +240,6 @@ class Admin extends Admin_Core_Controller {
     function products($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-        // active menu session
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '8'); 
         if ($param1 == 'add') {
             $data['imdbid']                 = $this->input->post('imdbid');          
             $data['title']                  = $this->input->post('title');
@@ -500,10 +472,6 @@ class Admin extends Admin_Core_Controller {
     function file_and_download($param1 = '', $param2 = ''){
     if ($this->session->userdata('admin_is_login') != 1)
         redirect(base_url(), 'refresh');
-        /* start menu active/inactive section*/
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '8');
-        /* end menu active/inactive section*/
         if ($param1 == 'update') {
             $product_id = $param2;
             $file_type= 'upload';
@@ -606,10 +574,6 @@ class Admin extends Admin_Core_Controller {
     function product_type($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '9');
-            /* end menu active/inactive section*/ 
         
         if ($param1 == 'add') {
             
@@ -644,10 +608,10 @@ class Admin extends Admin_Core_Controller {
             $this->session->set_flashdata('success', trans('update_success'));
             redirect($this->agent->referrer());
         }      
-       		$data['folder_name']              = 'products';
+       		$data['folder_name']            = 'products';
             $data['page_name']              = 'product_type_manage';
             $data['page_title']             = 'Videos Type Management';
-            $data['product_types']            = $this->db->get('product_type')->result_array();             
+            $data['product_types']          = $this->db->get('product_type')->result_array();             
             $this->load->view('admin/index', $data);
 
 
@@ -655,12 +619,7 @@ class Admin extends Admin_Core_Controller {
     // products or products types
     function product_quality($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
-            redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '24');
-            /* end menu active/inactive section*/ 
-        
+            redirect(base_url(), 'refresh');       
         if ($param1 == 'add') {
             $data['quality']                = $this->input->post('quality');
             $data['description']            = $this->input->post('description');            
@@ -689,10 +648,6 @@ class Admin extends Admin_Core_Controller {
     function comments($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '31');
-            /* end menu active/inactive section*/ 
         if ($param1 == 'update_product') {
             $data['comment']             = $this->input->post('comment');
             $data['publication']        = $this->input->post('publication');                        
@@ -727,7 +682,7 @@ class Admin extends Admin_Core_Controller {
             else{
                 $data['type']      = '';
             }     
-        
+			$data['folder_name']    = 'comments';
             $data['page_name']      = 'comments_manage';
             $data['page_title']     = trans('comments_manage');            
             $this->load->view('admin/index', $data);
@@ -737,10 +692,6 @@ class Admin extends Admin_Core_Controller {
     function comments_setting($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '32');
-            /* end menu active/inactive section*/
         if ($param1 == 'update') {
             $data['value'] = $this->input->post('comments_method');
             $this->db->where('title' , 'comments_method');
@@ -760,7 +711,8 @@ class Admin extends Admin_Core_Controller {
 
             $this->session->set_flashdata('success', trans('update_success'));
             redirect($this->agent->referrer());                       
-        }
+		}
+		$data['folder_name']    = 'comments';
         $data['page_name']      = 'comments_setting';
         $data['page_title']     = trans('comments_setting');
         $this->load->view('admin/index', $data);
@@ -772,10 +724,6 @@ class Admin extends Admin_Core_Controller {
     function pages_add(){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '10');
-            /* end menu active/inactive section*/
 			$data['folder_name']      = 'pages';
             $data['page_name']      = 'pages_add';
             $data['page_title']     = trans('pages_add'); 
@@ -786,11 +734,6 @@ class Admin extends Admin_Core_Controller {
     function pages_edit($param1='',$param2=''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-        /* start menu active/inactive section*/
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '10');
-        /* end menu active/inactive section*/
-
         $data['param1']         = $param1;
 		$data['param2']         = $param2;
 		$data['folder_name']      = 'pages';
@@ -802,11 +745,7 @@ class Admin extends Admin_Core_Controller {
     // add,update custom page
     function pages($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
-            redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '11');
-            /* end menu active/inactive section*/          
+            redirect(base_url(), 'refresh');        
         
         if ($param1 == 'add') {            
             $data['page_title']         = $this->input->post('page_title');
@@ -878,11 +817,6 @@ class Admin extends Admin_Core_Controller {
     function posts_add(){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '12');
-            /* end menu active/inactive section*/
-
 			$data['folder_name']      = 'blog';
             $data['page_name']      = 'posts_add';
             $data['page_title']     = trans('posts_add'); 
@@ -893,16 +827,11 @@ class Admin extends Admin_Core_Controller {
     function posts_edit($param1='',$param2=''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '12');
-            /* end menu active/inactive section*/
-
 
             $data['param1']         = $param1;
 			$data['param2']         = $param2;
 
-			$data['folder_name']      = 'blog';
+			$data['folder_name']    = 'blog';
             $data['page_name']      = 'posts_edit';
             $data['page_title']     = trans('posts_edit');
             $this->load->view('admin/index', $data);
@@ -912,10 +841,6 @@ class Admin extends Admin_Core_Controller {
     function posts($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '13');
-            /* end menu active/inactive section*/   
         
         if ($param1 == 'add') {            
             $data['post_title']                 = $this->input->post('post_title');
@@ -929,7 +854,6 @@ class Admin extends Admin_Core_Controller {
                 $data['image_link']     = $this->input->post('thumb_link');
             }     
 
-            
             $this->db->insert('posts', $data);
             $insert_id = $this->db->insert_id();          
 
@@ -1005,10 +929,6 @@ class Admin extends Admin_Core_Controller {
     function post_category($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '14');
-            /* end menu active/inactive section*/   
         
         if ($param1 == 'add') {
             
@@ -1063,10 +983,6 @@ class Admin extends Admin_Core_Controller {
     function manage_user($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '15');
-            /* end menu active/inactive section*/ 
 
             /* add new access */   
         
@@ -1106,12 +1022,8 @@ class Admin extends Admin_Core_Controller {
     // users
     function manage_star($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
-            redirect(base_url(), 'refresh');
-        /* start menu active/inactive section*/
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '25');
-        /* end menu active/inactive section*/  
-        
+			redirect(base_url(), 'refresh');
+
         if ($param1 == 'add') {
             $star_name                      = trim($this->input->post('star_name'));
             if($this->db->get_where('star',array('star_name'=>$star_name))->num_rows() > 0){
@@ -1171,10 +1083,6 @@ class Admin extends Admin_Core_Controller {
     function system_setting($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '160');
-            /* end menu active/inactive section*/
 
             if ($param1 == 'update') {
 
@@ -1377,145 +1285,9 @@ class Admin extends Admin_Core_Controller {
         $this->load->view('admin/index', $data);
     }
 
-    // API setting
-    function api_setting($param1 = '', $param2 = ''){
-        // active menu session
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '162');
-            /* end menu active/inactive section*/
-        if ($param1 == 'update_legacy_api') {
-             $data['value'] = $this->input->post('mobile_apps_api_secret_key');
-             $this->db->where('title' , 'mobile_apps_api_secret_key');
-             $this->db->update('config' , $data);
-             $this->session->set_flashdata('success', 'Setting update successed.');           
-             redirect($this->agent->referrer());
-        }
-        if($param1 == 'create_key'):
-            $this->form_validation->set_rules('label', 'Label', 'required|min_length[4]');
-            if ($this->form_validation->run() == FALSE):
-                $this->session->set_flashdata('error',strip_tags(json_encode(validation_errors())));
-            else:
-                $data['label'] = $this->input->post('label');
-                $data['key']            = $this->generate_random_string(16);
-                $data['level']          = 1;
-                $data['date_created']   = time();
-                $this->db->insert('keys',$data);
-                $this->session->set_flashdata('success', 'Key create successed.');
-            endif;
-            redirect($this->agent->referrer());
-        endif;
-        if($param1 == 'update_key'):
-            if($param2 !='' && $param2 !=NULL):
-                $data['label'] = $this->input->post('label');
-                $this->form_validation->set_rules('label', 'Label', 'required|min_length[4]'); 
-                if ($this->form_validation->run() == FALSE):
-                    $this->session->set_flashdata('error',strip_tags(json_encode(validation_errors())));
-                else:               
-                    $query = $this->db->get_where('keys',array('id'=>$param2));
-                    if($query->num_rows() > 0):
-                        $this->db->where('id',$param2);
-                        $this->db->update('keys',$data);
-                        $this->session->set_flashdata('success', 'Label update successed.');
-                    else:
-                       $this->session->set_flashdata('error', 'Invalid ID.');
-                    endif;
-                endif;
-            else:
-                $this->session->set_flashdata('error', 'ID Is required.'); 
-            endif;
-            redirect($this->agent->referrer());
-        endif;
-
-
-        if($param1 == 'delete_key'):
-            if($param2 !='' && $param2 !=NULL):
-                if($this->db->get_where('keys',array('id'=>$param2))->num_rows() > 0):
-                    $this->db->where('id',$param2);
-                    $this->db->delete('keys');
-                    $this->session->set_flashdata('success', 'Key delete successed.');
-                else:
-                    $this->session->set_flashdata('error', 'ID not found.');
-                endif; 
-            else:
-                $this->session->set_flashdata('error', 'ID Is required.'); 
-            endif;
-            redirect($this->agent->referrer());
-        endif;
-
-        if($param1 == 'create_authentication'):
-            $this->form_validation->set_rules('username', 'Username', 'required|min_length[4]|is_unique[rest_logins.username]');
-            if ($this->form_validation->run() == FALSE):
-                $this->session->set_flashdata('error',strip_tags(json_encode(validation_errors())));
-            else:
-                $data['username'] = $this->input->post('username');
-                $data['password']      = $this->generate_random_password(16);
-                $this->db->insert('rest_logins',$data);
-                $this->session->set_flashdata('success', 'Authentication create successed.');
-            endif;
-            redirect($this->agent->referrer());
-        endif;
-
-        if($param1 == 'update_authentication'):
-            if($param2 !='' && $param2 !=NULL):
-                $data['username'] = $this->input->post('username');
-                $data['password'] = $this->input->post('password');
-                $this->form_validation->set_rules('username', 'Username', 'required|min_length[4]');
-                $this->form_validation->set_rules('password', 'Password', 'required|min_length[4]'); 
-                if ($this->form_validation->run() == FALSE):
-                    $this->session->set_flashdata('error',strip_tags(json_encode(validation_errors())));
-                else:               
-                    $query = $this->db->get_where('rest_logins',array('id !='=>$param2,'username'=>$data['username']));
-                    if($query->num_rows() > 0):
-                        $this->session->set_flashdata('error', 'Username already exist.Please choose another username.');
-                    else:
-                        $query = $this->db->get_where('rest_logins',array('id'=>$param2));
-                        if($query->num_rows() > 0):
-                            $this->db->where('id',$param2);
-                            $this->db->update('rest_logins',$data);
-                            $this->session->set_flashdata('success', 'Label update successed.');
-                        else:
-                           $this->session->set_flashdata('error', 'Invalid ID.');
-                        endif;
-                        $this->db->update('rest_logins',$data);
-                        $this->session->set_flashdata('success', 'Authentication update successed.');
-                    endif;
-                endif;
-            else:
-                $this->session->set_flashdata('error', 'ID Is required.'); 
-            endif;
-            redirect($this->agent->referrer());
-        endif;
-
-        if($param1 == 'delete_authentication'):
-            if($param2 !='' && $param2 !=NULL):
-                if($this->db->get_where('rest_logins',array('id'=>$param2))->num_rows() > 0):
-                    $this->db->where('id',$param2);
-                    $this->db->delete('rest_logins');
-                    $this->session->set_flashdata('success', 'Authentication delete successed.');
-                else:
-                    $this->session->set_flashdata('error', 'ID not found.');
-                endif; 
-            else:
-                $this->session->set_flashdata('error', 'ID Is required.'); 
-            endif;
-            redirect($this->agent->referrer());
-        endif;
-
-        $data['page_name']      = 'api_setting';
-        $data['page_title']     = 'API Setting';
-        $data['keys']           = $this->db->get('keys')->result_array();
-        $data['rest_logins']    = $this->db->get('rest_logins')->result_array();
-        $this->load->view('admin/index', $data);
-    }
-
-
     function update($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-        /* start menu active/inactive section*/
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '161');
-        /* end menu active/inactive section*/
         $data['page_name']      = 'update';
         $data['page_title']     = trans('system_updater');
         $this->load->view('admin/index', $data);
@@ -1526,10 +1298,6 @@ class Admin extends Admin_Core_Controller {
     function theme_options($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '16');
-            /* end menu active/inactive section*/
 
             if ($param1 == 'update') {
 
@@ -1620,10 +1388,7 @@ class Admin extends Admin_Core_Controller {
     function player_setting($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '34');
-            /* end menu active/inactive section*/
+
 
             if ($param1 == 'update') {     
              
@@ -1693,11 +1458,6 @@ class Admin extends Admin_Core_Controller {
     function email_setting($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '17');
-            /* end menu active/inactive section*/
-
         if ($param1 == 'update') {
             $protocol = $this->input->post('protocol');            
             if($protocol=='smtp')
@@ -1745,7 +1505,7 @@ class Admin extends Admin_Core_Controller {
              $this->session->set_flashdata('success', trans('setting_update_success'));            
              redirect($this->agent->referrer());
 		}
-		$data['folder_name']      = 'users';
+			$data['folder_name']    = 'settings';
             $data['page_name']      = 'email_setting';
             $data['page_title']     = trans('email_setting');
             $this->load->view('admin/index', $data);
@@ -1756,10 +1516,6 @@ class Admin extends Admin_Core_Controller {
     function logo_setting($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '18');
-            /* end menu active/inactive section*/
 
         if ($param1 == 'update') {
             // logo
@@ -1822,10 +1578,6 @@ class Admin extends Admin_Core_Controller {
     function footer_setting($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '19');
-            /* end menu active/inactive section*/
 
         if ($param1 == 'update') {
             $data['value'] = $this->input->post('footer1_title');
@@ -1865,15 +1617,12 @@ class Admin extends Admin_Core_Controller {
             $data['page_name']      = 'footer_setting';
             $data['page_title']     = trans('footer_setting');
             $this->load->view('admin/index', $data);
-    }
+	}
+
     //seo setting
     function seo_setting($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '20');
-            /* end menu active/inactive section*/
 
         if ($param1 == 'update') {
             $data['value'] = $this->input->post('author');
@@ -1976,11 +1725,6 @@ class Admin extends Admin_Core_Controller {
     function copyright_privacy($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '350');
-            /* end menu active/inactive section*/
-
         if ($param1 == 'update') {
             $privacy_policy_to_primary_menu = $this->input->post('privacy_policy_to_primary_menu');
             if($privacy_policy_to_primary_menu =='on'):
@@ -2066,10 +1810,6 @@ class Admin extends Admin_Core_Controller {
     function push_notification_setting($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '36');
-            /* end menu active/inactive section*/
 
         if ($param1 == 'update') {
             $data['value'] = $this->input->post('push_notification_enable');
@@ -2107,11 +1847,6 @@ class Admin extends Admin_Core_Controller {
     function send_web_notification($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            // active menu session
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '371');
-            /* end menu active/inactive section*/
-
         if ($param1 == 'send') {
             $data['message']            = $this->input->post("message");
             $data['url']                = $this->input->post("url");
@@ -2131,10 +1866,7 @@ class Admin extends Admin_Core_Controller {
     function send_product_notification($type='',$products_id = '',$param2=''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '37');
-            /* end menu active/inactive section*/
+
         if(!empty($products_id) && $products_id !='' && $products_id !=NULL && is_numeric($products_id)):
             $verify                 = $this->common_model->verify_product_tvseries_id($products_id);
             if($verify):
@@ -2164,10 +1896,6 @@ class Admin extends Admin_Core_Controller {
     function social_login_setting($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '22');
-            /* end menu active/inactive section*/
 
         if ($param1 == 'update_facebook') {
             $facebook_login_enable = $this->input->post('facebook_login_enable');
@@ -2233,10 +1961,6 @@ class Admin extends Admin_Core_Controller {
     function ad_setting($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '21');
-            /* end menu active/inactive section*/
 
         if ($param1 == 'update') {
             $ads_type = $this->input->post('ads_type');
@@ -2312,11 +2036,7 @@ class Admin extends Admin_Core_Controller {
 
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '23');
-            /* end menu active/inactive section*/   
-        
+
         if ($operation == 'create') {            
             $this->common_model->create_backup();
             $this->session->set_flashdata('success', trans('backup_created'));
@@ -2344,7 +2064,7 @@ class Admin extends Admin_Core_Controller {
             $this->session->set_flashdata('success', trans('backup_restored'));
             redirect($this->agent->referrer());
         }
-        	$data['folder_name']  = 'database';
+        	$data['folder_name']  = 'backup';
             $data['page_info']  = 'Create backup / restore from backup';
             $data['page_name']  = 'backup_restore';
             $data['page_title'] = trans('backup_restore');
@@ -2364,10 +2084,7 @@ class Admin extends Admin_Core_Controller {
 	function manage_profile(){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '12');
-            /* end menu active/inactive section*/
+
             $data['page_name']      = 'manage_profile';
             $data['page_title']     = trans('manage_profile');
             $data['profile_info']   = $this->db->get_where('user', array(
@@ -2377,10 +2094,7 @@ class Admin extends Admin_Core_Controller {
 
     // profile
     function profile($param1 = '', $param2 = '', $param3 = ''){
-        /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '12');
-            /* end menu active/inactive section*/
+
             $user_id=$this->session->userdata('user_id');
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url() . 'login', 'refresh');
@@ -2461,44 +2175,6 @@ class Admin extends Admin_Core_Controller {
         echo json_encode($response);        
     }  
 
-
-    function fetch_actor_from_tmdb(){
-        $response                   = array();        
-        $id                         =   trim($_POST["id"]);
-        $from                       =   $_POST["from"];
-        $response['submitted_data'] = $_POST;
-        $this->load->model('tmdb_model');
-        if($from=='tv'){
-            $data = $this->tmdb_model->get_tvshow_actor_info($id);
-        }else{
-            $data = $this->tmdb_model->get_product_actor_info($id);
-        }
-        $this->session->set_flashdata('success', $data.' '.trans('start_imported'));
-        redirect($this->agent->referrer());
-    }
-
-    function download_link(){
-
-        $this->form_validation->set_rules('products_id', 'products_id', 'required');
-        $this->form_validation->set_rules('link_title', 'Link Title', 'required|min_length[2]');
-        $this->form_validation->set_rules('file_size', 'File Size', 'required|min_length[2]');
-        $this->form_validation->set_rules('resolution', 'Resolution', 'required|min_length[2]');
-        $this->form_validation->set_rules('in_app_download', 'Download Type', 'required');
-        $this->form_validation->set_rules('download_url', 'Download URL', 'required');
-        if ($this->form_validation->run() == FALSE):
-            $this->session->set_flashdata('error',strip_tags(json_encode(validation_errors())));
-        else:
-            $data['products_id']          = $this->input->post("products_id");            
-            $data['link_title']         = $this->input->post("link_title");
-            $data['file_size']          = $this->input->post("file_size");
-            $data['resolution']         = $this->input->post("resolution");
-            $data['download_url']       = $this->input->post("download_url");
-            $data['in_app_download']    = $this->input->post("in_app_download");
-            $this->db->insert('download_link',$data);
-            $this->session->set_flashdata('success', trans("add_success"));
-        endif;
-        redirect($this->agent->referrer());
-    }
     function product_file(){
         $response = array();
         $file_data['products_id']         = $_POST["products_id"];            
@@ -2525,7 +2201,8 @@ class Admin extends Admin_Core_Controller {
         $response['rate']           = $rate; 
         $response['product_id']       = $product_id; 
         echo json_encode($response);    
-    }
+	}
+	
     // post rating
     function post_rating( $rate , $product_id){
 
@@ -2558,79 +2235,6 @@ class Admin extends Admin_Core_Controller {
             }
            return "success"; 
         }
-
-        //product importer
-
-        function product_importer(){
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-			/* start menu active/inactive section*/
-		$this->session->unset_userdata('active_menu');
-		$this->session->set_userdata('active_menu', '7');
-		/* end menu active/inactive section*/
-		$data['page_name']  = 'product_importer';
-		$data['page_title'] = 'Product Search & Import';
-        if(!empty($this->input->post('title')) && $this->input->post('title') !=NULL):
-            $this->load->model('tmdb_model');
-            $search_data    = $this->tmdb_model->search($this->input->post('title'),$this->input->post('to'));
-            if(isset($search_data['error_message'])):
-                $data['error_message'] = $search_data['error_message'];
-            else:
-                $data['products'] = $search_data;
-            endif;
-            $data['title']  = $this->input->post('title');
-            $data['to']     = $this->input->post('to');
-        endif;
-		$this->load->view('admin/index', $data);
-	}
-
-
-    function cron_setting($param1 = '', $param2 = ''){
-        if ($this->session->userdata('admin_is_login') != 1)
-            redirect(base_url(), 'refresh');
-        /* start menu active/inactive section*/
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '78');
-        /* end menu active/inactive section*/
-
-        if($param1=='update'):
-            $data['value'] = $this->input->post('cron_key');
-            $this->db->where('title' , 'cron_key');
-            $this->db->update('config' , $data);
-             // db backup on/off
-             $backup_schedule = $this->input->post('backup_schedule');
-             if($backup_schedule =='1'):
-                $data['value'] = '1';
-                $this->db->where('title' , 'backup_schedule');
-                $this->db->update('config' , $data);
-            elseif($backup_schedule =='7'):
-                $data['value'] = '7';
-                $this->db->where('title' , 'backup_schedule');
-                $this->db->update('config' , $data);
-            else:
-                $data['value'] = '30';
-                $this->db->where('title' , 'backup_schedule');
-                $this->db->update('config' , $data);
-            endif;
-
-             $db_backup = $this->input->post('db_backup');
-            if($db_backup =='on'):
-                $data['value'] = '1';
-                $this->db->where('title' , 'db_backup');
-                 $this->db->update('config' , $data);
-            else:
-                $data['value'] = '0';
-                 $this->db->where('title' , 'db_backup');
-                 $this->db->update('config' , $data);
-            endif;
-            $this->session->set_flashdata('success', trans('cron_setting_success'));
-            redirect($this->agent->referrer());
-        endif;
-
-        $data['page_name']  = 'manage_cron';
-        $data['page_title'] = trans('cron_setting');
-        $this->load->view('admin/index', $data);
-    }
 
     public function product_upload(){
         if ($this->session->userdata('admin_is_login') != 1)
@@ -2902,10 +2506,7 @@ class Admin extends Admin_Core_Controller {
     function language_setting($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-        /* start menu active/inactive section*/
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '179');
-        /* end menu active/inactive section*/
+
         $this->load->model('language_model');
         if($param1=='change_default'):
             $d = array(
@@ -2949,10 +2550,6 @@ class Admin extends Admin_Core_Controller {
     function language_edit($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
-        /* start menu active/inactive section*/
-        $this->session->unset_userdata('active_menu');
-        $this->session->set_userdata('active_menu', '79');
-        /* end menu active/inactive section*/
         $this->load->model('language_model');
 
         if($param1=='update'):
@@ -3089,8 +2686,60 @@ class Admin extends Admin_Core_Controller {
         endif;
         echo $data;
     }
-
-
-
      
+}
+
+//  country
+function country($param1 = '', $param2 = ''){
+	if ($this->session->userdata('admin_is_login') != 1)
+		redirect(base_url(), 'refresh');
+	// start menu active/inactive section
+	$this->session->unset_userdata('active_menu');
+	$this->session->set_userdata('active_menu', '2');
+	// end menu active/inactive section
+	
+	if ($param1 == 'add') {
+		$data['name']           = $this->input->post('name');
+		$data['description']    = $this->input->post('description');
+		$data['slug']           = url_title($this->input->post('name'), 'dash', TRUE);
+		$data['publication']    = $this->input->post('publication');          
+		
+		$this->db->insert('country', $data);
+		if($this->input->post('image_link')!=''){ 
+			$image_source           =   $this->input->post('image_link');
+			$save_to                =   'uploads/country/'.$insert_id.'.png';           
+			$this->common_model->grab_image($image_source,$save_to);
+		}
+		if(isset($_FILES['image']) && $_FILES['image']['name']!=''){
+			move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/country/'.$insert_id.'.png');
+		}
+		$this->session->set_flashdata('success', trans('add_success'));
+		redirect($this->agent->referrer());
+	}
+		
+	if ($param1 == 'update') {
+		$data['name']           = $this->input->post('name');
+		$data['description']    = $this->input->post('description');
+		$data['slug']           = url_title($this->input->post('name'), 'dash', TRUE);
+		$data['publication']    = $this->input->post('publication');
+
+		$this->db->where('country_id', $param2);
+		$this->db->update('country', $data);
+		if($this->input->post('image_link')!=''){
+			$image_source           =   $this->input->post('image_link');
+			$save_to                =   'uploads/country/'.$param2.'.png';           
+			$this->common_model->grab_image($image_source,$save_to);
+		}
+		if(isset($_FILES['image']) && $_FILES['image']['name']!=''){
+			move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/country/'.$param2.'.png');
+		}
+
+		$this->session->set_flashdata('success', trans('update_success'));
+		redirect($this->agent->referrer());
+	} 
+	$data['folder_name']          = 'countries';       
+	$data['page_name']          = 'country_manage';
+	$data['page_title']         = trans('country_management');
+	$data['countries']          = $this->db->get('country')->result_array(); 
+	$this->load->view('admin/index', $data);
 }
