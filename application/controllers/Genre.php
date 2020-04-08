@@ -1,18 +1,21 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Genre extends Home_Core_Controller {
-	public function __construct(){
+class category extends Home_Core_Controller
+{
+	public function __construct()
+	{
 		parent::__construct();
 	}
 
-	public function index($slug=''){
-		$genre_exist = $this->genre_model->genre_exist($slug);
-        if ($slug !='' && $slug !=NULL && $genre_exist) {
-        	$num_genre = $this->genre_model->total_genre_found($slug);
+	public function index($slug = '')
+	{
+		$category_exist = $this->category_model->category_exist($slug);
+		if ($slug != '' && $slug != NULL && $category_exist) {
+			$num_category = $this->category_model->total_category_found($slug);
 			$config = array();
-			$config["base_url"] = base_url() . "genre/".$slug;
-			$config["total_rows"] = $num_genre;
+			$config["base_url"] = base_url() . "category/" . $slug;
+			$config["total_rows"] = $num_category;
 			$config["per_page"] = 24;
 			$config["uri_segment"] = 3;
 			$config['full_tag_open'] = '<div class="pagination-container text-center"><ul class ="pagination">';
@@ -40,20 +43,19 @@ class Genre extends Home_Core_Controller {
 			$config['num_tag_open'] = '<li>';
 			$config['num_tag_close'] = '<div class="pagination-hvr"></div></li>';
 
-			$config['suffix']= 	'.html'; 
+			$config['suffix'] = 	'.html';
 
 			$this->pagination->initialize($config);
 			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-			$data["all_published_Products"] = $this->genre_model->fetch_genre_Product_by_slug($config["per_page"], $page, $slug);
+			$data["all_published_Products"] = $this->category_model->fetch_category_Product_by_slug($config["per_page"], $page, $slug);
 			$data["links"] = $this->pagination->create_links();
-			$data['total_rows']=$config["total_rows"];
-			$data['genre_name']=$slug;
-			$data['title'] = 'Watch '.$slug.' products & TV-Series online';
-			$data['page_name']='genre';
-			$this->load->view('theme/'.$this->active_theme.'/index',$data);
-		}else{
-            redirect('error', 'refresh');
-        }
+			$data['total_rows'] = $config["total_rows"];
+			$data['category_name'] = $slug;
+			$data['title'] = 'Watch ' . $slug . ' products & TV-Series online';
+			$data['page_name'] = 'category';
+			$this->load->view('theme/' . $this->active_theme . '/index', $data);
+		} else {
+			redirect('error', 'refresh');
+		}
 	}
-
 }

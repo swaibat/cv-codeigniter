@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /*
 | -------------------------------------------------------------------------
 | URI ROUTING
@@ -58,54 +58,54 @@
 // default language routes
 
 
-$route['watch/(:any)'] 					= 'watch/index/$1';
-$route['watch/(:any)/(:any)'] 			= 'watch/index/$1/$2';
-$route['watch/(:any)/(:any)/(:any)'] 	= 'watch/index/$1/$2/$3';
-$route['blog/:num'] 					= 'blog/index';
-$route['blog/category/(:any)'] 			= 'blog/category/$1';
-$route['blog/(:any)'] 					= 'blog/details/$1';
-$route['genre/(:any)'] 					= 'genre/index/$1';
-$route['genre/(:any)/:num'] 			= 'genre/index/$1';
-$route['type/(:any)'] 					= 'type/index/$1';
-$route['type/(:any)/:num'] 				= 'type/index/$1';
-$route['request-products'] 				= 'home/request_products';
-$route['contact-us'] 					= 'home/contact';
-$route['send_message'] 					= 'home/send_message';
-$route['contact_process'] 				= 'home/contact_process';
-$route['send_product_request'] 			= 'home/send_product_request';
-$route['search'] 						= 'home/search';
-$route['products'] 						= 'home/products';
-$route['product/(:any)'] 					= 'product/index/$1';
-$route['all-products'] 					= 'home/home2';
-$route['about-us'] 						= 'page/about_us';
-$route['request-products'] 				= 'home/request_products';
-$route['privacy-policy'] 				= 'home/policy';
-$route['trailers'] 						= 'home/trailers';
-$route['request'] 						= 'home/request_for_products';
-$route['dmca'] 							= 'home/dmca';
-$route['policy'] 						= 'home/policy';
-$route['terms'] 						= 'home/terms';
-$route['star/(:any)'] 					= 'star/index/$1';
-$route['star/(:any)/:num'] 				= 'star/index/$1';
-$route['director/(:any)'] 				= 'director/index/$1';
-$route['director/(:any)/:num'] 			= 'director/index/$1';
-$route['tags/(:any)'] 					= 'tags/index/$1';
-$route['tags/(:any)/:num'] 				= 'tags/index/$1';
-$route['year'] 							= 'year/find';
-$route['year/(:any)'] 					= 'year/find/$1';
-$route['year/(:any)/:num'] 				= 'year/find/$1';
-$route['page/(:any)'] 					= 'page/index/$1';
-$route['my-account/profile'] 			= 'user/profile';
-$route['my-account/update'] 			= 'user/update_profile';
-$route['my-account/favorite'] 			= 'user/favorite';
-$route['my-account/change-password'] 	= 'user/change_password';
-$route['my-account/watch-later'] 		= 'user/watch_later';
-$route['my-account/subscription'] 		= 'user/subscription';
+$route['watch/(:any)']                     = 'watch/index/$1';
+$route['watch/(:any)/(:any)']             = 'watch/index/$1/$2';
+$route['watch/(:any)/(:any)/(:any)']     = 'watch/index/$1/$2/$3';
+$route['blog/:num']                     = 'blog/index';
+$route['blog/category/(:any)']             = 'blog/category/$1';
+$route['blog/(:any)']                     = 'blog/details/$1';
+$route['category/(:any)']                     = 'category/index/$1';
+$route['category/(:any)/:num']             = 'category/index/$1';
+$route['type/(:any)']                     = 'type/index/$1';
+$route['type/(:any)/:num']                 = 'type/index/$1';
+$route['request-products']                 = 'home/request_products';
+$route['contact-us']                     = 'home/contact';
+$route['send_message']                     = 'home/send_message';
+$route['contact_process']                 = 'home/contact_process';
+$route['send_product_request']             = 'home/send_product_request';
+$route['search']                         = 'home/search';
+$route['products']                         = 'home/products';
+$route['product/(:any)']                     = 'product/index/$1';
+$route['all-products']                     = 'home/home2';
+$route['about-us']                         = 'page/about_us';
+$route['request-products']                 = 'home/request_products';
+$route['privacy-policy']                 = 'home/policy';
+$route['trailers']                         = 'home/trailers';
+$route['request']                         = 'home/request_for_products';
+$route['dmca']                             = 'home/dmca';
+$route['policy']                         = 'home/policy';
+$route['terms']                         = 'home/terms';
+$route['star/(:any)']                     = 'star/index/$1';
+$route['star/(:any)/:num']                 = 'star/index/$1';
+$route['director/(:any)']                 = 'director/index/$1';
+$route['director/(:any)/:num']             = 'director/index/$1';
+$route['tags/(:any)']                     = 'tags/index/$1';
+$route['tags/(:any)/:num']                 = 'tags/index/$1';
+$route['year']                             = 'year/find';
+$route['year/(:any)']                     = 'year/find/$1';
+$route['year/(:any)/:num']                 = 'year/find/$1';
+$route['page/(:any)']                     = 'page/index/$1';
+$route['my-account/profile']             = 'user/profile';
+$route['my-account/update']             = 'user/update_profile';
+$route['my-account/favorite']             = 'user/favorite';
+$route['my-account/change-password']     = 'user/change_password';
+$route['my-account/watch-later']         = 'user/watch_later';
+$route['my-account/subscription']         = 'user/subscription';
 
-$route['az-list'] 						= 'az/index';
-$route['az-list/(:any)/page/(:any)'] 	= 'az/index/$1';
-$route['az-list/(:any)'] 				= 'az/index/$1';
-$route['az-list/(:any)/(:any)'] 		= 'az/index/$1';
+$route['az-list']                         = 'az/index';
+$route['az-list/(:any)/page/(:any)']     = 'az/index/$1';
+$route['az-list/(:any)']                 = 'az/index/$1';
+$route['az-list/(:any)/(:any)']         = 'az/index/$1';
 
 
 
@@ -113,18 +113,18 @@ $route['az-list/(:any)/(:any)'] 		= 'az/index/$1';
 
 
 // api route
-$route['api/v100/'] 								= 'api/v100/test_get';
-$route['api/v100/(:any)'] 							= 'api/v100/$1';
-$route['api/v100/(:any)/(:any)'] 					= 'api/v100/$1/$2';
-$route['api/v100/(:any)/(:any)/(:any)'] 			= 'api/v100/$1/$2/$3';
-$route['api/v100/(:any)/(:any)/(:any)/(:any)'] 		= 'api/v100/$1/$2/$3/$4';
-$route['api/(:any)'] 								= 'legacy_api/$1';
+$route['api/v100/']                                 = 'api/v100/test_get';
+$route['api/v100/(:any)']                             = 'api/v100/$1';
+$route['api/v100/(:any)/(:any)']                     = 'api/v100/$1/$2';
+$route['api/v100/(:any)/(:any)/(:any)']             = 'api/v100/$1/$2/$3';
+$route['api/v100/(:any)/(:any)/(:any)/(:any)']         = 'api/v100/$1/$2/$3/$4';
+$route['api/(:any)']                                 = 'legacy_api/$1';
 
 
 // default routes
-$route['default_controller'] 			= "home";
-$route['404_override'] 					= 'notfound';
-$route['translate_uri_dashes'] 			= FALSE;
+$route['default_controller']             = "home";
+$route['404_override']                     = 'notfound';
+$route['translate_uri_dashes']             = FALSE;
 
 
 

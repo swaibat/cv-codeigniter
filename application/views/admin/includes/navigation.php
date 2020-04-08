@@ -1,12 +1,12 @@
-<?php $active_menu = $this->session->userdata('selected');?>
+<?php $active_menu = $this->session->userdata('selected'); ?>
 <?php
 function menu($page_name, $value, $type)
 {
-    if ($type == 'child') {
-        echo (preg_match("/$value/i", $page_name)) ? 'on-outline' : 'off';
-    } else {
-        echo (preg_match("/$value/i", $page_name)) ? $type : '';
-    }
+	if ($type == 'child') {
+		echo (preg_match("/$value/i", $page_name)) ? 'on-outline' : 'off';
+	} else {
+		echo (preg_match("/$value/i", $page_name)) ? $type : '';
+	}
 }
 ?>
 <ul class="navbar-nav mr-auto sidenav bg-white -light vh-100" id="navAccordion">
@@ -48,7 +48,7 @@ function menu($page_name, $value, $type)
 
 		<!-- Categories -->
 		<li class="nav-item">
-			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?php echo ($folder_name == 'categories') ? 'selected' : ''; ?>" href="<?php echo base_url() . "admin/genre"; ?>">
+			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?php echo ($folder_name == 'categories') ? 'selected' : ''; ?>" href="<?php echo base_url() . "admin/category"; ?>">
 				<ion-icon name="folder-open-outline"></ion-icon><span class="nav-item-text">Categories</span>
 			</a>
 		</li>
@@ -68,14 +68,14 @@ function menu($page_name, $value, $type)
 			<ul class="nav-second-level cv-collapse collapse <?php echo ($folder_name == 'blog') ? 'show' : ''; ?>" id="Pages" data-parent="#navAccordion">
 				<li class="nav-item">
 					<a class="nav-link pl-2" href="<?php echo base_url() . 'admin/posts/' ?>"><span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-<?php menu($page_name, 'posts', 'child')?>"></ion-icon>All Posts
+							<ion-icon name="radio-button-<?php menu($page_name, 'posts', 'child') ?>"></ion-icon>All Posts
 						</span>
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link  pl-2" href="<?php echo base_url() . 'admin/post_category/' ?>">
 						<span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-<?php menu($page_name, 'Post_category', 'child');?>"></ion-icon>Post Category
+							<ion-icon name="radio-button-<?php menu($page_name, 'Post_category', 'child'); ?>"></ion-icon>Post Category
 						</span>
 					</a>
 				</li>
@@ -91,14 +91,14 @@ function menu($page_name, $value, $type)
 			<ul class="nav-second-level cv-collapse collapse <?php echo ($folder_name == 'sliders') ? 'show' : ''; ?>" id="slider" data-parent="#navAccordion">
 				<li class="nav-item">
 					<a class="nav-link pl-2" href="<?php echo base_url() . 'admin/slider/' ?>"><span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-<?php menu($page_name, 'slider_manage', 'child')?>"></ion-icon>Image slider
+							<ion-icon name="radio-button-<?php menu($page_name, 'slider_manage', 'child') ?>"></ion-icon>Image slider
 						</span>
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link  pl-2" href="<?php echo base_url() . 'admin/slider_setting/' ?>">
 						<span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-<?php menu($page_name, 'slider_setting', 'child')?>"></ion-icon>Slider settings
+							<ion-icon name="radio-button-<?php menu($page_name, 'slider_setting', 'child') ?>"></ion-icon>Slider settings
 						</span>
 					</a>
 				</li>
@@ -127,14 +127,14 @@ function menu($page_name, $value, $type)
 			<ul class="nav-second-level cv-collapse collapse <?php echo ($folder_name == 'comments') ? 'show' : ''; ?>" id="comments" data-parent="#navAccordion">
 				<li class="nav-item">
 					<a class="nav-link pl-2" href="<?php echo base_url() . 'admin/comments/' ?>"><span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-<?php menu($page_name, 'comments_manage', 'child')?>"></ion-icon>Products comments
+							<ion-icon name="radio-button-<?php menu($page_name, 'comments_manage', 'child') ?>"></ion-icon>Products comments
 						</span>
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link  pl-2" href="<?php echo base_url() . 'admin/comments_setting/' ?>">
 						<span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-<?php menu($page_name, 'comments_setting', 'child')?>"></ion-icon>comments settings
+							<ion-icon name="radio-button-<?php menu($page_name, 'comments_setting', 'child') ?>"></ion-icon>comments settings
 						</span>
 					</a>
 				</li>
@@ -149,14 +149,14 @@ function menu($page_name, $value, $type)
 				<li class="nav-item">
 					<a class="nav-link  pl-2" href="<?php echo base_url() . 'admin/system_setting/' ?>">
 						<span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-<?php menu($page_name, 'system_setting', 'child')?>"></ion-icon>system
+							<ion-icon name="radio-button-<?php menu($page_name, 'system_setting', 'child') ?>"></ion-icon>system
 						</span>
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link  pl-2" href="<?php echo base_url() . 'admin/theme_options/' ?>">
 						<span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-<?php menu($page_name, 'theme_options', 'child')?>"></ion-icon>theme
+							<ion-icon name="radio-button-<?php menu($page_name, 'theme_options', 'child') ?>"></ion-icon>theme
 						</span>
 					</a>
 				</li>
@@ -215,4 +215,3 @@ function menu($page_name, $value, $type)
 	</li>
 </ul>
 <div class="header-bg"></div>
-

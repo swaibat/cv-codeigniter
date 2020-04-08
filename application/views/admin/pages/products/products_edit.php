@@ -21,7 +21,7 @@ foreach ($Products as $Product) :
     $directors  = explode(",", $Product['director']);
     $writers    = explode(",", $Product['writer']);
     echo form_open(base_url() . 'admin/Products/update/' . $param1, array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data'));
-    ?>
+?>
     <div class="row">
         <div class="col-md-6">
             <div class="card cta cta--featured p-a">
@@ -83,22 +83,22 @@ foreach ($Products as $Product) :
                         <select class="form-control select2" name="country[]" multiple="multiple" id="country">
                             <optgroup label="Select Country">
                                 <?php $country = $this->db->get('country')->result_array();
-                                    foreach ($country as $v_country) : ?>
+                                foreach ($country as $v_country) : ?>
                                     <option value="<?php echo $v_country['country_id']; ?>" <?php if (preg_match('/\b' . $v_country['country_id'] . '\b/', $Product['country'])) {
-                                                                                                        echo "selected";
-                                                                                                    } ?>><?php echo $v_country['name']; ?></option>
+                                                                                                echo "selected";
+                                                                                            } ?>><?php echo $v_country['name']; ?></option>
                                 <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="control-label"><?php echo trans('genre'); ?></label>
-                        <select class="form-control select2" name="genre[]" multiple="multiple" id="genre">
-                            <?php $genre = $this->db->get('genre')->result_array();
-                                foreach ($genre as $v_genre) : ?>
-                                <option value="<?php echo $v_genre['genre_id']; ?>" <?php if (preg_match('/\b' . $v_genre['genre_id'] . '\b/', $Product['genre'])) {
+                        <label class="control-label"><?php echo trans('category'); ?></label>
+                        <select class="form-control select2" name="category[]" multiple="multiple" id="category">
+                            <?php $category = $this->db->get('category')->result_array();
+                            foreach ($category as $v_category) : ?>
+                                <option value="<?php echo $v_category['category_id']; ?>" <?php if (preg_match('/\b' . $v_category['category_id'] . '\b/', $Product['category'])) {
                                                                                                 echo "selected";
-                                                                                            } ?>><?php echo $v_genre['name']; ?></option>
-                                <option value="<?php echo $v_genre['genre_id']; ?>"><?php echo $v_genre['name']; ?></option>
+                                                                                            } ?>><?php echo $v_category['name']; ?></option>
+                                <option value="<?php echo $v_category['category_id']; ?>"><?php echo $v_category['name']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -106,10 +106,10 @@ foreach ($Products as $Product) :
                         <label class="control-label"><?php echo trans('Product_type'); ?></label>
                         <select class="form-control select2" name="Product_type[]" multiple="multiple" id="Product_type">
                             <?php $Product_types = $this->db->get('Product_type')->result_array();
-                                foreach ($Product_types as $Product_type) : ?>
+                            foreach ($Product_types as $Product_type) : ?>
                                 <option value="<?php echo $Product_type['Product_type_id']; ?>" <?php if (preg_match('/\b' . $Product_type['Product_type_id'] . '\b/', $Product['Product_type'])) {
-                                                                                                        echo "selected";
-                                                                                                    } ?>><?php echo $Product_type['Product_type']; ?></option>
+                                                                                                    echo "selected";
+                                                                                                } ?>><?php echo $Product_type['Product_type']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -121,10 +121,10 @@ foreach ($Products as $Product) :
                         <label class="control-label"><?php echo trans('Product_quality'); ?></label>
                         <select class="form-control m-bot15" name="Product_quality">
                             <?php $quality = $this->db->get_where('quality', array('status' => '1'))->result_array();
-                                foreach ($quality as $quality) : ?>
+                            foreach ($quality as $quality) : ?>
                                 <option value="<?php echo $quality['quality'] ?>" <?php if ($quality['quality'] == $Product['Product_quality']) {
-                                                                                                echo 'selected';
-                                                                                            } ?>><?php echo $quality['quality'] ?></option>
+                                                                                        echo 'selected';
+                                                                                    } ?>><?php echo $quality['quality'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -133,8 +133,8 @@ foreach ($Products as $Product) :
                         <div class="toggle">
                             <label>
                                 <input type="checkbox" name="publication" <?php if ($Product['publication'] == '1') {
-                                                                                    echo 'checked';
-                                                                                } ?>><span class="button-indecator"></span>
+                                                                                echo 'checked';
+                                                                            } ?>><span class="button-indecator"></span>
                             </label>
                         </div>
                     </div>
@@ -144,16 +144,20 @@ foreach ($Products as $Product) :
                         <div class="toggle">
                             <label>
                                 <input type="checkbox" name="enable_download" <?php if ($Product['enable_download'] == '1') {
-                                                                                        echo 'checked';
-                                                                                    } ?>><span class="button-indecator"></span>
+                                                                                    echo 'checked';
+                                                                                } ?>><span class="button-indecator"></span>
                             </label>
                         </div>
                     </div>
                     <div class="form-group">
-                      <label class="control-label">Free/Paid</label>
-                        <select  class="form-control"  name="is_paid">
-                          <option value="0"  <?php if($Product['is_paid'] =='0'){ echo "selected";} ?>>Free</option>
-                          <option value="1" <?php if($Product['is_paid'] =='1'){ echo "selected";} ?>>Paid</option>
+                        <label class="control-label">Free/Paid</label>
+                        <select class="form-control" name="is_paid">
+                            <option value="0" <?php if ($Product['is_paid'] == '0') {
+                                                    echo "selected";
+                                                } ?>>Free</option>
+                            <option value="1" <?php if ($Product['is_paid'] == '1') {
+                                                    echo "selected";
+                                                } ?>>Paid</option>
                         </select>
                     </div>
                     <div class="row">
@@ -319,8 +323,8 @@ foreach ($Products as $Product) :
         $('#country').select2({
             placeholder: 'Select Country'
         });
-        $('#genre').select2({
-            placeholder: 'Select Genre'
+        $('#category').select2({
+            placeholder: 'Select category'
         });
         $('#Product_type').select2({
             placeholder: 'Select Video Type'

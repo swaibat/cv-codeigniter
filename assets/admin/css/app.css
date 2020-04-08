@@ -2,6 +2,11 @@ html {
 	position: relative;
 	min-height: 100%;
 }
+.btn-primary {
+    color: #fff;
+    background-color: #0f0f0f;
+    border-color: #0f0f0f;
+}
 a {
 	text-decoration: none;
 	color: gray;

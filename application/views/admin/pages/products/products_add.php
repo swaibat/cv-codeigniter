@@ -31,9 +31,9 @@ $default_quality    =   $this->db->get_where('config', array('title' => 'default
                         $languages = $this->db->get('languages_iso')->result_array();
                         foreach ($languages as $language) :
 
-                            ?>
+                        ?>
                             <option value="<?php echo $language['iso'] ?>" <?php if ($tmdb_language == $language['iso']) : echo "selected";
-                                                                                endif; ?>><?php echo $language['name'] ?></option>
+                                                                            endif; ?>><?php echo $language['name'] ?></option>
                         <?php endforeach; ?>
                     </select>
                     <input type="text" class="form-control" id="imdb_id" placeholder="Enter TMDB ID. Ex: 141052" aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -109,11 +109,11 @@ $default_quality    =   $this->db->get_where('config', array('title' => 'default
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="control-label"><?php echo trans('genre'); ?></label>
-                    <select class="form-control select2" name="genre[]" multiple="multiple" id="genre">
-                        <?php $genre = $this->db->get('genre')->result_array();
-                        foreach ($genre as $v_genre) : ?>
-                            <option value="<?php echo $v_genre['genre_id']; ?>"><?php echo $v_genre['name']; ?></option>
+                    <label class="control-label"><?php echo trans('category'); ?></label>
+                    <select class="form-control select2" name="category[]" multiple="multiple" id="category">
+                        <?php $category = $this->db->get('category')->result_array();
+                        foreach ($category as $v_category) : ?>
+                            <option value="<?php echo $v_category['category_id']; ?>"><?php echo $v_category['name']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -138,7 +138,7 @@ $default_quality    =   $this->db->get_where('config', array('title' => 'default
                         <?php $quality = $this->db->get_where('quality', array('status' => '1'))->result_array();
                         foreach ($quality as $quality) : ?>
                             <option value="<?php echo $quality['quality'] ?>" <?php if ($default_quality == $quality['quality']) : echo "selected";
-                                                                                    endif; ?>><?php echo $quality['quality'] ?></option>
+                                                                                endif; ?>><?php echo $quality['quality'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -159,10 +159,10 @@ $default_quality    =   $this->db->get_where('config', array('title' => 'default
                     </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label">Free/Paid</label>
-                    <select  class="form-control"  name="is_paid">
-                      <option value="0">Free</option>
-                      <option value="1" selected>Paid</option>
+                    <label class="control-label">Free/Paid</label>
+                    <select class="form-control" name="is_paid">
+                        <option value="0">Free</option>
+                        <option value="1" selected>Paid</option>
                     </select>
                 </div>
                 <br><br>
@@ -319,8 +319,8 @@ $default_quality    =   $this->db->get_where('config', array('title' => 'default
         $('#country').select2({
             placeholder: 'Select Country'
         });
-        $('#genre').select2({
-            placeholder: 'Select Genre'
+        $('#category').select2({
+            placeholder: 'Select category'
         });
         $('#Product_type').select2({
             placeholder: 'Select Video Type'
@@ -386,7 +386,7 @@ $default_quality    =   $this->db->get_where('config', array('title' => 'default
                         var plot = response.plot;
                         var runtime = response.runtime;
                         var country = JSON.parse("[" + response.country + "]");
-                        var genre = JSON.parse("[" + response.genre + "]");
+                        var category = JSON.parse("[" + response.category + "]");
                         var rating = response.rating;;
                         var release = response.release;
                         var thumbnail = response.thumbnail;
@@ -422,7 +422,7 @@ $default_quality    =   $this->db->get_where('config', array('title' => 'default
                             $("#description").code('<p>' + plot + '</p>');
                             $("#runtime").val(runtime);
                             $("#country").val(country).trigger('change');
-                            $("#genre").val(genre).trigger('change');
+                            $("#category").val(category).trigger('change');
                             $("#rating").val(rating);
                             $("#release_date").datepicker("setDate", release);
                             $('#thumbnail_content').html('<input type="text" name="thumb_link" value="' + thumbnail + '" class="form-control">');

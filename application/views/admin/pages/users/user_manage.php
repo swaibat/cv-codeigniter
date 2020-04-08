@@ -1,7 +1,7 @@
 <div class="card">
     <div class="row">
         <div class="col-sm-12">
-            <button data-toggle="modal" data-target="#mymodal" data-id="<?php echo base_url() . 'admin/view_modal/user_add';?>" id="menu" class="btn btn-sm btn-primary waves-effect waves-light"><span class="btn-label"><i class="fa fa-plus"></i></span><?php echo trans('add_user'); ?></button>
+            <button data-toggle="modal" data-target="#mymodal" data-id="<?php echo base_url('admin/view_modal/user_add');?>" id="menu" class="btn btn-sm btn-primary waves-effect waves-light"><span class="btn-label"><i class="fa fa-plus"></i></span><?php echo trans('add_user'); ?></button>
             <br>
             <br>
             <table class="table table-striped">

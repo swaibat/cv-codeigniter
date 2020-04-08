@@ -1,0 +1,236 @@
+.previewImage span {
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	margin-left: -0.5rem;
+	margin-top: 0.4rem;
+	float: left;
+	cursor: pointer !important;
+	transition: color 0.3s ease, border 0.3s ease;
+	text-align: center;
+	line-height: 1.4;
+	font-size: 12px;
+}
+.previewImage span > * {
+	pointer-events: none;
+}
+.img-upload-preview {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+}
+.title-btn {
+	border-top-right-radius: 0 !important;
+	border-top-left-radius: 0 !important;
+}
+.font-size-lg {
+	font-size: 1.9rem;
+}
+.btn-blue {
+	background: #007bff;
+	color: white;
+}
+.previewImage {
+	padding: 0 0.7rem;
+	overflow: hidden;
+}
+.previewImage .preview-badge {
+	margin-left: -1.1rem;
+	margin-top: 3.2rem;
+	border-radius: 5px 0 5px 0;
+}
+.previewImage img {
+	width: 90px;
+	height: 60px;
+	float: left;
+	border-radius: 5px;
+	margin-top: 10px;
+}
+.previewImage img:hover {
+	cursor: pointer;
+}
+.previewImage:nth-child(1) {
+	padding-left: 0rem;
+	padding-right: 0.7rem;
+}
+.previewImage:nth-child(1) .preview-badge {
+	margin-left: -5.1rem;
+	margin-top: 9.5rem;
+}
+.previewImage:nth-child(1) img {
+	width: 15rem;
+	height: 10rem;
+}
+.previewImage:nth-child(1) img:hover {
+	cursor: pointer;
+}
+.previewImage > * {
+	pointer-events: none;
+}
+.photo-file-detail {
+	background: #819d97;
+	padding: 7px;
+	color: #fff;
+	border-bottom: 1px solid #fff;
+	font-size: 16px;
+	text-transform: capitalize;
+}
+.sm-font {
+	font-size: 13px;
+}
+ion-icon {
+	margin-bottom: -0.15rem;
+}
+.sidenav ion-icon {
+	font-size: 1.2rem;
+	margin-right: 0.4rem;
+	margin-bottom: -0.25rem;
+}
+.sidenav ion-icon[names="cog"] {
+	font-size: 1.3rem;
+	margin-bottom: -0.25rem;
+}
+.icon.shadow.padding-4 {
+	border-radius: 10px;
+}
+.cv-editor .gikaa-btn ion-icon {
+	font-size: 1.1rem;
+	color: #5c5c5c;
+	padding: 0.1rem;
+}
+.cv-editor .btn.gikaa-btn {
+	line-height: 0;
+}
+.cv-editor .btn.gikaa-link ion-icon {
+	font-size: 0.9rem;
+	color: #5c5c5c;
+	line-height: 0;
+}
+.cv-editor textarea {
+	border: none;
+	overflow: auto;
+	outline: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+.gu-mirror {
+	position: fixed !important;
+	margin: 0 !important;
+	z-index: 9999 !important;
+	opacity: 0.8;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+}
+.gu-hide {
+	display: none !important;
+}
+.gu-unselectable {
+	-webkit-user-select: none !important;
+	-moz-user-select: none !important;
+	-ms-user-select: none !important;
+	user-select: none !important;
+}
+.gu-transit {
+	opacity: 0.2;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+	filter: alpha(opacity=20);
+}
+/* CSS rules are kept repetitive so that you can get CSS rules for each button easily :) */
+* {
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+}
+*:focus {
+	outline: none;
+}
+
+.button-cover,
+.knobs,
+.layer {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+.button {
+	position: relative;
+	top: 50%;
+	width: 74px;
+	height: 30px;
+	margin: -20px auto 0 auto;
+	overflow: hidden;
+}
+.button.r,
+.button.r .layer {
+	border-radius: 100px;
+}
+.button.b2 {
+	border-radius: 2px;
+}
+.checkbox {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	opacity: 0;
+	cursor: pointer;
+	z-index: 3;
+}
+.knobs {
+	z-index: 2;
+}
+.layer {
+	width: 100%;
+	background-color: #ebf7fc;
+	transition: 0.3s ease all;
+	z-index: 1;
+}
+#button-10 .knobs:before,
+#button-10 .knobs:after,
+#button-10 .knobs span {
+	position: absolute;
+	top: 4px;
+	width: 30px;
+	height: 23px;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 1;
+	padding: 6px 4px;
+	border-radius: 2px;
+	transition: 0.3s ease all;
+}
+#button-10 .knobs:before {
+	content: "";
+	left: 4px;
+	background-color: #0f0f0f;
+}
+#button-10 .knobs:after {
+	content: "NO";
+	right: 4px;
+	color: #4e4e4e;
+}
+#button-10 .knobs span {
+	display: inline-block;
+	left: 4px;
+	color: #fff;
+	z-index: 1;
+}
+#button-10 .checkbox:checked + .knobs span {
+	color: #4e4e4e;
+}
+#button-10 .checkbox:checked + .knobs:before {
+	left: 42px;
+	background-color: #f44336;
+}
+#button-10 .checkbox:checked + .knobs:after {
+	color: #fff;
+}
+#button-10 .checkbox:checked ~ .layer {
+	background-color: #fcebeb;
+}
+
+

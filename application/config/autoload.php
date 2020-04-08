@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /*
 | -------------------------------------------------------------------
 | AUTO-LOADER
@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('session','pagination', 'xmlrpc' , 'user_agent', 'form_validation', 'email','upload','database','recaptcha','paypal','stripegateway');
+$autoload['libraries'] = array('session', 'pagination', 'xmlrpc', 'user_agent', 'form_validation', 'email', 'upload', 'database', 'recaptcha', 'paypal', 'stripegateway');
 
 
 /*
@@ -64,7 +64,7 @@ $autoload['libraries'] = array('session','pagination', 'xmlrpc' , 'user_agent', 
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('html','url','file','form','security','string','inflector','directory','download','language','custom');
+$autoload['helper'] = array('html', 'url', 'file', 'form', 'security', 'string', 'inflector', 'directory', 'download', 'language', 'custom');
 
 
 /*
@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('common_model','language_model','genre_model','subscription_model');
+$autoload['model'] = array('common_model', 'language_model', 'category_model', 'subscription_model');
 
 
 /* End of file autoload.php */
