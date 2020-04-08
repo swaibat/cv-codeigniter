@@ -827,39 +827,9 @@ class Admin extends Admin_Core_Controller
 		$this->load->view('admin/index', $data);
 	}
 
-	// add blog post
-	function posts_add()
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-		$data['folder_name']      = 'blog';
-		$data['page_name']      = 'posts_add';
-		$data['page_title']     = trans('posts_add');
-		$this->load->view('admin/index', $data);
-	}
-
-	// edit blog post
-	function posts_edit($param1 = '', $param2 = '')
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-
-		$data['param1']         = $param1;
-		$data['param2']         = $param2;
-
-		$data['folder_name']    = 'blog';
-		$data['page_name']      = 'posts_edit';
-		$data['page_title']     = trans('posts_edit');
-		$this->load->view('admin/index', $data);
-	}
-
-	// add,update blog post
-	function posts($param1 = '', $param2 = '')
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-
-		if ($param1 == 'add') {
+	// CREATE A NEW POST
+	function posts_add(){
+		if (isset($_POST) && !empty($_POST)) {
 			$data['post_title']                 = $this->input->post('post_title');
 			$data['seo_title']                  = $this->input->post('seo_title');
 			$data['content']                    = $this->input->post('content');
@@ -892,7 +862,21 @@ class Admin extends Admin_Core_Controller
 
 			$this->session->set_flashdata('success', trans('add_success'));
 			redirect($this->agent->referrer());
-		} else if ($param1 == 'update') {
+		}
+		$data['folder_name']    = 'blog';
+		$data['page_name']      = 'posts_add';
+		$data['page_title']     = trans('posts_add');
+		$this->load->view('admin/index', $data);
+	}
+
+
+	// add,update blog post
+	function posts($param1 = '', $param2 = '')
+	{
+		if ($this->session->userdata('admin_is_login') != 1)
+			redirect(base_url(), 'refresh');
+
+		if ($param1 == 'update') {
 			$data['post_title']                 = $this->input->post('post_title');
 			$data['seo_title']                  = $this->input->post('seo_title');
 			$data['content']                    = $this->input->post('content');
@@ -933,7 +917,7 @@ class Admin extends Admin_Core_Controller
 		}
 		$data['folder_name']      = 'blog';
 		$data['page_name']      = 'posts_manage';
-		$data['page_title']     = trans('');
+		$data['page_title']     = trans('posts_manage');
 		$this->load->view('admin/index', $data);
 	}
 
