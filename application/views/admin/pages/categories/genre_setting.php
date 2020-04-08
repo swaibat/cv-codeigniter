@@ -1,12 +1,12 @@
-<?php $genre_to_primary_menu           =   $this->db->get_where('config', array('title' => 'genre_to_primary_menu'))->row()->value; ?>
-<?php echo form_open(base_url() . 'admin/genre_setting/update/', array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data')); ?>
+<?php $category_to_primary_menu           =   $this->db->get_where('config', array('title' => 'category_to_primary_menu'))->row()->value; ?>
+<?php echo form_open(base_url() . 'admin/category_setting/update/', array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data')); ?>
 <div class="card">
   <div class="row">
     <!-- panel  -->
     <div class="col-md-12">
       <div class="panel panel-border panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title"><?php echo trans('genre_setting'); ?></h3>
+          <h3 class="panel-title"><?php echo trans('category_setting'); ?></h3>
         </div>
         <div class="panel-body">
           <!-- panel  -->
@@ -15,9 +15,9 @@
             <div class="col-sm-6">
               <div class="toggle">
                 <label>
-                  <input type="checkbox" name="genre_to_primary_menu" <?php if ($genre_to_primary_menu == '1') {
-                                                                        echo 'checked';
-                                                                      } ?>><span class="button-indecator"></span>
+                  <input type="checkbox" name="category_to_primary_menu" <?php if ($category_to_primary_menu == '1') {
+                                                                            echo 'checked';
+                                                                          } ?>><span class="button-indecator"></span>
                 </label>
               </div>
             </div>

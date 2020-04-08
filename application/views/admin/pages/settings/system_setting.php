@@ -1,26 +1,26 @@
 <?php
-    $registration_enable        = app_config('purchase_code');
-    $frontend_login_enable      = app_config('frontend_login_enable');
-    $blog_enable                = app_config('blog_enable');
-    $country_to_primary_menu    = app_config('country_to_primary_menu');
-    $genre_to_primary_menu      = app_config('genre_to_primary_menu');
-    $release_to_primary_menu    = app_config('release_to_primary_menu');
-    $contact_to_primary_menu    = app_config('contact_to_primary_menu');
-    $contact_to_footer_menu     = app_config('contact_to_footer_menu');
-    $show_star_image            = app_config('show_star_image');
-    $product_report_enable        = app_config('product_report_enable');
-    $product_report_email         = app_config('product_report_email');
-    $product_request_enable       = app_config('product_request_enable');
-    $product_request_email        = app_config('product_request_email');
-    $product_report_note          = app_config('product_report_note');
-    $recaptcha_enable           = app_config('recaptcha_enable');
-    $recaptcha_site_key         = app_config('recaptcha_site_key');
-    $recaptcha_secret_key       = app_config('recaptcha_secret_key');
-    $az_to_primary_menu         = app_config('az_to_primary_menu');
-    $az_to_footer_menu          = app_config('az_to_footer_menu');
-    $current_timezone           = app_config('timezone');
-    $purchase_code              = app_config('purchase_code');
-    $purchase_code              = substr($purchase_code, 0,10).'***********'.substr($purchase_code, -8);
+$registration_enable        = app_config('purchase_code');
+$frontend_login_enable      = app_config('frontend_login_enable');
+$blog_enable                = app_config('blog_enable');
+$country_to_primary_menu    = app_config('country_to_primary_menu');
+$category_to_primary_menu      = app_config('category_to_primary_menu');
+$release_to_primary_menu    = app_config('release_to_primary_menu');
+$contact_to_primary_menu    = app_config('contact_to_primary_menu');
+$contact_to_footer_menu     = app_config('contact_to_footer_menu');
+$show_star_image            = app_config('show_star_image');
+$product_report_enable        = app_config('product_report_enable');
+$product_report_email         = app_config('product_report_email');
+$product_request_enable       = app_config('product_request_enable');
+$product_request_email        = app_config('product_request_email');
+$product_report_note          = app_config('product_report_note');
+$recaptcha_enable           = app_config('recaptcha_enable');
+$recaptcha_site_key         = app_config('recaptcha_site_key');
+$recaptcha_secret_key       = app_config('recaptcha_secret_key');
+$az_to_primary_menu         = app_config('az_to_primary_menu');
+$az_to_footer_menu          = app_config('az_to_footer_menu');
+$current_timezone           = app_config('timezone');
+$purchase_code              = app_config('purchase_code');
+$purchase_code              = substr($purchase_code, 0, 10) . '***********' . substr($purchase_code, -8);
 ?>
 
 <?php echo form_open(base_url() . 'admin/system_setting/update/', array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data')); ?>
@@ -40,7 +40,7 @@
             <div class="col-sm-9">
               <input type="text" value="<?php echo $purchase_code; ?>" name="purchase_code" class="form-control" required />
             </div>
-          </div>          
+          </div>
 
           <div class="form-group row">
             <label class="col-sm-3 control-label"><?php echo trans('timezone'); ?></label>
@@ -48,10 +48,11 @@
               <select class="form-control select2" name="timezone" id="timezone">
                 <?php $timezones = $this->db->get('calendar')->result_array();
                 foreach ($timezones as $timezone) : ?>
-                    <option value="<?php echo $timezone['timezone']; ?>" <?php if($current_timezone == $timezone['timezone']): echo "selected"; endif; ?>><?php echo $timezone['timezone']; ?></option>
+                  <option value="<?php echo $timezone['timezone']; ?>" <?php if ($current_timezone == $timezone['timezone']) : echo "selected";
+                                                                        endif; ?>><?php echo $timezone['timezone']; ?></option>
                 <?php endforeach; ?>
               </select>
-              <small>Server Time: <?php echo date('Y-m-d H:i:s');?></small>
+              <small>Server Time: <?php echo date('Y-m-d H:i:s'); ?></small>
             </div>
           </div>
 
@@ -149,13 +150,13 @@
           </div>
 
           <div class="form-group row">
-            <label class="control-label col-sm-3 "><?php echo trans('show_genre_to_main_menu'); ?></label>
+            <label class="control-label col-sm-3 "><?php echo trans('show_category_to_main_menu'); ?></label>
             <div class="col-sm-6">
               <div class="toggle">
                 <label>
-                  <input type="checkbox" name="genre_to_primary_menu" <?php if ($genre_to_primary_menu == '1') {
-                                                                        echo 'checked';
-                                                                      } ?>><span class="button-indecator"></span>
+                  <input type="checkbox" name="category_to_primary_menu" <?php if ($category_to_primary_menu == '1') {
+                                                                            echo 'checked';
+                                                                          } ?>><span class="button-indecator"></span>
                 </label>
               </div>
             </div>
@@ -179,7 +180,9 @@
             <div class="col-sm-6">
               <div class="toggle">
                 <label>
-                  <input type="checkbox" name="contact_to_primary_menu" <?php if ($contact_to_primary_menu == '1') { echo 'checked';} ?>><span class="button-indecator"></span>
+                  <input type="checkbox" name="contact_to_primary_menu" <?php if ($contact_to_primary_menu == '1') {
+                                                                          echo 'checked';
+                                                                        } ?>><span class="button-indecator"></span>
                 </label>
               </div>
             </div>
@@ -190,7 +193,9 @@
             <div class="col-sm-6">
               <div class="toggle">
                 <label>
-                  <input type="checkbox" name="contact_to_footer_menu" <?php if ($contact_to_footer_menu == '1') { echo 'checked';} ?>><span class="button-indecator"></span>
+                  <input type="checkbox" name="contact_to_footer_menu" <?php if ($contact_to_footer_menu == '1') {
+                                                                          echo 'checked';
+                                                                        } ?>><span class="button-indecator"></span>
                 </label>
               </div>
             </div>
@@ -201,7 +206,9 @@
             <div class="col-sm-6">
               <div class="toggle">
                 <label>
-                  <input type="checkbox" name="show_star_image" <?php if ($show_star_image == '1') {echo 'checked'; } ?>><span class="button-indecator"></span>
+                  <input type="checkbox" name="show_star_image" <?php if ($show_star_image == '1') {
+                                                                  echo 'checked';
+                                                                } ?>><span class="button-indecator"></span>
                 </label>
               </div>
             </div>
@@ -239,8 +246,8 @@
               <div class="toggle">
                 <label>
                   <input type="checkbox" name="product_report_enable" <?php if ($product_report_enable == '1') {
-                                                                      echo 'checked';
-                                                                    } ?>><span class="button-indecator"></span>
+                                                                        echo 'checked';
+                                                                      } ?>><span class="button-indecator"></span>
                 </label>
               </div>
             </div>
@@ -266,8 +273,8 @@
               <div class="toggle">
                 <label>
                   <input type="checkbox" name="product_request_enable" <?php if ($product_request_enable == '1') {
-                                                                        echo 'checked';
-                                                                      } ?>><span class="button-indecator"></span>
+                                                                          echo 'checked';
+                                                                        } ?>><span class="button-indecator"></span>
                 </label>
               </div>
             </div>
@@ -289,7 +296,7 @@
                                                                     echo 'checked';
                                                                   } ?>><span class="button-indecator"></span>
                 </label>
-                <p class="text-danger"><?php echo trans('recaptcha_alert_text');?></p>
+                <p class="text-danger"><?php echo trans('recaptcha_alert_text'); ?></p>
               </div>
             </div>
           </div>
@@ -335,9 +342,10 @@
 <script type="text/javascript">
   jQuery(document).ready(function() {
     $('#timezone').select2({
-        placeholder: '<?php echo trans('timezone');?>'
+      placeholder: '<?php echo trans('timezone'); ?>'
     });
   });
+
   function showImg(input) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();

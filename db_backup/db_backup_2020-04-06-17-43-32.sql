@@ -19,7 +19,7 @@ CREATE TABLE `ads` (
 
 INSERT INTO `ads` (`ads_id`, `ads_name`, `unique_name`, `ads_size`, `ads_type`, `ads_url`, `ads_image_url`, `ads_code`, `enable`) VALUES (1, 'Home Page Header', 'home_header', '728x90', 'code', '#', '', '', 0);
 INSERT INTO `ads` (`ads_id`, `ads_name`, `unique_name`, `ads_size`, `ads_type`, `ads_url`, `ads_image_url`, `ads_code`, `enable`) VALUES (2, 'Product Page Header', 'product_header', '728x90', 'code', '#', '', '', 0);
-INSERT INTO `ads` (`ads_id`, `ads_name`, `unique_name`, `ads_size`, `ads_type`, `ads_url`, `ads_image_url`, `ads_code`, `enable`) VALUES (3, 'Genre Page Header', 'genre_header', '728x90', 'code', '#', '', '', 0);
+INSERT INTO `ads` (`ads_id`, `ads_name`, `unique_name`, `ads_size`, `ads_type`, `ads_url`, `ads_image_url`, `ads_code`, `enable`) VALUES (3, 'category Page Header', 'category_header', '728x90', 'code', '#', '', '', 0);
 INSERT INTO `ads` (`ads_id`, `ads_name`, `unique_name`, `ads_size`, `ads_type`, `ads_url`, `ads_image_url`, `ads_code`, `enable`) VALUES (4, 'Country Page Header', 'country_header', '728x90', 'code', '#', '', '', 0);
 INSERT INTO `ads` (`ads_id`, `ads_name`, `unique_name`, `ads_size`, `ads_type`, `ads_url`, `ads_image_url`, `ads_code`, `enable`) VALUES (5, 'Release Page Header', 'release_header', '728x90', 'code', '#', '', '', 0);
 INSERT INTO `ads` (`ads_id`, `ads_name`, `unique_name`, `ads_size`, `ads_type`, `ads_url`, `ads_image_url`, `ads_code`, `enable`) VALUES (6, 'TV-series Page Header', 'tv_header', '728x90', 'code', '#', '', '', 0);
@@ -765,7 +765,7 @@ INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (112, 'landing_page_
 INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (113, 'landing_page_image_url', 'landing_page/bg.jpg');
 INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (142, 'mobile_apps_api_secret_key', 'default_mobile_apps_api_secret_key');
 INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (115, 'country_to_primary_menu', '0');
-INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (116, 'genre_to_primary_menu', '1');
+INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (116, 'category_to_primary_menu', '1');
 INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (117, 'release_to_primary_menu', '1');
 INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (118, 'show_star_image', '0');
 INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (119, 'product_page_seo_title', 'Product Page SEO Title');
@@ -814,7 +814,7 @@ INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (172, 'default_quali
 INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (173, 'app_menu', 'grid');
 INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (174, 'app_program_guide_enable', 'false');
 INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (175, 'app_mandatory_login', 'false');
-INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (176, 'genre_visible', 'true');
+INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (176, 'category_visible', 'true');
 INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (177, 'country_visible', 'true');
 INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (178, 'timezone', 'Asia/Dhaka');
 INSERT INTO `config` (`config_id`, `title`, `value`) VALUES (179, 'season_order', 'DESC');
@@ -1154,81 +1154,81 @@ CREATE TABLE `episodes` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 #
-# TABLE STRUCTURE FOR: genre
+# TABLE STRUCTURE FOR: category
 #
 
-DROP TABLE IF EXISTS `genre`;
+DROP TABLE IF EXISTS `category`;
 
-CREATE TABLE `genre` (
-  `genre_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `category` (
+  `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `description` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `slug` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `publication` int(1) NOT NULL,
   `featured` int(2) DEFAULT '0',
-  PRIMARY KEY (`genre_id`)
+  PRIMARY KEY (`category_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (1, 'Action', 'Action Product<br>', 'action', 1, 1);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (2, 'TV Show', 'Tv Show <br>', 'tv-show', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (3, 'Si-Fi', '', 'si-fi', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (4, 'Adventure', 'Adventure Products<br>', 'adventure', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (5, 'Animation', 'Animation Products<br>', 'animation', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (6, 'Biography', 'Biography Products<br>', 'biography', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (7, 'Comedy', 'Comedy Products<br>', 'comedy', 1, 1);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (8, 'Crime', 'Crime Products<br>', 'crime', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (9, 'Documentary', 'Documentary Products<br>', 'documentary', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (10, 'Drama', '', 'drama', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (11, 'Family', 'Family<br>', 'family', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (12, 'Fantasy', 'Fantasy Products<br>', 'fantasy', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (13, 'History', '', 'history', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (14, 'Horror', 'Horror Products<br>', 'horror', 1, 1);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (15, 'Music', '', 'music', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (16, 'Musical', '', 'musical', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (17, 'Mystery', '', 'mystery', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (18, 'Thriller', '', 'thriller', 1, 1);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (19, 'War', '', 'war', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (20, 'Western', '', 'western', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (21, 'TV Series', '', 'tv-series', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (22, ' Romance', ' Romance', 'romance', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (23, ' Adventure', ' Adventure', 'adventure', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (24, ' Thriller', ' Thriller', 'thriller', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (25, ' Drama', ' Drama', 'drama', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (26, ' Fantasy', ' Fantasy', 'fantasy', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (27, ' Sci-Fi', ' Sci-Fi', 'sci-fi', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (28, ' Comedy', ' Comedy', 'comedy', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (29, ' Family', ' Family', 'family', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (30, ' Action', ' Action', 'action', 1, 1);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (31, 'Short', 'Short', 'short', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (32, ' Music', ' Music', 'music', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (33, ' History', ' History', 'history', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (34, ' Crime', ' Crime', 'crime', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (35, ' Western', ' Western', 'western', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (36, ' Sport', ' Sport', 'sport', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (37, ' Short', ' Short', 'short', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (38, ' Mystery', ' Mystery', 'mystery', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (39, 'Romance', 'Romance', 'romance', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (40, 'Action & Adventure', 'Action & Adventure', 'action-adventure', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (41, 'Sci-Fi & Fantasy', 'Sci-Fi & Fantasy', 'sci-fi-fantasy', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (42, 'Science Fiction', 'Science Fiction', 'science-fiction', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (44, 'TV Product', 'TV Product', 'tv-product', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (45, 'News', 'News', 'news', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (46, 'جريمة', 'جريمة', 'جريمة', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (47, 'إثارة', 'إثارة', 'إثارة', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (48, 'دراما', 'دراما', 'دراما', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (49, 'حركة', 'حركة', '', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (50, 'خيال علمي', 'خيال علمي', '', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (51, 'مغامرة', 'مغامرة', '', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (52, 'فانتازيا', 'فانتازيا', '', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (53, 'رسوم متحركة', 'رسوم متحركة', '', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (54, 'عائلي', 'عائلي', '', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (55, 'كوميديا', 'كوميديا', '', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (56, 'وثائقي', 'وثائقي', '', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (57, 'Science-Fiction', 'Science-Fiction', 'science-fiction', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (58, 'Historie', 'Historie', 'historie', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (59, 'Abenteuer', 'Abenteuer', 'abenteuer', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (60, 'Familie', 'Familie', 'familie', 1, 0);
-INSERT INTO `genre` (`genre_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (61, 'Krimi', 'Krimi', 'krimi', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (1, 'Action', 'Action Product<br>', 'action', 1, 1);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (2, 'TV Show', 'Tv Show <br>', 'tv-show', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (3, 'Si-Fi', '', 'si-fi', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (4, 'Adventure', 'Adventure Products<br>', 'adventure', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (5, 'Animation', 'Animation Products<br>', 'animation', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (6, 'Biography', 'Biography Products<br>', 'biography', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (7, 'Comedy', 'Comedy Products<br>', 'comedy', 1, 1);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (8, 'Crime', 'Crime Products<br>', 'crime', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (9, 'Documentary', 'Documentary Products<br>', 'documentary', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (10, 'Drama', '', 'drama', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (11, 'Family', 'Family<br>', 'family', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (12, 'Fantasy', 'Fantasy Products<br>', 'fantasy', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (13, 'History', '', 'history', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (14, 'Horror', 'Horror Products<br>', 'horror', 1, 1);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (15, 'Music', '', 'music', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (16, 'Musical', '', 'musical', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (17, 'Mystery', '', 'mystery', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (18, 'Thriller', '', 'thriller', 1, 1);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (19, 'War', '', 'war', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (20, 'Western', '', 'western', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (21, 'TV Series', '', 'tv-series', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (22, ' Romance', ' Romance', 'romance', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (23, ' Adventure', ' Adventure', 'adventure', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (24, ' Thriller', ' Thriller', 'thriller', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (25, ' Drama', ' Drama', 'drama', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (26, ' Fantasy', ' Fantasy', 'fantasy', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (27, ' Sci-Fi', ' Sci-Fi', 'sci-fi', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (28, ' Comedy', ' Comedy', 'comedy', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (29, ' Family', ' Family', 'family', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (30, ' Action', ' Action', 'action', 1, 1);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (31, 'Short', 'Short', 'short', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (32, ' Music', ' Music', 'music', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (33, ' History', ' History', 'history', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (34, ' Crime', ' Crime', 'crime', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (35, ' Western', ' Western', 'western', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (36, ' Sport', ' Sport', 'sport', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (37, ' Short', ' Short', 'short', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (38, ' Mystery', ' Mystery', 'mystery', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (39, 'Romance', 'Romance', 'romance', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (40, 'Action & Adventure', 'Action & Adventure', 'action-adventure', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (41, 'Sci-Fi & Fantasy', 'Sci-Fi & Fantasy', 'sci-fi-fantasy', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (42, 'Science Fiction', 'Science Fiction', 'science-fiction', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (44, 'TV Product', 'TV Product', 'tv-product', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (45, 'News', 'News', 'news', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (46, 'جريمة', 'جريمة', 'جريمة', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (47, 'إثارة', 'إثارة', 'إثارة', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (48, 'دراما', 'دراما', 'دراما', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (49, 'حركة', 'حركة', '', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (50, 'خيال علمي', 'خيال علمي', '', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (51, 'مغامرة', 'مغامرة', '', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (52, 'فانتازيا', 'فانتازيا', '', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (53, 'رسوم متحركة', 'رسوم متحركة', '', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (54, 'عائلي', 'عائلي', '', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (55, 'كوميديا', 'كوميديا', '', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (56, 'وثائقي', 'وثائقي', '', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (57, 'Science-Fiction', 'Science-Fiction', 'science-fiction', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (58, 'Historie', 'Historie', 'historie', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (59, 'Abenteuer', 'Abenteuer', 'abenteuer', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (60, 'Familie', 'Familie', 'familie', 1, 0);
+INSERT INTO `category` (`category_id`, `name`, `description`, `slug`, `publication`, `featured`) VALUES (61, 'Krimi', 'Krimi', 'krimi', 1, 0);
 
 
 #
@@ -1596,7 +1596,7 @@ CREATE TABLE `products` (
   `rating` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT '0',
   `release` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `country` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `genre` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `category` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `product_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `runtime` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `product_quality` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT 'HD',

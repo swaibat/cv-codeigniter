@@ -384,3 +384,19 @@ ion-icon {
 .font-size-lg {
 	font-size: 1.9rem;
 }
+
+div.dataTables_wrapper div.dataTables_info {
+	padding-top: 0em;
+	white-space: nowrap;
+}
+
+#example_length{
+	margin-top: .5rem;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #0f0f0f;
+    border-color: #0f0f0f;
+}

@@ -83,3 +83,7 @@
 				font-weight: bold;
 			}
 </style>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.20/b-1.6.1/b-flash-1.6.1/b-print-1.6.1/cr-1.5.2/fc-3.3.0/r-2.2.3/rr-1.2.6/sp-1.0.1/sl-1.3.1/datatables.min.css"/>
+ 
+ <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.20/b-1.6.1/b-flash-1.6.1/b-print-1.6.1/cr-1.5.2/fc-3.3.0/r-2.2.3/rr-1.2.6/sp-1.0.1/sl-1.3.1/datatables.min.js"></script>

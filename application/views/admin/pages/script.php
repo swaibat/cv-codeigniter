@@ -1,6 +1,29 @@
-<script>
+<footer></footer>
+    <!-- ajax modal  -->
+
+    <div id="mymodal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content p-0 b-0">
+                <div class="panel panel-color panel-primary">
+                    <div class="panel-heading">
+                        <button type="button" class="close m-t-5" data-dismiss="modal" aria-hidden="true">Ã—</button>
+                        <h3 class="panel-title text-light"><?php echo $page_title; ?></h3>
+                    </div>
+                    <div class="modal-body">
+                        <div id="modal-loader" style="display: none; text-align: center;"> <img src="<?php echo base_url(); ?>assets/images/preloader.gif" /> </div>
+
+                        <!-- content will be load here -->
+                        <div id="dynamic-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal -->
+    <script>
         $(document).ready(function() {
             $(document).on('click', '#menu', function(e) {
+				console.log(e.target)
                 e.preventDefault();
                 var url = $(this).data('id'); // it will get action url
                 $('#dynamic-content').html(''); // leave it blank before ajax call
@@ -11,7 +34,6 @@
                     dataType: 'html'
                 })
                 .done(function(data) {
-                    console.log(data);
                     $('#dynamic-content').html('');
                     $('#dynamic-content').html(data); // load response 
                     $('#modal-loader').hide(); // hide ajax loader 
@@ -128,3 +150,6 @@
     <script type="text/javascript">
         $('#datatable').DataTable();
     </script>
+</body>
+
+</html>
