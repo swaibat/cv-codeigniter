@@ -976,15 +976,9 @@ class Admin extends Admin_Core_Controller
 		$this->load->view('admin/index', $data);
 	}
 
-	// users
-	function manage_user($param1 = '', $param2 = '')
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-
-		/* add new access */
-
-		if ($param1 == 'add') {
+	// ADD A NEW USER
+	function user_add(){
+		if (isset($_POST) && !empty($_POST)) {
 			$data['name']           = $this->input->post('name');
 			// $data['username']       = $this->input->post('username');
 			$data['password']       = md5($this->input->post('password'));
@@ -995,6 +989,17 @@ class Admin extends Admin_Core_Controller
 			$this->session->set_flashdata('success', trans('add_success'));
 			redirect($this->agent->referrer());
 		}
+		$data['folder_name']      = 'users';
+		$data['page_name']      = 'user_add';
+		$data['page_title']     = trans('user_add');
+		$this->load->view('admin/index', $data);
+	}
+
+	// users
+	function manage_user($param1 = '', $param2 = '')
+	{
+		if ($this->session->userdata('admin_is_login') != 1)
+			redirect(base_url(), 'refresh');
 		if ($param1 == 'update') {
 			$data['name']           = $this->input->post('name');
 			// $data['username']       = $this->input->post('username');
