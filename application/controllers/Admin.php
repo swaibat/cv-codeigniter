@@ -1007,7 +1007,7 @@ class Admin extends Admin_Core_Controller
 	}
 
 	// EDIT A USER
-	function user_edit($param1 = '', $param2 = ''){
+	function user_edit($param2 = ''){
 		if (isset($_POST) && !empty($_POST)) {
 			$data['name']           = $this->input->post('name');
 			$data['username']       = $this->input->post('username');
@@ -1019,9 +1019,7 @@ class Admin extends Admin_Core_Controller
 			$data['company']        = $this->input->post('company');
 			$data['address']        = $this->input->post('address');
 			$data['phone']        = $this->input->post('phone');
-
-			$this->db->where('user_id', $param2);
-			$this->db->update('user', $data);
+			$this->db->update('user', $data, array('user_id'=>$param2));
 			$this->session->set_flashdata('success', trans('update_success'));
 			redirect($this->agent->referrer());
 		}
