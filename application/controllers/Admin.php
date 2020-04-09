@@ -145,10 +145,10 @@ class Admin extends Admin_Core_Controller
 		$this->load->view('admin/index', $data);
 	}
 
-	// slider
-	function slider($param1 = '', $param2 = '')
+	// CREATE A CATEGORY
+	function slider_add()
 	{
-		if ($param1 == 'add') {
+		if (isset($_POST) && !empty($_POST)) {
 			$data['title']              =   $this->input->post('title');
 			$data['description']        =   $this->input->post('description');
 			$data['order']              =   $this->input->post('order');
@@ -184,7 +184,15 @@ class Admin extends Admin_Core_Controller
 			$this->session->set_flashdata('success', 'Slider added successed');
 			redirect($this->agent->referrer());
 		}
+		$data['folder_name']	=	'sliders';
+		$data['page_name']		=	'slider_add';
+		$data['page_title']		=	'slider add';
+		$this->load->view('backend/index', $data);
+	}
 
+	// slider
+	function slider($param1 = '', $param2 = '')
+	{
 		if ($param1 == 'update') {
 			$data['title']              =   $this->input->post('title');
 			$data['description']        =   $this->input->post('description');
@@ -980,10 +988,13 @@ class Admin extends Admin_Core_Controller
 	function user_add(){
 		if (isset($_POST) && !empty($_POST)) {
 			$data['name']           = $this->input->post('name');
-			// $data['username']       = $this->input->post('username');
+			$data['username']       = $this->input->post('username');
 			$data['password']       = md5($this->input->post('password'));
 			$data['email']          = $this->input->post('email');
 			$data['role']           = $this->input->post('role');
+			$data['company']        = $this->input->post('company');
+			$data['address']        = $this->input->post('address');
+			$data['phone']        = $this->input->post('phone');
 
 			$this->db->insert('user', $data);
 			$this->session->set_flashdata('success', trans('add_success'));
@@ -2087,13 +2098,14 @@ class Admin extends Admin_Core_Controller
 		$this->load->view('admin/index', $data);
 	}
 
-	function view_modal($page_name = '', $param2 = '', $param3 = '', $param4 = '')
+	function view_modal( $folder_name= '', $page_name = '', $param2 = '', $param3 = '', $param4 = '')
 	{
+		log_message('error', 'Some variable did not contain a value.'); 
 		$account_type       =   $this->session->userdata('login_type');
 		$data['param2']     =   $param2;
 		$data['param3']     =   $param3;
 		$data['param4']     =   $param4;
-		$this->load->view('admin/' . $page_name . '.php', $data);
+		$this->load->view('admin/pages/'. $folder_name .'/' . $page_name . '.php', $data);
 	}
 
 	//profile

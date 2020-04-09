@@ -4,7 +4,7 @@
   }
 </style>
 
-<?php echo form_open(base_url() . 'admin/slider/add/' , array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data'));?>
+<?php echo form_open(base_url() . 'admin/slider_add' , array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data'));?>
 
 <h4 class="text-center">New slider Add</h4>
 <hr>
