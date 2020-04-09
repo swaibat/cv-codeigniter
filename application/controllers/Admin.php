@@ -145,10 +145,10 @@ class Admin extends Admin_Core_Controller
 		$this->load->view('admin/index', $data);
 	}
 
-	// slider
-	function slider($param1 = '', $param2 = '')
+	// CREATE A CATEGORY
+	function slider_add()
 	{
-		if ($param1 == 'add') {
+		if (isset($_POST) && !empty($_POST)) {
 			$data['title']              =   $this->input->post('title');
 			$data['description']        =   $this->input->post('description');
 			$data['order']              =   $this->input->post('order');
@@ -184,7 +184,15 @@ class Admin extends Admin_Core_Controller
 			$this->session->set_flashdata('success', 'Slider added successed');
 			redirect($this->agent->referrer());
 		}
+		$data['folder_name']	=	'sliders';
+		$data['page_name']		=	'slider_add';
+		$data['page_title']		=	'slider add';
+		$this->load->view('backend/index', $data);
+	}
 
+	// slider
+	function slider($param1 = '', $param2 = '')
+	{
 		if ($param1 == 'update') {
 			$data['title']              =   $this->input->post('title');
 			$data['description']        =   $this->input->post('description');
@@ -827,39 +835,9 @@ class Admin extends Admin_Core_Controller
 		$this->load->view('admin/index', $data);
 	}
 
-	// add blog post
-	function posts_add()
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-		$data['folder_name']      = 'blog';
-		$data['page_name']      = 'posts_add';
-		$data['page_title']     = trans('posts_add');
-		$this->load->view('admin/index', $data);
-	}
-
-	// edit blog post
-	function posts_edit($param1 = '', $param2 = '')
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-
-		$data['param1']         = $param1;
-		$data['param2']         = $param2;
-
-		$data['folder_name']    = 'blog';
-		$data['page_name']      = 'posts_edit';
-		$data['page_title']     = trans('posts_edit');
-		$this->load->view('admin/index', $data);
-	}
-
-	// add,update blog post
-	function posts($param1 = '', $param2 = '')
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-
-		if ($param1 == 'add') {
+	// CREATE A NEW POST
+	function posts_add(){
+		if (isset($_POST) && !empty($_POST)) {
 			$data['post_title']                 = $this->input->post('post_title');
 			$data['seo_title']                  = $this->input->post('seo_title');
 			$data['content']                    = $this->input->post('content');
@@ -892,7 +870,21 @@ class Admin extends Admin_Core_Controller
 
 			$this->session->set_flashdata('success', trans('add_success'));
 			redirect($this->agent->referrer());
-		} else if ($param1 == 'update') {
+		}
+		$data['folder_name']    = 'blog';
+		$data['page_name']      = 'posts_add';
+		$data['page_title']     = trans('posts_add');
+		$this->load->view('admin/index', $data);
+	}
+
+
+	// add,update blog post
+	function posts($param1 = '', $param2 = '')
+	{
+		if ($this->session->userdata('admin_is_login') != 1)
+			redirect(base_url(), 'refresh');
+
+		if ($param1 == 'update') {
 			$data['post_title']                 = $this->input->post('post_title');
 			$data['seo_title']                  = $this->input->post('seo_title');
 			$data['content']                    = $this->input->post('content');
@@ -933,7 +925,7 @@ class Admin extends Admin_Core_Controller
 		}
 		$data['folder_name']      = 'blog';
 		$data['page_name']      = 'posts_manage';
-		$data['page_title']     = trans('');
+		$data['page_title']     = trans('posts_manage');
 		$this->load->view('admin/index', $data);
 	}
 
@@ -992,40 +984,58 @@ class Admin extends Admin_Core_Controller
 		$this->load->view('admin/index', $data);
 	}
 
-	// users
-	function manage_user($param1 = '', $param2 = '')
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-
-		/* add new access */
-
-		if ($param1 == 'add') {
+	// ADD A NEW USER
+	function user_add(){
+		if (isset($_POST) && !empty($_POST)) {
 			$data['name']           = $this->input->post('name');
-			// $data['username']       = $this->input->post('username');
+			$data['username']       = $this->input->post('username');
 			$data['password']       = md5($this->input->post('password'));
 			$data['email']          = $this->input->post('email');
 			$data['role']           = $this->input->post('role');
+			$data['company']        = $this->input->post('company');
+			$data['address']        = $this->input->post('address');
+			$data['phone']        = $this->input->post('phone');
 
 			$this->db->insert('user', $data);
 			$this->session->set_flashdata('success', trans('add_success'));
 			redirect($this->agent->referrer());
 		}
-		if ($param1 == 'update') {
+		$data['folder_name']      = 'users';
+		$data['page_name']      = 'user_add';
+		$data['page_title']     = trans('user_add');
+		$this->load->view('admin/index', $data);
+	}
+
+	// EDIT A USER
+	function user_edit($param1 = '', $param2 = ''){
+		if (isset($_POST) && !empty($_POST)) {
 			$data['name']           = $this->input->post('name');
-			// $data['username']       = $this->input->post('username');
+			$data['username']       = $this->input->post('username');
 			if ($this->input->post('password') != '' || $this->input->post('password') != NULL) {
 				$data['password']   = md5($this->input->post('password'));
 			}
-
 			$data['email']          = $this->input->post('email');
 			$data['role']           = $this->input->post('role');
+			$data['company']        = $this->input->post('company');
+			$data['address']        = $this->input->post('address');
+			$data['phone']        = $this->input->post('phone');
 
 			$this->db->where('user_id', $param2);
 			$this->db->update('user', $data);
 			$this->session->set_flashdata('success', trans('update_success'));
 			redirect($this->agent->referrer());
 		}
+		$data['folder_name']      = 'users';
+		$data['page_name']      = 'user_edit';
+		$data['page_title']     = trans('user_edit');
+		$this->load->view('admin/index', $data);
+	}
+
+	// users
+	function manage_user($param1 = '', $param2 = '')
+	{
+		if ($this->session->userdata('admin_is_login') != 1)
+			redirect(base_url(), 'refresh');
 		$data['folder_name']      = 'users';
 		$data['page_name']      = 'user_manage';
 		$data['page_title']     = trans('user_manage');
@@ -2098,13 +2108,14 @@ class Admin extends Admin_Core_Controller
 		$this->load->view('admin/index', $data);
 	}
 
-	function view_modal($page_name = '', $param2 = '', $param3 = '', $param4 = '')
+	function view_modal( $folder_name= '', $page_name = '', $param2 = '', $param3 = '', $param4 = '')
 	{
+		log_message('error', 'Some variable did not contain a value.'); 
 		$account_type       =   $this->session->userdata('login_type');
 		$data['param2']     =   $param2;
 		$data['param3']     =   $param3;
 		$data['param4']     =   $param4;
-		$this->load->view('admin/' . $page_name . '.php', $data);
+		$this->load->view('admin/pages/'. $folder_name .'/' . $page_name . '.php', $data);
 	}
 
 	//profile

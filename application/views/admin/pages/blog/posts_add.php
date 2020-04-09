@@ -8,7 +8,7 @@
 <div class="card">
   <div class="row">
     <div class="col-sm-12">
-      <?php echo form_open(base_url() . 'admin/posts/add/', array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data')); ?>
+      <?php echo form_open(base_url() . 'admin/posts_add/', array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data')); ?>
       <h4 class="text-center"><?php echo trans('add_new_post') ?></h4>
       <hr>
       <div class="form-group">
