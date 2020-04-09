@@ -1006,26 +1006,36 @@ class Admin extends Admin_Core_Controller
 		$this->load->view('admin/index', $data);
 	}
 
-	// users
-	function manage_user($param1 = '', $param2 = '')
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-		if ($param1 == 'update') {
+	// EDIT A USER
+	function user_edit($param1 = '', $param2 = ''){
+		if (isset($_POST) && !empty($_POST)) {
 			$data['name']           = $this->input->post('name');
-			// $data['username']       = $this->input->post('username');
+			$data['username']       = $this->input->post('username');
 			if ($this->input->post('password') != '' || $this->input->post('password') != NULL) {
 				$data['password']   = md5($this->input->post('password'));
 			}
-
 			$data['email']          = $this->input->post('email');
 			$data['role']           = $this->input->post('role');
+			$data['company']        = $this->input->post('company');
+			$data['address']        = $this->input->post('address');
+			$data['phone']        = $this->input->post('phone');
 
 			$this->db->where('user_id', $param2);
 			$this->db->update('user', $data);
 			$this->session->set_flashdata('success', trans('update_success'));
 			redirect($this->agent->referrer());
 		}
+		$data['folder_name']      = 'users';
+		$data['page_name']      = 'user_edit';
+		$data['page_title']     = trans('user_edit');
+		$this->load->view('admin/index', $data);
+	}
+
+	// users
+	function manage_user($param1 = '', $param2 = '')
+	{
+		if ($this->session->userdata('admin_is_login') != 1)
+			redirect(base_url(), 'refresh');
 		$data['folder_name']      = 'users';
 		$data['page_name']      = 'user_manage';
 		$data['page_title']     = trans('user_manage');

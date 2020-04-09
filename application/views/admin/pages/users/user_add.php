@@ -1,4 +1,4 @@
-<form id='model-form' type='post' action="<?php base_url('admin/user_add/')?>">
+<form action="<?php base_url('admin/user_add/') ?>" enctype="multipart/form-data" method="post" accept-charset="utf-8">
 	<div class="modal-header border-0">
 		<h6 class="modal-title position-absolute bg-primary text-white" id="mymodalLabel">Add User</h6>
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close">

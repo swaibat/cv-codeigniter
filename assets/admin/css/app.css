@@ -352,8 +352,16 @@ span.pf-grab:after {
 	left: 0 !important;
 	top: 6px !important;
 }
+.notify-badge {
+	top: 0.9rem;
+	margin-left: 1.2rem;
+}
 label.false {
 	margin-left: 2.2rem;
+}
+.btn-outline-primary {
+	color: #0f0f0f;
+	border-color: #0f0f0f;
 }
 .select-dropdown {
 	max-height: 33vh;
@@ -370,6 +378,11 @@ label.false {
 }
 .custom-input:focus {
 	box-shadow: none !important;
+}
+.parsley-errors-list.filled {
+	position: absolute;
+	margin-top: 2.3rem;
+	font-size: smaller;
 }
 
 .cv-form-group .custom-input:focus ~ label,
@@ -527,3 +540,39 @@ label.false {
 .fr-box.fr-basic {
 	margin: 0 1rem;
 }
+.dataTables_filter {
+	display: flex;
+	justify-content: flex-end;
+}
+.dataTables_filter label,
+.dataTables_length label {
+	display: flex;
+}
+.dataTables_length label .form-control {
+	width: 4rem;
+	margin: 0 1rem;
+}
+.pagination {
+	justify-content: flex-end;
+}
+.red-tooltip + .tooltip > .tooltip-inner {
+	background-color: #f00;
+}
+.bs-tooltip-auto[x-placement^="bottom"] .arrow::before,
+.bs-tooltip-bottom .arrow::before {
+	border-bottom-color: #f00; /* Red */
+}
+.page-link {
+	padding: 0.25rem 0.5rem;
+	line-height: 1.5;
+}
+#example_wrapper .dataTables_info {
+	margin-top: -0.3rem !important;
+}
+
+#example_wrapper .dataTables_length {
+	margin-top: -0.3rem !important;
+}
+
+/* custom select  */
+

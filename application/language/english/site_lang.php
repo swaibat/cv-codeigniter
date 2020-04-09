@@ -895,3 +895,4 @@ $lang["tv"] = "Tv";
 $lang["subscribe_mail_list_text"] = "Subscribe mail list text";
 $lang["products_add"] = "Products add";
 $lang["products_manage"] = "Products manage";
+$lang["edit_user_information"] = "Edit user information";
