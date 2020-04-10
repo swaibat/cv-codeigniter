@@ -75,13 +75,20 @@ class Common_model extends CI_Model
             return $row['Product_type'];
     }
 
-    function get_category_name($category_id = '')
-    {
+    function get_category_name($category_id = ''){
         $query = $this->db->get_where('post_category', array('post_category_id' => $category_id));
         $res = $query->result_array();
         foreach ($res as $row)
             return $row['category'];
-    }
+	}
+
+	function get_user_name($user_id){
+		$query = $this->db->get_where('user', array('user_id' => $user_id));
+		$res = $query->result_array();
+		foreach ($res as $row)
+			return $row['name'];
+	}
+
     /* get image url */
     function get_img($type = '', $id = '')
     {
