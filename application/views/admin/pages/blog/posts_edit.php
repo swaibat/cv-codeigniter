@@ -1,6 +1,5 @@
 <style type="text/css">
   .bootstrap-tagsinput .badge {
-    ;
     background-color: #009688;
     border: 1px solid #035d54;
   }

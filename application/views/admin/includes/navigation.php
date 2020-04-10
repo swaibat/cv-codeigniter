@@ -105,7 +105,7 @@
 
 		<!-- Users -->
 		<li class="nav-item">
-			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'users') ? 'selected' : ''; ?>" href="<?= base_url() . 'admin/manage_user/' ?>">
+			<a class="nav-link  nav-link -collapse cv-sidenav pl-3 <?= ($folder_name == 'users') ? 'selected' : ''; ?>" href="<?= base_url() . 'admin/users/' ?>">
 				<ion-icon name="people-outline" role="img" class="md hydrated" aria-label="people outline"></ion-icon><span class="nav-item-text">Users</span>
 			</a>
 		</li>

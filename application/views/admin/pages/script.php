@@ -1,6 +1,18 @@
 <footer></footer>
 <!-- ajax modal  -->
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="confirm">
+			<h1>Confirm Delete</h1>
+			<p class="mb-2">Are you sure ?</p>
+			<p><strong id="title">really</strong> will be deleted parmanently</p>
+			<button type="button" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary">Confirm</button>
+		</div>
+	</div>
+</div>
+
 <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="mymodalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 		<div class="modal-content">
@@ -10,34 +22,6 @@
 </div>
 <!-- /.modal -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-<script>
-	$(document).ready(function() {
-		$(document).on('click', '#menu', function(e) {
-			e.preventDefault();
-			var url = $(this).data('id'); // it will get action url
-			$('#dynamic-content').html(''); // leave it blank before ajax call
-			$('#modal-loader').show(); // load ajax loader
-			$('.model-form').on('submit', (event) => {
-				event.preventDefault()
-			})
-			$.ajax({
-					url: url,
-					type: 'POST',
-					dataType: 'html'
-				})
-				.done(function(data) {
-					$('#dynamic-content').html('');
-					$('#dynamic-content').html(data); // load response 
-					$('#modal-loader').hide(); // hide ajax loader 
-				})
-				.fail(function() {
-					$('#dynamic-content').html('<i class="glyphicon glyphicon-info-sign"></i> Something went wrong, Please try again...');
-					$('#modal-loader').hide();
-				});
-		});
-	});
-</script>
-<!-- END Ajax modal  -->
 
 <!-- Ajax Delete -->
 <script type="text/javascript">
@@ -80,38 +64,40 @@
 	}
 </script>
 <script type="text/javascript">
-	function delete_row(table_name, row_id) {
-		var table_row = '#row_' + row_id
-		var base_url = '<?php echo base_url(); ?>'
-		url = base_url + 'admin/delete_record/'
-		swal({
-				title: 'Are you sure?',
-				text: "It will be deleted permanently!",
-				icon: "warning",
-				buttons: true,
-				buttons: ["Cancel", "Delete"],
-				dangerMode: true,
-				closeOnClickOutside: false
-			})
-			.then(function(confirmed) {
-				if (confirmed) {
-					$.ajax({
-							url: url,
-							type: 'POST',
-							data: 'row_id=' + row_id + '&table_name=' + table_name,
-							dataType: 'json'
-						})
-						.done(function(response) {
-							swal.stopLoading();
-							swal("Deleted!", response.message, response.status);
-							$(table_row).fadeOut(2000);
-						})
-						.fail(function() {
-							swal('Oops...', 'Something went wrong with ajax !', 'error');
-						})
-				}
-			})
-	}
+	$(".delete").on('click', (e) => {
+		e.preventDefault()
+		console.log(e.target.name)
+		$('#title').text(e.target.name)
+
+		// var table_row = '#row_' + e.target.id
+		// const url = base_url + 'admin/delete_record/'
+		// swal({
+		// 		title: 'Are you sure?',
+		// 		text: "It will be deleted permanently!",
+		// 		icon: "warning",
+		// 		buttons: true,
+		// 		buttons: ["Cancel", "Delete"],
+		// 		dangerMode: true,
+		// 		closeOnClickOutside: false
+		// 	})
+		// 	.then(function(confirmed) {
+		// 		if (confirmed) {
+		// 			$.ajax({
+		// 					url: url,
+		// 					type: 'POST',
+		// 					data: 'row_id=' + e.target.id + '&table_name=' + e.target.name,
+		// 					dataType: 'json'
+		// 				}).done(function(response) {
+		// 					swal.stopLoading();
+		// 					swal("Deleted!", response.message, response.status);
+		// 					$(table_row).fadeOut(2000);
+		// 				})
+		// 				.fail(function() {
+		// 					swal('Oops...', 'Something went wrong with ajax !', 'error');
+		// 				})
+		// 		}
+		// 	})
+	})
 </script>
 <!-- END Ajax Delete -->
 

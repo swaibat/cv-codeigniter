@@ -10,6 +10,7 @@ class Admin extends Admin_Core_Controller
 		parent::__construct();
 		$this->load->model('common_model');
 		$this->load->model('email_model');
+		$this->load->model('user_model');
 		$this->load->database();
 		//cache controlling
 		$this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');
@@ -27,7 +28,7 @@ class Admin extends Admin_Core_Controller
 			redirect(base_url() . 'admin/dashboard', 'refresh');
 	}
 
-	//dashboard
+	//ADMIN DASHBOARD
 	function dashboard()
 	{
 		if ($this->session->userdata('admin_is_login') != 1)
@@ -37,8 +38,10 @@ class Admin extends Admin_Core_Controller
 		$data['page_title']            = trans('admin_dashboard');
 		$this->load->view('admin/index', $data);
 	}
+
 	// VIEW ALL CATEGORIS
-	function category(){
+	function category()
+	{
 		$data['folder_name']   	= 'categories';
 		$data['page_name']		= 'category';
 		$data['page_title']		= 'Manage Categories';
@@ -47,23 +50,24 @@ class Admin extends Admin_Core_Controller
 	}
 
 	// CREATE A NEW CATEGORY
-	function category_create(){
+	function category_create()
+	{
 		if (isset($_POST) && !empty($_POST)) {
 			$data['name']           = $this->input->post('name');
-	        $data['description']    = $this->input->post('description');
-	        $data['slug']           = url_title($this->input->post('name'), 'dash', TRUE);
-	        $data['featured']       = $this->input->post('featured');          
-	        $data['publication']    = $this->input->post('publication');          
+			$data['description']    = $this->input->post('description');
+			$data['slug']           = url_title($this->input->post('name'), 'dash', TRUE);
+			$data['featured']       = $this->input->post('featured');
+			$data['publication']    = $this->input->post('publication');
 
-	        $this->db->insert('category', $data);
-	        if($this->input->post('image_link')!=''){ 
-	            $image_source           =   $this->input->post('image_link');
-	            $save_to                =   'uploads/category/'.$insert_id.'.png';           
-	            $this->common_model->grab_image($image_source,$save_to);
-	        }
-	        if(isset($_FILES['image']) && $_FILES['image']['name']!=''){
-	            move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/category/'.$insert_id.'.png');
-	        }
+			$this->db->insert('category', $data);
+			if ($this->input->post('image_link') != '') {
+				$image_source           =   $this->input->post('image_link');
+				$save_to                =   'uploads/category/' . $insert_id . '.png';
+				$this->common_model->grab_image($image_source, $save_to);
+			}
+			if (isset($_FILES['image']) && $_FILES['image']['name'] != '') {
+				move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/category/' . $insert_id . '.png');
+			}
 			$this->session->set_flashdata('success', trans('add_success'));
 			redirect($this->agent->referrer());
 		}
@@ -81,17 +85,10 @@ class Admin extends Admin_Core_Controller
 			$this->db->update('category', $data,  array('category_id' => $category_id));
 			redirect(base_url() . 'index.php?admin/category_list', 'refresh');
 		}
-		$data['category_id']		=	$category_id;
+		$data['category_id']	=	$category_id;
 		$data['page_name']		=	'category_edit';
-		$data['page_title']	=	'Edit category';
+		$data['page_title']	    =	'Edit category';
 		$this->load->view('backend/index', $data);
-	}
-
-	/// DELETE CATEGORY
-	function category_delete($category_id = '')
-	{
-		$this->db->delete('category',  array('category_id' => $category_id));
-		redirect(base_url() . 'index.php?admin/category_list', 'refresh');
 	}
 
 	// slider setting
@@ -836,7 +833,32 @@ class Admin extends Admin_Core_Controller
 	}
 
 	// CREATE A NEW POST
-	function posts_add(){
+	function posts_add()
+	{
+		if (isset($_POST) && !empty($_POST)) {
+			$data['post_title']                 = $this->input->post('post_title');
+			$data['content']                    = $this->input->post('content');
+			$data['focus_keyword']              = $this->input->post('focus_keyword');
+			$data['meta_description']           = $this->input->post('meta_description');
+			$data['category_id']                = implode(',', $this->input->post('category_id'));
+			$data['status']               		= $this->input->post('status');
+			$data['slug']               		= $this->input->post('slug');
+			$this->db->insert('posts', $data);
+			$insert_id = $this->db->insert_id();
+			$this->db->where('posts_id', $insert_id);
+			$this->db->update('posts', $data);
+			$this->session->set_flashdata('success', trans('add_success'));
+			redirect($this->agent->referrer());
+		}
+		$data['folder_name']    = 'blog';
+		$data['page_name']      = 'posts_add';
+		$data['page_title']     = trans('posts_add');
+		$this->load->view('admin/index', $data);
+	}
+
+	// CREATE A NEW POST
+	function posts_edit($param2)
+	{
 		if (isset($_POST) && !empty($_POST)) {
 			$data['post_title']                 = $this->input->post('post_title');
 			$data['seo_title']                  = $this->input->post('seo_title');
@@ -848,27 +870,15 @@ class Admin extends Admin_Core_Controller
 			if ($this->input->post('thumb_link') != '') {
 				$data['image_link']     = $this->input->post('thumb_link');
 			}
-
-			$this->db->insert('posts', $data);
-			$insert_id = $this->db->insert_id();
-
+			$this->db->update('posts', $data, array('posts_id' => $param2));
 			$slug                       = url_title($this->input->post('slug'), 'dash', TRUE);
 			$slug_num                   = $this->common_model->slug_num('products', $slug);
-			if ($slug_num > 0) {
-				$slug = $slug . '-' . $insert_id;
+			if ($slug_num > 1) {
+				$slug = $slug . '-' . $param2;
 			}
-			$data['slug']               = $slug;
-			if (isset($_FILES['thumbnail']) && $_FILES['thumbnail']['name'] != '') {
-				move_uploaded_file($_FILES['thumbnail']['tmp_name'], 'uploads/post_thumb/' . $slug . '.jpg');
-				$data['image_link']     = base_url() . 'uploads/post_thumb/' . $slug . '.jpg';
-				$source                 = 'uploads/post_thumb/' . $slug . '.jpg';
-				$destination            = 'uploads/post_thumb/small/' . $slug . '.jpg';
-				$this->common_model->create_small_thumbnail($source, $destination, "150", "150");
-			}
-			$this->db->where('posts_id', $insert_id);
-			$this->db->update('posts', $data);
-
-			$this->session->set_flashdata('success', trans('add_success'));
+			$data['slug']            = $slug;
+			$this->db->update('posts', $data, array('posts_id' => $param2));
+			$this->session->set_flashdata('success', trans('update_success'));
 			redirect($this->agent->referrer());
 		}
 		$data['folder_name']    = 'blog';
@@ -883,49 +893,14 @@ class Admin extends Admin_Core_Controller
 	{
 		if ($this->session->userdata('admin_is_login') != 1)
 			redirect(base_url(), 'refresh');
-
-		if ($param1 == 'update') {
-			$data['post_title']                 = $this->input->post('post_title');
-			$data['seo_title']                  = $this->input->post('seo_title');
-			$data['content']                    = $this->input->post('content');
-			$data['focus_keyword']              = $this->input->post('focus_keyword');
-			$data['meta_description']           = $this->input->post('meta_description');
-			$data['category_id']                = implode(',', $this->input->post('category_id'));
-			$data['publication']                = $this->input->post('publication');
-			if ($this->input->post('thumb_link') != '') {
-				$data['image_link']     = $this->input->post('thumb_link');
-			}
-			$this->db->where('posts_id', $param2);
-			$this->db->update('posts', $data);
-			$slug                       = url_title($this->input->post('slug'), 'dash', TRUE);
-			$slug_num                   = $this->common_model->slug_num('products', $slug);
-			if ($slug_num > 1) {
-				$slug = $slug . '-' . $param2;
-			}
-			$data['slug']            = $slug;
-			if (isset($_FILES['thumbnail']) && $_FILES['thumbnail']['name'] != '') {
-				move_uploaded_file($_FILES['thumbnail']['tmp_name'], 'uploads/post_thumb/' . $slug . '.jpg');
-				$data['image_link']     = base_url() . 'uploads/post_thumb/' . $slug . '.jpg';
-				$source = 'uploads/post_thumb/' . $slug . '.jpg';
-				$destination = 'uploads/post_thumb/small/' . $slug . '.jpg';
-				$this->common_model->create_small_thumbnail($source, $destination, "150", "150");
-			}
-			$this->db->where('posts_id', $param2);
-			$this->db->update('posts', $data);
-
-
-			$this->session->set_flashdata('success', trans('update_success'));
-			redirect($this->agent->referrer());
+		if ($param1 != '' && $param1 != NULL) {
+			$data['type']      = $param1;
 		} else {
-			if ($param1 != '' && $param1 != NULL) {
-				$data['type']      = $param1;
-			} else {
-				$data['type']      = '';
-			}
+			$data['type']      = '';
 		}
-		$data['folder_name']      = 'blog';
-		$data['page_name']      = 'posts_manage';
-		$data['page_title']     = trans('posts_manage');
+		$data['folder_name']    = 'blog';
+		$data['page_name']      = 'posts';
+		$data['page_title']     = 'posts';
 		$this->load->view('admin/index', $data);
 	}
 
@@ -985,7 +960,8 @@ class Admin extends Admin_Core_Controller
 	}
 
 	// ADD A NEW USER
-	function user_add(){
+	function user_add()
+	{
 		if (isset($_POST) && !empty($_POST)) {
 			$data['name']           = $this->input->post('name');
 			$data['username']       = $this->input->post('username');
@@ -995,7 +971,6 @@ class Admin extends Admin_Core_Controller
 			$data['company']        = $this->input->post('company');
 			$data['address']        = $this->input->post('address');
 			$data['phone']        = $this->input->post('phone');
-
 			$this->db->insert('user', $data);
 			$this->session->set_flashdata('success', trans('add_success'));
 			redirect($this->agent->referrer());
@@ -1007,7 +982,8 @@ class Admin extends Admin_Core_Controller
 	}
 
 	// EDIT A USER
-	function user_edit($param2 = ''){
+	function user_edit($param2 = '')
+	{
 		if (isset($_POST) && !empty($_POST)) {
 			$data['name']           = $this->input->post('name');
 			$data['username']       = $this->input->post('username');
@@ -1018,25 +994,25 @@ class Admin extends Admin_Core_Controller
 			$data['role']           = $this->input->post('role');
 			$data['company']        = $this->input->post('company');
 			$data['address']        = $this->input->post('address');
-			$data['phone']        = $this->input->post('phone');
-			$this->db->update('user', $data, array('user_id'=>$param2));
-			$this->session->set_flashdata('success', trans('update_success'));
+			$data['phone']        	= $this->input->post('phone');
+			$this->db->update('user', $data, array('user_id' => $param2));
+			$this->session->set_flashdata('success', 'user update successfully');
 			redirect($this->agent->referrer());
 		}
-		$data['folder_name']      = 'users';
+		$data['folder_name']    = 'users';
 		$data['page_name']      = 'user_edit';
-		$data['page_title']     = trans('user_edit');
+		$data['page_title']     = 'user_edit';
 		$this->load->view('admin/index', $data);
 	}
 
 	// users
-	function manage_user($param1 = '', $param2 = '')
+	function users($param1 = '', $param2 = '')
 	{
 		if ($this->session->userdata('admin_is_login') != 1)
 			redirect(base_url(), 'refresh');
-		$data['folder_name']      = 'users';
-		$data['page_name']      = 'user_manage';
-		$data['page_title']     = trans('user_manage');
+		$data['folder_name']    = 'users';
+		$data['page_name']      = 'users';
+		$data['page_title']     = 'users';
 		$data['users']          = $this->db->get('user')->result_array();
 		$this->load->view('admin/index', $data);
 	}
@@ -2106,14 +2082,14 @@ class Admin extends Admin_Core_Controller
 		$this->load->view('admin/index', $data);
 	}
 
-	function view_modal( $folder_name= '', $page_name = '', $param2 = '', $param3 = '', $param4 = '')
+	function view_modal($folder_name = '', $page_name = '', $param2 = '', $param3 = '', $param4 = '')
 	{
-		log_message('error', 'Some variable did not contain a value.'); 
+		log_message('error', 'Some variable did not contain a value.');
 		$account_type       =   $this->session->userdata('login_type');
 		$data['param2']     =   $param2;
 		$data['param3']     =   $param3;
 		$data['param4']     =   $param4;
-		$this->load->view('admin/pages/'. $folder_name .'/' . $page_name . '.php', $data);
+		$this->load->view('admin/pages/' . $folder_name . '/' . $page_name . '.php', $data);
 	}
 
 	//profile
