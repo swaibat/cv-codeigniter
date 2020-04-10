@@ -1,7 +1,7 @@
 <?php $users = $this->db->get_where('user', array('user_id' => $param2))->result_array();
-foreach ($users as $row) :
+foreach ($users as $user) :
 ?>
-	<form action="<?php base_url('admin/user_add/') ?>" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+	<form action="<?php echo base_url();?>admin/user_edit/<?= $param2;?>" enctype="multipart/form-data" method="post" accept-charset="utf-8">
 		<div class="modal-header border-0">
 			<h6 class="modal-title position-absolute bg-primary text-white" id="mymodalLabel">Edit User</h6>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -12,58 +12,58 @@ foreach ($users as $row) :
 			<div class="col-md-6">
 				<div class="cv-form-group input-group mb-3 mt-4 px-3">
 					<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-							<ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon>
-						</span></div><input name="name" value="<?= $row['name']; ?>" type="text" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">fullnames</label>
+							<ion-icon name="person-outline"></ion-icon>
+						</span></div><input name="name" value="<?= $user['name']; ?>" type="text" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">fullnames</label>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="cv-form-group input-group mb-3 mt-4 px-3">
 					<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-							<ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon>
-						</span></div><input name="username" value="<?= $row['username']; ?>" type="text" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">username</label>
+							<ion-icon name="person-outline"></ion-icon>
+						</span></div><input name="username" value="<?= $user['username']; ?>" type="text" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">username</label>
 				</div>
 			</div>
 			<div class="col-md-9">
 				<div class="cv-form-group input-group mb-3 mt-4 px-3">
 					<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-							<ion-icon name="mail-outline" role="img" class="md hydrated" aria-label="mail outline"></ion-icon>
-						</span></div><input name="email" value="<?= $row['email']; ?>" type="email" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">email address</label>
+							<ion-icon name="mail-outline"></ion-icon>
+						</span></div><input name="email" value="<?= $user['email']; ?>" type="email" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">email address</label>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="cv-form-group form-group mt-4 px-3">
 					<select class="form-control js-select2" name="role" required>
-						<option value="admin" <?= ($row['role'] == "admin") ? "selected" : '' ?>>admin</option>
-						<option value="subscriber" <?= ($row['role'] == "subscriber") ? "selected" : '' ?>>subscriber</option>
+						<option value="admin" <?= ($user['role'] == "admin") ? "selected" : '' ?>>admin</option>
+						<option value="subscriber" <?= ($user['role'] == "subscriber") ? "selected" : '' ?>>subscriber</option>
 					</select>
 				</div>
 			</div>
 			<div class="col-md-7">
 				<div class="cv-form-group input-group mb-3 mt-4 px-3">
 					<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-							<ion-icon name="locate-outline" role="img" class="md hydrated" aria-label="locate outline"></ion-icon>
-						</span></div><input name="address" value="<?= $row['address']; ?>" type="text" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">physical address</label>
+							<ion-icon name="locate-outline"></ion-icon>
+						</span></div><input name="address" value="<?= $user['address']; ?>" type="text" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">physical address</label>
 				</div>
 			</div>
 			<div class="col-md-5">
 				<div class="cv-form-group input-group mb-3 mt-4 px-3">
 					<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-							<ion-icon name="call-outline" role="img" class="md hydrated" aria-label="call outline"></ion-icon>
-						</span></div><input name="phone" type="number" value="<?= $row['phone']; ?>" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">Telephone number</label>
+							<ion-icon name="call-outline"></ion-icon>
+						</span></div><input name="phone" type="number" value="<?= $user['phone']; ?>" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">Telephone number</label>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="cv-form-group input-group mb-3 mt-4 px-3">
 					<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-							<ion-icon name="briefcase-outline" role="img" class="md hydrated" aria-label="briefcase outline"></ion-icon>
-						</span></div><input name="company" type="text" value="<?= $row['company']; ?>" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">company</label>
+							<ion-icon name="briefcase-outline"></ion-icon>
+						</span></div><input name="company" type="text" value="<?= $user['company']; ?>" class="form-control custom-input" required="" autocomplete="new-password" value=""><span class="bar"></span><label class="cv-label left text-capitalize">company</label>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="cv-form-group input-group mb-3 mt-4 px-3">
 					<div class="input-group-prepend"><span class="input-group-text bg-white rounded-0 cv-chev left">
-							<ion-icon name="lock-closed-outline" role="img" class="md hydrated" aria-label="lock closed outline"></ion-icon>
-						</span></div><input name="password" type="password" class="form-control custom-input" required="" autocomplete="new-password" value="">
+							<ion-icon name="lock-closed-outline"></ion-icon>
+						</span></div><input name="password" type="password" class="form-control custom-input" autocomplete="new-password" value="">
 					<div class="input-group-prepend"><span type="button" class="input-group-text bg-white rounded-0 cv-chev right">
 							<ion-icon name="eye-outline" role="img" class="md hydrated" aria-label="eye outline"></ion-icon>
 						</span></div><span class="bar"></span><label class="cv-label left text-capitalize">password</label>
