@@ -1,5 +1,5 @@
 <?php $assets_dir  =   'assets/theme/default/'; ?>
-<div class="latest-product-img-container lazy" data-src="<?php echo $this->common_model->get_Product_thumb_url($Products['Products_id']); ?>" style="background-image: url(<?php echo base_url('uploads/default_image/blank_thumbnail.jpg');?>);">
+<div class="latest-product-img-container lazy" data-src="<?php echo $this->common_model->get_Product_thumb_url($Products['product_id']); ?>" style="background-image: url(<?php echo base_url('uploads/default_image/blank_thumbnail.jpg');?>);">
     <div class="product-img">
         <?php if($Products['is_paid'] == '1'):?>
           <div class="ribbon ribbon-top-right"></div>

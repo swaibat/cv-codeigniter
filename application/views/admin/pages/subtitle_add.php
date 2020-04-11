@@ -3,7 +3,7 @@
 <h4 class="text-center"><?php echo trans('add_subtitle)'); ?></h4>
 <hr>
 
-<input type="hidden" name="Products_id" value="<?php echo $param2; ?>">
+<input type="hidden" name="product_id" value="<?php echo $param2; ?>">
 <input type="hidden" name="Product_file_id" value="<?php echo $param3; ?>">
 <div class="form-group row">
   <label class="col-sm-3 control-label"><?php echo trans('language)'); ?></label>

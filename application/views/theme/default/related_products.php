@@ -9,9 +9,9 @@
                     <?php
                     $i      = 0;
                     if ($watch_Products->is_tvseries == '1') :
-                        $related_Products = $this->common_model->get_related_tvseries($watch_Products->Products_id, $watch_Products->category);
+                        $related_Products = $this->common_model->get_related_tvseries($watch_Products->product_id, $watch_Products->category);
                     else :
-                        $related_Products = $this->common_model->get_related_product($watch_Products->Products_id, $watch_Products->category);
+                        $related_Products = $this->common_model->get_related_product($watch_Products->product_id, $watch_Products->category);
                     endif;
                     //var_dump($related_Products);        
                     foreach ($related_Products as $Products) :

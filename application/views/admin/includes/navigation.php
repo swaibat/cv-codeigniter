@@ -66,7 +66,7 @@
 			<ul class="nav-second-level cv-collapse collapse <?= ($folder_name == 'blog') ? 'show' : ''; ?>" id="Pages" data-parent="#navAccordion">
 				<li class="nav-item">
 					<a class="nav-link pl-2" href="<?= base_url() . 'admin/posts/' ?>"><span class="nav-link -text p-0 ml-n3">
-							<ion-icon name="radio-button-<?php menu($page_name, 'posts', 'child') ?>"></ion-icon>All Posts
+							<ion-icon name="radio-button-<?php menu($page_name, 'post', 'child') ?>"></ion-icon>All Posts
 						</span>
 					</a>
 				</li>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="126.875" height="84.875" viewBox="0 0 126.875 84.875">
+  <g id="Group_8" data-name="Group 8" transform="translate(-882 -522)">
+    <g id="Group_7" data-name="Group 7">
+      <g id="Group_6" data-name="Group 6">
+        <g id="Group_5" data-name="Group 5">
+          <g id="Group_4" data-name="Group 4">
+            <g id="Rectangle_3" data-name="Rectangle 3" transform="translate(882 537)" fill="none" stroke="#e3e3e3" stroke-width="1" stroke-dasharray="1 2">
+              <rect width="86" height="60" stroke="none"/>
+              <rect x="0.5" y="0.5" width="85" height="59" fill="none"/>
+            </g>
+            <rect id="Rectangle_1" data-name="Rectangle 1" width="97" height="62" transform="translate(894 522)" fill="#f7f7f7"/>
+            <ellipse id="Ellipse_1" data-name="Ellipse 1" cx="12.5" cy="12" rx="12.5" ry="12" transform="translate(918 527)" fill="#e3e3e3"/>
+            <rect id="Rectangle_2" data-name="Rectangle 2" width="25" height="29" transform="matrix(1, -0.017, 0.017, 1, 929.749, 540.229)" fill="#fff"/>
+            <path id="Polygon_1" data-name="Polygon 1" d="M11,0,22,16H0Z" transform="translate(946 553)" fill="#e3e3e3"/>
+            <path id="Icon_awesome-arrow-circle-up" data-name="Icon awesome-arrow-circle-up" d="M.563,18A17.438,17.438,0,1,1,18,35.438,17.434,17.434,0,0,1,.563,18Zm10.1,2.032,5.091-5.309V27.563a1.683,1.683,0,0,0,1.688,1.688h1.125a1.683,1.683,0,0,0,1.688-1.687V14.723l5.091,5.309a1.689,1.689,0,0,0,2.412.028l.766-.773a1.681,1.681,0,0,0,0-2.384L19.2,7.573a1.681,1.681,0,0,0-2.384,0L7.474,16.9a1.681,1.681,0,0,0,0,2.384l.766.773A1.7,1.7,0,0,0,10.659,20.032Z" transform="translate(973.438 571.438)" fill="#e3e3e3"/>
+            <g id="Group_3" data-name="Group 3" transform="translate(-0.009)">
+              <g id="Group_2" data-name="Group 2" transform="translate(905.5 574.5)">
+                <g id="Group_1" data-name="Group 1">
+                  <line id="Line_1" data-name="Line 1" x2="55" fill="none" stroke="#e3e3e3" stroke-width="1"/>
+                  <line id="Line_3" data-name="Line 3" x2="12" transform="translate(58.009)" fill="none" stroke="#e3e3e3" stroke-width="1"/>
+                  <line id="Line_4" data-name="Line 4" x2="44" transform="translate(0 3)" fill="none" stroke="#e3e3e3" stroke-width="1"/>
+                  <line id="Line_5" data-name="Line 5" x2="17" transform="translate(49.009 4)" fill="none" stroke="#e3e3e3" stroke-width="1"/>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

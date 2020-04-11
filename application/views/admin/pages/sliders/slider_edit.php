@@ -69,7 +69,7 @@ foreach ( $sliders as $row):
     <select class="form-control" name="product_id" id="select_product">
         <?php if($row['action_id'] !='' && $row['action_id'] !=NULL &&  $row['action_type'] =='product'): ?>
             <option value="<?php echo $row['action_id']; ?>" selected>
-                <?php echo $this->common_model->get_title_by_Products_id($row['action_id']); ?>
+                <?php echo $this->common_model->get_title_by_product_id($row['action_id']); ?>
             </option>
         <?php endif; ?>
     </select>
@@ -82,7 +82,7 @@ foreach ( $sliders as $row):
     <select class="form-control" name="tvseries_id" id="select_tvseries">
         <?php if($row['action_id'] !='' && $row['action_id'] !=NULL && $row['action_type'] =='tvseries'): ?>
             <option value="<?php echo $row['action_id']; ?>" selected>
-                <?php echo $this->common_model->get_title_by_Products_id($row['action_id']); ?>
+                <?php echo $this->common_model->get_title_by_product_id($row['action_id']); ?>
             </option>
         <?php endif; ?>
     </select>

@@ -954,7 +954,7 @@ CREATE TABLE `cron` (
   `action` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `image_url` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `save_to` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `products_id` int(250) DEFAULT NULL,
+  `product_id` int(250) DEFAULT NULL,
   `admin_email_from` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `admin_email` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `email_to` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
@@ -1123,7 +1123,7 @@ DROP TABLE IF EXISTS `download_link`;
 
 CREATE TABLE `download_link` (
   `download_link_id` int(11) NOT NULL AUTO_INCREMENT,
-  `products_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
   `link_title` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `resolution` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '720p',
   `file_size` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '00MB',
@@ -1141,7 +1141,7 @@ DROP TABLE IF EXISTS `episodes`;
 CREATE TABLE `episodes` (
   `episodes_id` int(11) NOT NULL AUTO_INCREMENT,
   `stream_key` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `products_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
   `seasons_id` int(11) DEFAULT NULL,
   `episodes_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `file_source` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
@@ -1524,7 +1524,7 @@ CREATE TABLE `post_comments` (
 DROP TABLE IF EXISTS `posts`;
 
 CREATE TABLE `posts` (
-  `posts_id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL AUTO_INCREMENT,
   `post_title` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci,
   `seo_title` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `slug` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci,
@@ -1536,7 +1536,7 @@ CREATE TABLE `posts` (
   `user_id` int(20) DEFAULT '1',
   `post_at` datetime DEFAULT NULL,
   `publication` int(11) DEFAULT '1',
-  PRIMARY KEY (`posts_id`)
+  PRIMARY KEY (`post_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 #
@@ -1548,7 +1548,7 @@ DROP TABLE IF EXISTS `product_file`;
 CREATE TABLE `product_file` (
   `product_file_id` int(11) NOT NULL AUTO_INCREMENT,
   `stream_key` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `products_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
   `file_source` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `source_type` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `file_url` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
@@ -1584,7 +1584,7 @@ INSERT INTO `product_type` (`product_type_id`, `product_type`, `product_type_des
 DROP TABLE IF EXISTS `products`;
 
 CREATE TABLE `products` (
-  `products_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `imdbid` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `title` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `seo_title` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
@@ -1615,7 +1615,7 @@ CREATE TABLE `products` (
   `monthly_view` int(250) DEFAULT '0',
   `total_view` int(250) DEFAULT '1',
   `last_ep_added` datetime DEFAULT '2019-04-04 00:00:00',
-  PRIMARY KEY (`products_id`)
+  PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 #
@@ -1680,7 +1680,7 @@ DROP TABLE IF EXISTS `seasons`;
 
 CREATE TABLE `seasons` (
   `seasons_id` int(11) NOT NULL AUTO_INCREMENT,
-  `products_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
   `seasons_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `order` int(50) NOT NULL DEFAULT '0',
   `publish` int(11) DEFAULT '1',
@@ -1757,7 +1757,7 @@ DROP TABLE IF EXISTS `subtitle`;
 
 CREATE TABLE `subtitle` (
   `subtitle_id` int(11) NOT NULL AUTO_INCREMENT,
-  `products_id` int(50) NOT NULL,
+  `product_id` int(50) NOT NULL,
   `product_file_id` int(50) DEFAULT NULL,
   `language` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `kind` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
@@ -1776,7 +1776,7 @@ DROP TABLE IF EXISTS `tvseries_subtitle`;
 
 CREATE TABLE `tvseries_subtitle` (
   `tvseries_subtitle_id` int(11) NOT NULL AUTO_INCREMENT,
-  `products_id` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `product_id` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `episodes_id` int(250) DEFAULT NULL,
   `language` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `kind` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
@@ -1829,7 +1829,7 @@ CREATE TABLE `wish_list` (
   `wish_list_id` int(11) NOT NULL AUTO_INCREMENT,
   `wish_list_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `products_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
   `create_at` datetime DEFAULT NULL,
   `status` int(11) DEFAULT '1',
   PRIMARY KEY (`wish_list_id`)

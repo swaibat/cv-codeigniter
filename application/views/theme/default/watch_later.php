@@ -78,11 +78,11 @@
                                     <table class="table table-striped">
                                         <?php 
                                             foreach($wl_Products as $favorite_Products):
-                                            $all_fav_Products = $this->db->get_where('Products', array('Products_id'=>$favorite_Products['Products_id']))->result_array();
+                                            $all_fav_Products = $this->db->get_where('Products', array('product_id'=>$favorite_Products['product_id']))->result_array();
                                             foreach ($all_fav_Products as $Products) :
                                         ?>
                                         <tr id="row_<?php echo $favorite_Products['wish_list_id'];?>">
-                                            <td width="180" valign="top"><a href="<?php echo base_url('watch/'.$Products['slug'].'.html');?>"><img class="img-responsive" src="<?php echo $this->common_model->get_Product_thumb_url($Products['Products_id']); ?>" width="120" alt="Blade Runner 2049"></a></td>
+                                            <td width="180" valign="top"><a href="<?php echo base_url('watch/'.$Products['slug'].'.html');?>"><img class="img-responsive" src="<?php echo $this->common_model->get_Product_thumb_url($Products['product_id']); ?>" width="120" alt="Blade Runner 2049"></a></td>
                                             <td width="70" valign="top">
                                                 <a class="btn btn-xs btn-success" href="<?php echo base_url('watch/'.$Products['slug'].'.html');?>"><i class="fa fa-eye"></i></a>
                                                 <button class="btn btn-xs btn-danger" onclick="wish_list_remove('<?php echo $favorite_Products['wish_list_id'];?>')"><i class="fa fa-close"></i></button>                                                

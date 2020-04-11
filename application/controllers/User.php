@@ -2,8 +2,10 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class User extends Home_Core_Controller{
-    public function __construct(){
+class User extends Home_Core_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
         $this->load->library('google');
         $this->load->library('facebook');
@@ -11,9 +13,10 @@ class User extends Home_Core_Controller{
         $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
         $this->output->set_header('Pragma: no-cache');
     }
-    
+
     // index function
-    public function index() {
+    public function index()
+    {
         if ($this->session->userdata('login_status') == 1)
             redirect(base_url() . 'user/profile', 'refresh');
         if ($this->session->userdata('login_status') != 1)
@@ -21,31 +24,34 @@ class User extends Home_Core_Controller{
     }
 
     // login function
-    public function login() {
+    public function login()
+    {
         if ($this->session->userdata('login_status') == 1)
             redirect(base_url() . 'user/profile', 'refresh');
         $data['page_name']      = 'login';
         $data['title']          = 'Login | Signup';
-		$this->load->library('google');
+        $this->load->library('google');
         $data['facebook_login_url'] = $this->facebook->getLoginUrl(array(
-                'redirect_uri' => site_url('user/facebook_login'), 
-                'scope' => array("email") // permissions here
-            ));
-		$data['login_url']      = $this->google->login_url();
+            'redirect_uri' => site_url('user/facebook_login'),
+            'scope' => array("email") // permissions here
+        ));
+        $data['login_url']      = $this->google->login_url();
         //$data['facebook_login_url'] =  $this->facebook->login_url();        
-        $this->load->view('theme/'.$this->active_theme.'/index',$data);
+        $this->load->view('theme/' . $this->active_theme . '/index', $data);
     }
 
     // logout function
-    function logout() {
+    function logout()
+    {
         $this->session->unset_userdata('');
         $this->session->sess_destroy();
         $this->session->set_flashdata('logout_notification', 'logged_out');
-        redirect(base_url() , 'refresh');
+        redirect(base_url(), 'refresh');
     }
 
-    public function google_login(){       
-        if(isset($_GET['code'])){
+    public function google_login()
+    {
+        if (isset($_GET['code'])) {
             $this->google->authenticate();
             $get_user_info = $this->google->get_user_info();
             $user_info['oauth_provider'] = 'google';
@@ -53,18 +59,19 @@ class User extends Home_Core_Controller{
             $user_info['first_name']     = $get_user_info['given_name'];
             $user_info['last_name']      = $get_user_info['family_name'];
             $user_info['email']          = $get_user_info['email'];
-            $user_info['gender']         = !empty($get_user_info['gender'])?$get_user_info['gender']:'';
-            $user_info['locale']         = !empty($get_user_info['locale'])?$get_user_info['locale']:'';
-            $user_info['profile_url']    = !empty($get_user_info['link'])?$get_user_info['link']:'';
-            $user_info['picture_url']    = !empty($get_user_info['picture'])?$get_user_info['picture']:'';
+            $user_info['gender']         = !empty($get_user_info['gender']) ? $get_user_info['gender'] : '';
+            $user_info['locale']         = !empty($get_user_info['locale']) ? $get_user_info['locale'] : '';
+            $user_info['profile_url']    = !empty($get_user_info['link']) ? $get_user_info['link'] : '';
+            $user_info['picture_url']    = !empty($get_user_info['picture']) ? $get_user_info['picture'] : '';
             $this->varify_social_user_info($user_info);
             redirect('user/profile/');
         }
-        redirect('user/login/');        
+        redirect('user/login/');
     }
 
-    public function facebook_login(){       
-        if($this->facebook->is_authenticated()){
+    public function facebook_login()
+    {
+        if ($this->facebook->is_authenticated()) {
             $get_user_info = $this->facebook->request('get', '/me?fields=id,first_name,last_name,email,gender,locale,picture');
             // Preparing data for database insertion
             $user_info['oauth_provider'] = 'facebook';
@@ -74,58 +81,58 @@ class User extends Home_Core_Controller{
             $user_info['email'] = $get_user_info['email'];
             $user_info['gender'] = $get_user_info['gender'];
             $user_info['locale'] = $get_user_info['locale'];
-            $user_info['profile_url'] = 'https://www.facebook.com/'.$get_user_info['id'];
+            $user_info['profile_url'] = 'https://www.facebook.com/' . $get_user_info['id'];
             $user_info['picture_url'] = $get_user_info['picture']['data']['url'];
             $this->varify_social_user_info($user_info);
             redirect('user/profile/');
         }
         redirect('user/login/');
-        
     }
 
-    public function varify_social_user_info($user_info=''){
-        $query  = $this->db->get_where('user' , array('email'=>$user_info['email']));;
+    public function varify_social_user_info($user_info = '')
+    {
+        $query  = $this->db->get_where('user', array('email' => $user_info['email']));;
         $row  = $query->row();
         $num_rows  = $query->num_rows();
         if ($num_rows > 0) {
             $this->session->set_userdata('login_status', '1');
             $this->session->set_userdata('user_id', $row->user_id);
-            $this->session->set_userdata('name', $row->name);                     
+            $this->session->set_userdata('name', $row->name);
             $this->db->where('user_id', $row->user_id);
             $this->db->update('user', array(
                 'last_login' => date('Y-m-d H:i:s')
-            )); 
-            if($row->role=='admin'){
-              $this->session->set_userdata('admin_is_login', '1');
-              $this->session->set_userdata('login_type', 'admin');
+            ));
+            if ($row->role == 'admin') {
+                $this->session->set_userdata('admin_is_login', '1');
+                $this->session->set_userdata('login_type', 'admin');
             }
-            if($row->role=='subscriber'){
-              $this->session->set_userdata('user_is_login', '1');
-              $this->session->set_userdata('login_type', 'subscriber');
+            if ($row->role == 'subscriber') {
+                $this->session->set_userdata('user_is_login', '1');
+                $this->session->set_userdata('login_type', 'subscriber');
             }
-        }else{
-            $name                   = $user_info['first_name'].' '.$user_info['last_name'];
+        } else {
+            $name                   = $user_info['first_name'] . ' ' . $user_info['last_name'];
             $data['name']           = $name;
             $data['password']       = md5($user_info['email']);
             $data['email']          = $user_info['email'];
             $data['role']           = 'subscriber';
             $data['join_date']      = date('Y-m-d H:i:s');
-            $data['last_login']     = date('Y-m-d H:i:s');             
+            $data['last_login']     = date('Y-m-d H:i:s');
             $this->db->insert('user', $data);
             $user_id                = $this->db->insert_id();
-            $trial_enable               =   $this->db->get_where('config' , array('title'=>'trial_enable'))->row()->value;
-            if($trial_enable =='1'):
+            $trial_enable               =   $this->db->get_where('config', array('title' => 'trial_enable'))->row()->value;
+            if ($trial_enable == '1') :
                 $this->subscription_model->create_trial_subscription($user_id);
             endif;
             //save user image
             $source = $user_info['picture_url'];
-            $save_to = "uploads/user_image/".$user_id.".jpg";
-            $this->common_model->grab_image($source,$save_to);
+            $save_to = "uploads/user_image/" . $user_id . ".jpg";
+            $this->common_model->grab_image($source, $save_to);
             //var_dump($source);
             // create session
             $this->session->set_userdata('login_status', '1');
             $this->session->set_userdata('user_id', $user_id);
-            $this->session->set_userdata('name', $name);                     
+            $this->session->set_userdata('name', $name);
             $this->db->where('user_id', $row->user_id);
             $this->db->update('user', array('last_login' => date('Y-m-d H:i:s')));
             $this->session->set_userdata('user_is_login', '1');
@@ -134,12 +141,13 @@ class User extends Home_Core_Controller{
         return TRUE;
     }
 
-    
+
     // signup function
-    function signup($param1='', $param2='')  {
+    function signup($param1 = '', $param2 = '')
+    {
         if ($param1 == 'do_signup') {
-            $registration_enable        =   $this->db->get_where('config' , array('title'=>'registration_enable'))->row()->value;
-            if($registration_enable =="1"):
+            $registration_enable        =   $this->db->get_where('config', array('title' => 'registration_enable'))->row()->value;
+            if ($registration_enable == "1") :
                 $name                   = $this->input->post('name');
                 $email                  = $this->input->post('email');
                 $password               = $this->input->post('password');
@@ -147,41 +155,41 @@ class User extends Home_Core_Controller{
                 $data['name']           = $name;
                 $data['username']       = $email;
                 $data['email']          = $email;
-                $data['password']       = md5($password );
+                $data['password']       = md5($password);
                 $data['role']           = 'subscriber';
                 $this->form_validation->set_rules('name', 'Name', 'required|min_length[5]');
                 $this->form_validation->set_rules('email', 'Email', 'required|min_length[5]|valid_email|is_unique[user.email]');
                 $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
                 $this->form_validation->set_rules('password2', 'Confirm Password', 'required|matches[password]|min_length[6]');
                 // recaptcha check
-                $recaptcha_enable          =   $this->db->get_where('config' , array('title' =>'recaptcha_enable'))->row()->value;
-                if($recaptcha_enable == '1'):
+                $recaptcha_enable          =   $this->db->get_where('config', array('title' => 'recaptcha_enable'))->row()->value;
+                if ($recaptcha_enable == '1') :
                     $this->form_validation->set_rules('captcha', 'Captcha', 'callback_validate_recaptcha');
                 endif;
 
-                if ($this->form_validation->run() == FALSE):
+                if ($this->form_validation->run() == FALSE) :
                     $this->session->set_flashdata('error', validation_errors());
                     redirect(base_url() . 'user/login', 'refresh');
-                else:
+                else :
                     $email_exist             = $this->common_model->check_email($email);
-                    if($email_exist):
-                        $this->session->set_flashdata('error', 'Signup fail.Email is already exist on system');                        
-                    else:
+                    if ($email_exist) :
+                        $this->session->set_flashdata('error', 'Signup fail.Email is already exist on system');
+                    else :
                         $data['join_date']       = date('Y-m-d H:i:s');
                         $data['last_login']       = date('Y-m-d H:i:s');
                         $this->db->insert('user', $data);
                         $insert_id                  =   $this->db->insert_id();
-                        $trial_enable               =   $this->db->get_where('config' , array('title'=>'trial_enable'))->row()->value;
-                        if($trial_enable =='1'):
+                        $trial_enable               =   $this->db->get_where('config', array('title' => 'trial_enable'))->row()->value;
+                        if ($trial_enable == '1') :
                             $this->subscription_model->create_trial_subscription($insert_id);
                         endif;
                         $this->load->model('email_model');
                         $this->email_model->account_opening_email($email, $password);
-                        $this->session->set_flashdata('success', 'Signup successfully.now you can login to system');                    
+                        $this->session->set_flashdata('success', 'Signup successfully.now you can login to system');
                         redirect(base_url() . 'user/login', 'refresh');
                     endif;
                 endif;
-            else:
+            else :
                 $this->session->set_flashdata('login_error', 'Registration disabled by administrator.');
                 redirect(base_url() . 'user/login', 'refresh');
             endif;
@@ -190,48 +198,47 @@ class User extends Home_Core_Controller{
     }
 
     // forget password function
-    function forget_password($param1='', $param2='') {
-        if ($param1 == 'do_reset') {           
-            $email                  = $this->input->post('email');            
+    function forget_password($param1 = '', $param2 = '')
+    {
+        if ($param1 == 'do_reset') {
+            $email                  = $this->input->post('email');
             $user_exist             = $this->common_model->check_email($email);
-            if($user_exist){ 
-                $token = bin2hex(openssl_random_pseudo_bytes(16));               
+            if ($user_exist) {
+                $token = bin2hex(openssl_random_pseudo_bytes(16));
                 $data['token'] = $token;
-                $this->db->where('email',$email);
-                $this->db->update('user',$data);
+                $this->db->where('email', $email);
+                $this->db->update('user', $data);
                 $this->load->model('email_model');
                 $this->email_model->password_reset_email($email, $token);
                 $this->session->set_flashdata('success', 'Please Check Your Email to Complete Password Reset.');
-                redirect(base_url() . 'user/forget_password', 'refresh');                
-            }else{
-            $this->session->set_flashdata('error', 'Email not found on our system');            
-            redirect(base_url() . 'user/forget_password', 'refresh');
+                redirect(base_url() . 'user/forget_password', 'refresh');
+            } else {
+                $this->session->set_flashdata('error', 'Email not found on our system');
+                redirect(base_url() . 'user/forget_password', 'refresh');
             }
         }
         $data['page_name']      = 'forget_password';
-        $data['title']     = 'Password Recovery';        
-        $this->load->view('theme/'.$this->active_theme.'/index',$data);
+        $data['title']     = 'Password Recovery';
+        $this->load->view('theme/' . $this->active_theme . '/index', $data);
         //redirect(base_url() . 'login', 'refresh');
 
     }
     // complete password reset function
-    function complete_reset($param1='', $param2='') {
+    function complete_reset($param1 = '', $param2 = '')
+    {
         if ($param1 == 'save') {
 
             $token                      = $this->input->post('token');
             $password                   = $this->input->post('password');
             $password2                  = $this->input->post('password2');
-            $email                      = $this->db->get_where('user' , array('token' => $token))->row()->email;
+            $email                      = $this->db->get_where('user', array('token' => $token))->row()->email;
             $this->form_validation->set_rules('token', 'token', 'required|min_length[3]');
             $this->form_validation->set_rules('password', 'Password', 'required|min_length[4]');
             $this->form_validation->set_rules('password2', 'Confirm Password', 'required|matches[password]|min_length[4]');
-            if ($this->form_validation->run() == FALSE)
-            {
+            if ($this->form_validation->run() == FALSE) {
                 $this->session->set_flashdata('error', validation_errors());
-                redirect(base_url() . 'user/complete_reset?token='.$token, 'refresh'); 
-            }
-
-            else{
+                redirect(base_url() . 'user/complete_reset?token=' . $token, 'refresh');
+            } else {
                 $data['token']      = '';
                 $data['password']   = md5($password);
                 $this->db->where('token', $token);
@@ -241,243 +248,255 @@ class User extends Home_Core_Controller{
                 $this->session->set_flashdata('login_success', 'Password Changed');
                 redirect(base_url() . 'user/login', 'refresh');
             }
-
         }
-            $token                  = $this->input->get('token');
-            if(isset($token) && $token !=''){
-                $token_exist             = $this->common_model->check_token($token);
-                if($token_exist){                               
+        $token                  = $this->input->get('token');
+        if (isset($token) && $token != '') {
+            $token_exist             = $this->common_model->check_token($token);
+            if ($token_exist) {
                 $data['token'] = $token;
                 $data['page_name']      = 'new_password';
-                $data['title']     = 'New Password';        
-                $this->load->view('theme/'.$this->active_theme.'/index',$data);
-                }else{
+                $data['title']     = 'New Password';
+                $this->load->view('theme/' . $this->active_theme . '/index', $data);
+            } else {
                 $this->session->set_flashdata('error', 'Invalid token..');
                 redirect(base_url() . 'user/forget_password', 'refresh');
-                }
-            }else{
-                $this->session->set_flashdata('error', 'Invalid token..');
-                redirect(base_url() . 'user/forget_password', 'refresh');
-            }            
-        }   
+            }
+        } else {
+            $this->session->set_flashdata('error', 'Invalid token..');
+            redirect(base_url() . 'user/forget_password', 'refresh');
+        }
+    }
     // validate login  function
-    function validate_login($email   =   '' , $password   =  ''){
-        $credential    =   array(  'email' => $email , 'password' => $password );
-        $query = $this->db->get_where('user' , $credential);
+    function validate_login($email   =   '', $password   =  '')
+    {
+        $credential    =   array('email' => $email, 'password' => $password);
+        $query = $this->db->get_where('user', $credential);
         $row = $query->row();
-        if ($query->num_rows() > 0):
+        if ($query->num_rows() > 0) :
             $this->session->set_userdata('login_status', '1');
             $this->session->set_userdata('user_id', $row->user_id);
-            $this->session->set_userdata('name', $row->name);                     
+            $this->session->set_userdata('name', $row->name);
             $this->db->where('user_id', $row->user_id);
             $this->db->update('user', array(
                 'last_login' => date('Y-m-d H:i:s')
-            )); 
-            if($row->role =='admin'):
-              $this->session->set_userdata('admin_is_login', '1');
-              $this->session->set_userdata('login_type', 'admin');
+            ));
+            if ($row->role == 'admin') :
+                $this->session->set_userdata('admin_is_login', '1');
+                $this->session->set_userdata('login_type', 'admin');
             endif;
-            if($row->role =='subscriber'):
-              $this->session->set_userdata('user_is_login', '1');
-              $this->session->set_userdata('login_type', 'subscriber');
+            if ($row->role == 'subscriber') :
+                $this->session->set_userdata('user_is_login', '1');
+                $this->session->set_userdata('login_type', 'subscriber');
             endif;
-              return 'success';
-        endif;        
-        return 'invalid';       
+            return 'success';
+        endif;
+        return 'invalid';
     }
 
-    
+
     // dashboard function
-    function dashboard(){
+    function dashboard()
+    {
         if ($this->session->userdata('user_is_login') != 1)
             redirect(base_url(), 'refresh');
-        	/* start menu active/inactive section*/
-        	$this->session->unset_userdata('active_menu');
-        	$this->session->set_userdata('active_menu', '1');
-        	/* end menu active/inactive section*/
-        	$data['page_name']             = 'dashboard';
-        	$data['page_title']            = 'User Dashboard';
-        	$this->load->view('user/index', $data);
+        /* start menu active/inactive section*/
+        $this->session->unset_userdata('active_menu');
+        $this->session->set_userdata('active_menu', '1');
+        /* end menu active/inactive section*/
+        $data['page_name']             = 'dashboard';
+        $data['page_title']            = 'User Dashboard';
+        $this->load->view('user/index', $data);
     }
     // manage profile function
-    function manage_profile(){
-    	if ($this->session->userdata('user_is_login') != 1)
+    function manage_profile()
+    {
+        if ($this->session->userdata('user_is_login') != 1)
             redirect(base_url(), 'refresh');
-            /* start menu active/inactive section*/
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '12');
-            /* end menu active/inactive section*/
-            $data['page_name']      = 'manage_profile';
-            $data['page_title']     = 'Update profile information';
-            $data['profile_info']   = $this->db->get_where('user', array(
-            'user_id' => $this->session->userdata('user_id')))->result_array();
-            $this->load->view('user/index', $data);
+        /* start menu active/inactive section*/
+        $this->session->unset_userdata('active_menu');
+        $this->session->set_userdata('active_menu', '12');
+        /* end menu active/inactive section*/
+        $data['page_name']      = 'manage_profile';
+        $data['page_title']     = 'Update profile information';
+        $data['profile_info']   = $this->db->get_where('user', array(
+            'user_id' => $this->session->userdata('user_id')
+        ))->result_array();
+        $this->load->view('user/index', $data);
     }
 
     // profile function
-    function profile($param1 = '', $param2 = ''){
+    function profile($param1 = '', $param2 = '')
+    {
         $user_id                = $this->session->userdata('user_id');
         if ($this->session->userdata('login_status') != 1)
             redirect(base_url() . 'login', 'refresh');
         if ($param1 == 'update') {
             $data['name']           = $this->input->post('name');
-            $data['gender']         = $this->input->post('gender');             
-            $data['phone']          = $this->input->post('phone');             
-            $data['dob']            = date("Y-m-d",strtotime($this->input->post('dob')));             
+            $data['gender']         = $this->input->post('gender');
+            $data['phone']          = $this->input->post('phone');
+            $data['dob']            = date("Y-m-d", strtotime($this->input->post('dob')));
             $this->db->where('user_id', $user_id);
             $this->db->update('user', $data);
-            move_uploaded_file($_FILES['photo']['tmp_name'], 'uploads/user_image/' .$user_id.'.jpg');            
+            move_uploaded_file($_FILES['photo']['tmp_name'], 'uploads/user_image/' . $user_id . '.jpg');
             $this->session->set_flashdata('success', 'Profile information updated.');
             redirect(base_url() . 'user/update_profile/', 'refresh');
         }
-            $data['page_name']      = 'profile';
-            $data['title']          = 'Manage Profile';
-            $data['profile_info']   = $this->db->get_where('user', array(
-            'user_id' => $this->session->userdata('user_id')))->row();
-            $this->load->view('theme/'.$this->active_theme.'/index',$data);
-
+        $data['page_name']      = 'profile';
+        $data['title']          = 'Manage Profile';
+        $data['profile_info']   = $this->db->get_where('user', array(
+            'user_id' => $this->session->userdata('user_id')
+        ))->row();
+        $this->load->view('theme/' . $this->active_theme . '/index', $data);
     }
 
-    function favorite($param1 = '', $param2 = ''){
-            $user_id=$this->session->userdata('user_id');
+    function favorite($param1 = '', $param2 = '')
+    {
+        $user_id = $this->session->userdata('user_id');
         if ($this->session->userdata('login_status') != 1)
             redirect(base_url() . 'login', 'refresh');
-        
-            $data['page_name']      = 'favorite';
-            $data['title']          = 'My Favorite Products & Videos';
-            $this->db->order_by('wish_list_id', 'desc');
-            $data['fav_Products']     = $this->db->get_where('wish_list', array('wish_list_type'=>'fav','user_id' => $this->session->userdata('user_id')))->result_array();
-            $this->load->view('theme/'.$this->active_theme.'/index',$data);
+
+        $data['page_name']      = 'favorite';
+        $data['title']          = 'My Favorite Products & Videos';
+        $this->db->order_by('wish_list_id', 'desc');
+        $data['fav_Products']     = $this->db->get_where('wish_list', array('wish_list_type' => 'fav', 'user_id' => $this->session->userdata('user_id')))->result_array();
+        $this->load->view('theme/' . $this->active_theme . '/index', $data);
     }
 
-    function watch_later($param1 = '', $param2 = ''){
-            $user_id=$this->session->userdata('user_id');
+    function watch_later($param1 = '', $param2 = '')
+    {
+        $user_id = $this->session->userdata('user_id');
         if ($this->session->userdata('login_status') != 1)
             redirect(base_url() . 'login', 'refresh');
-        
-            $data['page_name']      = 'watch_later';
-            $data['title']          = 'My Wish List';
-            $this->db->order_by('wish_list_id', 'desc');
-            $data['wl_Products']      = $this->db->get_where('wish_list', array('wish_list_type'=>'wl','user_id' => $this->session->userdata('user_id')))->result_array();
-            $this->load->view('theme/'.$this->active_theme.'/index',$data);
+
+        $data['page_name']      = 'watch_later';
+        $data['title']          = 'My Wish List';
+        $this->db->order_by('wish_list_id', 'desc');
+        $data['wl_Products']      = $this->db->get_where('wish_list', array('wish_list_type' => 'wl', 'user_id' => $this->session->userdata('user_id')))->result_array();
+        $this->load->view('theme/' . $this->active_theme . '/index', $data);
     }
 
     // update profile function
-    function update_profile($param1 = '', $param2 = ''){
-            $user_id=$this->session->userdata('user_id');
+    function update_profile($param1 = '', $param2 = '')
+    {
+        $user_id = $this->session->userdata('user_id');
         if ($this->session->userdata('login_status') != 1)
-            redirect(base_url() . 'login', 'refresh');        
-            $data['page_name']      = 'update_profile';
-            $data['title']     = 'Update Profile';
-            $data['profile_info']   = $this->db->get_where('user', array(
-            'user_id' => $this->session->userdata('user_id')))->row();
-            $this->load->view('theme/'.$this->active_theme.'/index',$data);
-
+            redirect(base_url() . 'login', 'refresh');
+        $data['page_name']      = 'update_profile';
+        $data['title']     = 'Update Profile';
+        $data['profile_info']   = $this->db->get_where('user', array(
+            'user_id' => $this->session->userdata('user_id')
+        ))->row();
+        $this->load->view('theme/' . $this->active_theme . '/index', $data);
     }
     // password change function
-    function change_password($param1 = '', $param2 = ''){
-        $user_id=$this->session->userdata('user_id');
+    function change_password($param1 = '', $param2 = '')
+    {
+        $user_id = $this->session->userdata('user_id');
         if ($this->session->userdata('login_status') != 1)
             redirect(base_url() . 'login', 'refresh');
         if ($param1 == 'update') {
             $password               = md5($this->input->post('password'));
             $new_password           = md5($this->input->post('new_password'));
             $retype_new_password    = md5($this->input->post('retype_new_password'));
-            
+
             $current_password       = $this->db->get_where('user', array(
                 'user_id' => $this->session->userdata('user_id')
             ))->row()->password;
-            
+
             if ($current_password == $password && $new_password == $retype_new_password) {
                 $this->db->where('user_id', $this->session->userdata('user_id'));
                 $this->db->update('user', array(
                     'password' => $new_password
                 ));
                 $this->session->set_flashdata('success', 'Password changed.');
-            }
-            elseif ($current_password !=$password ){
+            } elseif ($current_password != $password) {
                 $this->session->set_flashdata('error', 'Old password not correct.');
-
             } else {
                 $this->session->set_flashdata('error', 'Password not match.');
             }
-            redirect(base_url() . 'user/change_password/', 'refresh');        
+            redirect(base_url() . 'user/change_password/', 'refresh');
         }
 
-            $data['page_name']      = 'change_password';
-            $data['title']     = 'Change Password';
-            $data['profile_info']   = $this->db->get_where('user', array(
-            'user_id' => $this->session->userdata('user_id')))->row();
-            $this->load->view('theme/'.$this->active_theme.'/index',$data);
+        $data['page_name']      = 'change_password';
+        $data['title']     = 'Change Password';
+        $data['profile_info']   = $this->db->get_where('user', array(
+            'user_id' => $this->session->userdata('user_id')
+        ))->row();
+        $this->load->view('theme/' . $this->active_theme . '/index', $data);
     }
     // login function
-    function do_login(){
+    function do_login()
+    {
         $email                          = $this->input->post('email');
         $password                       = md5($this->input->post('password'));
         $this->form_validation->set_rules('email', 'Email', 'required|min_length[5]|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
 
         // recaptcha check
-        $recaptcha_enable          =   $this->db->get_where('config' , array('title' =>'recaptcha_enable'))->row()->value;
-        if($recaptcha_enable == '1'):
+        $recaptcha_enable          =   $this->db->get_where('config', array('title' => 'recaptcha_enable'))->row()->value;
+        if ($recaptcha_enable == '1') :
             $this->form_validation->set_rules('captcha', 'Captcha', 'callback_validate_recaptcha');
         endif;
 
-        if ($this->form_validation->run() == FALSE):
+        if ($this->form_validation->run() == FALSE) :
             $this->session->set_flashdata('login_error', validation_errors());
             redirect(base_url() . 'user/login', 'refresh');
-        else:            
-            $login_status               = $this->validate_login( $email ,$password);        
-            if ($login_status == 'success'):
-                if($this->session->userdata('admin_is_login')==1)
-                redirect(base_url() . 'admin/dashboard', 'refresh');
-            redirect(base_url() . 'user/profile', 'refresh');
-            else:
+        else :
+            $login_status               = $this->validate_login($email, $password);
+            if ($login_status == 'success') :
+                if ($this->session->userdata('admin_is_login') == 1)
+                    redirect(base_url() . 'admin/dashboard', 'refresh');
+                redirect(base_url() . 'user/profile', 'refresh');
+            else :
                 $this->session->set_flashdata('login_error', 'Username & password not match..');
                 redirect(base_url() . 'user/login', 'refresh');
             endif;
-        endif;      
+        endif;
     }
 
-    public function validate_recaptcha(){
+    public function validate_recaptcha()
+    {
         $is_valid = $this->recaptcha->is_valid();
-        if($is_valid['success']):
+        if ($is_valid['success']) :
             return true;
-        else:
-            if(array_key_exists("error_message",$is_valid)):
+        else :
+            if (array_key_exists("error_message", $is_valid)) :
                 $this->form_validation->set_message('validate_recaptcha', $is_valid['error_message']);
-            else:
+            else :
                 $this->form_validation->set_message('validate_recaptcha', trans("captcha_code_is_wrong"));
             endif;
             return false;
         endif;
-   }
+    }
 
 
 
-    function subscribe(){
+    function subscribe()
+    {
         $response                       = array();
         $email                          = $_POST["email"];
-        $name                           = $_POST["name"];       
+        $name                           = $_POST["name"];
         $response['submitted_data']     = $_POST;
-        $subscribe_status               = $this->add_subscriber($name,$email);
+        $subscribe_status               = $this->add_subscriber($name, $email);
         $response['subscribe_status']   = $subscribe_status;
         echo json_encode($response);
     }
 
-    function add_to_wish_list(){
+    function add_to_wish_list()
+    {
         $response = array();
         $list_type                      = trim($_POST["list_type"]);
-        $Products_id                      = trim($_POST["Products_id"]);       
+        $product_id                      = trim($_POST["product_id"]);
         $response['submitted_data']     = $_POST;
-        $status                         = $this->add_to_list($list_type,$Products_id);
+        $status                         = $this->add_to_list($list_type, $product_id);
         $response['status']             = $status;
         echo json_encode($response);
     }
 
-    function remove_wish_list(){
+    function remove_wish_list()
+    {
         $response                       = array();
-        $wish_list_id                   = trim($_POST["wish_list_id"]);       
+        $wish_list_id                   = trim($_POST["wish_list_id"]);
         $response['submitted_data']     = $_POST;
         $status                         = $this->remove_from_list($wish_list_id);
         $response['status']             = $status;
@@ -485,16 +504,17 @@ class User extends Home_Core_Controller{
     }
 
 
-    function add_to_list($list_type="", $Products_id=""){
+    function add_to_list($list_type = "", $product_id = "")
+    {
         $user_id                        = $this->session->userdata('user_id');
-        $query                          = $this->db->get_where('wish_list' , array('Products_id' => $Products_id, 'user_id'=>$user_id,'wish_list_type'=>$list_type));
-        if($user_id =='' || $user_id==NULL):
-           return 'login_fail'; 
-        elseif ($query->num_rows() > 0):
+        $query                          = $this->db->get_where('wish_list', array('product_id' => $product_id, 'user_id' => $user_id, 'wish_list_type' => $list_type));
+        if ($user_id == '' || $user_id == NULL) :
+            return 'login_fail';
+        elseif ($query->num_rows() > 0) :
             return 'exist';
-        else:
+        else :
             $data['user_id']            = $user_id;
-            $data['Products_id']          = $Products_id;
+            $data['product_id']          = $product_id;
             $data['wish_list_type']     = $list_type;
             $data['create_at']          = date('Y-m-d H:i:s');
             $this->db->insert('wish_list', $data);
@@ -502,24 +522,26 @@ class User extends Home_Core_Controller{
         endif;
     }
 
-    function remove_from_list($wish_list_id=""){
+    function remove_from_list($wish_list_id = "")
+    {
         $user_id                        = $this->session->userdata('user_id');
-        $query                          = $this->db->get_where('wish_list' , array('wish_list_id' => $wish_list_id, 'user_id'=>$user_id));
-        if($user_id =='' || $user_id==NULL){
-           return 'login_error'; 
-        }else if ($query->num_rows() > 0) {
-            $this->db->where('wish_list_id',$wish_list_id);
+        $query                          = $this->db->get_where('wish_list', array('wish_list_id' => $wish_list_id, 'user_id' => $user_id));
+        if ($user_id == '' || $user_id == NULL) {
+            return 'login_error';
+        } else if ($query->num_rows() > 0) {
+            $this->db->where('wish_list_id', $wish_list_id);
             $this->db->delete('wish_list');
-            return 'success';            
-        }else{
-           return 'error'; 
+            return 'success';
+        } else {
+            return 'error';
         }
     }
 
 
 
-    function add_subscriber($name="", $email=""){
-    $query                          = $this->db->get_where('user' , array('email' => $email));
+    function add_subscriber($name = "", $email = "")
+    {
+        $query                          = $this->db->get_where('user', array('email' => $email));
         if ($query->num_rows() < 1) {
             $data['name']           = $name;
             $data['password']       = md5($email);
@@ -527,74 +549,72 @@ class User extends Home_Core_Controller{
             $data['email']          = $email;
             $data['role']           = 'subscriber';
             $data['join_date']      = date('Y-m-d H:i:s');
-            $data['last_login']     = date('Y-m-d H:i:s');             
+            $data['last_login']     = date('Y-m-d H:i:s');
             $this->db->insert('user', $data);
             $this->load->model('email_model');
-            if($this->email_model->send_confirmation_to_subscriber($email)){
-            return 'success';
-            }else{
-               return 'error'; 
+            if ($this->email_model->send_confirmation_to_subscriber($email)) {
+                return 'success';
+            } else {
+                return 'error';
             }
-        }
-        else if ($query->num_rows() > 0) {
+        } else if ($query->num_rows() > 0) {
             return 'exist';
-        }
-        else{
+        } else {
             return 'error';
         }
     }
 
-    function report_product($param1=''){
+    function report_product($param1 = '')
+    {
         $data = array();
-        if($this->input->post('Product') !="" && $this->input->post('Product') !=NULL){
+        if ($this->input->post('Product') != "" && $this->input->post('Product') != NULL) {
             $data['Product']      = $this->input->post('Product');
         }
-        if($this->input->post('audio') !="" && $this->input->post('audio') !=NULL){
+        if ($this->input->post('audio') != "" && $this->input->post('audio') != NULL) {
             $data['audio']      = $this->input->post('audio');
         }
-        if($this->input->post('subtitle') !="" && $this->input->post('subtitle') !=NULL){
+        if ($this->input->post('subtitle') != "" && $this->input->post('subtitle') != NULL) {
             $data['subtitle']   = $this->input->post('subtitle');
         }
 
-        if($this->input->post('message') !="" && $this->input->post('message') !=NULL){
+        if ($this->input->post('message') != "" && $this->input->post('message') != NULL) {
             $data['message']    = $this->input->post('message');
         }
         // recaptcha check
-        $recaptcha_enable          =   $this->db->get_where('config' , array('title' =>'recaptcha_enable'))->row()->value;
-        if($recaptcha_enable == '1'):
+        $recaptcha_enable          =   $this->db->get_where('config', array('title' => 'recaptcha_enable'))->row()->value;
+        if ($recaptcha_enable == '1') :
             $this->form_validation->set_rules('captcha', 'Captcha', 'callback_validate_recaptcha');
         endif;
-        if ($this->form_validation->run() == FALSE):
+        if ($this->form_validation->run() == FALSE) :
             $this->session->set_flashdata('report_error', validation_errors());
             redirect($this->agent->referrer(), 'refresh');
-        else:
+        else :
             $this->load->model('email_model');
-            $this->email_model->send_product_report_to_admin($param1,$data);
+            $this->email_model->send_product_report_to_admin($param1, $data);
             $this->session->set_flashdata('report_success', 'Report sent successfully.');
             redirect($this->agent->referrer(), 'refresh');
         endif;
     }
-    function subscription($param1 = '', $param2 = ''){
+    function subscription($param1 = '', $param2 = '')
+    {
         $this->session->unset_userdata('user_active_menu');
         $this->session->set_userdata('user_active_menu', '2');
 
-        $user_id=$this->session->userdata('user_id');
+        $user_id = $this->session->userdata('user_id');
         if ($this->session->userdata('login_status') != 1)
             redirect(base_url() . 'login', 'refresh');
         if ($param1 == 'update') {
             $data['name']  = $this->input->post('name');
-            $data['gender'] = $this->input->post('gender');             
+            $data['gender'] = $this->input->post('gender');
             $this->db->where('user_id', $user_id);
             $this->db->update('user', $data);
-            move_uploaded_file($_FILES['photo']['tmp_name'], 'uploads/user_image/' .$user_id.'.jpg');            
+            move_uploaded_file($_FILES['photo']['tmp_name'], 'uploads/user_image/' . $user_id . '.jpg');
             $this->session->set_flashdata('success', 'Profile information updated.');
             redirect(base_url() . 'user/update_profile/', 'refresh');
         }
         $data['page_name']      = 'subscription';
         $data['title']          = 'My Subscription';
         $data['profile_info']   = $this->db->get_where('user', array('user_id' => $this->session->userdata('user_id')))->row();
-        $this->load->view('theme/'.$this->active_theme.'/index',$data);
+        $this->load->view('theme/' . $this->active_theme . '/index', $data);
     }
-
 }
-    
