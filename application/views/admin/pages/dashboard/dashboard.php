@@ -180,7 +180,7 @@
             <tbody>
               <?php
               $this->db->LIMIT('5');
-              $this->db->order_by('posts_id', 'desc');
+              $this->db->order_by('post_id', 'desc');
               $posts = $this->db->get('posts')->result_array();
               foreach ($posts as $post) : ?>
                 <tr>

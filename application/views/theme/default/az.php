@@ -163,7 +163,7 @@
                     ?>
                         <tr>
                             <td><?php echo $i; ?></td>
-                            <td> <img class="thumb" src="<?php echo $this->common_model->get_Product_thumb_url($Products['Products_id']); ?>" alt="<?php echo $Products['title']; ?>"> <a class="name" href="<?php echo base_url('watch/' . $Products['slug']) . '.html'; ?>" title="<?php echo $Products['title']; ?>"><?php echo $Products['title']; ?></a> </td>
+                            <td> <img class="thumb" src="<?php echo $this->common_model->get_Product_thumb_url($Products['product_id']); ?>" alt="<?php echo $Products['title']; ?>"> <a class="name" href="<?php echo base_url('watch/' . $Products['slug']) . '.html'; ?>" title="<?php echo $Products['title']; ?>"><?php echo $Products['title']; ?></a> </td>
                             <td><?php echo date("Y", strtotime($Products['release'])); ?></td>
                             <td><?php echo ($Products['Product_quality'] == '' || $Products['Product_quality'] == NULL) ? $Products['Product_quality'] : 'HD'; ?></td>
                             <td> <?php echo $this->category_model->generate_categorys_anchor($Products['category']); ?> </td>

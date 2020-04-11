@@ -12,7 +12,7 @@
               <div class="form-group row">
               <label class="control-label col-sm-4">Product/TV-Series</label>
               <div class="col-sm-8">
-                <select class="form-control" name="Products_id"  id="Products_id" required></select>
+                <select class="form-control" name="product_id"  id="product_id" required></select>
               </div>
             </div>            
               <div class="form-group row">
@@ -61,7 +61,7 @@
 
 <script src="<?php echo base_url() ?>assets/plugins/select2/select2.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-      $('#Products_id').select2({
+      $('#product_id').select2({
         placeholder: 'Select Product/TV-Series',
         minimumInputLength: 2,
         ajax: {
@@ -78,13 +78,13 @@
       });
 </script>
 <script>
-    $("#Products_id").change(function() {
-        var Products_id = $("#Products_id option:selected").val();
-        if (Products_id != '' && Products_id !=null){
+    $("#product_id").change(function() {
+        var product_id = $("#product_id option:selected").val();
+        if (product_id != '' && product_id !=null){
           $.ajax({
             url: '<?=base_url('admin/get_single_product_details_by_id')?>',
             type: 'POST',
-            data: {"Products_id":Products_id},
+            data: {"product_id":product_id},
             dataType: 'json'
          })
          .done(function(response){

@@ -1,4 +1,4 @@
-<?php $Product_source = 'mp4';?>
+<?php $Product_source = 'mp4'; ?>
 <div class="card">
   <div class="row">
     <div class="col-md-12">
@@ -13,51 +13,65 @@
           <h3 class="panel-title"><?php echo trans('upload_Products') ?></h3>
         </div>
         <div class="panel-body">
-          <?php echo form_open_multipart(base_url('admin/product_upload')); ?>           
-            <input type="hidden" name="Products_id" value="<?php echo $param1; ?>">
-            <div class="form-group">
-              <label class="control-label"><?php echo trans('label') ?></label>&nbsp;&nbsp;<input id="label" type="text" name="label" class="form-control" placeholder="Server#1" required="">
-            </div>
-            <div class="form-group">
-              <label class="control-label"><?php echo trans('order'); ?></label>
-              <input type="number" name="order" class="form-control" placeholder="0 to 9999" required>
-            </div>
-            <div class="form-group">
-              <label class="control-label"><?php echo trans('source'); ?></label>
-              <select class="form-control" name="source" id="selected-source">
-                <option value="upload" <?php if($Product_source =='upload'): echo 'selected'; endif;?>><?php echo trans('upload');?></option>
-                <option value="youtube" <?php if($Product_source =='youtube'): echo 'selected'; endif;?>><?php echo trans('youtube');?></option>
-                <option value="vimeo" <?php if($Product_source =='vimeo'): echo 'selected'; endif;?>><?php echo trans('Product');?></option>
-                <option value="embed" <?php if($Product_source ==''): echo 'selected'; endif;?>><?php echo trans('google_drive');?></option>
-                <option value="amazone" <?php if($Product_source =='amazone'): echo 'selected'; endif;?>><?php echo trans('amazone_s3');?></option>
-                <option value="mp4" <?php if($Product_source =='mp4'): echo 'selected'; endif;?>><?php echo trans('mp4_from_url');?></option>
-                <option value="mkv" <?php if($Product_source =='mkv'): echo 'selected'; endif;?>><?php echo trans('mkv_from_url');?></option>
-                <option value="webm" <?php if($Product_source =='webm'): echo 'selected'; endif;?>><?php echo trans('webm_from_url');?></option>
-                <option value="m3u8" <?php if($Product_source =='m3u8'): echo 'selected'; endif;?>><?php echo trans('m3u8_from_url');?></option>
-                <option value="embed" <?php if($Product_source =='embed'): echo 'selected'; endif;?>><?php echo trans('embed_url');?></option>
-              </select>
-            </div>
-            <div class="form-group" <?php if($Product_source =='upload'): echo 'style="display:none;"'; endif;?> id="url-input">
-              <label class="control-label"><?php echo trans('url') ?></label>
-              <input type="text" name="url" id="url-input-field" value="" class="form-control" placeholder="http://server-2.com/products/titalic.mp4" <?php if($Product_source !='upload'): echo 'required'; endif;?> ><br>
-            </div>
-            <div class="form-group" <?php if($Product_source !='upload'): echo 'style="display:none;"'; endif;?> id="image-input">
-              <label class="control-label"><?php echo trans('select_Product'); ?></label>
-              <input class="Productselect" name="Productfile" id="image-input-field" type="file" accept="Product/*" <?php if($Product_source =='upload'): echo 'required'; endif;?> />
-            </div>
-            <div class="form-group">
-              <button class="btn btn-sm btn-primary waves-effect" type="submit"> <span class="btn-label"><i class="fa fa-plus"></i></span><?php echo trans('add') ?> </button>
-            </div>
+          <?php echo form_open_multipart(base_url('admin/product_upload')); ?>
+          <input type="hidden" name="product_id" value="<?php echo $param1; ?>">
+          <div class="form-group">
+            <label class="control-label"><?php echo trans('label') ?></label>&nbsp;&nbsp;<input id="label" type="text" name="label" class="form-control" placeholder="Server#1" required="">
+          </div>
+          <div class="form-group">
+            <label class="control-label"><?php echo trans('order'); ?></label>
+            <input type="number" name="order" class="form-control" placeholder="0 to 9999" required>
+          </div>
+          <div class="form-group">
+            <label class="control-label"><?php echo trans('source'); ?></label>
+            <select class="form-control" name="source" id="selected-source">
+              <option value="upload" <?php if ($Product_source == 'upload') : echo 'selected';
+                                      endif; ?>><?php echo trans('upload'); ?></option>
+              <option value="youtube" <?php if ($Product_source == 'youtube') : echo 'selected';
+                                      endif; ?>><?php echo trans('youtube'); ?></option>
+              <option value="vimeo" <?php if ($Product_source == 'vimeo') : echo 'selected';
+                                    endif; ?>><?php echo trans('Product'); ?></option>
+              <option value="embed" <?php if ($Product_source == '') : echo 'selected';
+                                    endif; ?>><?php echo trans('google_drive'); ?></option>
+              <option value="amazone" <?php if ($Product_source == 'amazone') : echo 'selected';
+                                      endif; ?>><?php echo trans('amazone_s3'); ?></option>
+              <option value="mp4" <?php if ($Product_source == 'mp4') : echo 'selected';
+                                  endif; ?>><?php echo trans('mp4_from_url'); ?></option>
+              <option value="mkv" <?php if ($Product_source == 'mkv') : echo 'selected';
+                                  endif; ?>><?php echo trans('mkv_from_url'); ?></option>
+              <option value="webm" <?php if ($Product_source == 'webm') : echo 'selected';
+                                    endif; ?>><?php echo trans('webm_from_url'); ?></option>
+              <option value="m3u8" <?php if ($Product_source == 'm3u8') : echo 'selected';
+                                    endif; ?>><?php echo trans('m3u8_from_url'); ?></option>
+              <option value="embed" <?php if ($Product_source == 'embed') : echo 'selected';
+                                    endif; ?>><?php echo trans('embed_url'); ?></option>
+            </select>
+          </div>
+          <div class="form-group" <?php if ($Product_source == 'upload') : echo 'style="display:none;"';
+                                  endif; ?> id="url-input">
+            <label class="control-label"><?php echo trans('url') ?></label>
+            <input type="text" name="url" id="url-input-field" value="" class="form-control" placeholder="http://server-2.com/products/titalic.mp4" <?php if ($Product_source != 'upload') : echo 'required';
+                                                                                                                                                    endif; ?>><br>
+          </div>
+          <div class="form-group" <?php if ($Product_source != 'upload') : echo 'style="display:none;"';
+                                  endif; ?> id="image-input">
+            <label class="control-label"><?php echo trans('select_Product'); ?></label>
+            <input class="Productselect" name="Productfile" id="image-input-field" type="file" accept="Product/*" <?php if ($Product_source == 'upload') : echo 'required';
+                                                                                                                  endif; ?> />
+          </div>
+          <div class="form-group">
+            <button class="btn btn-sm btn-primary waves-effect" type="submit"> <span class="btn-label"><i class="fa fa-plus"></i></span><?php echo trans('add') ?> </button>
+          </div>
           </form>
         </div>
-      </div>      
+      </div>
       <div class="panel panel-border panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title"><?php echo trans('Product_list') ?></h3>
         </div>
         <div class="panel-body">
-            <?php echo form_open(base_url() . 'admin/file_and_download/change_order/', array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data')); ?>
-            <input type="hidden" name="Products_id" value="<?php echo $param1; ?>">
+          <?php echo form_open(base_url() . 'admin/file_and_download/change_order/', array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data')); ?>
+          <input type="hidden" name="product_id" value="<?php echo $param1; ?>">
           <table class="table table-bordered" id="Product-list">
             <thead>
               <tr>
@@ -72,16 +86,16 @@
             </thead>
             <?php
             $sl = 0;
-            $Product_files = $this->common_model->get_Product_file_by_Products_id($param1);
+            $Product_files = $this->common_model->get_Product_file_by_product_id($param1);
             foreach ($Product_files as $Product_file) :
               $sl++;
-              ?>
+            ?>
               <tr id="row_<?php echo $Product_file['Product_file_id']; ?>">
                 <td><?php echo $sl; ?></td>
-                <td><a href="<?php echo base_url('watch/') . $this->common_model->get_slug_by_Products_id($Product_file['Products_id']) . '.html?key=' . $Product_file['stream_key']; ?>"><?php echo $Product_file['file_source']; ?></a></td>
+                <td><a href="<?php echo base_url('watch/') . $this->common_model->get_slug_by_product_id($Product_file['product_id']) . '.html?key=' . $Product_file['stream_key']; ?>"><?php echo $Product_file['file_source']; ?></a></td>
                 <td>
-                    <input type="hidden" name="Product_file_id[]" value="<?php echo $Product_file['Product_file_id']; ?>">
-                    <input type="number" name="order[]" value="<?php echo $Product_file['order']; ?>" class="form-control" style="width:80px" required>
+                  <input type="hidden" name="Product_file_id[]" value="<?php echo $Product_file['Product_file_id']; ?>">
+                  <input type="number" name="order[]" value="<?php echo $Product_file['order']; ?>" class="form-control" style="width:80px" required>
                 </td>
                 <td><?php echo $Product_file['label']; ?></td>
                 <td><?php echo urldecode($Product_file['file_url']); ?></td>
@@ -90,9 +104,9 @@
                     <p><?php echo trans('unsupported') ?></p>
                   <?php else : ?>
                     <?php
-                        $subtitles = $this->db->get_where('subtitle', array('Product_file_id' => $Product_file['Product_file_id']))->result_array();
-                        foreach ($subtitles as $subtitle) :
-                          ?>
+                    $subtitles = $this->db->get_where('subtitle', array('Product_file_id' => $Product_file['Product_file_id']))->result_array();
+                    foreach ($subtitles as $subtitle) :
+                    ?>
                       <a class="label label-default" href="#" onclick="delete_row('subtitle',<?php echo urldecode($subtitle['subtitle_id']); ?>)"><?php echo $subtitle['language']; ?></a>
                     <?php endforeach; ?>
                   <?php endif; ?>
@@ -101,10 +115,10 @@
                   <div class="btn-group">
                     <button type="button" class="btn btn-white btn-sm dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a class="dropdown-item"href="<?php echo base_url('admin/file_and_download/edit/'. $Product_file['Product_file_id']); ?>"><?php echo trans('edit') ?></a></li>
-                      <li><a class="dropdown-item" target="_blank" href="<?php echo base_url('watch/') . $this->common_model->get_slug_by_Products_id($Product_file['Products_id']) . '.html?key=' . $Product_file['stream_key']; ?>"><?php echo trans('watch_now') ?></a></li>
+                      <li><a class="dropdown-item" href="<?php echo base_url('admin/file_and_download/edit/' . $Product_file['Product_file_id']); ?>"><?php echo trans('edit') ?></a></li>
+                      <li><a class="dropdown-item" target="_blank" href="<?php echo base_url('watch/') . $this->common_model->get_slug_by_product_id($Product_file['product_id']) . '.html?key=' . $Product_file['stream_key']; ?>"><?php echo trans('watch_now') ?></a></li>
                       <?php if ($Product_file['file_source'] != 'youtube' && $Product_file['file_source'] != 'vimeo' && $Product_file['file_source'] != 'embed') : ?>
-                        <li><a href="#" class="dropdown-item" data-toggle="modal" data-target="#mymodal" data-id="<?php echo base_url() . 'admin/view_modal/subtitle_add/' . $Product_file['Products_id'] . '/' . $Product_file['Product_file_id']; ?>" id="menu"><?php echo trans('add_subtitle') ?></a> </li>
+                        <li><a href="#" class="dropdown-item" data-toggle="modal" data-target="#mymodal" data-id="<?php echo base_url() . 'admin/view_modal/subtitle_add/' . $Product_file['product_id'] . '/' . $Product_file['Product_file_id']; ?>" id="menu"><?php echo trans('add_subtitle') ?></a> </li>
                       <?php endif; ?>
                       <li><a class="dropdown-item" title="<?php echo trans('delete'); ?>" href="#" onclick="delete_row('Product_file',<?php echo urldecode($Product_file['Product_file_id']); ?>)" class="delete"><?php echo trans('delete'); ?></a> </li>
                     </ul>
@@ -113,63 +127,65 @@
               </tr>
             <?php endforeach; ?>
           </table>
-          <div class="pull-right" style="margin-bottom:10px;"><button type="submit" class="btn btn-primary btn-sm"><?php echo trans('save_order');?></button></div>
-          <?php echo form_close();?>
+          <div class="pull-right" style="margin-bottom:10px;"><button type="submit" class="btn btn-primary btn-sm"><?php echo trans('save_order'); ?></button></div>
+          <?php echo form_close(); ?>
         </div>
       </div>
     </div>
     <div class="col-md-12">
       <div class="panel panel-border panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title"><?php echo trans("download_url");?></h3>
-          </div>
-          <div class="panel-body">          
-            <div id="download_link_section">
-              <?php echo form_open_multipart(base_url('admin/download_link/')); ?>
-              <input type="hidden" name="Products_id" value="<?php echo $param1; ?>">
-              <div class="form-group" id="_source2">
-                <label class="control-label" ><?php echo trans("link_title");?></label>&nbsp;&nbsp;<input id="link_title" type="text" name="link_title" class="form-control" placeholder="Ex; Google Drive" required="">
-              </div>
-              <div class="form-group" id="">
-                <label class="control-label" ><?php echo trans("resolution");?></label>&nbsp;&nbsp;<input id="resolution" type="text" name="resolution" class="form-control" placeholder="Ex: 720p" required="">
-              </div>
-              <div class="form-group" id="">
-                <label class="control-label" ><?php echo trans("file_size");?></label>&nbsp;&nbsp;<input id="file_size" type="text" name="file_size" class="form-control" placeholder="Ex: 300MB" required="">
-              </div>
-              <div class="form-group" id="">
-                <label class="control-label" ><?php echo trans("download_url");?></label>&nbsp;&nbsp;<input id="download_url" type="url" name="download_url" class="form-control" placeholder="Ex: http://server-2.com/products/titalic.mp4" required="">              
+        <div class="panel-heading">
+          <h3 class="panel-title"><?php echo trans("download_url"); ?></h3>
+        </div>
+        <div class="panel-body">
+          <div id="download_link_section">
+            <?php echo form_open_multipart(base_url('admin/download_link/')); ?>
+            <input type="hidden" name="product_id" value="<?php echo $param1; ?>">
+            <div class="form-group" id="_source2">
+              <label class="control-label"><?php echo trans("link_title"); ?></label>&nbsp;&nbsp;<input id="link_title" type="text" name="link_title" class="form-control" placeholder="Ex; Google Drive" required="">
+            </div>
+            <div class="form-group" id="">
+              <label class="control-label"><?php echo trans("resolution"); ?></label>&nbsp;&nbsp;<input id="resolution" type="text" name="resolution" class="form-control" placeholder="Ex: 720p" required="">
+            </div>
+            <div class="form-group" id="">
+              <label class="control-label"><?php echo trans("file_size"); ?></label>&nbsp;&nbsp;<input id="file_size" type="text" name="file_size" class="form-control" placeholder="Ex: 300MB" required="">
+            </div>
+            <div class="form-group" id="">
+              <label class="control-label"><?php echo trans("download_url"); ?></label>&nbsp;&nbsp;<input id="download_url" type="url" name="download_url" class="form-control" placeholder="Ex: http://server-2.com/products/titalic.mp4" required="">
             </div>
             <div class="form-group">
               <label class="control-label"><?php echo trans('download_type'); ?></label>
               <select class="form-control" name="in_app_download">
-                <option value="0"><?php echo trans('external_download');?></option>
-                <option value="1"><?php echo trans('in_app_download');?></option>                
+                <option value="0"><?php echo trans('external_download'); ?></option>
+                <option value="1"><?php echo trans('in_app_download'); ?></option>
               </select>
             </div>
             <button type="submit" class="btn btn-sm btn-primary waves-effect" id="add-download-link"> <span class="btn-label"><i class="fa fa-plus"></i></span>Submit</button><br><br>
-            </form>            
+            </form>
+          </div>
         </div>
       </div>
-    </div>
       <div class="panel panel-border panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Download Link List</h3>
-          </div>
-          <div class="panel-body">                
-            <table class="table table-bordered" id="download-link-list">
-              <?php $download_links = $this->db->get_where('download_link', array('Products_id'=> $param1))->result_array();
-                    foreach($download_links as $download_link):
-               ?>
+        <div class="panel-heading">
+          <h3 class="panel-title">Download Link List</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table table-bordered" id="download-link-list">
+            <?php $download_links = $this->db->get_where('download_link', array('product_id' => $param1))->result_array();
+            foreach ($download_links as $download_link) :
+            ?>
               <tr id="row_<?php echo $download_link['download_link_id']; ?>">
                 <td><a href="<?php echo $download_link['download_url']; ?>"><strong><?php echo $download_link['link_title']; ?></strong></a></td>
-                <td><?php if($download_link['in_app_download'] == '1'): echo "In-App Download";else: echo "External Download"; endif; ?></td>
+                <td><?php if ($download_link['in_app_download'] == '1') : echo "In-App Download";
+                    else : echo "External Download";
+                    endif; ?></td>
                 <td><?php echo $download_link['resolution']; ?></td>
                 <td><?php echo $download_link['file_size']; ?></td>
                 <td><a href="<?php echo urldecode($download_link['download_url']); ?>"><?php echo urldecode($download_link['download_url']); ?></a></td>
-                <td><a title="Delete" class="btn btn-icon" onclick="delete_row(<?php echo " 'download_link' ".','.$download_link['download_link_id'];?>)" class="delete"><i class="fa fa-remove"></i></a></td>
+                <td><a title="Delete" class="btn btn-icon" onclick="delete_row(<?php echo " 'download_link' " . ',' . $download_link['download_link_id']; ?>)" class="delete"><i class="fa fa-remove"></i></a></td>
               </tr>
             <?php endforeach; ?>
-            </table>       
+          </table>
         </div>
       </div>
     </div>
@@ -191,30 +207,30 @@
     <script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/parsleyjs/dist/parsley.min.js"></script>
     <script>
       jQuery(document).ready(function() {
-          $('form').parsley();
-          $(".Productselect").filestyle({
-              input: true,
-              icon: true,
-              buttonBefore: true,
-              text: "<?php echo trans('select_Product'); ?>",
-              htmlIcon: '<span class="fa fa-file-Product-o"></span>',
-              badge: true,
-              badgeName: "badge-danger"
-          });
+        $('form').parsley();
+        $(".Productselect").filestyle({
+          input: true,
+          icon: true,
+          buttonBefore: true,
+          text: "<?php echo trans('select_Product'); ?>",
+          htmlIcon: '<span class="fa fa-file-Product-o"></span>',
+          badge: true,
+          badgeName: "badge-danger"
+        });
 
-          $( "#selected-source" ).change(function() {
-             var source = $("#selected-source option:selected" ).val();
-             if(source == 'upload'){
-               $("#image-input").show('slow');
-               $("#url-input").hide('slow');
-               $("#image-input-field").attr("required", true);
-               $("#url-input-field").attr("required", false);
-             }else{
-               $("#image-input").hide('slow');
-               $("#url-input").show('slow');
-               $("#image-input-field").attr("required", false);
-               $("#url-input-field").attr("required", true);
-             }
-          });
+        $("#selected-source").change(function() {
+          var source = $("#selected-source option:selected").val();
+          if (source == 'upload') {
+            $("#image-input").show('slow');
+            $("#url-input").hide('slow');
+            $("#image-input-field").attr("required", true);
+            $("#url-input-field").attr("required", false);
+          } else {
+            $("#image-input").hide('slow');
+            $("#url-input").show('slow');
+            $("#image-input-field").attr("required", false);
+            $("#url-input-field").attr("required", true);
+          }
+        });
       });
     </script>

@@ -17,7 +17,7 @@
 		        $file_url       = $Product_file->file_url;                            
 		        
 		    else:
-	            $Product_file 	= $this->common_model->get_first_Product_details_Products_id($Products_id);
+	            $Product_file 	= $this->common_model->get_first_Product_details_product_id($product_id);
 	            $Product_file_id  = $Product_file->Product_file_id;
 		        $source_type    = $Product_file->source_type;
 		        $file_source    = $Product_file->file_source;
@@ -31,7 +31,7 @@
         <script src="https://unpkg.com/Productjs-flash/dist/Productjs-flash.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Productjs-contrib-hls/5.14.1/Productjs-contrib-hls.min.js"></script>
     <?php endif; ?>
-        <Product id="play" class="Product-js vjs-big-play-centered skin-<?php echo $player_color_skin; ?> vjs-16-9" controls preload="none" width="640" height="265" poster="<?php echo $this->common_model->get_Product_poster_url($watch_Products->Products_id); ?>" data-setup="{}">                            <!-- Product source -->
+        <Product id="play" class="Product-js vjs-big-play-centered skin-<?php echo $player_color_skin; ?> vjs-16-9" controls preload="none" width="640" height="265" poster="<?php echo $this->common_model->get_Product_poster_url($watch_Products->product_id); ?>" data-setup="{}">                            <!-- Product source -->
                 <?php
                     foreach ($subtitles as $subtitle):
                 ?>
@@ -67,7 +67,7 @@
 			      requestPosterFn: function () {
 	                return [
 	                    {
-	                        'url': '<?php echo $this->common_model->get_Product_thumb_url($watch_Products->Products_id); ?>'
+	                        'url': '<?php echo $this->common_model->get_Product_thumb_url($watch_Products->product_id); ?>'
 	                    }
 	                ];
 	            }
@@ -86,7 +86,7 @@
 		<?php endif; ?>
 		<?php if($file_source=='youtube'): ?>
 	        <!-- play from youtube file -->
-	       <Product id="play" class="Product-js vjs-big-play-centered skin-<?php echo $player_color_skin; ?> vjs-16-9" poster="<?php echo $this->common_model->get_Product_poster_url($watch_Products->Products_id); ?>">
+	       <Product id="play" class="Product-js vjs-big-play-centered skin-<?php echo $player_color_skin; ?> vjs-16-9" poster="<?php echo $this->common_model->get_Product_poster_url($watch_Products->product_id); ?>">
 	           <?php
 	                foreach ($subtitles as $subtitle):
 	            ?>
@@ -125,7 +125,7 @@
 				fluidPlayer("Product-id",{
 					layoutControls: {
 			            fillToContainer: true, // Default true
-			            posterImage: '<?php echo $this->common_model->get_Product_poster_url($watch_Products->Products_id); ?>',
+			            posterImage: '<?php echo $this->common_model->get_Product_poster_url($watch_Products->product_id); ?>',
 			            doubleclickFullscreen: true, // Default true
 			        }
 				});
@@ -199,7 +199,7 @@
 	    <div class="col-md-12 m-b-10">                               
 	        <div class="season">
 	            <?php
-	                $sources = $this->common_model->get_Product_file_by_Products_id($watch_Products->Products_id);
+	                $sources = $this->common_model->get_Product_file_by_product_id($watch_Products->product_id);
 	                $i=0;
 	                if(isset($_GET['key'])){
 	                    $current_file_id = $_GET['key'];

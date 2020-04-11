@@ -1,68 +1,73 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Home extends Home_Core_Controller {
-	
+class Home extends Home_Core_Controller
+{
+
 	public $active_theme;
-	public function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
 		/* cache control */
 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
-        $this->output->set_header('Pragma: no-cache');
+		$this->output->set_header('Pragma: no-cache');
 	}
 
 
-  public function index() {
-  	    $landing_page_enable        	=   $this->db->get_where('config' , array('title'=>'landing_page_enable'))->row()->value;
+	public function index()
+	{
+		$landing_page_enable        	=   $this->db->get_where('config', array('title' => 'landing_page_enable'))->row()->value;
 		$data['all_published_slider']	= $this->common_model->all_published_slider();
 		$data['new_products']				= $this->common_model->new_published_products();
 		$data['latest_products']			= $this->common_model->latest_published_products();
 		$data['new_tv_series']			= $this->common_model->new_published_tv_series();
-		$data['latest_tv_series']		= $this->common_model->latest_published_tv_series();		
-		$data['title'] 					= $this->db->get_where('config' , array('title' =>'home_page_seo_title'))->row()->value;
+		$data['latest_tv_series']		= $this->common_model->latest_published_tv_series();
+		$data['title'] 					= $this->db->get_where('config', array('title' => 'home_page_seo_title'))->row()->value;
 		// seo
-		$data['title']					= $this->db->get_where('config' , array('title' =>'home_page_seo_title'))->row()->value;
-		$data['meta_description']		= $this->db->get_where('config' , array('title' =>'meta_description'))->row()->value;
-		$data['focus_keyword']			= $this->db->get_where('config' , array('title' =>'focus_keyword'))->row()->value;
+		$data['title']					= $this->db->get_where('config', array('title' => 'home_page_seo_title'))->row()->value;
+		$data['meta_description']		= $this->db->get_where('config', array('title' => 'meta_description'))->row()->value;
+		$data['focus_keyword']			= $this->db->get_where('config', array('title' => 'focus_keyword'))->row()->value;
 		$data['canonical']				= base_url();
 		// end seo
 		$data['page_name']				= 'home';
-		if($landing_page_enable =="1"):
-			$this->load->view('theme/'.$this->active_theme.'/landing',$data);
-		else:
-			$this->load->view('theme/'.$this->active_theme.'/index',$data);
+		if ($landing_page_enable == "1") :
+			$this->load->view('theme/' . $this->active_theme . '/landing', $data);
+		else :
+			$this->load->view('theme/' . $this->active_theme . '/index', $data);
 		endif;
 	}
-	public function home2() {
+	public function home2()
+	{
 
 		$data['all_published_slider']	= $this->common_model->all_published_slider();
 		$data['new_products']				= $this->common_model->new_published_products();
 		$data['latest_products']			= $this->common_model->latest_published_products();
 		$data['new_tv_series']			= $this->common_model->new_published_tv_series();
-		$data['latest_tv_series']		= $this->common_model->latest_published_tv_series();		
+		$data['latest_tv_series']		= $this->common_model->latest_published_tv_series();
 		// seo
-		$data['title']					= $this->db->get_where('config' , array('title' =>'home_page_seo_title'))->row()->value;
-		$data['meta_description']		= $this->db->get_where('config' , array('title' =>'meta_description'))->row()->value;
-		$data['focus_keyword']			= $this->db->get_where('config' , array('title' =>'focus_keyword'))->row()->value;
+		$data['title']					= $this->db->get_where('config', array('title' => 'home_page_seo_title'))->row()->value;
+		$data['meta_description']		= $this->db->get_where('config', array('title' => 'meta_description'))->row()->value;
+		$data['focus_keyword']			= $this->db->get_where('config', array('title' => 'focus_keyword'))->row()->value;
 		$data['canonical']				= base_url('all-products.html');
 		// end seo
 		$data['page_name']				= 'home';
-		$this->load->view('theme/'.$this->active_theme.'/index',$data);
+		$this->load->view('theme/' . $this->active_theme . '/index', $data);
 	}
-  
-	public function search(){
+
+	public function search()
+	{
 		$filter 			= array();
 		$search_string		= '';
 		$filter['title'] 	= '';
-		if(isset($_GET['q'])){
-			$title 				= trim($this->input->get('q',true));
+		if (isset($_GET['q'])) {
+			$title 				= trim($this->input->get('q', true));
 			$filter['title'] 	= $title;
-			$search_string	   .= 'q='.$title;
+			$search_string	   .= 'q=' . $title;
 		}
 		$total_rows = $this->common_model->get_products_num_rows($filter);
 		$this->load->library("pagination");
 		$config 					= array();
-		$config["base_url"] 		= base_url() . "search?".$search_string;
+		$config["base_url"] 		= base_url() . "search?" . $search_string;
 		$config["total_rows"] 		= $total_rows;
 		$config["per_page"] 		= 24;
 		$config["uri_segment"] 		= 3;
@@ -92,46 +97,46 @@ class Home extends Home_Core_Controller {
 		$config['num_tag_close'] 	= '<div class="pagination-hvr"></div></li>';
 		$config['page_query_string'] = TRUE;
 		$this->pagination->initialize($config);
-		$page 						= $this->input->get('per_page');   
-        $data["all_published_products"] = $this->common_model->get_products($filter,$config["per_page"], $page);
+		$page 						= $this->input->get('per_page');
+		$data["all_published_products"] = $this->common_model->get_products($filter, $config["per_page"], $page);
 		$data["links"] 				= $this->pagination->create_links();
 		$data['total_rows']			= $config["total_rows"];
 		$data['search_keyword']		= $filter['title'];
-		$data['title'] 				= $filter['title'].'-search results';
+		$data['title'] 				= $filter['title'] . '-search results';
 		$data['page_name']			= 'search_results.php';
-		$this->load->view('theme/'.$this->active_theme.'/index',$data);
+		$this->load->view('theme/' . $this->active_theme . '/index', $data);
 	}
 	public function autoCompleteAjax()
-    {
-    	$tearm = $this->input->get('term');
-    	$this->db->order_by('title',"ASC");
-        $this->db->limit(5);
-        $this->db->like('title',$tearm);
-        $products =  $this->db->get('products')->result_array();
-            foreach($products as $product)
-            {                
-                $new_row['title']= $product['title'];
-                $new_row['type']= "Product";
-                if($product['is_tvseries']=="1"){
-                	$new_row['type']= "TV-Series";
-                }
-	            $new_row['image'] 	= $this->common_model->get_product_thumb_url($product['products_id']);
-                $new_row['url']		= base_url().'watch/'.$product['slug'].'.html';              
-             	$row_set[] 			= $new_row;
-            }        
-        echo json_encode($row_set); 
-    }
-  
-    public function products(){
-    	$product_per_page              =   $this->db->get_where('config' , array('title'=>'product_per_page'))->row()->value;
+	{
+		$tearm = $this->input->get('term');
+		$this->db->order_by('title', "ASC");
+		$this->db->limit(5);
+		$this->db->like('title', $tearm);
+		$products =  $this->db->get('products')->result_array();
+		foreach ($products as $product) {
+			$new_row['title'] = $product['title'];
+			$new_row['type'] = "Product";
+			if ($product['is_tvseries'] == "1") {
+				$new_row['type'] = "TV-Series";
+			}
+			$new_row['image'] 	= $this->common_model->get_product_thumb_url($product['product_id']);
+			$new_row['url']		= base_url() . 'watch/' . $product['slug'] . '.html';
+			$row_set[] 			= $new_row;
+		}
+		echo json_encode($row_set);
+	}
+
+	public function products()
+	{
+		$product_per_page              =   $this->db->get_where('config', array('title' => 'product_per_page'))->row()->value;
 		$this->load->library("pagination");
-		$total_product 				= $this->common_model->products_record_count();  
+		$total_product 				= $this->common_model->products_record_count();
 		$config 					= array();
 		$config["base_url"] 		= base_url() . "home/products";
 		$config["total_rows"] 		= $total_product;
 		$config["per_page"] 		= $product_per_page;
 		$config["uri_segment"] 		= 3;
-	    $config['full_tag_open'] 	= '<div class="pagination-container text-center"><ul class ="pagination">';
+		$config['full_tag_open'] 	= '<div class="pagination-container text-center"><ul class ="pagination">';
 		$config['full_tag_close'] 	= '</ul></div><!--pagination-->';
 		$config['first_link'] 		= '«';
 		$config['first_tag_open'] 	= '<li>';
@@ -149,28 +154,29 @@ class Home extends Home_Core_Controller {
 		$config['cur_tag_close'] 	= '</a><div class="pagination-hvr"></div></li>';
 		$config['num_tag_open'] 	= '<li>';
 		$config['num_tag_close'] 	= '<div class="pagination-hvr"></div></li>';
-		$config['suffix']			= '.html'; 
-		$config['use_page_numbers'] = TRUE;	
+		$config['suffix']			= '.html';
+		$config['use_page_numbers'] = TRUE;
 
 		$this->pagination->initialize($config);
 		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		$data["all_published_products"] = $this->common_model->all_published_products($product_per_page, $page);
 		$data["links"] = $this->pagination->create_links();
-	    $data['total_rows']=$total_product;
+		$data['total_rows'] = $total_product;
 		// seo
-		$data['title']				= $this->db->get_where('config' , array('title' =>'product_page_seo_title'))->row()->value;
-		$data['meta_description']	= $this->db->get_where('config' , array('title' =>'product_page_meta_description'))->row()->value;
-		$data['focus_keyword']		= $this->db->get_where('config' , array('title' =>'product_page_focus_keyword'))->row()->value;
+		$data['title']				= $this->db->get_where('config', array('title' => 'product_page_seo_title'))->row()->value;
+		$data['meta_description']	= $this->db->get_where('config', array('title' => 'product_page_meta_description'))->row()->value;
+		$data['focus_keyword']		= $this->db->get_where('config', array('title' => 'product_page_focus_keyword'))->row()->value;
 		$data['canonical']			= base_url('products.html');
 		// end seo
 
-		$data['page_name']='products';
-		$this->load->view('theme/'.$this->active_theme.'/index',$data);
+		$data['page_name'] = 'products';
+		$this->load->view('theme/' . $this->active_theme . '/index', $data);
 	}
 
-	public function trailers(){
+	public function trailers()
+	{
 		$this->load->library("pagination");
-    
+
 		$config = array();
 		$config["base_url"] = base_url() . "home/trailers";
 		$config["total_rows"] = $this->common_model->trailers_record_count();
@@ -200,22 +206,23 @@ class Home extends Home_Core_Controller {
 
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '<div class="pagination-hvr"></div></li>';
-		$config['suffix']=  '.html'; 
-  
+		$config['suffix'] =  '.html';
+
 
 		$this->pagination->initialize($config);
 		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		$data["all_published_products"] = $this->common_model->fetch_trailers($config["per_page"], $page);
 		$data["links"] = $this->pagination->create_links();
-		$data['total_rows']=$config["total_rows"];
+		$data['total_rows'] = $config["total_rows"];
 		$data['title'] = 'Free Products Online';
-		$data['page_name']='products';
-		$this->load->view('theme/'.$this->active_theme.'/index',$data);
-	}  
+		$data['page_name'] = 'products';
+		$this->load->view('theme/' . $this->active_theme . '/index', $data);
+	}
 
-	public function request_products(){
+	public function request_products()
+	{
 
-		$this->load->library("pagination");    
+		$this->load->library("pagination");
 		$config = array();
 		$config["base_url"] = base_url() . "home/request_products";
 		$config["total_rows"] = $this->common_model->requested_product_record_count();
@@ -245,8 +252,8 @@ class Home extends Home_Core_Controller {
 
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '<div class="pagination-hvr"></div></li>';
-		$config['suffix']=  '.html'; 
-  
+		$config['suffix'] =  '.html';
+
 
 		$this->pagination->initialize($config);
 		$page 							= ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
@@ -255,157 +262,164 @@ class Home extends Home_Core_Controller {
 		$data['total_rows']				= $config["total_rows"];
 		$data['title'] 					= 'Free Products  Request Online';
 		$data['page_name']				= 'request_products';
-		$this->load->view('theme/'.$this->active_theme.'/index',$data);
-    }
+		$this->load->view('theme/' . $this->active_theme . '/index', $data);
+	}
 
-    public function request_for_products(){
+	public function request_for_products()
+	{
 		$data['title'] = 'Send Us Product Request';
-		$data['page_name']='requiest_for_product';
-		$this->load->view('theme/'.$this->active_theme.'/index',$data);
+		$data['page_name'] = 'requiest_for_product';
+		$this->load->view('theme/' . $this->active_theme . '/index', $data);
 	}
 
-	public function dmca(){
+	public function dmca()
+	{
 		$data['title'] = 'DMCA';
-		$data['page_name']='dmca';
-		$this->load->view('theme/'.$this->active_theme.'/index',$data);
+		$data['page_name'] = 'dmca';
+		$this->load->view('theme/' . $this->active_theme . '/index', $data);
 	}
 
 
-  
-	public function faq(){
+
+	public function faq()
+	{
 		$data['title'] = 'FAQ';
-		$data['page_name']='faq';
-		$this->load->view('theme/'.$this->active_theme.'/index',$data);
+		$data['page_name'] = 'faq';
+		$this->load->view('theme/' . $this->active_theme . '/index', $data);
 	}
-  
-  
-    public function policy(){
+
+
+	public function policy()
+	{
 		$data['title'] = 'Privacy Policy';
-		$data['page_name']='policy';
-		$this->load->view('theme/'.$this->active_theme.'/index',$data);
+		$data['page_name'] = 'policy';
+		$this->load->view('theme/' . $this->active_theme . '/index', $data);
 	}
-  
-  
-    public function terms(){
+
+
+	public function terms()
+	{
 		$data['title'] = 'Terms & Condition';
-		$data['page_name']='terms';
-		$this->load->view('theme/'.$this->active_theme.'/index',$data);
+		$data['page_name'] = 'terms';
+		$this->load->view('theme/' . $this->active_theme . '/index', $data);
 	}
-  
-  
-    public function contact(){
+
+
+	public function contact()
+	{
 		$data['title'] = 'Contact Us';
-		$data['page_name']='contact';
-		$this->load->view('theme/'.$this->active_theme.'/index',$data);
+		$data['page_name'] = 'contact';
+		$this->load->view('theme/' . $this->active_theme . '/index', $data);
 	}
 
-	function send_message(){
-        $response = array();        
-        //Ajax database name,username and password request
-        $name                   	= $_POST["name"];
-        $email                   	= $_POST["email"]; 
-        $message                   	= $_POST["message"];
-        //$this->email_model->contact_email($name , $email, $message);
-        $response['status'] = 'success';        
-        //Replying ajax request with validation response
-        echo json_encode($response);
-    }
+	function send_message()
+	{
+		$response = array();
+		//Ajax database name,username and password request
+		$name                   	= $_POST["name"];
+		$email                   	= $_POST["email"];
+		$message                   	= $_POST["message"];
+		//$this->email_model->contact_email($name , $email, $message);
+		$response['status'] = 'success';
+		//Replying ajax request with validation response
+		echo json_encode($response);
+	}
 
-    function contact_process(){
-    	$name 			= $this->input->post('name');
-    	$email 			= $this->input->post('email');
-    	$message		= $this->input->post('message');
-        $this->form_validation->set_rules('name', 'Name', 'required|min_length[3]');
+	function contact_process()
+	{
+		$name 			= $this->input->post('name');
+		$email 			= $this->input->post('email');
+		$message		= $this->input->post('message');
+		$this->form_validation->set_rules('name', 'Name', 'required|min_length[3]');
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|min_length[8]');
 		$this->form_validation->set_rules('message', 'Message', 'required|min_length[8]');
-		if ($this->form_validation->run() == FALSE)
-        {
-        	$this->session->set_flashdata('error', validation_errors());
-            redirect(base_url() . 'contact-us.html', 'refresh');
-        }
-        else
-        {
-        	$this->load->model('email_model');
-        	if($this->email_model->contact_email($name , $email, $message)){
-        		//$insert_id = '1043';
-        		//$this->email_model->new_product_notification($insert_id);
-        		$this->session->set_flashdata('success', 'Message send successfully.');
-    		}else{
-    			$this->session->set_flashdata('error', 'Oops! Something went wrong.');	
-    	    	rediret(base_url() . 'contact-us.html', 'refresh');
-    		}
-    	}
-    	redirect(base_url() . 'contact-us.html', 'refresh');
-    }
+		if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata('error', validation_errors());
+			redirect(base_url() . 'contact-us.html', 'refresh');
+		} else {
+			$this->load->model('email_model');
+			if ($this->email_model->contact_email($name, $email, $message)) {
+				//$insert_id = '1043';
+				//$this->email_model->new_product_notification($insert_id);
+				$this->session->set_flashdata('success', 'Message send successfully.');
+			} else {
+				$this->session->set_flashdata('error', 'Oops! Something went wrong.');
+				rediret(base_url() . 'contact-us.html', 'refresh');
+			}
+		}
+		redirect(base_url() . 'contact-us.html', 'refresh');
+	}
 
-    function send_product_request(){
-        $name                   	= $this->input->post('name');
-        $email                   	= $this->input->post('email');
-        $product_name                 = $this->input->post('product_name');  
-        $message                   	= $this->input->post('message');
-        $this->form_validation->set_rules('name', 'Name', 'required|min_length[3]');
+	function send_product_request()
+	{
+		$name                   	= $this->input->post('name');
+		$email                   	= $this->input->post('email');
+		$product_name                 = $this->input->post('product_name');
+		$message                   	= $this->input->post('message');
+		$this->form_validation->set_rules('name', 'Name', 'required|min_length[3]');
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|min_length[6]');
 		$this->form_validation->set_rules('product_name', 'Product Name', 'required|min_length[3]');
 		$this->form_validation->set_rules('message', 'Message', 'required|min_length[5]');
 		// recaptcha check
-        $recaptcha_enable          =   $this->db->get_where('config' , array('title' =>'recaptcha_enable'))->row()->value;
-        if($recaptcha_enable == '1'):
-            $this->form_validation->set_rules('captcha', 'Captcha', 'callback_validate_recaptcha');
-        endif;
-        if ($this->form_validation->run() == FALSE):
-            $this->session->set_flashdata('requiest_error', validation_errors());
-            redirect($this->agent->referrer(), 'refresh');
-        else:
-        	$this->load->model('email_model');
-        	$this->email_model->send_product_request($name , $email, $message,$product_name);
+		$recaptcha_enable          =   $this->db->get_where('config', array('title' => 'recaptcha_enable'))->row()->value;
+		if ($recaptcha_enable == '1') :
+			$this->form_validation->set_rules('captcha', 'Captcha', 'callback_validate_recaptcha');
+		endif;
+		if ($this->form_validation->run() == FALSE) :
+			$this->session->set_flashdata('requiest_error', validation_errors());
+			redirect($this->agent->referrer(), 'refresh');
+		else :
+			$this->load->model('email_model');
+			$this->email_model->send_product_request($name, $email, $message, $product_name);
 
-        	$this->session->set_flashdata('requiest_success', 'Request sent successfully.');
-        	redirect($this->agent->referrer(), 'refresh');
-        endif;
-    }
+			$this->session->set_flashdata('requiest_success', 'Request sent successfully.');
+			redirect($this->agent->referrer(), 'refresh');
+		endif;
+	}
 
-    function send_product_requiest(){
-        $name                   	= $this->input->post('name');
-        $email                   	= $this->input->post('email');
-        $product_name                 = $this->input->post('product_name');  
-        $message                   	= $this->input->post('message');
-        $this->form_validation->set_rules('name', 'Name', 'required|min_length[3]');
+	function send_product_requiest()
+	{
+		$name                   	= $this->input->post('name');
+		$email                   	= $this->input->post('email');
+		$product_name                 = $this->input->post('product_name');
+		$message                   	= $this->input->post('message');
+		$this->form_validation->set_rules('name', 'Name', 'required|min_length[3]');
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|min_length[6]');
 		$this->form_validation->set_rules('product_name', 'Product Name', 'required|min_length[3]');
 		$this->form_validation->set_rules('message', 'Message', 'required|min_length[5]');
-		if ($this->form_validation->run() == FALSE):
-        	$this->session->set_flashdata('error', json_encode(validation_errors()));
-            redirect($this->input->post('url'), 'refresh');
-        else:
-        	$this->load->model('email_model');
-        	$this->email_model->send_product_request($name , $email, $message,$product_name);
+		if ($this->form_validation->run() == FALSE) :
+			$this->session->set_flashdata('error', json_encode(validation_errors()));
+			redirect($this->input->post('url'), 'refresh');
+		else :
+			$this->load->model('email_model');
+			$this->email_model->send_product_request($name, $email, $message, $product_name);
 
-        	$this->session->set_flashdata('success', 'Request sent successfully.');
-        	redirect($this->input->post('url'), 'refresh');
-        endif;
-    }
-
-    public function validate_recaptcha(){
-        $is_valid = $this->recaptcha->is_valid();
-        if($is_valid['success']):
-            return true;
-        else:
-            if(array_key_exists("error_message",$is_valid)):
-                $this->form_validation->set_message('validate_recaptcha', $is_valid['error_message']);
-            else:
-                $this->form_validation->set_message('validate_recaptcha', trans("captcha_code_is_wrong"));
-            endif;
-            return false;
-        endif;
-   }
-
-    function view_modal($page_name = '' , $param2 = '' , $param3 = ''){
-            $account_type       =   $this->session->userdata('login_type');
-            $data['param2']     =   $param2;
-            $data['param3']     =   $param3;
-            //$this->load->view('front_end/'.$page_name.'.php' ,$data);
-            $this->load->view('theme/'.$this->active_theme.'/'.$page_name.'.php',$data);       
-        
+			$this->session->set_flashdata('success', 'Request sent successfully.');
+			redirect($this->input->post('url'), 'refresh');
+		endif;
 	}
-	
+
+	public function validate_recaptcha()
+	{
+		$is_valid = $this->recaptcha->is_valid();
+		if ($is_valid['success']) :
+			return true;
+		else :
+			if (array_key_exists("error_message", $is_valid)) :
+				$this->form_validation->set_message('validate_recaptcha', $is_valid['error_message']);
+			else :
+				$this->form_validation->set_message('validate_recaptcha', trans("captcha_code_is_wrong"));
+			endif;
+			return false;
+		endif;
+	}
+
+	function view_modal($page_name = '', $param2 = '', $param3 = '')
+	{
+		$account_type       =   $this->session->userdata('login_type');
+		$data['param2']     =   $param2;
+		$data['param3']     =   $param3;
+		//$this->load->view('front_end/'.$page_name.'.php' ,$data);
+		$this->load->view('theme/' . $this->active_theme . '/' . $page_name . '.php', $data);
+	}
 }

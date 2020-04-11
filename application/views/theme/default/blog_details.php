@@ -1,6 +1,6 @@
 <?php
-    $theme_dir          =   'theme/default/';
-    $assets_dir         =   'assets/theme/default/';
+$theme_dir          =   'theme/default/';
+$assets_dir         =   'assets/theme/default/';
 ?>
 
 <!-- Breadcrumb -->
@@ -17,9 +17,9 @@
             <div class="col-md-6 col-sm-6 col-xs-12 text-right">
                 <ul class="breadcrumb">
                     <li>
-                        <a href="<?php echo base_url();?>"><i class="fi ion-ios-home"></i><?php echo trans('home'); ?></a>
+                        <a href="<?php echo base_url(); ?>"><i class="fi ion-ios-home"></i><?php echo trans('home'); ?></a>
                     </li>
-                    <li><a href="<?php echo base_url('blog');?>"><i class="fi ion-edit"></i><?php echo trans('blog'); ?></a></li>
+                    <li><a href="<?php echo base_url('blog'); ?>"><i class="fi ion-edit"></i><?php echo trans('blog'); ?></a></li>
                     <li class="active">
                         <?php echo $post_details->slug; ?>
                     </li>
@@ -49,30 +49,30 @@
                             <div class="post-Product-info">
                                 <div class="row">
                                     <div class="col-md-6"><span class="by-in"><?php echo trans('by'); ?></span>
-                                        <a href="#"><?php echo $this->common_model->get_name_by_id($post_details->user_id);?></a>
+                                        <a href="#"><?php echo $this->common_model->get_name_by_id($post_details->user_id); ?></a>
                                         <span>&#47;</span>
                                         <span class="by-in"> In</span>
-                                        <?php $category=explode(',', $post_details->category_id);
-                                            foreach ($category as $category):
+                                        <?php $category = explode(',', $post_details->category_id);
+                                        foreach ($category as $category) :
                                         ?>
-                                        <a href="<?php echo base_url().'blog/category/'.$this->common_model->get_slug_by_category_id($category).'.html'; ?>">
-                                            <?php echo $this->common_model->get_category_name_by_id($category);?>
-                                        </a>
+                                            <a href="<?php echo base_url() . 'blog/category/' . $this->common_model->get_slug_by_category_id($category) . '.html'; ?>">
+                                                <?php echo $this->common_model->get_category_name_by_id($category); ?>
+                                            </a>
                                         <?php endforeach; ?>
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        <span><?php echo date('d M Y',strtotime($post_details->post_at));?></span>
+                                        <span><?php echo date('d M Y', strtotime($post_details->post_at)); ?></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="product-details-text">
                                 <?php echo $post_details->content; ?>
                                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                                    <div class="addthis_inline_share_toolbox_yl99 m-t-30 m-b-10" data-url="<?php echo base_url().'blog/'.$post_details->slug.'.html';?>" data-title="Watch & Download <?php echo $post_details->post_title;?>"></div>
-                                    <!-- Addthis Social tool -->
+                                <div class="addthis_inline_share_toolbox_yl99 m-t-30 m-b-10" data-url="<?php echo base_url() . 'blog/' . $post_details->slug . '.html'; ?>" data-title="Watch & Download <?php echo $post_details->post_title; ?>"></div>
+                                <!-- Addthis Social tool -->
                             </div>
                             <div class="similler-product">
-                                <?php $this->load->view($theme_dir.'comments',array('PAGE_URL' => base_url('blog/'.$post_details->slug.'.html'),'PAGE_IDENTIFIER'=>'post_'.$post_details->posts_id)); ?>
+                                <?php $this->load->view($theme_dir . 'comments', array('PAGE_URL' => base_url('blog/' . $post_details->slug . '.html'), 'PAGE_IDENTIFIER' => 'post_' . $post_details->post_id)); ?>
                             </div>
                             <div class="similler-product">
                                 <div class="product-heading overflow-hidden">
@@ -82,9 +82,9 @@
                                 <div class="row">
                                     <!-- All post -->
                                     <?php
-                                        $category_id = explode(',', $post_details->category_id);
-                                        $related_posts = $this->common_model->related_posts($category_id[0]);
-                                        foreach ($related_posts as $posts) :?>
+                                    $category_id = explode(',', $post_details->category_id);
+                                    $related_posts = $this->common_model->related_posts($category_id[0]);
+                                    foreach ($related_posts as $posts) : ?>
                                         <div class="col-md-6 col-sm-6">
                                             <div class="post-list-container">
                                                 <div class="product-img">
@@ -93,41 +93,41 @@
                                                 <div class="post-Product-info">
                                                     <p class="post-Product-aut-name">
                                                         <span class="by-in">By</span>
-                                                        <a href="#"><?php echo $this->common_model->get_name_by_id($posts->user_id);?></a>
+                                                        <a href="#"><?php echo $this->common_model->get_name_by_id($posts->user_id); ?></a>
                                                         <span>&#47;</span>
                                                         <span class="by-in"> In</span>
-                                                        <?php $category=explode(',', $posts->category_id);
-                                                            foreach ($category as $category):
+                                                        <?php $category = explode(',', $posts->category_id);
+                                                        foreach ($category as $category) :
                                                         ?>
-                                                        <a href="<?php echo base_url().'blog/'.$category; ?>">
-                                                            <?php echo $this->common_model->get_category_name_by_id($category);?>
-                                                        </a>
+                                                            <a href="<?php echo base_url() . 'blog/' . $category; ?>">
+                                                                <?php echo $this->common_model->get_category_name_by_id($category); ?>
+                                                            </a>
                                                         <?php endforeach; ?>
                                                     </p>
                                                     <p class="blog-product-desc text-right">
-                                                        <span><?php echo $this->common_model->time_ago($posts->post_at);?></span>
+                                                        <span><?php echo $this->common_model->time_ago($posts->post_at); ?></span>
                                                         <span>&#47;</span>
-                                                        <span><?php echo $this->common_model->post_comments_record_count_by_id($posts->posts_id);?> <i class="fa fa-commenting-o"></i></span>
+                                                        <span><?php echo $this->common_model->post_comments_record_count_by_id($posts->post_id); ?> <i class="fa fa-commenting-o"></i></span>
                                                     </p>
                                                 </div>
                                                 <div class="post-text">
                                                     <div class="sm-heading">
-                                                        <a href="<?php echo  base_url().'blog/'.$posts->slug.'.html'; ?>">
+                                                        <a href="<?php echo  base_url() . 'blog/' . $posts->slug . '.html'; ?>">
                                                             <h2>
-                                                                <?php echo $posts->post_title;?>
+                                                                <?php echo $posts->post_title; ?>
                                                             </h2>
                                                         </a>
                                                     </div>
-                                                    <?php 
-                                                        $html = strip_tags($posts->content);
-                                                        $html = html_entity_decode($html, ENT_QUOTES, 'UTF-8');
-                                                        $html = mb_substr($html, 0, 100, 'UTF-8');
-                                                        $html .= "…";
-                                                     ?>
+                                                    <?php
+                                                    $html = strip_tags($posts->content);
+                                                    $html = html_entity_decode($html, ENT_QUOTES, 'UTF-8');
+                                                    $html = mb_substr($html, 0, 100, 'UTF-8');
+                                                    $html .= "…";
+                                                    ?>
                                                     <p>
-                                                        <?php echo $html;?>
+                                                        <?php echo $html; ?>
                                                     </p>
-                                                    <a href="<?php echo  base_url().'blog/'.$posts->slug.'.html'; ?>" class="btn btn-success pull-right">Read More<i class="fa fa-angle-double-right m-l-10" aria-hidden="true"></i></a>
+                                                    <a href="<?php echo  base_url() . 'blog/' . $posts->slug . '.html'; ?>" class="btn btn-success pull-right">Read More<i class="fa fa-angle-double-right m-l-10" aria-hidden="true"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,7 +139,7 @@
                     </div>
                 </div>
             </div>
-            <?php $this->load->view($theme_dir.'blog_sidebar'); ?>   
+            <?php $this->load->view($theme_dir . 'blog_sidebar'); ?>
         </div>
     </div>
 </div>

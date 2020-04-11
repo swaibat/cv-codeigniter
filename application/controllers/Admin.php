@@ -11,6 +11,8 @@ class Admin extends Admin_Core_Controller
 		$this->load->model('common_model');
 		$this->load->model('email_model');
 		$this->load->model('user_model');
+		$this->load->model('post_model');
+		$this->load->model('product_model');
 		$this->load->database();
 		//cache controlling
 		$this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');
@@ -89,6 +91,98 @@ class Admin extends Admin_Core_Controller
 		$data['page_name']		=	'category_edit';
 		$data['page_title']	    =	'Edit category';
 		$this->load->view('backend/index', $data);
+	}
+
+
+	// CREATE A NEW PRODUCT
+	function product_create()
+	{
+		if (isset($_POST) && !empty($_POST)) {
+			$data['title']                  = $this->input->post('title');
+			$data['slug']                   = $this->input->post('slug');
+			$data['price']                  = $this->input->post('price');
+			$data['compare_price']          = $this->input->post('compare_price');
+			$data['available_quantity']     = $this->input->post('available_quantity');
+			$data['sku']                    = $this->input->post('sku');
+			$data['product_type']           = $this->input->post('product_type');
+			$data['description']            = $this->input->post('description');
+			$data['vendor']                 = $this->input->post('vendor');
+			$data['country']                = $this->input->post('country');
+			$data['category']               = $this->input->post('category');
+			$data['status']                 = $this->input->post('status');
+			$data['focus_keyword']          = $this->input->post('focus_keyword');
+			$data['meta_description']       = $this->input->post('meta_description');
+
+			$this->db->insert('products', $data);
+			$insert_id = $this->db->insert_id();
+			$this->db->update('products', $data, array('products_id' => $insert_id));
+			move_uploaded_file($_FILES['thumb']['tmp_name'], 'assets/global/product_thumb/' . $insert_id . '.jpg');
+			$this->session->set_flashdata('success', trans('add_success'));
+			redirect($this->agent->referrer());
+		}
+
+		$data['folder_name']        = 'products';
+		$data['page_name']          = 'product_create';
+		$data['page_title']         = 'create Product';
+		$this->load->view('admin/index', $data);
+	}
+
+	// CREATE A NEW PRODUCT
+	function product_update($product_id)
+	{
+		$this->check_admin();
+		$this->product_model->product_update($product_id);
+		$data['folder_name']        = 'products';
+		$data['page_name']          = 'product_update';
+		$data['page_title']         = 'Update Product';
+		$data['product_id']		    = $product_id;
+		$this->load->view('admin/index', $data);
+	}
+
+
+	// GET CATEGORIES
+	function products()
+	{
+		if ($this->session->userdata('admin_is_login') != 1)
+			redirect(base_url(), 'refresh');
+		$data['folder_name']          = 'products';
+		$data['page_name']          = 'products';
+		$data['page_title']         = trans('products_manage');
+		$this->load->view('admin/index', $data);
+	}
+
+	// CREATE A NEW POST
+	function posts_add()
+	{
+		$this->check_admin();
+		$this->post_model->post_add();
+		$data['folder_name']    = 'blog';
+		$data['page_name']      = 'posts_add';
+		$data['page_title']     = trans('posts_add');
+		$this->load->view('admin/index', $data);
+	}
+
+	// EDIT A POST
+	function post_edit($post_id)
+	{
+		$this->check_admin();
+		$this->post_model->post_edit($post_id);
+		$data['folder_name']    = 'blog';
+		$data['page_name']      = 'post_edit';
+		$data['page_title']     = trans('post_edit');
+		$data['post_id']		=	$post_id;
+		$this->load->view('admin/index', $data);
+	}
+
+
+	// GET ALL POSTS
+	function posts()
+	{
+		$this->check_admin();
+		$data['folder_name']    = 'blog';
+		$data['page_name']      = 'posts';
+		$data['page_title']     = 'posts';
+		$this->load->view('admin/index', $data);
 	}
 
 	// slider setting
@@ -230,438 +324,6 @@ class Admin extends Admin_Core_Controller
 		$this->load->view('admin/index', $data);
 	}
 
-	// add products 
-	function products_add()
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-		$data['folder_name']    = 'products';
-		$data['page_name']      = 'products_add';
-		$data['page_title']     = trans('products_add');
-		$this->load->view('admin/index', $data);
-	}
-
-	// edit products 
-	function products_edit($param1 = '', $param2 = '')
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-		$data['param1']         = $param1;
-		$data['param2']         = $param2;
-		$data['folder_name']        = 'products';
-		$data['page_name']      = 'products_edit';
-		$data['page_title']     = trans('product_edit') . ' | ' . $this->common_model->get_title_by_products_id($param1);
-		$this->load->view('admin/index', $data);
-	}
-
-	// add,edit products 
-	function products($param1 = '', $param2 = '')
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-		if ($param1 == 'add') {
-			$data['imdbid']                 = $this->input->post('imdbid');
-			$data['title']                  = $this->input->post('title');
-			$data['seo_title']              = $this->input->post('seo_title');
-			$data['description']            = $this->input->post('description');
-			$data['is_paid']                = $this->input->post('is_paid');
-			$actors                         = $this->input->post('actor');
-			$directors                      = $this->input->post('director');
-			$writers                        = $this->input->post('writer');
-			$countries                      = $this->input->post('country');
-			$categorys                         = $this->input->post('category');
-			if ($actors != '' && $actors != NULL) {
-				$data['stars']              = implode(',', $actors);
-			}
-			if ($directors != '' && $directors != NULL) {
-				$data['director']           = implode(',', $directors);
-			}
-			if ($writers != '' && $writers != NULL) {
-				$data['writer']             = implode(',', $writers);
-			}
-			if ($countries != '' && $countries != NULL) {
-				$data['country']            = implode(',', $countries);
-			}
-			if ($categorys != '' && $categorys != NULL) {
-				$data['category']              = implode(',', $categorys);
-			}
-
-			$data['imdb_rating']        = $this->input->post('rating');
-			$data['release']            = $this->input->post('release');
-
-
-			$data['runtime']            = $this->input->post('runtime');
-			$data['publication']        = '0';
-			if (isset($_POST['publication'])) {
-				$data['publication']    = '1';
-			}
-
-			$data['enable_download']    = '0';
-			if (isset($_POST['enable_download'])) {
-				$data['enable_download']    = '1';
-			}
-
-			$data['focus_keyword']      = $this->input->post('focus_keyword');
-			$data['meta_description']   = $this->input->post('meta_description');
-			$data['tags']               = $this->input->post('tags');
-
-			$this->db->insert('products', $data);
-			$insert_id = $this->db->insert_id();
-			$slug                       = url_title($this->input->post('slug'), 'dash', TRUE);
-			$slug_num                   = $this->common_model->slug_num('products', $slug);
-			if ($slug_num > 0) {
-				$slug = $slug . '-' . $insert_id;
-			}
-			$data_update['slug']        = $slug;
-			if (isset($_FILES['thumbnail']) && $_FILES['thumbnail']['name'] != '') {
-				move_uploaded_file($_FILES['thumbnail']['tmp_name'], 'uploads/product_thumb/' . $insert_id . '.jpg');
-			}
-
-			if (isset($_FILES['poster_file']) && $_FILES['poster_file']['name'] != '') {
-				move_uploaded_file($_FILES['poster_file']['tmp_name'], 'uploads/poster_image/' . $insert_id . '.jpg');
-			}
-
-			if ($this->input->post('thumb_link') != '') {
-				$image_source           =   $this->input->post('thumb_link');
-				$save_to                =   'uploads/product_thumb/' . $insert_id . '.jpg';
-				$this->common_model->grab_image($image_source, $save_to);
-			}
-
-			if ($this->input->post('poster_link') != '') {
-				$image_source       =   $this->input->post('poster_link');
-				$save_to            =   'uploads/poster_image/' . $insert_id . '.jpg';
-				$this->common_model->grab_image($image_source, $save_to);
-			}
-
-			$this->db->where('products_id', $insert_id);
-			$this->db->update('products', $data_update);
-
-			// email newslater
-			if (isset($_POST['email_notify'])) {
-				$this->load->model('email_model');
-				$this->email_model->create_newslater_cron($insert_id);
-			}
-			// push notification
-			if (isset($_POST['push_notify'])) {
-				$this->load->model('notify_model');
-				$this->notify_model->send_push_notification($insert_id);
-			}
-			$this->session->set_flashdata('success', trans('add_success'));
-			redirect(base_url() . 'admin/file_and_download/' . $insert_id, 'refresh');
-		} else if ($param1 == 'update') {
-			$data['imdbid']                 = $this->input->post('imdbid');
-			$data['title']                  = $this->input->post('title');
-			$data['seo_title']              = $this->input->post('seo_title');
-			$data['description']            = $this->input->post('description');
-			$data['is_paid']                = $this->input->post('is_paid');
-			$actors                         = $this->input->post('actor');
-			$directors                      = $this->input->post('director');
-			$writers                        = $this->input->post('writer');
-			$countries                      = $this->input->post('country');
-			$categorys                         = $this->input->post('category');
-			$product_types                    = $this->input->post('product_type');
-			if ($actors != '' && $actors != NULL) {
-				$data['stars']              = implode(',', $actors);
-			}
-			if ($directors != '' && $directors != NULL) {
-				$data['director']           = implode(',', $directors);
-			}
-			if ($writers != '' && $writers != NULL) {
-				$data['writer']             = implode(',', $writers);
-			}
-			if ($countries != '' && $countries != NULL) {
-				$data['country']            = implode(',', $countries);
-			}
-			if ($categorys != '' && $categorys != NULL) {
-				$data['category']              = implode(',', $categorys);
-			}
-
-			$data['imdb_rating']        = $this->input->post('rating');
-			$data['release']            = $this->input->post('release');
-			$data['runtime']            = $this->input->post('runtime');
-			$data['product_quality']      = $this->input->post('product_quality');
-			$publication                = $this->input->post('publication');
-			if ($publication == 'on') {
-				$data['publication'] = '1';
-			} else {
-				$data['publication'] = '0';
-			}
-
-			$enable_download                = $this->input->post('enable_download');
-			if ($enable_download == 'on') {
-				$data['enable_download'] = '1';
-			} else {
-				$data['enable_download'] = '0';
-			}
-
-			$data['focus_keyword']      = $this->input->post('focus_keyword');
-			$data['meta_description']   = $this->input->post('meta_description');
-			$data['tags']               = $this->input->post('tags');
-			$this->db->where('products_id', $param2);
-			$this->db->update('products', $data);
-			$this->db->where('products_id', $param2);
-
-			$slug                       = url_title($this->input->post('slug'), 'dash', TRUE);
-			$slug_num                   = $this->common_model->slug_num('products', $slug);
-			if ($slug_num > 1) {
-				$slug = $slug . '-' . $param2;
-			}
-			$data_update['slug']               = $slug;
-			if (isset($_FILES['thumbnail']) && $_FILES['thumbnail']['name'] != '') {
-				move_uploaded_file($_FILES['thumbnail']['tmp_name'], 'uploads/product_thumb/' . $param2 . '.jpg');
-			}
-
-			if (isset($_FILES['poster_file']) && $_FILES['poster_file']['name'] != '') {
-				move_uploaded_file($_FILES['poster_file']['tmp_name'], 'uploads/poster_image/' . $param2 . '.jpg');
-			}
-
-			if ($this->input->post('thumb_link') != '') {
-				$image_source = $this->input->post('thumb_link');
-				$save_to = 'uploads/product_thumb/' . $param2 . '.jpg';
-				$this->common_model->grab_image($image_source, $save_to);
-			}
-
-			if ($this->input->post('poster_link') != '') {
-				$image_source = $this->input->post('poster_link');
-				$save_to = 'uploads/poster_image/' . $param2 . '.jpg';
-				$this->common_model->grab_image($image_source, $save_to);
-			}
-
-			$this->db->where('products_id', $param2);
-			$this->db->update('products', $data_update);
-			// email newslater
-			if (isset($_POST['email_notify'])) {
-				$this->load->model('email_model');
-				$this->email_model->create_newslater_cron($param2);
-			}
-			// push notification
-			if (isset($_POST['push_notify'])) {
-				$this->load->model('notify_model');
-				$this->notify_model->send_push_notification($param2);
-			}
-			$this->session->set_flashdata('success', trans('update_success'));
-			redirect(base_url() . 'admin/products_edit/' . $param2, 'refresh');
-			//redirect($this->agent->referrer());
-		}
-		// filter
-		$title          = $this->input->get('title');
-		$release        = $this->input->get('release');
-		$publication    = $this->input->get('publication');
-		$filter = array();
-		$filter['is_tvseries '] = 0;
-		$search_string = '';
-		if ($title != "" && $title != NULL) {
-			$filter['title '] = $title;
-			$search_string .= 'title=' . $title . '&';
-			$data['title'] = $title;
-		}
-		if ($release != "" && $release != NULL) {
-			$filter['release'] = $release;
-			$search_string .= 'release=' . $release . '&';
-			$data['release'] = $release;
-		}
-		if ($publication != "" && $publication != NULL) {
-			$filter['publication'] = $publication;
-			$search_string .= '&&publication=' . $publication;
-			$data['publication'] = $publication;
-		}
-		$total_rows = $this->common_model->get_products_num_rows($filter);
-		// page
-		$config                     = $this->common_model->pagination();
-		$config["base_url"]         = base_url() . "admin/products?" . $search_string;
-		$config["total_rows"]       = $total_rows;
-		$config["per_page"]         = 10;
-		$config["uri_segment"]      = 3;
-		//$config['use_page_numbers'] = TRUE;
-		$config['page_query_string'] = TRUE;
-		$this->pagination->initialize($config);
-		$data['last_row_num']       = $this->uri->segment(3);
-		$page                       = $this->input->get('per_page'); //($this->uri->segment(3)) ? $this->uri->segment(3) : 0;   
-		$data["products"]             = $this->common_model->get_products($filter, $config["per_page"], $page);
-		$data["links"]              = $this->pagination->create_links();
-		$data['total_rows']         = $config["total_rows"];
-		$data['folder_name']          = 'products';
-		$data['page_name']          = 'products_manage';
-		$data['page_title']         = trans('products_manage');
-		$this->load->view('admin/index', $data);
-	}
-
-	function file_and_download($param1 = '', $param2 = '')
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-		if ($param1 == 'update') {
-			$product_id = $param2;
-			$file_type = 'upload';
-			$product_file_type    = $this->input->post('product_file_type');
-			$product_file         = $this->input->post('product_file');
-			$link_name          = $this->input->post('link_name');
-			$link               = $this->input->post('link');
-			$this->db->where('products_id', $product_id);
-			$this->db->delete('product_file');
-			for ($i = 0; $i < sizeof($product_file_type); $i++) {
-				$file_data['products_id']     = $product_id;
-				$file_data['file_source']   = $product_file_type[$i];
-				$file_data['source_type']   = 'link';
-				if ($product_file_type[$i]     == 'upload') {
-					$file_data['source_type'] = $this->common_model->get_extension($product_file[$i]);
-					copy('uploads/temp/' . $product_file[$i], 'uploads/products/' . $product_file[$i]);
-				}
-				$file_data['file_url'] = $product_file[$i];
-				$this->db->insert('product_file', $file_data);
-				//var_dump($file_data);
-			}
-			$this->db->where('products_id', $product_id);
-			$this->db->delete('download_link');
-			for ($i = 0; $i < sizeof($link); $i++) {
-				$download_data['products_id'] = $product_id;
-				$download_data['link_name'] = $link_name[$i];
-				$download_data['link']      = $link[$i];
-			}
-		}
-		if ($param1 == 'change_order') :
-			$products_id           = $this->input->post('products_id');
-			$product_file_ids      = $this->input->post('product_file_id');
-			$orders              = $this->input->post('order');
-			$i = 0;
-			for ($i = 0; $i < sizeof($orders); $i++) :
-				$data['order'] = $orders[$i];
-				$this->db->where('product_file_id', $product_file_ids[$i]);
-				$this->db->update('product_file', $data);
-			endfor;
-			$this->session->set_flashdata('success', trans('update_success'));
-			redirect($this->agent->referrer());
-		endif;
-		if ($param1 == 'edit') :
-			$data['param1']         = $param1;
-			$data['param2']         = $param2;
-			$data['page_name']      = 'product_file_edit';
-			$data['page_title']     = trans('edit_product_file');
-			$data['product_file_info'] = $this->common_model->get_single_product_file_details_by_id($param2);
-			$this->load->view('admin/index', $data);
-		else :
-			$data['param1']         = $param1;
-			$data['param2']         = $param2;
-			$data['slug']           = $this->common_model->get_slug_by_products_id($param1);
-			$data['page_name']      = 'file_and_download';
-			$data['page_title']     = trans('file_and_download') . ' | ' . $this->common_model->get_title_by_products_id($param1);
-			$this->load->view('admin/index', $data);
-		endif;
-	}
-	// subtitles
-	function subtitle($param1 = '', $param2 = '')
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-
-		$product_file_id              = $this->input->post('product_file_id');
-		$products_id                  = $this->input->post('products_id');
-		$language                   = $this->input->post('language');
-		$srclang                    = $this->common_model->get_srclang($language);
-		$kind                       = $this->input->post('kind');
-		$vtt_file                   = $this->input->post('vtt_file');
-		$vtt_url                    = $this->input->post('vtt_url');
-		$is_subtitle                = FALSE;
-
-		if (isset($_FILES['vtt_file']) && $_FILES['vtt_file']['name'] != '') {
-			$ext = $this->common_model->get_extension($_FILES['vtt_file']['name']);
-			if ($ext == 'vtt')
-				$is_subtitle        = TRUE;
-			$subtitle_path          = 'uploads/subtitles/' . $products_id . '_' . $product_file_id . '_' . $this->generate_random_string() . '.vtt';
-			move_uploaded_file($_FILES['vtt_file']['tmp_name'], $subtitle_path);
-			$data['src']            = base_url() . $subtitle_path;
-		} else if (isset($vtt_url) && $vtt_url != '') {
-			$data['src']            = $vtt_url;
-			$is_subtitle            = TRUE;
-		}
-		if ($is_subtitle) {
-			$data['product_file_id']  = $product_file_id;
-			$data['products_id']      = $products_id;
-			$data['language']       = $language;
-			$data['kind']           = $kind;
-			$data['srclang']        = $srclang;
-			$this->db->insert('subtitle', $data);
-			$this->session->set_flashdata('success', trans('add_success'));
-			redirect(base_url() . 'admin/file_and_download/' . $products_id, 'refresh');
-		} else {
-			$this->session->set_flashdata('error', trans('vtt_support_only'));
-			redirect(base_url() . 'admin/file_and_download/' . $products_id, 'refresh');
-		}
-	}
-
-	// products or products types
-	function product_type($param1 = '', $param2 = '')
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-
-		if ($param1 == 'add') {
-
-			$data['product_type']             = $this->input->post('product_type');
-			$data['product_type_desc']        = $this->input->post('product_type_desc');
-			$data['primary_menu']           = $this->input->post('primary_menu');
-			$data['footer_menu']            = $this->input->post('footer_menu');
-
-			$this->db->insert('product_type', $data);
-
-			$insert_id                      = $this->db->insert_id();
-			$slug                           = url_title($this->input->post('product_type'), 'dash', TRUE);
-			$slug_num                       = $this->common_model->slug_num('product_type', $slug);
-			if ($slug_num > 0) {
-				$slug = $slug . '-' . $insert_id;
-			}
-			$data_update['slug']               = $slug;
-			$this->db->where('product_type_id', $insert_id);
-			$this->db->update('product_type', $data_update);
-
-			$this->session->set_flashdata('success', trans('add_success'));
-			redirect($this->agent->referrer());
-		}
-		if ($param1 == 'update') {
-
-			$data['product_type']             = $this->input->post('product_type');
-			$data['product_type_desc']        = $this->input->post('product_type_desc');
-			$data['primary_menu']           = $this->input->post('primary_menu');
-			$data['footer_menu']            = $this->input->post('footer_menu');
-			$this->db->where('product_type_id', $param2);
-			$this->db->update('product_type', $data);
-			$this->session->set_flashdata('success', trans('update_success'));
-			redirect($this->agent->referrer());
-		}
-		$data['folder_name']            = 'products';
-		$data['page_name']              = 'product_type_manage';
-		$data['page_title']             = 'Videos Type Management';
-		$data['product_types']          = $this->db->get('product_type')->result_array();
-		$this->load->view('admin/index', $data);
-	}
-	// products or products types
-	function product_quality($param1 = '', $param2 = '')
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-		if ($param1 == 'add') {
-			$data['quality']                = $this->input->post('quality');
-			$data['description']            = $this->input->post('description');
-
-			$this->db->insert('quality', $data);
-			$this->session->set_flashdata('success', trans('add_success'));
-			redirect($this->agent->referrer());
-		}
-		if ($param1 == 'update') {
-			$data['quality']                = $this->input->post('quality');
-			$data['description']            = $this->input->post('description');
-
-			$this->db->where('quality_id', $param2);
-			$this->db->update('quality', $data);
-			$this->session->set_flashdata('success', trans('update_success'));
-			redirect($this->agent->referrer());
-		}
-		$data['folder_name']                = 'products';
-		$data['page_name']                  = 'product_quality_manage';
-		$data['page_title']                 = trans('product_quality_manage');
-		$data['quality']                    = $this->db->get('quality')->result_array();
-		$this->load->view('admin/index', $data);
-	}
 
 	// products or products types
 	function comments($param1 = '', $param2 = '')
@@ -832,77 +494,12 @@ class Admin extends Admin_Core_Controller
 		$this->load->view('admin/index', $data);
 	}
 
-	// CREATE A NEW POST
-	function posts_add()
+	function check_admin()
 	{
-		if (isset($_POST) && !empty($_POST)) {
-			$data['post_title']                 = $this->input->post('post_title');
-			$data['content']                    = $this->input->post('content');
-			$data['focus_keyword']              = $this->input->post('focus_keyword');
-			$data['meta_description']           = $this->input->post('meta_description');
-			$data['category_id']                = implode(',', $this->input->post('category_id'));
-			$data['status']               		= $this->input->post('status');
-			$data['slug']               		= $this->input->post('slug');
-			$this->db->insert('posts', $data);
-			$insert_id = $this->db->insert_id();
-			$this->db->where('posts_id', $insert_id);
-			$this->db->update('posts', $data);
-			$this->session->set_flashdata('success', trans('add_success'));
-			redirect($this->agent->referrer());
-		}
-		$data['folder_name']    = 'blog';
-		$data['page_name']      = 'posts_add';
-		$data['page_title']     = trans('posts_add');
-		$this->load->view('admin/index', $data);
-	}
-
-	// CREATE A NEW POST
-	function posts_edit($param2)
-	{
-		if (isset($_POST) && !empty($_POST)) {
-			$data['post_title']                 = $this->input->post('post_title');
-			$data['seo_title']                  = $this->input->post('seo_title');
-			$data['content']                    = $this->input->post('content');
-			$data['focus_keyword']              = $this->input->post('focus_keyword');
-			$data['meta_description']           = $this->input->post('meta_description');
-			$data['category_id']                = implode(',', $this->input->post('category_id'));
-			$data['publication']                = $this->input->post('publication');
-			if ($this->input->post('thumb_link') != '') {
-				$data['image_link']     = $this->input->post('thumb_link');
-			}
-			$this->db->update('posts', $data, array('posts_id' => $param2));
-			$slug                       = url_title($this->input->post('slug'), 'dash', TRUE);
-			$slug_num                   = $this->common_model->slug_num('products', $slug);
-			if ($slug_num > 1) {
-				$slug = $slug . '-' . $param2;
-			}
-			$data['slug']            = $slug;
-			$this->db->update('posts', $data, array('posts_id' => $param2));
-			$this->session->set_flashdata('success', trans('update_success'));
-			redirect($this->agent->referrer());
-		}
-		$data['folder_name']    = 'blog';
-		$data['page_name']      = 'posts_add';
-		$data['page_title']     = trans('posts_add');
-		$this->load->view('admin/index', $data);
+		if ($this->session->userdata('admin_is_login') != 1) redirect(base_url(), 'refresh');
 	}
 
 
-	// add,update blog post
-	function posts($param1 = '', $param2 = '')
-	{
-		if ($this->session->userdata('admin_is_login') != 1)
-			redirect(base_url(), 'refresh');
-		if ($param1 != '' && $param1 != NULL) {
-			$data['type']      = $param1;
-		} else {
-			$data['type']      = '';
-		}
-		$data['folder_name']    = 'blog';
-		$data['page_name']      = 'posts';
-		$data['page_title']     = 'posts';
-		$this->load->view('admin/index', $data);
-	}
 
 	// post category
 	function post_category($param1 = '', $param2 = '')

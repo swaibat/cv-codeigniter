@@ -32,11 +32,11 @@ $total_product_in_slider  =   app_config('total_product_in_slider');
         <?php
         if ($slider_type == "product") :
           $this->db->limit($total_product_in_slider);
-          $this->db->order_by("Products_id", "desc");
+          $this->db->order_by("product_id", "desc");
           $slider_Products = $this->db->get_where('Products', array('publication' => '1'))->result();
           foreach ($slider_Products as $Products) :
         ?>
-            <div class="swiper-slide" style="background-image: url('<?php echo $this->common_model->get_Product_poster_url($Products->Products_id); ?>');">
+            <div class="swiper-slide" style="background-image: url('<?php echo $this->common_model->get_Product_poster_url($Products->product_id); ?>');">
               <a href="<?php echo base_url('watch/' . $Products->slug) . '.html'; ?>" class="slide-link" title="<?php echo $Products->title; ?>"> </a>
               <span class="slide-caption">
                 <h2><?php echo $Products->title; ?></h2>
@@ -72,7 +72,7 @@ $total_product_in_slider  =   app_config('total_product_in_slider');
             $action_url = $slider->action_url;
             if ($slider->action_type == 'product' || $slider->action_type == 'tvseries' || $slider->action_type == 'tv') :
               if ($slider->action_type == 'product' || $slider->action_type == 'tvseries') :
-                $action_url = base_url("watch/" . $this->common_model->get_slug_by_Products_id($slider->action_id) . '.html');
+                $action_url = base_url("watch/" . $this->common_model->get_slug_by_product_id($slider->action_id) . '.html');
               endif;
             endif;
           ?>

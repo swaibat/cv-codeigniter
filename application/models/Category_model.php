@@ -98,7 +98,7 @@ class Category_model extends CI_Model
 	public function fetch_category_Product_by_slug($limit = 16, $start = 0, $slug)
 	{
 		$category_id   = $this->db->get_where('category', array('slug' => $slug))->row()->category_id;
-		$this->db->order_by('Products_id', 'DESC');
+		$this->db->order_by('product_id', 'DESC');
 		$this->db->where("find_in_set(" . $category_id . ",category) >", 0);
 		$this->db->limit($limit, $start);
 		return $this->db->get('Products')->result_array();
@@ -119,7 +119,7 @@ class Category_model extends CI_Model
 		$this->db->where("is_tvseries !=", '1');
 		$this->db->where("find_in_set(" . $category_id . ",category) >", 0);
 		$this->db->limit($limit);
-		$this->db->order_by('Products_id', "desc");
+		$this->db->order_by('product_id', "desc");
 		$query = $this->db->get('Products');
 		return $query->result_array();
 	}
@@ -130,7 +130,7 @@ class Category_model extends CI_Model
 		$this->db->where("is_tvseries", '1');
 		$this->db->where("find_in_set(" . $category_id . ",category) >", 0);
 		$this->db->limit($limit);
-		$this->db->order_by('Products_id', "desc");
+		$this->db->order_by('product_id', "desc");
 		$query = $this->db->get('Products');
 		return $query->result_array();
 	}

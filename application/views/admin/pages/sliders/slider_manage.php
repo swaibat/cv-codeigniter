@@ -27,9 +27,9 @@
                         <td>
                             <?php 
                                 if($slider['action_type'] == 'product'):
-                                    echo "Product: " .$this->common_model->get_title_by_Products_id($slider['action_id']);
+                                    echo "Product: " .$this->common_model->get_title_by_product_id($slider['action_id']);
                                 elseif($slider['action_type'] == 'tvseries'):
-                                    echo "TVSeries: " .$this->common_model->get_title_by_Products_id($slider['action_id']);
+                                    echo "TVSeries: " .$this->common_model->get_title_by_product_id($slider['action_id']);
                                 elseif($slider['action_type'] == 'external_browser'):
                                     echo "External URL: " .$slider['action_url'];
                                 elseif($slider['action_type'] == 'webview'):

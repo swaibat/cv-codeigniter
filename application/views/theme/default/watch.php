@@ -82,15 +82,15 @@ $assets_dir         =   'assets/theme/default/';
                         <div class="tab-content">
                             <div id="info" class="tab-pane fade in active">
                                 <div class="row">
-                                    <div class="col-md-3 m-t-10"><img class="img-responsive" style="min-width: 183px;" src="<?php echo $this->common_model->get_Product_thumb_url($watch_Products->Products_id); ?>" alt="<?php echo $watch_Products->title; ?>"></div>
+                                    <div class="col-md-3 m-t-10"><img class="img-responsive" style="min-width: 183px;" src="<?php echo $this->common_model->get_Product_thumb_url($watch_Products->product_id); ?>" alt="<?php echo $watch_Products->title; ?>"></div>
                                     <div class="col-md-9">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h1>
                                                     <?php echo $watch_Products->title; ?>
                                                 </h1>
-                                                <button class="btn btn-sm btn-default" onclick="wish_list_add('fav','<?php echo $watch_Products->Products_id; ?>')"><i class="fa fa-heart-o"></i></button>
-                                                <button class="btn btn-sm btn-default" onclick="wish_list_add('wl','<?php echo $watch_Products->Products_id; ?>')"><i class="fa fa-clock-o"></i></button>
+                                                <button class="btn btn-sm btn-default" onclick="wish_list_add('fav','<?php echo $watch_Products->product_id; ?>')"><i class="fa fa-heart-o"></i></button>
+                                                <button class="btn btn-sm btn-default" onclick="wish_list_add('wl','<?php echo $watch_Products->product_id; ?>')"><i class="fa fa-clock-o"></i></button>
 
                                                 <?php if ($this->db->get_where('config', array('title' => 'social_share_enable'))->row()->value == '1') : ?>
 
@@ -292,14 +292,14 @@ $assets_dir         =   'assets/theme/default/';
             </div>
             <!-- End row2 product info -->
             <?php $this->load->view($theme_dir . 'related_products'); ?>
-            <?php $this->load->view($theme_dir . 'comments', array('PAGE_URL' => base_url('watch/' . $watch_Products->slug . '.html'), 'PAGE_IDENTIFIER' => $watch_Products->Products_id)); ?>
+            <?php $this->load->view($theme_dir . 'comments', array('PAGE_URL' => base_url('watch/' . $watch_Products->slug . '.html'), 'PAGE_IDENTIFIER' => $watch_Products->product_id)); ?>
         </div>
     </div>
 
     <!--sweet alert2 JS -->
     <!-- ajax add to wish-list -->
     <script type="text/javascript">
-        function wish_list_add(list_type = '', Products_id = '') {
+        function wish_list_add(list_type = '', product_id = '') {
 
             if (list_type == 'fav') {
                 list_name = 'Favorite';
@@ -309,7 +309,7 @@ $assets_dir         =   'assets/theme/default/';
             $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url(); ?>user/add_to_wish_list',
-                data: "list_type=" + list_type + "&Products_id=" + Products_id,
+                data: "list_type=" + list_type + "&product_id=" + product_id,
                 dataType: 'json',
                 beforeSend: function() {},
                 success: function(response) {
@@ -330,7 +330,7 @@ $assets_dir         =   'assets/theme/default/';
     <script>
         $('.rate_now').click(function() {
             rate = $(this).val();
-            Product_id = "<?php echo $watch_Products->Products_id; ?>";
+            Product_id = "<?php echo $watch_Products->product_id; ?>";
             current_rating = "<?php echo $watch_Products->total_rating; ?>";
             total_rating = Number(current_rating) + Number(1);
             if (parseInt(rate) && parseInt(Product_id)) {

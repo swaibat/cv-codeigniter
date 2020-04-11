@@ -1,10 +1,4 @@
-<style type="text/css">
-	.bootstrap-tagsinput .badge {
-		;
-		background-color: #009688;
-		border: 1px solid #035d54;
-	}
-</style>
+
 <div class="card">
 	<div class="row">
 		<div class="col-sm-12">

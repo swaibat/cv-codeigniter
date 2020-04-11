@@ -8,7 +8,7 @@
  ?>
 
 <div class="pull-right">
-    <a data-toggle="modal" id="menu" class="btn" data-target="#report-modal" data-id="<?php echo base_url('home/view_modal/report/'.$watch_Products->Products_id) ?>" style="text-transform: lowercase;font-size: 13px;color: yellow;" href="#"><i class="fa fa-warning"></i>&nbsp;report</a>
+    <a data-toggle="modal" id="menu" class="btn" data-target="#report-modal" data-id="<?php echo base_url('home/view_modal/report/'.$watch_Products->product_id) ?>" style="text-transform: lowercase;font-size: 13px;color: yellow;" href="#"><i class="fa fa-warning"></i>&nbsp;report</a>
 </div>
 
 <!-- report modal  -->
@@ -41,7 +41,7 @@
 
             <div id="modal-loader" style="display: none; text-align: center;"> <img src="<?php echo base_url(); ?>assets/images/preloader.gif" /> </div>
             
-            <?php echo form_open(base_url() . 'user/report_product/'.$watch_Products->Products_id , array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data', 'id' =>'report_form'));?>
+            <?php echo form_open(base_url() . 'user/report_product/'.$watch_Products->product_id , array('class' => 'form-horizontal group-border-dashed', 'enctype' => 'multipart/form-data', 'id' =>'report_form'));?>
               <?php echo $product_report_note; ?>
               <div class="form-group">
                 <label class="col-sm-3 control-label">To</label>
@@ -51,7 +51,7 @@
                 <!-- End col-6 -->
               </div>
               <!-- end form -group -->
-              <input type="hidden" name="Products_id" value="<?php echo $watch_Products->Products_id;?>">
+              <input type="hidden" name="product_id" value="<?php echo $watch_Products->product_id;?>">
               <fieldset class="form-group">
                 <legend class="col-sm-3 control-label"><?php echo trans('Product'); ?></legend>
                 <div class="col-sm-9">

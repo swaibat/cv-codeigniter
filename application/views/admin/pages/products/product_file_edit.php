@@ -9,7 +9,7 @@
 <div class="card">
   <div class="row justify-content-md-center">
     <div class="col-md-6">
-      <a class="btn btn-sm btn-primary waves-effect mb-20" href="<?php echo base_url('admin/file_and_download/') . $Product_file_info->Products_id; ?>"> <span class="btn-label"><i class="fa fa-arrow-left"></i></span><?php echo trans('back_to_list'); ?></a>
+      <a class="btn btn-sm btn-primary waves-effect mb-20" href="<?php echo base_url('admin/file_and_download/') . $Product_file_info->product_id; ?>"> <span class="btn-label"><i class="fa fa-arrow-left"></i></span><?php echo trans('back_to_list'); ?></a>
 <br><br>
       <div class="panel panel-border panel-primary">
         <div class="panel-heading">
@@ -17,7 +17,7 @@
         </div>
         <div class="panel-body">
             <?php echo form_open_multipart(base_url('admin/product_file_update/'.$Product_file_info->Product_file_id)); ?>           
-              <input type="hidden" name="Products_id" value="<?php echo $Product_file_info->Products_id; ?>">
+              <input type="hidden" name="product_id" value="<?php echo $Product_file_info->product_id; ?>">
               <div class="form-group">
                 <label class="control-label"><?php echo trans('label') ?></label>&nbsp;&nbsp;<input id="label" type="text" value="<?php echo $Product_file_info->label; ?>" name="label" class="form-control" placeholder="Episode-1" required="">
               </div>

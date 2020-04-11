@@ -93,7 +93,7 @@
                   <strong><?php echo $this->common_model->get_name_by_id($comments['user_id']); ?></strong><br>
                 </td>
                 <td> <?php echo $comments['comment']; ?></td>
-                <td><?php echo $this->common_model->get_title_by_Products_id($comments['Product_id']); ?></td>
+                <td><?php echo $this->common_model->get_title_by_product_id($comments['Product_id']); ?></td>
                 <td><?php echo $comments['comment_at']; ?></td>
                 <td>
                   <?php
